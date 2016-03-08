@@ -50,9 +50,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="lat:"
         android:id="@+id/latitudeView"
-        android:layout_below="@+id/longitudeView"
+        android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/accelerationView"
-        android:layout_alignStart="@+id/accelerationView" />
+        android:layout_alignStart="@+id/accelerationView"
+        android:layout_marginTop="84dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,8 +61,18 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="long"
         android:id="@+id/longitudeView"
-        android:layout_alignTop="@+id/timerView"
-        android:layout_alignLeft="@+id/gyroscopeView"
-        android:layout_alignStart="@+id/gyroscopeView" />
+        android:layout_below="@+id/latitudeView"
+        android:layout_alignLeft="@+id/latitudeView"
+        android:layout_alignStart="@+id/latitudeView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="alt"
+        android:id="@+id/altitudeView"
+        android:layout_below="@+id/longitudeView"
+        android:layout_alignLeft="@+id/longitudeView"
+        android:layout_alignStart="@+id/longitudeView" />
 
 </RelativeLayout>
