@@ -8,18 +8,22 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TrackingActivity extends AppCompatActivity implements LocationListener {
 
     LocationManager locationManager;
     String provider;
-    Location location;
+
     TextView latView;
     TextView lngView;
     TextView altView;
@@ -35,33 +39,34 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
 
 
+
+
     }
 
     public void trackCoordinate(){
-        latView = (TextView)findViewById(R.id.latitudeView);
-        lngView = (TextView)findViewById(R.id.longitudeView);
-        altView  =(TextView)findViewById(R.id.altitudeView);
+        latView = (TextView) findViewById(R.id.latitudeView);
+        lngView = (TextView) findViewById(R.id.longitudeView);
+        altView = (TextView) findViewById(R.id.altitudeView);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        provider = locationManager.getBestProvider(new Criteria(), false);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
-                provider = locationManager.getBestProvider(new Criteria(), false);
-                location = locationManager.getLastKnownLocation(provider);
-            }
-            return;
-        }
-
-        location = locationManager.getLastKnownLocation(provider);
+        Location location = locationManager.getLastKnownLocation(provider);
 
         if (location != null) {
-            Log.i("LocationInfo", "Location Achieved");
+
+            Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
+
+            Log.i("Location Info", "Location achieved!");
         } else {
-            Log.i("LocationInfo", "No Location");
+
+            Log.i("Location Info", "No location :(");
         }
     }
+
 
 
     public void trackAcceleration(){
@@ -78,25 +83,18 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     @Override
     protected void onResume() {
         super.onResume();
+        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                locationManager.requestLocationUpdates(provider, 400, 1, this);
-            }
-            return;
-        }
+        locationManager.requestLocationUpdates(provider, 400, 1, this);
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                locationManager.removeUpdates(this);
-            }
-            return;
-        }
+        locationManager.removeUpdates(this);
     }
 
     @Override
@@ -105,12 +103,13 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         Double lng = location.getLongitude();
         Double alt = location.getAltitude();
 
-        Log.i("Location", "Latitude : " + lat.toString());
-        Log.i("Location", "Longitude : " + lng.toString());
-        Log.i("Location", "Altitude : " + alt.toString());
+        Toast.makeText(getApplicationContext(), lat.toString() +alt.toString() +lng.toString(), Toast.LENGTH_LONG).show();
+
+        /*
         altView.setText(Double.toString(alt));
         latView.setText(Double.toString(lat));
         lngView.setText(Double.toString(lng));
+        */
     }
 
     @Override
@@ -126,5 +125,14 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    public void getLocation(View view ) {
+
+        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        onLocationChanged(location);
     }
 }

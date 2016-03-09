@@ -75,4 +75,14 @@
         android:layout_alignLeft="@+id/longitudeView"
         android:layout_alignStart="@+id/longitudeView" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show"
+        android:id="@+id/locButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/gyroscopeView"
+        android:layout_alignEnd="@+id/gyroscopeView"
+        android:onClick="getLocation" />
+
 </RelativeLayout>
