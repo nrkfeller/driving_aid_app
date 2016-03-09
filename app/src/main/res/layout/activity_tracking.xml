@@ -13,53 +13,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="accel"
-        android:id="@+id/accelerationView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="26dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginBottom="140dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="gyro"
-        android:id="@+id/gyroscopeView"
-        android:layout_alignTop="@+id/accelerationView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="40dp"
-        android:layout_marginEnd="40dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="timer"
-        android:id="@+id/timerView"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="49dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="lat:"
+        android:text="Latitude : "
         android:id="@+id/latitudeView"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/accelerationView"
-        android:layout_alignStart="@+id/accelerationView"
         android:layout_marginTop="84dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="long"
+        android:text="Longitude : "
         android:id="@+id/longitudeView"
         android:layout_below="@+id/latitudeView"
         android:layout_alignLeft="@+id/latitudeView"
@@ -69,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="alt"
+        android:text="Altitude : "
         android:id="@+id/altitudeView"
         android:layout_below="@+id/longitudeView"
         android:layout_alignLeft="@+id/longitudeView"
@@ -81,8 +44,16 @@
         android:text="show"
         android:id="@+id/locButton"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/gyroscopeView"
-        android:layout_alignEnd="@+id/gyroscopeView"
         android:onClick="getLocation" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Z-Accel : "
+        android:id="@+id/accelView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

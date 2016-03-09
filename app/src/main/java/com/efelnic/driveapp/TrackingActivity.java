@@ -3,6 +3,10 @@ package com.efelnic.driveapp;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -19,10 +23,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TrackingActivity extends AppCompatActivity implements LocationListener {
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
+public class TrackingActivity extends AppCompatActivity implements LocationListener, SensorEventListener {
 
     LocationManager locationManager;
     String provider;
+
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    TextView accelView;
+    float alpha = (float) 0.8;
+    float[] gravity = new float[3];
+    float[] linear_acceleration = new float[3];
 
     TextView latView;
     TextView lngView;
@@ -34,16 +48,15 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
-        trackCoordinate();
 
 
 
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
 
+        accelView = (TextView) findViewById(R.id.accelView);
 
-    }
-
-    public void trackCoordinate(){
         latView = (TextView) findViewById(R.id.latitudeView);
         lngView = (TextView) findViewById(R.id.longitudeView);
         altView = (TextView) findViewById(R.id.altitudeView);
@@ -52,7 +65,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
         provider = locationManager.getBestProvider(new Criteria(), false);
 
-        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
 
         Location location = locationManager.getLastKnownLocation(provider);
 
@@ -60,30 +73,22 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
             Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
 
-            Log.i("Location Info", "Location achieved!");
+            //Log.i("Location Info", "Location achieved!");
         } else {
 
-            Log.i("Location Info", "No location :(");
+            //Log.i("Location Info", "No location :(");
         }
-    }
 
-
-
-    public void trackAcceleration(){
-
-    }
-
-    public void trackGyroscope(){
-
-    }
-    public void trackTime(){
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
 
         locationManager.requestLocationUpdates(provider, 400, 1, this);
 
@@ -92,7 +97,10 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     @Override
     protected void onPause() {
         super.onPause();
-        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        mSensorManager.unregisterListener(this);
+
+        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
 
         locationManager.removeUpdates(this);
     }
@@ -103,13 +111,13 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         Double lng = location.getLongitude();
         Double alt = location.getAltitude();
 
-        Toast.makeText(getApplicationContext(), lat.toString() +alt.toString() +lng.toString(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), lat.toString() +alt.toString() +lng.toString(), Toast.LENGTH_LONG).show();
 
-        /*
-        altView.setText(Double.toString(alt));
-        latView.setText(Double.toString(lat));
-        lngView.setText(Double.toString(lng));
-        */
+
+        altView.setText("Altitude : " + Double.toString(alt));
+        latView.setText("Latitude : " + Double.toString(lat));
+        lngView.setText("Longitude : " + Double.toString(lng));
+
     }
 
     @Override
@@ -129,10 +137,31 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     public void getLocation(View view ) {
 
-        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
 
         Location location = locationManager.getLastKnownLocation(provider);
 
         onLocationChanged(location);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        DecimalFormat df = new DecimalFormat("##.##");
+        df.setRoundingMode(RoundingMode.DOWN);
+
+        gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
+        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
+        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+
+        linear_acceleration[0] = event.values[0] - gravity[0];
+        linear_acceleration[1] = event.values[1] - gravity[1];
+        linear_acceleration[2] = event.values[2] - gravity[2];
+
+        accelView.setText("Accel : " + df.format( Math.sqrt(linear_acceleration[0]*linear_acceleration[0] + linear_acceleration[1]*linear_acceleration[1] + linear_acceleration[2]*linear_acceleration[2])));
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }
