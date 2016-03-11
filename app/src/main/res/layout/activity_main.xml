@@ -11,21 +11,58 @@
     android:background="#514d4d">
 
     <Button
+    android:layout_width="600dp"
+    android:layout_height="wrap_content"
+    android:text="Ready"
+    android:id="@+id/readyButton"
+    android:textColor="#ffffff"
+    android:paddingLeft="80dp"
+    android:paddingRight="80dp"
+    android:paddingTop="30dp"
+    android:paddingBottom="30dp"
+        android:layout_margin="10dp"
+    android:textSize="30dp"
+    android:background="#05c131"
+    android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:src="@drawable/Flag"
+        android:id="@+id/FlagImage"
+        android:layout_below="@+id/readyButton" />
+
+    <Button
         android:layout_width="600dp"
         android:layout_height="wrap_content"
-        android:text="Ready"
-        android:id="@+id/readyButton"
-        android:textColor="#ffffff"
+        android:text="Script"
+        android:id="@+id/scriptButton"
         android:paddingLeft="80dp"
         android:paddingRight="80dp"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
-        android:textSize="30dp"
-        android:background="#5463ee"
-        android:layout_below="@+id/relativeLayout"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:layout_margin="20dp"
+        android:textSize="25dp"
+        android:background="#2f6be9"
+        android:layout_below="@+id/FlagImage"
         android:layout_centerHorizontal="true" />
 
-    <RelativeLayout
+    <Button
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:text="Recordings"
+        android:id="@+id/recordingsButton"
+        android:paddingLeft="80dp"
+        android:paddingRight="80dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:layout_margin="20dp"
+        android:textSize="25dp"
+        android:background="#5463ee"
+        android:layout_below="@+id/scriptButton"
+        android:layout_centerHorizontal="true" />
+
+    <!--RelativeLayout
         android:layout_width="370dp"
         android:layout_height="325dp"
         android:layout_alignParentTop="true"
@@ -46,6 +83,6 @@
             android:textColor="#ffffff"
             android:textSize="30dp"
             android:textStyle="bold" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 </RelativeLayout>
