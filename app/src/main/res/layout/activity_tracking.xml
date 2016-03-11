@@ -9,14 +9,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.efelnic.driveapp.TrackingActivity">
 
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="GPS Data "
+        android:id="@+id/gpsView"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="00dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Latitude : "
         android:id="@+id/latitudeView"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="84dp" />
+        android:layout_below="@+id/gpsView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,22 +49,128 @@
         android:layout_alignLeft="@+id/longitudeView"
         android:layout_alignStart="@+id/longitudeView" />
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="show"
-        android:id="@+id/locButton"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Speed : "
+        android:id="@+id/speedView"
+        android:layout_below="@+id/altitudeView"
+        android:layout_alignLeft="@+id/longitudeView"
+        android:layout_alignStart="@+id/longitudeView" />
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Time Data "
+        android:id="@+id/timeView"
         android:layout_alignParentTop="true"
-        android:onClick="getLocation" />
+        android:layout_marginTop="150dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Z-Accel : "
+        android:text="Timer : "
+        android:id="@+id/timerView"
+        android:layout_below="@+id/timeView"
+        android:layout_alignLeft="@+id/longitudeView"
+        android:layout_alignStart="@+id/longitudeView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Lap : "
+        android:id="@+id/lapView"
+        android:layout_below="@+id/timerView"
+        android:layout_alignLeft="@+id/longitudeView"
+        android:layout_alignStart="@+id/longitudeView" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Accelerometer Data "
         android:id="@+id/accelView"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="240dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="X-Acceleration : "
+        android:id="@+id/accelXView"
+        android:layout_below="@+id/accelView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Y-Acceleration : "
+        android:id="@+id/accelYView"
+        android:layout_below="@+id/accelXView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Z-Acceleration : "
+        android:id="@+id/accelZView"
+        android:layout_below="@+id/accelYView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Gyroscope Data "
+        android:id="@+id/gyroView"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="360dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="X rotation : "
+        android:id="@+id/xrotationView"
+        android:layout_below="@+id/gyroView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Y rotation: "
+        android:id="@+id/yrotationView"
+        android:layout_below="@+id/xrotationView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Z rotation: "
+        android:id="@+id/zrotationView"
+        android:layout_below="@+id/yrotationView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>
