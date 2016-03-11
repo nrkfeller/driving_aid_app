@@ -43,6 +43,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     TextView latView;
     TextView lngView;
     TextView altView;
+    TextView spdView;
 
 
     @Override
@@ -54,6 +55,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         latView = (TextView) findViewById(R.id.latitudeView);
         lngView = (TextView) findViewById(R.id.longitudeView);
         altView = (TextView) findViewById(R.id.altitudeView);
+        spdView = (TextView) findViewById(R.id.speedView);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -110,13 +112,13 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         Double lat = location.getLatitude();
         Double lng = location.getLongitude();
         Double alt = location.getAltitude();
-
-        Toast.makeText(getApplicationContext(), lat.toString() +alt.toString() +lng.toString(), Toast.LENGTH_LONG).show();
+        float spd = location.getSpeed();
 
 
         altView.setText("Altitude : " + Double.toString(alt));
         latView.setText("Latitude : " + Double.toString(lat));
         lngView.setText("Longitude : " + Double.toString(lng));
+        spdView.setText("Speed : " + Float.toString(spd));
 
     }
 

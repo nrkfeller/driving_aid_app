@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:paddingTop="30dp"
-        android:src="@drawable/Flag"
+        android:src="@drawable/flag"
         android:id="@+id/FlagImage"
         android:layout_toRightOf="@+id/readyButton" />
 
@@ -51,7 +51,7 @@
     <ImageView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:src="@drawable/Script"
+        android:src="@drawable/script"
         android:id="@+id/ScriptImage"
         android:layout_marginTop="150dp"
         android:layout_toRightOf="@+id/ScriptButton" />
@@ -74,7 +74,7 @@
     <ImageView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:src="@drawable/Analytics"
+        android:src="@drawable/analytics"
         android:id="@+id/AnalyticsImage"
         android:layout_marginTop="270dp"
         android:layout_toRightOf="@+id/RecordingsButton" />
