@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class TrackingActivity extends AppCompatActivity implements LocationListener, SensorEventListener {
 
@@ -48,15 +50,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
-
-
-
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-
-        accelView = (TextView) findViewById(R.id.accelView);
-
+        startAccel();
         latView = (TextView) findViewById(R.id.latitudeView);
         lngView = (TextView) findViewById(R.id.longitudeView);
         altView = (TextView) findViewById(R.id.altitudeView);
@@ -70,16 +64,22 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         Location location = locationManager.getLastKnownLocation(provider);
 
         if (location != null) {
-
             Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
-
-            //Log.i("Location Info", "Location achieved!");
-        } else {
-
-            //Log.i("Location Info", "No location :(");
         }
 
 
+
+
+
+    }
+
+    public void startAccel() {
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+
+        accelView = (TextView) findViewById(R.id.accelView);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
         int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
 
-        locationManager.requestLocationUpdates(provider, 400, 1, this);
+        locationManager.requestLocationUpdates(provider, 400, 0, this);
 
     }
 
@@ -111,7 +111,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         Double lng = location.getLongitude();
         Double alt = location.getAltitude();
 
-        //Toast.makeText(getApplicationContext(), lat.toString() +alt.toString() +lng.toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), lat.toString() +alt.toString() +lng.toString(), Toast.LENGTH_LONG).show();
 
 
         altView.setText("Altitude : " + Double.toString(alt));
@@ -135,7 +135,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     }
 
-    public void getLocation(View view ) {
+    public void getLocation(View view) {
 
         int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
 
