@@ -22,7 +22,7 @@
     android:paddingBottom="30dp"
         android:layout_margin="10dp"
     android:textSize="30dp"
-    android:background="#05c131"
+    android:background="#059326"
     android:layout_centerHorizontal="true" />
 
     <ImageView
