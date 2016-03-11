@@ -23,5 +23,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        Button ScriptButton = (Button)findViewById(R.id.ScriptButton);
+        ScriptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ScriptActivity.class);
+                startActivity(intent);
+            }
+
+
+        });
+
+        Button RecordingsButton = (Button)findViewById(R.id.RecordingsButton);
+        RecordingsButton.setOnClickListener(new View.OnClickListener() {
+         @Override
+          public  void onClick(View v) {
+             Intent intent = new Intent(MainActivity.this, RecordingsActivity.class);
+             startActivity(intent);
+         }
+                                            });
+
     }
 }

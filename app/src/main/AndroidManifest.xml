@@ -5,7 +5,10 @@
     <uses-permission android:name="android.permission.ACCESS_GPS" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+=======
+>>>>>>> b81ecbe6d1e4d0ac1eda89a89d37b9442e72c564
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,7 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TrackingActivity"></activity>
+        <activity android:name=".TrackingActivity" />
+        <activity android:name=".ScriptActivity" />
+        <activity android:name=".RecordingsActivity"></activity>
     </application>
 
 </manifest>
