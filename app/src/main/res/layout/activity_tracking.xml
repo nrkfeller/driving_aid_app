@@ -19,8 +19,7 @@
         android:text="GPS Data "
         android:id="@+id/gpsView"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="00dp"
-        android:onClick="getLocation" />
+        android:layout_marginTop="00dp" />
 
     <TextView
         android:layout_width="wrap_content"

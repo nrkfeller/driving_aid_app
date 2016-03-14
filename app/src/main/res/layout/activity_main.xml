@@ -23,7 +23,8 @@
         android:layout_margin="10dp"
     android:textSize="30dp"
     android:background="#059326"
-    android:layout_centerHorizontal="true" />
+    android:layout_centerHorizontal="true"
+        android:onClick="goToTrackingActivity" />
 
     <ImageView
         android:layout_height="wrap_content"

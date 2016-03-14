@@ -27,6 +27,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
+import android.os.Handler;
 
 public class TrackingActivity extends AppCompatActivity implements LocationListener, SensorEventListener {
 
@@ -39,11 +40,13 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     float alpha = (float) 0.8;
     float[] gravity = new float[3];
     float[] linear_acceleration = new float[3];
+    float timeNow = 0;
 
     TextView latView;
     TextView lngView;
     TextView altView;
     TextView spdView;
+    TextView timerView;
 
 
     @Override
@@ -51,7 +54,24 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
+
+        timerView = (TextView)findViewById(R.id.timerView);
+
+
+        final Handler handler = new Handler();
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+                timerView.setText("Timer : " + Float.toString(timeNow));
+                timeNow++;
+                handler.postDelayed(this, 1000);
+            }
+        };
+
+        handler.post(run);
+
         startAccel();
+
         latView = (TextView) findViewById(R.id.latitudeView);
         lngView = (TextView) findViewById(R.id.longitudeView);
         altView = (TextView) findViewById(R.id.altitudeView);
@@ -69,10 +89,9 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
         }
 
+    }
 
-
-
-
+    public void startPositionTracking(){
     }
 
     public void startAccel() {

@@ -14,16 +14,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Button readyButton = (Button)findViewById(R.id.readyButton);
-        readyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TrackingActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
         Button ScriptButton = (Button)findViewById(R.id.ScriptButton);
         ScriptButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,12 +27,16 @@ public class MainActivity extends AppCompatActivity {
 
         Button RecordingsButton = (Button)findViewById(R.id.RecordingsButton);
         RecordingsButton.setOnClickListener(new View.OnClickListener() {
-         @Override
-          public  void onClick(View v) {
-             Intent intent = new Intent(MainActivity.this, RecordingsActivity.class);
-             startActivity(intent);
-         }
-                                            });
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RecordingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
+    }
+    public void goToTrackingActivity(View view) {
+        Intent i = new Intent(getApplicationContext(), TrackingActivity.class);
+        startActivity(i);
     }
 }
