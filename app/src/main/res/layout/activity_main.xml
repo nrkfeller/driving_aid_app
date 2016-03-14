@@ -13,7 +13,7 @@
     <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Ready"
+    android:text="@string/Ready_name"
     android:id="@+id/readyButton"
     android:textColor="#ffffff"
     android:paddingLeft="70dp"
@@ -21,29 +21,29 @@
     android:paddingTop="30dp"
     android:paddingBottom="30dp"
         android:layout_margin="10dp"
-    android:textSize="30dp"
+    android:textSize="30sp"
     android:background="#059326"
     android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingTop="30dp"
         android:src="@drawable/flag"
         android:id="@+id/FlagImage"
+        android:layout_marginTop="30dp"
         android:layout_toRightOf="@+id/readyButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Script"
+        android:text="@string/Script_name"
         android:id="@+id/ScriptButton"
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
         android:layout_margin="20dp"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:background="#2f6be9"
         android:layout_below="@+id/readyButton"
         android:layout_centerHorizontal="true" />
@@ -53,20 +53,20 @@
         android:layout_width="wrap_content"
         android:src="@drawable/script"
         android:id="@+id/ScriptImage"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="155dp"
         android:layout_toRightOf="@+id/ScriptButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recordings"
+        android:text="@string/Recordings_name"
         android:id="@+id/RecordingsButton"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
         android:layout_margin="20dp"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:background="#5463ee"
         android:layout_below="@+id/ScriptButton"
         android:layout_centerHorizontal="true" />
@@ -79,27 +79,27 @@
         android:layout_marginTop="270dp"
         android:layout_toRightOf="@+id/RecordingsButton" />
 
-    <!--RelativeLayout
-        android:layout_width="370dp"
-        android:layout_height="325dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/gear"
-        android:gravity="top"
-        android:id="@+id/relativeLayout">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/About_name"
+        android:id="@+id/AboutButton"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:textSize="15sp"
+        android:background="#a7ace1"
+        android:layout_below="@+id/RecordingsButton"
+        android:layout_margin="30dp"
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="PILOT"
-            android:id="@+id/titleView"
-            android:layout_marginBottom="69dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textColor="#ffffff"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-    </RelativeLayout>-->
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/info"
+        android:id="@+id/AboutImage"
+        android:layout_marginTop="388dp"
+        android:layout_toRightOf="@+id/AboutButton" />
 
 </RelativeLayout>

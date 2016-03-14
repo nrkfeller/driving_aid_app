@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">DriveApp</string>
+
+    <string name="Ready_name">Ready</string>
+        <string name="Ready_GPS">GPS Data</string>
+            <string name="Ready_GPS_Latitude">Latitude : </string>
+            <string name="Ready_GPS_Longitude">Longitude : </string>
+            <string name="Ready_GPS_Altitude">Altitude : </string>
+            <string name="Ready_GPS_Speed">Speed : </string>
+        <string name="Ready_Time">Time Data</string>
+            <string name="Ready_Time_Timer">Timer : </string>
+            <string name="Ready_Time_Lap">Lap : </string>
+        <string name="Ready_Accelerometer">Accelerometer Data</string>
+        <string name="Ready_Gyroscope">Gyroscope Data</string>
+
+    <string name="Script_name">Script</string>
+        <string name="Script_text">This is the Script page. (under construction). The user will be able to add and edit scripts. These script will give suggestions at given time marks. (ex: at 1min display "1min: Engine now warm, reduce speed")</string>
+
+    <string name="Recordings_name">Recordings</string>
+        <string name="Recordings_text">This is the Recordings page. (under construction)</string>
+
+    <string name="About_name">About</string>
+        <string name="About_Text">This is the About page. (underconstruction) </string>
+
 </resources>
