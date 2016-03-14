@@ -11,6 +11,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Chronometer;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,17 +38,19 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
+    private Sensor mGyroscope;
     TextView accelView;
     float alpha = (float) 0.8;
     float[] gravity = new float[3];
     float[] linear_acceleration = new float[3];
-    float timeNow = 0;
 
-    TextView latView;
-    TextView lngView;
-    TextView altView;
-    TextView spdView;
-    TextView timerView;
+    private static final float NS2S = 1.0f / 1000000000.0f;
+    private final float[] deltaRotationVector = new float[4];
+    private float timestamp;
+
+    TextView latView, lngView, altView, spdView, xrotView, yrotView, zrotView;
+
+    boolean bPermissionGranted;
 
 
     @Override
@@ -54,21 +58,12 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bPermissionGranted = checkLocationPermission();
+        }
 
-        timerView = (TextView)findViewById(R.id.timerView);
 
-
-        final Handler handler = new Handler();
-        Runnable run = new Runnable() {
-            @Override
-            public void run() {
-                timerView.setText("Timer : " + Float.toString(timeNow));
-                timeNow++;
-                handler.postDelayed(this, 1000);
-            }
-        };
-
-        handler.post(run);
+        startChronometer();
 
         startAccel();
 
@@ -81,14 +76,17 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
         provider = locationManager.getBestProvider(new Criteria(), false);
 
-        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
-
         Location location = locationManager.getLastKnownLocation(provider);
 
         if (location != null) {
             Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
         }
 
+    }
+    public void startChronometer() {
+        Chronometer c = (Chronometer) findViewById(R.id.chronometer);
+        c.setFormat("%s");
+        c.start();
     }
 
     public void startPositionTracking(){
@@ -99,17 +97,24 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        mGyroscope  = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
         accelView = (TextView) findViewById(R.id.accelView);
+        xrotView = (TextView) findViewById(R.id.xrotationView);;
+        yrotView = (TextView) findViewById(R.id.yrotationView);;
+        zrotView = (TextView) findViewById(R.id.zrotationView);;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bPermissionGranted = checkLocationPermission();
+        }
 
-        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 
         locationManager.requestLocationUpdates(provider, 400, 0, this);
 
@@ -119,9 +124,11 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     protected void onPause() {
         super.onPause();
 
-        mSensorManager.unregisterListener(this);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bPermissionGranted = checkLocationPermission();
+        }
 
-        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
+        mSensorManager.unregisterListener(this);
 
         locationManager.removeUpdates(this);
     }
@@ -158,7 +165,9 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     public void getLocation(View view) {
 
-        int permissionCheck = ContextCompat.checkSelfPermission(TrackingActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bPermissionGranted = checkLocationPermission();
+        }
 
         Location location = locationManager.getLastKnownLocation(provider);
 
@@ -167,6 +176,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+
         DecimalFormat df = new DecimalFormat("##.##");
         df.setRoundingMode(RoundingMode.DOWN);
 
@@ -178,11 +188,51 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         linear_acceleration[1] = event.values[1] - gravity[1];
         linear_acceleration[2] = event.values[2] - gravity[2];
 
-        accelView.setText("Accel : " + df.format( Math.sqrt(linear_acceleration[0]*linear_acceleration[0] + linear_acceleration[1]*linear_acceleration[1] + linear_acceleration[2]*linear_acceleration[2])));
+        accelView.setText("Accel : " + df.format(Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2])));
+
+
+        xrotView.setText("Orientation X : " + Float.toString(event.values[2]));
+        yrotView.setText("Orientation Y : " + Float.toString(event.values[1]));
+        zrotView.setText("Orientation Z : " + Float.toString(event.values[0]));
+
+
+
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    public boolean checkLocationPermission(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+                //Prompt the user once explanation has been shown
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
+            return false;
+        } else {
+            return true;
+        }
     }
 }
