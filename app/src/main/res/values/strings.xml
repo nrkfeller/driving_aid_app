@@ -10,16 +10,17 @@
         <string name="Ready_Time">Time Data</string>
             <string name="Ready_Time_Timer">Timer : </string>
             <string name="Ready_Time_Lap">Lap : </string>
-        <string name="Ready_Accelerometer">Accelerometer Data</string>
-        <string name="Ready_Gyroscope">Gyroscope Data</string>
+        <string name="Ready_Accelerometer">Linear Accelerometer Data</string>
+        <string name="Ready_Gyroscope">3D Accelerometer Data</string>
 
     <string name="Script_name">Script</string>
-        <string name="Script_text">This is the Script page. (under construction). The user will be able to add and edit scripts. These script will give suggestions at given time marks. (ex: at 1min display "1min: Engine now warm, reduce speed")</string>
+        <string name="Script_text">This is the Script page. (under construction) \n \nThe user will be able to add and edit scripts. These script will give suggestions at given time marks. \n(ex: at 1min display "1min: Engine now warm, reduce speed")</string>
+        <string name="Script_CreateScript">Create new Script</string>
 
     <string name="Recordings_name">Recordings</string>
         <string name="Recordings_text">This is the Recordings page. (under construction)</string>
 
     <string name="About_name">About</string>
-        <string name="About_Text">This is the About page. (underconstruction) </string>
+        <string name="About_Text">This is the About page. (underconstruction) \n \nMade by: \nNicolas Feller 2 5980925 \nAmbre Le Van Chau 2 6994873 \nRoberto Riccardi 2 9480668\nLoïc Lajoumard de Bellabre 2 6812260 \nYuan Song 2 6542972  </string>
 
 </resources>
