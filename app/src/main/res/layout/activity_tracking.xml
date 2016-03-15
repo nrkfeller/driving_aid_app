@@ -26,39 +26,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_GPS_Latitude"
         android:id="@+id/latitudeView"
-        android:layout_below="@+id/gpsView" />
+        android:layout_below="@+id/gpsView"
+        android:text="Latitude : " />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_GPS_Longitude"
         android:id="@+id/longitudeView"
         android:layout_below="@+id/latitudeView"
         android:layout_alignLeft="@+id/latitudeView"
-        android:layout_alignStart="@+id/latitudeView" />
+        android:layout_alignStart="@+id/latitudeView"
+        android:text="Longitude : " />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_GPS_Altitude"
         android:id="@+id/altitudeView"
         android:layout_below="@+id/longitudeView"
         android:layout_alignLeft="@+id/longitudeView"
-        android:layout_alignStart="@+id/longitudeView" />
+        android:layout_alignStart="@+id/longitudeView"
+        android:text="Altitude : " />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_GPS_Speed"
         android:id="@+id/speedView"
         android:layout_below="@+id/altitudeView"
         android:layout_alignLeft="@+id/longitudeView"
-        android:layout_alignStart="@+id/longitudeView" />
+        android:layout_alignStart="@+id/longitudeView"
+        android:text="Speed : " />
 
 
     <TextView
@@ -157,13 +157,13 @@
         android:layout_alignParentStart="true" />
 
     <Chronometer
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/chronometer"
         android:textSize="25dp"
-        android:layout_alignTop="@+id/timerView"
         android:layout_alignBottom="@+id/timerView"
-        android:layout_toRightOf="@+id/speedView" />
+        android:layout_toRightOf="@+id/timerView"
+        android:layout_toEndOf="@+id/timerView" />
 
 
 </RelativeLayout>

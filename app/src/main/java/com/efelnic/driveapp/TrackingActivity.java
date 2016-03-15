@@ -58,14 +58,30 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
-
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bPermissionGranted = checkLocationPermission();
+        }
 
 
         startChronometer();
 
         startAccel();
 
-        startPositionTracking();
+        latView = (TextView) findViewById(R.id.latitudeView);
+        lngView = (TextView) findViewById(R.id.longitudeView);
+        altView = (TextView) findViewById(R.id.altitudeView);
+        spdView = (TextView) findViewById(R.id.speedView);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        provider = locationManager.getBestProvider(new Criteria(), false);
+
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        if (location != null) {
+            Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
+        }
+
     }
     public void startChronometer() {
         Chronometer c = (Chronometer) findViewById(R.id.chronometer);
@@ -74,50 +90,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     }
 
     public void startPositionTracking(){
-        latView = (TextView) findViewById(R.id.latitudeView);
-        lngView = (TextView) findViewById(R.id.longitudeView);
-        altView = (TextView) findViewById(R.id.altitudeView);
-        spdView = (TextView) findViewById(R.id.speedView);
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            bPermissionGranted = checkLocationPermission();
-        }
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        provider = locationManager.getBestProvider(new Criteria(), false);
-
-        locationManager.requestLocationUpdates(provider, 1000, 0, new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Double lat = location.getLatitude();
-                Double lng = location.getLongitude();
-                Double alt = location.getAltitude();
-                float spd = location.getSpeed();
-
-
-                altView.setText("Altitude : " + Double.toString(alt));
-                latView.setText("Latitude : " + Double.toString(lat));
-                lngView.setText("Longitude : " + Double.toString(lng));
-                spdView.setText("Speed : " + Float.toString(spd));
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status,
-                                        Bundle extras) {
-                // TODO Auto-generated method stub
-            }
-        });
     }
 
     public void startAccel() {
@@ -144,6 +116,8 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 
+        locationManager.requestLocationUpdates(provider, 400, 0, this);
+
     }
 
     @Override
@@ -155,6 +129,38 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         }
 
         mSensorManager.unregisterListener(this);
+
+        locationManager.removeUpdates(this);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Double lat = location.getLatitude();
+        Double lng = location.getLongitude();
+        Double alt = location.getAltitude();
+        float spd = location.getSpeed();
+
+
+        altView.setText("Altitude : " + Double.toString(alt));
+        latView.setText("Latitude : " + Double.toString(lat));
+        lngView.setText("Longitude : " + Double.toString(lng));
+        spdView.setText("Speed : " + Float.toString(spd));
+
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 
     public void getLocation(View view) {
@@ -228,25 +234,5 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         } else {
             return true;
         }
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
     }
 }
