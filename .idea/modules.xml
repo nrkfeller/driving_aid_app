@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/DriveApp.iml" filepath="$PROJECT_DIR$/DriveApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-=======
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/driving_aid_app.iml" filepath="$PROJECT_DIR$/driving_aid_app.iml" />
->>>>>>> 76cd8c7eed74c4da60c223a28679f1eb219a135a
     </modules>
   </component>
 </project>
