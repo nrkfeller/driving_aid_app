@@ -23,7 +23,11 @@
         </activity>
         <activity android:name=".TrackingActivity" />
         <activity android:name=".ScriptActivity" />
-        <activity android:name=".RecordingsActivity"></activity>
+        <activity android:name=".RecordingsActivity" />
+        <activity
+            android:name=".PreferenceActivity"
+            android:label="@string/title_activity_preference"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
