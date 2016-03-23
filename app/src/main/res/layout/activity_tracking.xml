@@ -9,23 +9,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.efelnic.driveapp.TrackingActivity">
 
-    <!--This is the bar chart under construction (does not work yet)-->
-    <!--<linearLayout-->
-        <!--android:id="@+id/lchart"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_above="@+id/view"-->
-        <!--android:gravity="bottom"-->
-        <!--android:layout_marginTop="60dp"-->
-        <!--/>-->
 
-    <!--<View-->
-        <!--android:id="@+id/view"-->
-        <!--android:layout_height="35dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:background="#0c0d0c"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--/>-->
+    <LinearLayout
+        android:id="@+id/barchart"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/view"
+        android:gravity="bottom"
+        android:layout_marginTop="60dp"
+        />
+
+    <View
+        android:id="@+id/view"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="#0c0d0c"
+        android:layout_alignParentBottom="true"
+        />
 
     <TextView
         android:layout_width="fill_parent"
@@ -98,6 +99,15 @@
         android:layout_below="@+id/timeView"
         android:layout_alignLeft="@+id/longitudeView"
         android:layout_alignStart="@+id/longitudeView" />
+
+    <Chronometer
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/chronometer"
+        android:textSize="25dp"
+        android:layout_alignBottom="@+id/timerView"
+        android:layout_toRightOf="@+id/timerView"
+        android:layout_toEndOf="@+id/timerView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -173,14 +183,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Chronometer
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/chronometer"
-        android:textSize="25dp"
-        android:layout_alignBottom="@+id/timerView"
-        android:layout_toRightOf="@+id/timerView"
-        android:layout_toEndOf="@+id/timerView" />
 
 
 </RelativeLayout>

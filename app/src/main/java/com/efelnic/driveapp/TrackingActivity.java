@@ -54,7 +54,8 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     boolean bPermissionGranted;
 
-//    LinearLayout la; // used for charts
+    LinearLayout la; // used for charts
+    View bar1, bar2, bar3, bar4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +66,16 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             bPermissionGranted = checkLocationPermission();
         }
 
-
         startChronometer();
 
         startAccel();
+
+        // Create Bar chart
+        la = (LinearLayout)findViewById(R.id.barchart);
+        bar1 = drawChart(1,30);
+        bar2 = drawChart(1,30);
+        bar3 = drawChart(1,30);
+        bar4 = drawChart(2,60);
 
         latView = (TextView) findViewById(R.id.latitudeView);
         lngView = (TextView) findViewById(R.id.longitudeView);
@@ -143,7 +150,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         Double alt = location.getAltitude();
         float spd = location.getSpeed();
 
-
         altView.setText("Altitude : " + Double.toString(alt));
         latView.setText("Latitude : " + Double.toString(lat));
         lngView.setText("Longitude : " + Double.toString(lng));
@@ -153,25 +159,20 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
     }
 
     public void getLocation(View view) {
-
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
-
         Location location = locationManager.getLastKnownLocation(provider);
 
         onLocationChanged(location);
@@ -193,23 +194,23 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
         accelView.setText("Accel : " + df.format(Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2])));
 
-
         xrotView.setText("Orientation X : " + Float.toString(event.values[2]));
         yrotView.setText("Orientation Y : " + Float.toString(event.values[1]));
         zrotView.setText("Orientation Z : " + Float.toString(event.values[0]));
 
-        // Create Charts
-//        la = (LinearLayout)findViewById(R.id.lchart);
-//        drawchart(1, 1, (int)linear_acceleration[0]); //float converted to int
-//        drawchart(2, 2, (int)linear_acceleration[1]); //float converted to int
-//        drawchart(3, 3, (int)linear_acceleration[2]); //float converted to int
+        int temp_x = Math.round(event.values[2] * 10);
+        int temp_y = Math.round(event.values[1] * 10);
+        int temp_z = Math.round(event.values[0] * 10);
+        int temp_A = (int)Math.round((Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]))*100);
 
-
+        bar1.setLayoutParams(new LinearLayout.LayoutParams(90, temp_x));
+        bar2.setLayoutParams(new LinearLayout.LayoutParams(90, temp_y));
+        bar3.setLayoutParams(new LinearLayout.LayoutParams(90, temp_z));
+        bar4.setLayoutParams(new LinearLayout.LayoutParams(90, temp_A));
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -231,7 +232,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
 
-
             } else {
                 // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
@@ -245,25 +245,27 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     }
 
     // Chart creation function
-//    private void drawchart(int count, int color, int hight) {
-//     System.out.println(count+color+hight);
-//        if(color == 1) {
-//            color = Color.RED;
-//        }
-//        if(color == 2) {
-//            color = Color.GREEN;
-//        }
-//        if(color == 3) {
-//            color = Color.BLUE;
-//        }
-//        for(int k = 1; k<= count; k++) {
-//            View view = new View(this);
-//            view.setBackgroundColor(color);
-//            view.setLayoutParams(new LinearLayout.LayoutParams(30, hight));
-//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)view.getLayoutParams();
-//            params.setMargins(3, 0, 0, 0);
-//            view.setLayoutParams(params);
-//            la.addView(view);
-//        }
-//    }
+    private View drawChart(int color, int height) {
+        if(color == 1) {
+            color = Color.RED;
+        }
+        if(color == 2) {
+            color = Color.GREEN;
+        }
+        if(color == 3) {
+            color = Color.BLUE;
+        }
+
+        View custom_view = new View(this);
+        custom_view.setBackgroundColor(color);
+        custom_view.setLayoutParams(new LinearLayout.LayoutParams(90, height));
+
+        LinearLayout.LayoutParams custom_params = (LinearLayout.LayoutParams)custom_view.getLayoutParams();
+        custom_params.setMargins(3, 0, 0, 0); // left, top, right, bottom
+        custom_view.setLayoutParams(custom_params);
+
+        la.addView(custom_view);
+        return custom_view;
+    }
+
 }
