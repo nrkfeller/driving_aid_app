@@ -54,7 +54,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     boolean bPermissionGranted;
 
-    LinearLayout la; // used for charts
+//    LinearLayout la; // used for charts
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,10 +199,10 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         zrotView.setText("Orientation Z : " + Float.toString(event.values[0]));
 
         // Create Charts
-        la = (LinearLayout)findViewById(R.id.lchart);
-        drawchart(1, 1, (int)linear_acceleration[0]); //float converted to int
-        drawchart(2, 2, (int)linear_acceleration[1]); //float converted to int
-        drawchart(3, 3, (int)linear_acceleration[2]); //float converted to int
+//        la = (LinearLayout)findViewById(R.id.lchart);
+//        drawchart(1, 1, (int)linear_acceleration[0]); //float converted to int
+//        drawchart(2, 2, (int)linear_acceleration[1]); //float converted to int
+//        drawchart(3, 3, (int)linear_acceleration[2]); //float converted to int
 
 
     }
@@ -245,25 +245,25 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     }
 
     // Chart creation function
-    private void drawchart(int count, int color, int hight) {
-     System.out.println(count+color+hight);
-        if(color == 1) {
-            color = Color.RED;
-        }
-        if(color == 2) {
-            color = Color.GREEN;
-        }
-        if(color == 3) {
-            color = Color.BLUE;
-        }
-        for(int k = 1; k<= count; k++) {
-            View view = new View(this);
-            view.setBackgroundColor(color);
-            view.setLayoutParams(new LinearLayout.LayoutParams(30, hight));
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)view.getLayoutParams();
-            params.setMargins(3, 0, 0, 0);
-            view.setLayoutParams(params);
-            la.addView(view);
-        }
-    }
+//    private void drawchart(int count, int color, int hight) {
+//     System.out.println(count+color+hight);
+//        if(color == 1) {
+//            color = Color.RED;
+//        }
+//        if(color == 2) {
+//            color = Color.GREEN;
+//        }
+//        if(color == 3) {
+//            color = Color.BLUE;
+//        }
+//        for(int k = 1; k<= count; k++) {
+//            View view = new View(this);
+//            view.setBackgroundColor(color);
+//            view.setLayoutParams(new LinearLayout.LayoutParams(30, hight));
+//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)view.getLayoutParams();
+//            params.setMargins(3, 0, 0, 0);
+//            view.setLayoutParams(params);
+//            la.addView(view);
+//        }
+//    }
 }
