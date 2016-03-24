@@ -42,10 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
     }
+
     public void goToTrackingActivity(View view) {
         Intent i = new Intent(getApplicationContext(), TrackingActivity.class);
         startActivity(i);

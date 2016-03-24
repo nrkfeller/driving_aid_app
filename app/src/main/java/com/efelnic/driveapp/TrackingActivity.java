@@ -55,7 +55,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     boolean bPermissionGranted;
 
     LinearLayout la; // used for charts
-    View bar1, bar2, bar3, bar4;
+    View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +72,12 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
         // Create Bar chart
         la = (LinearLayout)findViewById(R.id.barchart);
-        bar1 = drawChart(1,30);
-        bar2 = drawChart(1,30);
-        bar3 = drawChart(1,30);
-        bar4 = drawChart(2,60);
+        bar1 = drawChart(7,10);
+        bar2 = drawChart(7,10);
+        bar3 = drawChart(7,10);
+        lin_acel_bar = drawChart(8,10);
+        speed_bar = drawChart(3,10);
+        time_bar = drawChart(5,5);
 
         latView = (TextView) findViewById(R.id.latitudeView);
         lngView = (TextView) findViewById(R.id.longitudeView);
@@ -127,7 +129,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 
         locationManager.requestLocationUpdates(provider, 400, 0, this);
-
     }
 
     @Override
@@ -137,7 +138,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
-
         mSensorManager.unregisterListener(this);
 
         locationManager.removeUpdates(this);
@@ -155,6 +155,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         lngView.setText("Longitude : " + Double.toString(lng));
         spdView.setText("Speed : " + Float.toString(spd));
 
+        speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
     }
 
     @Override
@@ -198,6 +199,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         yrotView.setText("Orientation Y : " + Float.toString(event.values[1]));
         zrotView.setText("Orientation Z : " + Float.toString(event.values[0]));
 
+        // Bar charts
         int temp_x = Math.round(event.values[2] * 10);
         int temp_y = Math.round(event.values[1] * 10);
         int temp_z = Math.round(event.values[0] * 10);
@@ -206,7 +208,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         bar1.setLayoutParams(new LinearLayout.LayoutParams(90, temp_x));
         bar2.setLayoutParams(new LinearLayout.LayoutParams(90, temp_y));
         bar3.setLayoutParams(new LinearLayout.LayoutParams(90, temp_z));
-        bar4.setLayoutParams(new LinearLayout.LayoutParams(90, temp_A));
+        lin_acel_bar.setLayoutParams(new LinearLayout.LayoutParams(90, temp_A));
     }
 
     @Override
@@ -246,16 +248,16 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     // Chart creation function
     private View drawChart(int color, int height) {
-        if(color == 1) {
-            color = Color.RED;
+        switch(color) {
+            case 1: color = Color.RED; break;
+            case 2: color = Color.BLUE; break;
+            case 3: color = Color.GREEN; break;
+            case 4: color = Color.BLACK; break;
+            case 5: color = Color.MAGENTA; break;
+            case 6: color = Color.YELLOW; break;
+            case 7: color = Color.GRAY; break;
+            case 8: color = Color.CYAN; break;
         }
-        if(color == 2) {
-            color = Color.GREEN;
-        }
-        if(color == 3) {
-            color = Color.BLUE;
-        }
-
         View custom_view = new View(this);
         custom_view.setBackgroundColor(color);
         custom_view.setLayoutParams(new LinearLayout.LayoutParams(90, height));
