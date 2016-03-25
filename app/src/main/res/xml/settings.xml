@@ -17,7 +17,12 @@
         </CheckBoxPreference>
 
 
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefMaps"
 
+            android:title="@string/pref_maps" >
+        </CheckBoxPreference>
 
 
 
