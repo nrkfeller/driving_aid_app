@@ -31,6 +31,7 @@ dependencies {
     compile 'com.android.support:design:23.2.0'
 }
 
+// TODO If there is nothing under this line, refer to README.md file to add MPCHARTS Library
 repositories {
     maven { url "https://jitpack.io" }
 }
