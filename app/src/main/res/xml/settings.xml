@@ -25,7 +25,21 @@
         </CheckBoxPreference>
 
 
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefAccelerometer"
 
+            android:title="@string/pref_accelerometer" >
+        </CheckBoxPreference>
+
+
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefGyroscope"
+
+            android:title="@string/pref_gyroscope" >
+        </CheckBoxPreference>
 
 
 
