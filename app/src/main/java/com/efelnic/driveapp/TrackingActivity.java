@@ -79,7 +79,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     private LineChart mChart;
     float lin_accel;
-    float time = 0;
+    double time = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -283,7 +283,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     private void addEntry(double value1) {
 
-        time++;
+        time = time + 0.5;
         LineData linedata = mChart.getData();
         float gravity = (float)value1;
 
@@ -298,11 +298,11 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
             // add a new x-value first
 
-            linedata.addXValue(linear_acceleration + "");
-            linedata.addEntry(new Entry(gravity + 30f, set.getEntryCount()), 0);
+            linedata.addXValue(time + ""); //name displayed for x-axis value
+            linedata.addEntry(new Entry(gravity + 30f, set.getEntryCount()), 0);//Y value
 
             // Add new value
-            set.addEntryOrdered(new Entry(time, 0)); // can be called as well
+            set.addEntryOrdered(new Entry((float)time, 0)); //x value that corresponds to y value
 
             // let the chart know it's data has changed
             mChart.notifyDataSetChanged();
