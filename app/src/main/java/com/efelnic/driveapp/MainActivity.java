@@ -51,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button GraphButton = (Button)findViewById(R.id.GraphButton);
+        GraphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public  void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GraphTest.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void goToTrackingActivity(View view) {

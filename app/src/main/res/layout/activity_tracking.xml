@@ -1,188 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.efelnic.driveapp.TrackingActivity">
+    android:layout_height="match_parent" >
 
 
-    <LinearLayout
-        android:id="@+id/barchart"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_above="@+id/view"
-        android:gravity="bottom"
-        android:layout_marginTop="60dp"
-        />
-
-    <View
-        android:id="@+id/view"
-        android:layout_height="1dp"
-        android:layout_width="match_parent"
-        android:background="#0c0d0c"
-        android:layout_alignParentBottom="true"
-        />
-
-    <TextView
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_GPS"
-        android:id="@+id/gpsView"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="00dp"
-        android:onClick="getLocation" />
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.efelnic.driveapp.TrackingActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/latitudeView"
-        android:layout_below="@+id/gpsView"
-        android:text="Latitude : " />
+        <!--<LinearLayout-->
+        <!--android:id="@+id/barchart"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_above="@+id/view"-->
+        <!--android:gravity="bottom"-->
+        <!--android:layout_marginTop="60dp"-->
+        <!--/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/longitudeView"
-        android:layout_below="@+id/latitudeView"
-        android:layout_alignLeft="@+id/latitudeView"
-        android:layout_alignStart="@+id/latitudeView"
-        android:text="Longitude : " />
+        <!--<View-->
+        <!--android:id="@+id/view"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="#0c0d0c"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/altitudeView"
-        android:layout_below="@+id/longitudeView"
-        android:layout_alignLeft="@+id/longitudeView"
-        android:layout_alignStart="@+id/longitudeView"
-        android:text="Altitude : " />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/Ready_Accelerometer"
+            android:id="@+id/accelTitle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/chronometer" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/speedView"
-        android:layout_below="@+id/altitudeView"
-        android:layout_alignLeft="@+id/longitudeView"
-        android:layout_alignStart="@+id/longitudeView"
-        android:text="Speed : " />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/accelView"
+            android:layout_below="@+id/accelTitle"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/gyroView"
+            android:layout_alignEnd="@+id/gyroView" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/Ready_Gyroscope"
+            android:id="@+id/gyroView"
+            android:layout_below="@+id/accelView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="X rotation : "
+            android:id="@+id/xrotationView"
+            android:layout_below="@+id/gyroView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Y rotation: "
+            android:id="@+id/yrotationView"
+            android:layout_below="@+id/xrotationView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Z rotation: "
+            android:id="@+id/zrotationView"
+            android:layout_below="@+id/yrotationView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_width="fill_parent"
+            android:layout_height="300dp"
+            android:id="@+id/chart1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/zrotationView" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/Ready_GPS"
+            android:id="@+id/gpsView"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="00dp"
+            android:onClick="getLocation" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/latitudeView"
+            android:layout_below="@+id/gpsView"
+            android:text="Latitude : " />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/longitudeView"
+            android:layout_below="@+id/latitudeView"
+            android:layout_alignLeft="@+id/latitudeView"
+            android:layout_alignStart="@+id/latitudeView"
+            android:text="Longitude : " />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/altitudeView"
+            android:layout_below="@+id/longitudeView"
+            android:layout_alignLeft="@+id/longitudeView"
+            android:layout_alignStart="@+id/longitudeView"
+            android:text="Altitude : " />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/speedView"
+            android:layout_below="@+id/altitudeView"
+            android:layout_alignLeft="@+id/longitudeView"
+            android:layout_alignStart="@+id/longitudeView"
+            android:text="Speed : " />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/Ready_Time"
+            android:id="@+id/timeView"
+            android:layout_gravity="top"
+            android:layout_below="@+id/speedView"
+            android:layout_alignRight="@+id/chronometer"
+            android:layout_alignEnd="@+id/chronometer" />
+
+        <Chronometer
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/chronometer"
+            android:textSize="25sp"
+            android:layout_gravity="center_horizontal|bottom|left"
+            android:layout_alignTop="@+id/timerView"
+            android:layout_toRightOf="@+id/speedView"
+            android:layout_toEndOf="@+id/speedView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/Ready_Time_Lap"
+            android:id="@+id/lapView"
+            android:layout_below="@+id/timeView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="382dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/Ready_Time_Timer"
+            android:id="@+id/timerView"
+            android:layout_gravity="center_vertical"
+            android:layout_below="@+id/lapView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_Time"
-        android:id="@+id/timeView"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="150dp" />
+    </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_Time_Timer"
-        android:id="@+id/timerView"
-        android:layout_below="@+id/timeView"
-        android:layout_alignLeft="@+id/longitudeView"
-        android:layout_alignStart="@+id/longitudeView" />
-
-    <Chronometer
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/chronometer"
-        android:textSize="25dp"
-        android:layout_alignBottom="@+id/timerView"
-        android:layout_toRightOf="@+id/timerView"
-        android:layout_toEndOf="@+id/timerView" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_Time_Lap"
-        android:id="@+id/lapView"
-        android:layout_below="@+id/timerView"
-        android:layout_alignLeft="@+id/longitudeView"
-        android:layout_alignStart="@+id/longitudeView" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_Accelerometer"
-        android:id="@+id/accelTitle"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="240dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/accelView"
-        android:layout_below="@+id/accelTitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/gyroView"
-        android:layout_alignEnd="@+id/gyroView" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Ready_Gyroscope"
-        android:id="@+id/gyroView"
-        android:layout_below="@+id/accelView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="X rotation : "
-        android:id="@+id/xrotationView"
-        android:layout_below="@+id/gyroView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Y rotation: "
-        android:id="@+id/yrotationView"
-        android:layout_below="@+id/xrotationView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Z rotation: "
-        android:id="@+id/zrotationView"
-        android:layout_below="@+id/yrotationView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-
-
-</RelativeLayout>
+</ScrollView>

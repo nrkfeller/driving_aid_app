@@ -33,6 +33,7 @@
             android:name=".UserSettingActivity"
             android:label="@string/title_activity_user_setting"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GraphTest"></activity>
     </application>
 
 </manifest>
