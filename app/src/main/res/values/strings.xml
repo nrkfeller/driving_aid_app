@@ -23,5 +23,25 @@
     <string name="About_name">About</string>
     <string name="About_Text">This is the About page. (underconstruction) \n \nMade by: \nNicolas Feller 2 5980925 \nAmbre Le Van Chau 2 6994873 \nRoberto Riccardi 2 9480668\nLoïc Lajoumard de Bellabre 2 6812260 \nYuan Song 2 6542972  </string>
     <string name="title_activity_preference">PreferenceActivity</string>
+    <string name="title_activity_user_setting">UserSettingActivity</string>
+
+
+
+<string name="app_name1">Android_Preferences_example</string>
+<string name="hello_world">Hello world!</string>
+<string name="menu_settings">Settings</string>
+<string name="title_activity_main">MainActivity</string>
+
+
+<string name="pref_send_report">Send crash reports</string>
+<string name="pref_send_report_summary">Helps to fix bugs</string>
+<string name="pref_sync_frequency">Sync frequency</string>
+<string name="pref_sync_frequency_summary">Set the sync frequency</string>
+<string name="pref_user_name">Set username</string>
+<string name="pref_user_name_summary">Set your username</string>
+
+<string name="pref_user_profile">User Profile</string>
+<string name="pref_update_setting">Update Settings</string>
+
 
 </resources>

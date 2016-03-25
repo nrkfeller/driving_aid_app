@@ -28,7 +28,11 @@
         <activity
             android:name=".PreferenceActivity"
             android:label="@string/title_activity_preference"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserSettingActivity"
+            android:label="@string/title_activity_user_setting"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
