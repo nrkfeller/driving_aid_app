@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,6 +14,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.Parcel;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
@@ -29,11 +32,30 @@ import android.widget.Toast;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 
-public class TrackingActivity extends AppCompatActivity implements LocationListener, SensorEventListener {
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.RadarDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+
+public class TrackingActivity extends AppCompatActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
     LocationManager locationManager;
     String provider;
@@ -48,14 +70,16 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     private static final float NS2S = 1.0f / 1000000000.0f;
     private final float[] deltaRotationVector = new float[4];
-    private float timestamp;
+//    private float timestamp;
 
     TextView latView, lngView, altView, spdView, xrotView, yrotView, zrotView;
 
     boolean bPermissionGranted;
 
-    LinearLayout la; // used for charts
-    View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
+
+    private LineChart mChart;
+    float lin_accel;
+    float time = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +91,8 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         }
 
         startChronometer();
-
         startAccel();
 
-        // Create Bar chart
-        la = (LinearLayout)findViewById(R.id.barchart);
-        bar1 = drawChart(7,10);
-        bar2 = drawChart(7,10);
-        bar3 = drawChart(7,10);
-        lin_acel_bar = drawChart(8,10);
-        speed_bar = drawChart(3,10);
-        time_bar = drawChart(5,5);
 
         latView = (TextView) findViewById(R.id.latitudeView);
         lngView = (TextView) findViewById(R.id.longitudeView);
@@ -93,6 +108,69 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         if (location != null) {
             Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
         }
+
+
+        //Dynamic line chart
+            mChart = (LineChart) findViewById(R.id.chart1);
+            mChart.setOnChartValueSelectedListener(this);
+
+            // no description text
+            mChart.setDescription("Linear Accelerometer Data");
+            mChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+            // enable touch gestures
+            mChart.setTouchEnabled(true);
+
+            // enable scaling and dragging
+            mChart.setDragEnabled(true);
+            mChart.setScaleEnabled(true);
+            mChart.setDrawGridBackground(false);
+
+            // if disabled, scaling can be done on x- and y-axis separately
+            mChart.setPinchZoom(true);
+
+            // set an alternative background color
+            mChart.setBackgroundColor(Color.LTGRAY);
+
+
+            LineData data = new LineData();
+            data.setValueTextColor(Color.WHITE);
+
+            // add empty data
+
+            mChart.setData(data);
+
+            //Typeface tf = Typeface.createFromAsset(getAssets(), "");
+
+            // get the legend (only possible after setting data)
+            Legend l = mChart.getLegend();
+
+            // modify the legend ...
+            // l.setPosition(LegendPosition.LEFT_OF_CHART);
+            l.setForm(Legend.LegendForm.LINE);
+            //l.setTypeface(tf);
+            l.setTextColor(Color.WHITE);
+
+            XAxis xl = mChart.getXAxis();
+           // xl.setTypeface(tf);
+            xl.setTextColor(Color.WHITE);
+            xl.setDrawGridLines(false);
+            xl.setAvoidFirstLastClipping(true);
+            xl.setSpaceBetweenLabels(5);
+            xl.setEnabled(true);
+
+            YAxis leftAxis = mChart.getAxisLeft();
+            //leftAxis.setTypeface(tf);
+            leftAxis.setTextColor(Color.WHITE);
+            leftAxis.setAxisMaxValue(100f);
+            leftAxis.setAxisMinValue(15f);
+            leftAxis.setDrawGridLines(true);
+
+            YAxis rightAxis = mChart.getAxisRight();
+            rightAxis.setEnabled(false);
+
+
+
 
     }
     public void startChronometer() {
@@ -155,7 +233,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         lngView.setText("Longitude : " + Double.toString(lng));
         spdView.setText("Speed : " + Float.toString(spd));
 
-        speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
+        //speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
     }
 
     @Override
@@ -193,22 +271,77 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         linear_acceleration[1] = event.values[1] - gravity[1];
         linear_acceleration[2] = event.values[2] - gravity[2];
 
-        accelView.setText("Accel : " + df.format(Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2])));
+        double  lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
+        accelView.setText("Accel : " + df.format(lin_accel*10));
 
         xrotView.setText("Orientation X : " + Float.toString(event.values[2]));
         yrotView.setText("Orientation Y : " + Float.toString(event.values[1]));
         zrotView.setText("Orientation Z : " + Float.toString(event.values[0]));
 
-        // Bar charts
-        int temp_x = Math.round(event.values[2] * 10);
-        int temp_y = Math.round(event.values[1] * 10);
-        int temp_z = Math.round(event.values[0] * 10);
-        int temp_A = (int)Math.round((Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]))*100);
+        addEntry(lin_accel);
+    }
 
-        bar1.setLayoutParams(new LinearLayout.LayoutParams(90, temp_x));
-        bar2.setLayoutParams(new LinearLayout.LayoutParams(90, temp_y));
-        bar3.setLayoutParams(new LinearLayout.LayoutParams(90, temp_z));
-        lin_acel_bar.setLayoutParams(new LinearLayout.LayoutParams(90, temp_A));
+    private void addEntry(double value1) {
+
+        time++;
+        LineData linedata = mChart.getData();
+        float gravity = (float)value1;
+
+        if (linedata != null) {
+
+            ILineDataSet set = linedata.getDataSetByIndex(0);
+
+            if (set == null) {
+                set = createSet();
+                linedata.addDataSet(set);
+            }
+
+            // add a new x-value first
+
+            linedata.addXValue(linear_acceleration + "");
+            linedata.addEntry(new Entry(gravity + 30f, set.getEntryCount()), 0);
+
+            // Add new value
+            set.addEntryOrdered(new Entry(time, 0)); // can be called as well
+
+            // let the chart know it's data has changed
+            mChart.notifyDataSetChanged();
+
+            // limit the number of visible entries
+            mChart.setVisibleXRangeMaximum(30);
+            // mChart.setVisibleYRange(30, AxisDependency.LEFT);
+
+            // move to the latest entry
+            mChart.moveViewToX(linedata.getXValCount() - 31);
+
+            // this automatically refreshes the chart (calls invalidate())
+             mChart.moveViewTo(linedata.getXValCount()-7, 55f,
+             YAxis.AxisDependency.LEFT);
+
+
+
+
+        }
+    }
+    private LineDataSet createSet() {
+
+        LineDataSet set = new LineDataSet(null, "Dynamic Data");
+        set.setAxisDependency(YAxis.AxisDependency.LEFT);
+        set.setColor(ColorTemplate.getHoloBlue());
+        set.setCircleColor(Color.WHITE);
+        set.setLineWidth(2f);
+        set.setCircleRadius(4f);
+        set.setFillAlpha(65);
+        set.setFillColor(ColorTemplate.getHoloBlue());
+        set.setHighLightColor(Color.rgb(244, 117, 117));
+        set.setValueTextColor(Color.WHITE);
+        set.setValueTextSize(9f);
+        set.setDrawValues(false);
+        return set;
+    }
+    @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+        Log.i("Entry selected", e.toString());
     }
 
     @Override
@@ -246,28 +379,11 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         }
     }
 
-    // Chart creation function
-    private View drawChart(int color, int height) {
-        switch(color) {
-            case 1: color = Color.RED; break;
-            case 2: color = Color.BLUE; break;
-            case 3: color = Color.GREEN; break;
-            case 4: color = Color.BLACK; break;
-            case 5: color = Color.MAGENTA; break;
-            case 6: color = Color.YELLOW; break;
-            case 7: color = Color.GRAY; break;
-            case 8: color = Color.CYAN; break;
-        }
-        View custom_view = new View(this);
-        custom_view.setBackgroundColor(color);
-        custom_view.setLayoutParams(new LinearLayout.LayoutParams(90, height));
 
-        LinearLayout.LayoutParams custom_params = (LinearLayout.LayoutParams)custom_view.getLayoutParams();
-        custom_params.setMargins(3, 0, 0, 0); // left, top, right, bottom
-        custom_view.setLayoutParams(custom_params);
 
-        la.addView(custom_view);
-        return custom_view;
+
+    @Override
+    public void onNothingSelected() {
+
     }
-
 }

@@ -28,7 +28,8 @@
         <activity
             android:name=".PreferenceActivity"
             android:label="@string/title_activity_preference"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".GraphTest"></activity>
     </application>
 
 </manifest>
