@@ -2,6 +2,7 @@ package com.efelnic.driveapp;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -13,6 +14,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -47,13 +49,14 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 public class TrackingActivity extends AppCompatActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
+
     LocationManager locationManager;
     String provider;
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private Sensor mGyroscope;
-    TextView accelView;
+
     float alpha = (float) 0.8;
     float[] gravity = new float[3];
     float[] linear_acceleration = new float[3];
@@ -62,18 +65,23 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     private final float[] deltaRotationVector = new float[4];
     private float timestamp;
 
-    TextView latView, lngView, altView, spdView, xrotView, yrotView, zrotView;
+    TextView  gpsTitle, latView, lngView, altView, spdView, //gps + speed
+              timerTitle, timerView, lapView, chrono, // time + lap
+              accTitle, accView, // lin accel
+              compAccTitle, xrotView, yrotView, zrotView; // componential accell
 
     boolean bPermissionGranted;
 
     private LineChart mChart;
     float lin_accel;
     double time = 0;
-
+    boolean gpsSetting, accelSetting, timerSetting;
 
     //Bar Chart Loic
 //    LinearLayout la; // used for charts
 //    View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +93,93 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         }
 
         startChronometer();
-
         startAccel();
-          //Loic
+
+        //Location Stuffs
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            provider = locationManager.getBestProvider(new Criteria(), false);
+            Location location = locationManager.getLastKnownLocation(provider);
+
+            if (location != null) {
+                Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
+            }
+        //GPS SETTINGS TOGGLE
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        gpsSetting  = sp.getBoolean("prefGps", false);
+
+        //GPS
+        gpsTitle = (TextView) findViewById(R.id.gpsView);
+        latView = (TextView) findViewById(R.id.latitudeView);
+        lngView = (TextView) findViewById(R.id.longitudeView);
+        altView = (TextView) findViewById(R.id.altitudeView);
+        spdView = (TextView) findViewById(R.id.speedView);
+        if (!gpsSetting) {
+
+            gpsTitle.setText(null);
+            latView.setText(null);
+            lngView.setText(null);
+            altView.setText(null);
+            spdView.setText(null);
+        }
+
+        //RealTime line chart
+            mChart = (LineChart) findViewById(R.id.chart1);
+            mChart.setOnChartValueSelectedListener(this);
+
+            // no description text
+            mChart.setDescription("Linear Accelerometer Data");
+            mChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+            // enable touch gestures
+            mChart.setTouchEnabled(true);
+
+            // enable scaling and dragging
+            mChart.setDragEnabled(true);
+            mChart.setScaleEnabled(true);
+            mChart.setDrawGridBackground(false);
+
+            // if disabled, scaling can be done on x- and y-axis separately
+            mChart.setPinchZoom(true);
+
+            // set an alternative background color
+            mChart.setBackgroundColor(Color.LTGRAY);
+
+            LineData data = new LineData();
+            data.setValueTextColor(Color.WHITE);
+
+            // add empty data
+            mChart.setData(data);
+
+            //Typeface tf = Typeface.createFromAsset(getAssets(), "");
+
+            // get the legend (only possible after setting data)
+            Legend l = mChart.getLegend();
+
+            // modify the legend ...
+            // l.setPosition(LegendPosition.LEFT_OF_CHART);
+            l.setForm(Legend.LegendForm.LINE);
+            //l.setTypeface(tf);
+            l.setTextColor(Color.WHITE);
+
+            XAxis xl = mChart.getXAxis();
+            // xl.setTypeface(tf);
+            xl.setTextColor(Color.WHITE);
+            xl.setDrawGridLines(false);
+            xl.setAvoidFirstLastClipping(true);
+            xl.setSpaceBetweenLabels(5);
+            xl.setEnabled(true);
+
+            YAxis leftAxis = mChart.getAxisLeft();
+            //leftAxis.setTypeface(tf);
+            leftAxis.setTextColor(Color.WHITE);
+            leftAxis.setAxisMaxValue(60f);
+            leftAxis.setAxisMinValue(0f);
+            leftAxis.setDrawGridLines(true);
+
+            YAxis rightAxis = mChart.getAxisRight();
+            rightAxis.setEnabled(false);
+
+        //Loic
 //        //Create Bar chart
 //        la = (LinearLayout)findViewById(R.id.barchart);
 //        bar1 = drawChart(7,10);
@@ -96,79 +188,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 //        lin_acel_bar = drawChart(8,10);
 //        speed_bar = drawChart(3,10);
 //        time_bar = drawChart(5,5);
-
-        latView = (TextView) findViewById(R.id.latitudeView);
-        lngView = (TextView) findViewById(R.id.longitudeView);
-        altView = (TextView) findViewById(R.id.altitudeView);
-        spdView = (TextView) findViewById(R.id.speedView);
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        provider = locationManager.getBestProvider(new Criteria(), false);
-
-        Location location = locationManager.getLastKnownLocation(provider);
-
-        if (location != null) {
-            Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
-        }
-
-        //Dynamic line chart
-        mChart = (LineChart) findViewById(R.id.chart1);
-        mChart.setOnChartValueSelectedListener(this);
-
-        // no description text
-        mChart.setDescription("Linear Accelerometer Data");
-        mChart.setNoDataTextDescription("You need to provide data for the chart.");
-
-        // enable touch gestures
-        mChart.setTouchEnabled(true);
-
-        // enable scaling and dragging
-        mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(true);
-        mChart.setDrawGridBackground(false);
-
-        // if disabled, scaling can be done on x- and y-axis separately
-        mChart.setPinchZoom(true);
-
-        // set an alternative background color
-        mChart.setBackgroundColor(Color.LTGRAY);
-
-        LineData data = new LineData();
-        data.setValueTextColor(Color.WHITE);
-
-        // add empty data
-        mChart.setData(data);
-
-        //Typeface tf = Typeface.createFromAsset(getAssets(), "");
-
-        // get the legend (only possible after setting data)
-        Legend l = mChart.getLegend();
-
-        // modify the legend ...
-        // l.setPosition(LegendPosition.LEFT_OF_CHART);
-        l.setForm(Legend.LegendForm.LINE);
-        //l.setTypeface(tf);
-        l.setTextColor(Color.WHITE);
-
-        XAxis xl = mChart.getXAxis();
-        // xl.setTypeface(tf);
-        xl.setTextColor(Color.WHITE);
-        xl.setDrawGridLines(false);
-        xl.setAvoidFirstLastClipping(true);
-        xl.setSpaceBetweenLabels(5);
-        xl.setEnabled(true);
-
-        YAxis leftAxis = mChart.getAxisLeft();
-        //leftAxis.setTypeface(tf);
-        leftAxis.setTextColor(Color.WHITE);
-        leftAxis.setAxisMaxValue(60f);
-        leftAxis.setAxisMinValue(0f);
-        leftAxis.setDrawGridLines(true);
-
-        YAxis rightAxis = mChart.getAxisRight();
-        rightAxis.setEnabled(false);
-
     }
 
 
@@ -226,20 +245,36 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         set.setDrawValues(false);
         return set;
     }
-    @Override
 
+    @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
         Log.i("Entry selected", e.toString());
     }
+
     @Override
-
     public void onNothingSelected() {
-
     }
+
     public void startChronometer() {
-        Chronometer c = (Chronometer) findViewById(R.id.chronometer);
-        c.setFormat("%s");
-        c.start();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        timerSetting = sp.getBoolean("prefTimer", false);
+
+        if (timerSetting) {
+            Chronometer c = (Chronometer) findViewById(R.id.chronometer);
+            c.setFormat("%s");
+            c.start();
+        }
+        else {
+            timerTitle = (TextView) findViewById(R.id.timerTitle);
+            timerView = (TextView) findViewById(R.id.timerView);
+            chrono = (TextView) findViewById(R.id.chronometer);
+            lapView = (TextView) findViewById(R.id.lapView);
+
+            timerTitle.setText(null);
+            timerView.setText(null);
+            chrono.setText(null);
+            lapView.setText(null);
+        }
     }
 
     public void startPositionTracking(){
@@ -248,14 +283,9 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     public void startAccel() {
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
         mGyroscope  = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
-        accelView = (TextView) findViewById(R.id.accelView);
-        xrotView = (TextView) findViewById(R.id.xrotationView);;
-        yrotView = (TextView) findViewById(R.id.yrotationView);;
-        zrotView = (TextView) findViewById(R.id.zrotationView);;
     }
 
     @Override
@@ -268,7 +298,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
-
         locationManager.requestLocationUpdates(provider, 400, 0, this);
     }
 
@@ -286,16 +315,30 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     @Override
     public void onLocationChanged(Location location) {
+
+
         Double lat = location.getLatitude();
         Double lng = location.getLongitude();
         Double alt = location.getAltitude();
         float spd = location.getSpeed();
 
-        altView.setText("Altitude : " + Double.toString(alt));
-        latView.setText("Latitude : " + Double.toString(lat));
-        lngView.setText("Longitude : " + Double.toString(lng));
-        spdView.setText("Speed : " + Float.toString(spd));
+        //SETTINGS TOGGLE
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        gpsSetting  = sp.getBoolean("prefGps", false);
+        //GPS
 
+
+        if (gpsSetting) {
+
+            altView.setText("Altitude : " + Double.toString(alt));
+            latView.setText("Latitude : " + Double.toString(lat));
+            lngView.setText("Longitude : " + Double.toString(lng));
+            spdView.setText("Speed : " + Float.toString(spd));
+        }
+
+
+
+        //Loic
        // speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
     }
 
@@ -335,12 +378,38 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         linear_acceleration[2] = event.values[2] - gravity[2];
 
         double  lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
-        accelView.setText("Accel : " + df.format(lin_accel*10));
 
-        xrotView.setText("Orientation X : " + Float.toString(event.values[2]));
-        yrotView.setText("Orientation Y : " + Float.toString(event.values[1]));
-        zrotView.setText("Orientation Z : " + Float.toString(event.values[0]));
 
+        //SETTING TOGGLE
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        accelSetting = sp.getBoolean("prefAccelerometer", false);
+
+            //ACCELEROMETER
+            accTitle = (TextView) findViewById(R.id.accelTitle);
+            accView = (TextView) findViewById(R.id.accelView);
+            compAccTitle = (TextView) findViewById(R.id.compAccView);
+            xrotView = (TextView) findViewById(R.id.xrotationView);
+            yrotView = (TextView) findViewById(R.id.yrotationView);
+            zrotView = (TextView) findViewById(R.id.zrotationView);
+
+            if(accelSetting) {
+                accView.setText("Accel : " + lin_accel * 10);
+                xrotView.setText("Orientation X : " + Float.toString(event.values[2]));
+                yrotView.setText("Orientation Y : " + Float.toString(event.values[1]));
+                zrotView.setText("Orientation Z : " + Float.toString(event.values[0]));
+            }
+            else {
+                accTitle.setText(null);
+                accView.setText(null);
+                compAccTitle.setText(null);
+                xrotView.setText(null);
+                yrotView.setText(null);
+                zrotView.setText(null);
+            }
+
+
+
+        //Send value to entry function for plotting
         addEntry(lin_accel);
 
 

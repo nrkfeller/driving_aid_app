@@ -46,14 +46,15 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Accel: "
             android:id="@+id/accelView"
             android:layout_below="@+id/accelTitle"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/gyroView"
-            android:layout_alignEnd="@+id/gyroView" />
+            android:layout_alignRight="@+id/compAccView"
+            android:layout_alignParentEnd="false" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -62,7 +63,7 @@
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Gyroscope"
-            android:id="@+id/gyroView"
+            android:id="@+id/compAccView"
             android:layout_below="@+id/accelView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -73,7 +74,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="X rotation : "
             android:id="@+id/xrotationView"
-            android:layout_below="@+id/gyroView"
+            android:layout_below="@+id/compAccView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -111,7 +112,7 @@
             android:textSize="26sp"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Ready_GPS"
+            android:text="GPS Data"
             android:id="@+id/gpsView"
             android:layout_alignParentTop="true"
             android:layout_marginTop="00dp"
@@ -162,11 +163,12 @@
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Time"
-            android:id="@+id/timeView"
+            android:id="@+id/timerTitle"
             android:layout_gravity="top"
             android:layout_below="@+id/speedView"
             android:layout_alignRight="@+id/chronometer"
-            android:layout_alignEnd="@+id/chronometer" />
+            android:layout_alignEnd="@+id/chronometer"
+            android:layout_alignParentStart="false" />
 
         <Chronometer
             android:layout_width="match_parent"
@@ -174,9 +176,12 @@
             android:id="@+id/chronometer"
             android:textSize="25sp"
             android:layout_gravity="center_horizontal|bottom|left"
-            android:layout_alignTop="@+id/timerView"
-            android:layout_toRightOf="@+id/speedView"
-            android:layout_toEndOf="@+id/speedView" />
+            android:layout_below="@+id/lapView"
+            android:layout_toRightOf="@+id/longitudeView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="75dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -184,12 +189,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Time_Lap"
             android:id="@+id/lapView"
-            android:layout_below="@+id/timeView"
+            android:layout_below="@+id/timerTitle"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
         <TextView
-            android:layout_width="382dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Time_Timer"

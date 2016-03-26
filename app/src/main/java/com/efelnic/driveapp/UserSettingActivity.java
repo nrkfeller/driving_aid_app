@@ -34,7 +34,8 @@ public class UserSettingActivity extends    PreferenceActivity {
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("prefGps"));
-            bindPreferenceSummaryToValue(findPreference("example_list"));
+            bindPreferenceSummaryToValue(findPreference("prefAccelerometer"));
+            bindPreferenceSummaryToValue(findPreference("prefTimer"));
         }
     }
     /**
