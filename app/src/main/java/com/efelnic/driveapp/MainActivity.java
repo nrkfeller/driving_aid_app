@@ -51,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button GraphButton = (Button)findViewById(R.id.GraphButton);
+        GraphButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public  void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GraphTest.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void goToTrackingActivity(View view) {
@@ -98,14 +106,16 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuilder builder = new StringBuilder();
 
-        builder.append("\n Username: "
-                + sharedPrefs.getString("prefUsername", "NULL"));
-
-        builder.append("\n Send report:"
-                + sharedPrefs.getBoolean("prefSendReport", false));
-
-        builder.append("\n Sync Frequency: "
-                + sharedPrefs.getString("prefSyncFrequency", "NULL"));
+        //What is this? (only commented part)
+//        builder.append("\n Username: "
+//                + sharedPrefs.getString("prefUsername", "NULL"));
+//
+//        builder.append("\n Send report:"
+//                + sharedPrefs.getBoolean("prefSendReport", false));
+//
+//        builder.append("\n Sync Frequency: "
+//                + sharedPrefs.getString("prefSyncFrequency", "NULL"));
+        //
 
         TextView settingsTextView = (TextView) findViewById(R.id.textUserSettings);
 

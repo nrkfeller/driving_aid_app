@@ -19,26 +19,21 @@
 
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="prefMaps"
-
-            android:title="@string/pref_maps" >
+            android:key="prefTimer"
+            android:title="Timer" >
         </CheckBoxPreference>
 
 
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="prefAccelerometer"
-
             android:title="@string/pref_accelerometer" >
         </CheckBoxPreference>
 
-
-
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="prefGyroscope"
-
-            android:title="@string/pref_gyroscope" >
+            android:key="prefLineGraph"
+            android:title="Line Graph" >
         </CheckBoxPreference>
 
 
