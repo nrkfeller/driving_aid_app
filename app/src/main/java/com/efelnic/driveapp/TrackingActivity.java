@@ -1,10 +1,14 @@
 package com.efelnic.driveapp;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -15,13 +19,17 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.FocusFinder;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Chronometer;
@@ -80,8 +88,8 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting;
 
     //Bar Chart Loic
-//    LinearLayout la; // used for charts
-//    View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
+    //LinearLayout la; // used for charts
+    //View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
 
 
 
@@ -102,150 +110,39 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             provider = locationManager.getBestProvider(new Criteria(), false);
             Location location = locationManager.getLastKnownLocation(provider);
 
-            if (location != null) {
+        //TODO If App isn't given enough time to connect to provider for GPS, the TrackingActivity crashes... Implement something that catches this error and tells user to wait a moment (maybe with a toast?)
+
+            if (location == null) {
+
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_LONG).show();
+            }
+        else
+            {
                 Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
             }
 
 
+
+
+        // Make sure that GPS is enabled on the device
+        LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if(!enabled) {
+            showDialogGPS();
+            Toast.makeText(getApplicationContext(), "onCreate", Toast.LENGTH_LONG).show();
+        }
+
+
         //SETTINGS TOGGLE
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        gpsSetting  = sp.getBoolean("prefGps", false);
-        accelSetting = sp.getBoolean("prefAccelerometer", false);
-        timerSetting = sp.getBoolean("prefTimer", false);
-        lineGraphSetting = sp.getBoolean("prefLineGraph", false);
-
-            //GPS
-            gpsTitle = (TextView) findViewById(R.id.gpsView);
-            latView = (TextView) findViewById(R.id.latitudeView);
-            lngView = (TextView) findViewById(R.id.longitudeView);
-            altView = (TextView) findViewById(R.id.altitudeView);
-            spdView = (TextView) findViewById(R.id.speedView);
-
-                if(gpsSetting){
-                    gpsTitle.setVisibility(View.VISIBLE);
-                    latView.setVisibility(View.VISIBLE);
-                    lngView.setVisibility(View.VISIBLE);
-                    altView.setVisibility(View.VISIBLE);
-                    spdView.setVisibility(View.VISIBLE);
-                }
-
-                else{
-                    gpsTitle.setVisibility(View.GONE);
-                    latView.setVisibility(View.GONE);
-                    lngView.setVisibility(View.GONE);
-                    altView.setVisibility(View.GONE);
-                    spdView.setVisibility(View.GONE);
-                }
-            //ACCEL
-            accTitle = (TextView) findViewById(R.id.accelTitle);
-            accView = (TextView) findViewById(R.id.accelView);
-            compAccTitle = (TextView) findViewById(R.id.compAccView);
-            xrotView = (TextView) findViewById(R.id.xrotationView);
-            yrotView = (TextView) findViewById(R.id.yrotationView);
-            zrotView = (TextView) findViewById(R.id.zrotationView);
-
-                if(accelSetting){
-                    accTitle.setVisibility(View.VISIBLE);
-                    accView.setVisibility(View.VISIBLE);
-                    compAccTitle.setVisibility(View.VISIBLE);
-                    xrotView.setVisibility(View.VISIBLE);
-                    yrotView.setVisibility(View.VISIBLE);
-                    zrotView.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    accTitle.setVisibility(View.GONE);
-                    accView.setVisibility(View.GONE);
-                    compAccTitle.setVisibility(View.GONE);
-                    xrotView.setVisibility(View.GONE);
-                    yrotView.setVisibility(View.GONE);
-                    zrotView.setVisibility(View.GONE);
-                }
-
-            //TIMER
-            timerTitle = (TextView) findViewById(R.id.timerTitle);
-            timerView = (TextView) findViewById(R.id.timerView);
-            chronoView = (TextView) findViewById(R.id.chronometer);
-            lapView = (TextView) findViewById(R.id.lapView);
-
-                if(timerSetting){
-                    timerTitle.setVisibility(View.VISIBLE);
-                    timerView.setVisibility(View.VISIBLE);
-                    chronoView.setVisibility(View.VISIBLE);
-                    lapView.setVisibility(View.VISIBLE);
-                }
-                else{
-                    timerTitle.setVisibility(View.GONE);
-                    timerView.setVisibility(View.GONE);
-                    chronoView.setVisibility(View.GONE);
-                    lapView.setVisibility(View.GONE);
-                }
-            //LineGraph
-            lineGraphView = (LineChart) findViewById(R.id.chart1);
-
-                if(lineGraphSetting)
-                    lineGraphView.setVisibility(View.VISIBLE);
-                else
-                    lineGraphView.setVisibility(View.GONE);
-
+        checkSettings();
 
 
         //RealTime line chart
-            mChart = (LineChart) findViewById(R.id.chart1);
-            mChart.setOnChartValueSelectedListener(this);
+        lineChartFormat();
 
-            // no description text
-            mChart.setDescription("Linear Accelerometer Data");
-            mChart.setNoDataTextDescription("You need to provide data for the chart.");
 
-            // enable touch gestures
-            mChart.setTouchEnabled(true);
 
-            // enable scaling and dragging
-            mChart.setDragEnabled(true);
-            mChart.setScaleEnabled(true);
-            mChart.setDrawGridBackground(false);
-
-            // if disabled, scaling can be done on x- and y-axis separately
-            mChart.setPinchZoom(true);
-
-            // set an alternative background color
-            mChart.setBackgroundColor(Color.LTGRAY);
-
-            LineData data = new LineData();
-            data.setValueTextColor(Color.WHITE);
-
-            // add empty data
-            mChart.setData(data);
-
-            //Typeface tf = Typeface.createFromAsset(getAssets(), "");
-
-            // get the legend (only possible after setting data)
-            Legend l = mChart.getLegend();
-
-            // modify the legend ...
-            // l.setPosition(LegendPosition.LEFT_OF_CHART);
-            l.setForm(Legend.LegendForm.LINE);
-            //l.setTypeface(tf);
-            l.setTextColor(Color.WHITE);
-
-            XAxis xl = mChart.getXAxis();
-            // xl.setTypeface(tf);
-            xl.setTextColor(Color.WHITE);
-            xl.setDrawGridLines(false);
-            xl.setAvoidFirstLastClipping(true);
-            xl.setSpaceBetweenLabels(5);
-            xl.setEnabled(true);
-
-            YAxis leftAxis = mChart.getAxisLeft();
-            //leftAxis.setTypeface(tf);
-            leftAxis.setTextColor(Color.WHITE);
-            leftAxis.setAxisMaxValue(60f);
-            leftAxis.setAxisMinValue(0f);
-            leftAxis.setDrawGridLines(true);
-
-            YAxis rightAxis = mChart.getAxisRight();
-            rightAxis.setEnabled(false);
 
         //Loic
 //        //Create Bar chart
@@ -256,9 +153,175 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 //        lin_acel_bar = drawChart(8,10);
 //        speed_bar = drawChart(3,10);
 //        time_bar = drawChart(5,5);
+
     }
 
+    // Show a dialog to the user requesting that GPS be enabled
+    private void showDialogGPS() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Enable GPS");
+        builder.setMessage("Please enable GPS");
+        builder.setInverseBackgroundForced(true);
+        builder.setPositiveButton("Enable", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(
+                        new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+        });
+        builder.setNegativeButton("Ignore", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
+    //Check the settings
+    public void checkSettings(){
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        gpsSetting  = sp.getBoolean("prefGps", false);
+        accelSetting = sp.getBoolean("prefAccelerometer", false);
+        timerSetting = sp.getBoolean("prefTimer", false);
+        lineGraphSetting = sp.getBoolean("prefLineGraph", false);
+
+        //GPS
+        gpsTitle = (TextView) findViewById(R.id.gpsView);
+        latView = (TextView) findViewById(R.id.latitudeView);
+        lngView = (TextView) findViewById(R.id.longitudeView);
+        altView = (TextView) findViewById(R.id.altitudeView);
+        spdView = (TextView) findViewById(R.id.speedView);
+
+        if(gpsSetting){
+            gpsTitle.setVisibility(View.VISIBLE);
+            latView.setVisibility(View.VISIBLE);
+            lngView.setVisibility(View.VISIBLE);
+            altView.setVisibility(View.VISIBLE);
+            spdView.setVisibility(View.VISIBLE);
+        }
+
+        else{
+            gpsTitle.setVisibility(View.GONE);
+            latView.setVisibility(View.GONE);
+            lngView.setVisibility(View.GONE);
+            altView.setVisibility(View.GONE);
+            spdView.setVisibility(View.GONE);
+        }
+        //ACCEL
+        accTitle = (TextView) findViewById(R.id.accelTitle);
+        accView = (TextView) findViewById(R.id.accelView);
+        compAccTitle = (TextView) findViewById(R.id.compAccView);
+        xrotView = (TextView) findViewById(R.id.xrotationView);
+        yrotView = (TextView) findViewById(R.id.yrotationView);
+        zrotView = (TextView) findViewById(R.id.zrotationView);
+
+        if(accelSetting){
+            accTitle.setVisibility(View.VISIBLE);
+            accView.setVisibility(View.VISIBLE);
+            compAccTitle.setVisibility(View.VISIBLE);
+            xrotView.setVisibility(View.VISIBLE);
+            yrotView.setVisibility(View.VISIBLE);
+            zrotView.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            accTitle.setVisibility(View.GONE);
+            accView.setVisibility(View.GONE);
+            compAccTitle.setVisibility(View.GONE);
+            xrotView.setVisibility(View.GONE);
+            yrotView.setVisibility(View.GONE);
+            zrotView.setVisibility(View.GONE);
+        }
+
+        //TIMER
+        timerTitle = (TextView) findViewById(R.id.timerTitle);
+        timerView = (TextView) findViewById(R.id.timerView);
+        chronoView = (TextView) findViewById(R.id.chronometer);
+        lapView = (TextView) findViewById(R.id.lapView);
+
+        if(timerSetting){
+            timerTitle.setVisibility(View.VISIBLE);
+            timerView.setVisibility(View.VISIBLE);
+            chronoView.setVisibility(View.VISIBLE);
+            lapView.setVisibility(View.VISIBLE);
+        }
+        else{
+            timerTitle.setVisibility(View.GONE);
+            timerView.setVisibility(View.GONE);
+            chronoView.setVisibility(View.GONE);
+            lapView.setVisibility(View.GONE);
+        }
+
+        //LineGraph
+        lineGraphView = (LineChart) findViewById(R.id.chart1);
+
+        if(lineGraphSetting)
+            lineGraphView.setVisibility(View.VISIBLE);
+        else
+            lineGraphView.setVisibility(View.GONE);
+    }
+
+    //Line Chart Methods
+    public void lineChartFormat(){
+        //RealTime line chart
+        mChart = (LineChart) findViewById(R.id.chart1);
+        mChart.setOnChartValueSelectedListener(this);
+
+        // no description text
+        mChart.setDescription("Linear Accelerometer Data");
+        mChart.setNoDataTextDescription("You need to provide data for the chart.");
+
+        // enable touch gestures
+        mChart.setTouchEnabled(true);
+
+        // enable scaling and dragging
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+        mChart.setDrawGridBackground(false);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        mChart.setPinchZoom(true);
+
+        // set an alternative background color
+        mChart.setBackgroundColor(Color.LTGRAY);
+
+        LineData data = new LineData();
+        data.setValueTextColor(Color.WHITE);
+
+        // add empty data
+        mChart.setData(data);
+
+       // Typeface tf = Typeface.createFromAsset(getAssets(), "");
+
+        // get the legend (only possible after setting data)
+        Legend l = mChart.getLegend();
+
+        // modify the legend ...
+        // l.setPosition(LegendPosition.LEFT_OF_CHART);
+        l.setForm(Legend.LegendForm.LINE);
+       // l.setTypeface(tf);
+        l.setTextColor(Color.WHITE);
+
+        XAxis xl = mChart.getXAxis();
+        // xl.setTypeface(tf);
+        xl.setTextColor(Color.WHITE);
+        xl.setDrawGridLines(false);
+        xl.setAvoidFirstLastClipping(true);
+        xl.setSpaceBetweenLabels(5);
+        xl.setEnabled(true);
+
+        YAxis leftAxis = mChart.getAxisLeft();
+        //leftAxis.setTypeface(tf);
+        leftAxis.setTextColor(Color.WHITE);
+        leftAxis.setAxisMaxValue(60f);
+        leftAxis.setAxisMinValue(0f);
+        leftAxis.setDrawGridLines(true);
+
+        YAxis rightAxis = mChart.getAxisRight();
+        rightAxis.setEnabled(false);
+    }
     private void addEntry(double value1) {
 
         time = time + 0.5;
@@ -313,26 +376,50 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         set.setDrawValues(false);
         return set;
     }
+    //**POSSIBLE SETTINGS FOR CHARTS, NOT CONFIGURED YET**
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.realtime, menu);
+//        return true;
+//    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        switch (item.getItemId()) {
+//            case R.id.actionAdd: {
+//                addEntry();
+//                break;
+//            }
+//            case R.id.actionClear: {
+//                mChart.clearValues();
+//                Toast.makeText(this, "Chart cleared!", Toast.LENGTH_SHORT).show();
+//                break;
+//            }
+////            case R.id.actionFeedMultiple: {
+////                feedMultiple();
+////                break;
+////            }
+//        }
+//        return true;
+//    }
 
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
         Log.i("Entry selected", e.toString());
     }
-
     @Override
     public void onNothingSelected() {
+        Log.i("Nothing selected", "Nothing selected.");
     }
+    //End of Line Chart Methods
 
+    //Chronometer, Accel, position tracking methods
     public void startChronometer() {
 
             Chronometer c = (Chronometer) findViewById(R.id.chronometer);
             c.setFormat("%s");
             c.start();
     }
-
-    public void startPositionTracking(){
-    }
-
     public void startAccel() {
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -340,6 +427,9 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         mGyroscope  = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
     }
+    public void startPositionTracking(){
+    }
+    //End of Chronometer, Accel, position tracking methods
 
     @Override
     protected void onResume() {
@@ -349,9 +439,37 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             bPermissionGranted = checkLocationPermission();
         }
 
+
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
-        locationManager.requestLocationUpdates(provider, 400, 0, this);
+
+
+        //Check if there is a previous known location and if gps is enabled!
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if (location == null){
+
+            if(!enabled) {
+                showDialogGPS();
+            }
+            // request location update!!
+            else {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_LONG).show();
+            }
+        }
+        else {
+            if(!enabled) {
+                showDialogGPS();
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+            }
+
+        }
     }
 
     @Override
@@ -362,7 +480,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             bPermissionGranted = checkLocationPermission();
         }
         mSensorManager.unregisterListener(this);
-
         locationManager.removeUpdates(this);
     }
 
@@ -370,17 +487,26 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     public void onLocationChanged(Location location) {
 
 
-        Double lat = location.getLatitude();
-        Double lng = location.getLongitude();
-        Double alt = location.getAltitude();
-        float spd = location.getSpeed();
+        if (location != null) {
+            Double lat = location.getLatitude();
+            Double lng = location.getLongitude();
+            Double alt = location.getAltitude();
+            float spd = location.getSpeed();
 
+            altView.setText("Altitude : " + Double.toString(alt));
+            latView.setText("Latitude : " + Double.toString(lat));
+            lngView.setText("Longitude : " + Double.toString(lng));
+            spdView.setText("Speed : " + Float.toString(spd));
+        }
 
-        altView.setText("Altitude : " + Double.toString(alt));
-        latView.setText("Latitude : " + Double.toString(lat));
-        lngView.setText("Longitude : " + Double.toString(lng));
-        spdView.setText("Speed : " + Float.toString(spd));
-
+        else{
+            LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+            boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            if(!enabled) {
+                showDialogGPS();
+            }
+            else Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 4 ", Toast.LENGTH_SHORT).show();
+        }
 
         //Loic
        // speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
@@ -404,6 +530,12 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         }
         Location location = locationManager.getLastKnownLocation(provider);
 
+        //If no previous location saved, tell user to wait for gps to load
+        if (location == null){
+            // request location update!!
+            locationManager.requestLocationUpdates (LocationManager.GPS_PROVIDER, 0, 0, this);
+            Toast.makeText(getApplicationContext(), "GPS is loading. One moment for GPS please!", Toast.LENGTH_LONG).show();
+        }
         onLocationChanged(location);
     }
 
@@ -450,6 +582,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
     public boolean checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -479,6 +612,15 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             return true;
         }
     }
+
+
+
+
+
+
+
+
+
 
     // Loic
 //    // Chart creation function
