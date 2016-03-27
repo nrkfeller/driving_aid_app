@@ -21,8 +21,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1071ae7e-c1b5-47a4-8ad3-06b926d2abd9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -65,9 +63,10 @@
       <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33207548">
-              <caret line="451" column="30" selection-start-line="451" selection-start-column="30" selection-end-line="451" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.61132073">
+              <caret line="464" column="32" selection-start-line="464" selection-start-column="32" selection-end-line="464" selection-end-column="32" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="e#5775#6034#0" expanded="true" />
                 <element signature="e#6033#6034#0" expanded="true" />
@@ -79,13 +78,10 @@
                 <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="e#13396#13450#0" expanded="false" />
-                <element signature="e#14406#14407#0" expanded="true" />
-                <element signature="e#14468#14469#0" expanded="true" />
+                <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#20201#20208#0" expanded="false" />
+                <element signature="e#20425#20432#0" expanded="false" />
                 <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
               </folding>
@@ -2119,7 +2115,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2167,7 +2163,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="13" />
+      <option name="time" value="14" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2241,6 +2237,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="349" column="56" selection-start-line="349" selection-start-column="56" selection-end-line="349" selection-end-column="56" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
             <element signature="e#5775#6034#0" expanded="true" />
             <element signature="e#6033#6034#0" expanded="true" />
@@ -2252,13 +2249,10 @@
             <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
             <element signature="e#13396#13450#0" expanded="false" />
-            <element signature="e#14406#14407#0" expanded="true" />
-            <element signature="e#14468#14469#0" expanded="true" />
+            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#20201#20208#0" expanded="false" />
+            <element signature="e#20425#20432#0" expanded="false" />
             <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
           </folding>
@@ -2296,6 +2290,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="349" column="56" selection-start-line="349" selection-start-column="56" selection-end-line="349" selection-end-column="56" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
             <element signature="e#5775#6034#0" expanded="true" />
             <element signature="e#6033#6034#0" expanded="true" />
@@ -2307,13 +2302,10 @@
             <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
             <element signature="e#13396#13450#0" expanded="false" />
-            <element signature="e#14406#14407#0" expanded="true" />
-            <element signature="e#14468#14469#0" expanded="true" />
+            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#20201#20208#0" expanded="false" />
+            <element signature="e#20425#20432#0" expanded="false" />
             <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
           </folding>
@@ -2351,6 +2343,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="343" column="28" selection-start-line="343" selection-start-column="28" selection-end-line="343" selection-end-column="28" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
             <element signature="e#5775#6034#0" expanded="true" />
             <element signature="e#6033#6034#0" expanded="true" />
@@ -2362,13 +2355,10 @@
             <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
             <element signature="e#13396#13450#0" expanded="false" />
-            <element signature="e#14406#14407#0" expanded="true" />
-            <element signature="e#14468#14469#0" expanded="true" />
+            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#20201#20208#0" expanded="false" />
+            <element signature="e#20425#20432#0" expanded="false" />
             <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
           </folding>
@@ -2678,9 +2668,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33207548">
-          <caret line="451" column="30" selection-start-line="451" selection-start-column="30" selection-end-line="451" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.61132073">
+          <caret line="464" column="32" selection-start-line="464" selection-start-column="32" selection-end-line="464" selection-end-column="32" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
             <element signature="e#5775#6034#0" expanded="true" />
             <element signature="e#6033#6034#0" expanded="true" />
@@ -2692,13 +2683,10 @@
             <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
             <element signature="e#13396#13450#0" expanded="false" />
-            <element signature="e#14406#14407#0" expanded="true" />
-            <element signature="e#14468#14469#0" expanded="true" />
+            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#20201#20208#0" expanded="false" />
+            <element signature="e#20425#20432#0" expanded="false" />
             <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
           </folding>

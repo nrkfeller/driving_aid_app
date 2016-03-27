@@ -464,6 +464,9 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             if(!enabled) {
                 showDialogGPS();
             }
+            else if(enabled && (locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null)){
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+            }
             else{
                 Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
