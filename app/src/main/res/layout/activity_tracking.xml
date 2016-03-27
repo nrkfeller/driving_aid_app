@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
 
     <RelativeLayout
@@ -12,7 +12,8 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="com.efelnic.driveapp.TrackingActivity">
+        tools:context="com.efelnic.driveapp.TrackingActivity"
+        android:visibility="visible">
 
         <!--<LinearLayout-->
         <!--android:id="@+id/barchart"-->
@@ -42,7 +43,8 @@
             android:id="@+id/accelTitle"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/chronometer" />
+            android:layout_below="@+id/chronometer"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +56,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/compAccView"
-            android:layout_alignParentEnd="false" />
+            android:layout_alignParentEnd="false"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -66,7 +69,8 @@
             android:id="@+id/compAccView"
             android:layout_below="@+id/accelView"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -86,7 +90,8 @@
             android:id="@+id/yrotationView"
             android:layout_below="@+id/xrotationView"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -96,7 +101,8 @@
             android:id="@+id/zrotationView"
             android:layout_below="@+id/yrotationView"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:visibility="visible" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:layout_width="fill_parent"
@@ -104,7 +110,8 @@
             android:id="@+id/chart1"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/zrotationView" />
+            android:layout_below="@+id/zrotationView"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -116,7 +123,8 @@
             android:id="@+id/gpsView"
             android:layout_alignParentTop="true"
             android:layout_marginTop="00dp"
-            android:onClick="getLocation" />
+            android:onClick="getLocation"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -124,7 +132,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/latitudeView"
             android:layout_below="@+id/gpsView"
-            android:text="Latitude : " />
+            android:text="Latitude : "
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -134,7 +143,8 @@
             android:layout_below="@+id/latitudeView"
             android:layout_alignLeft="@+id/latitudeView"
             android:layout_alignStart="@+id/latitudeView"
-            android:text="Longitude : " />
+            android:text="Longitude : "
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -144,7 +154,8 @@
             android:layout_below="@+id/longitudeView"
             android:layout_alignLeft="@+id/longitudeView"
             android:layout_alignStart="@+id/longitudeView"
-            android:text="Altitude : " />
+            android:text="Altitude : "
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -154,7 +165,8 @@
             android:layout_below="@+id/altitudeView"
             android:layout_alignLeft="@+id/longitudeView"
             android:layout_alignStart="@+id/longitudeView"
-            android:text="Speed : " />
+            android:text="Speed : "
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -168,7 +180,8 @@
             android:layout_below="@+id/speedView"
             android:layout_alignRight="@+id/chronometer"
             android:layout_alignEnd="@+id/chronometer"
-            android:layout_alignParentStart="false" />
+            android:layout_alignParentStart="false"
+            android:visibility="visible" />
 
         <Chronometer
             android:layout_width="match_parent"
@@ -181,7 +194,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="30dp"
-            android:layout_marginLeft="75dp" />
+            android:layout_marginLeft="75dp"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="match_parent"
@@ -191,7 +205,8 @@
             android:id="@+id/lapView"
             android:layout_below="@+id/timerTitle"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="match_parent"
@@ -202,7 +217,8 @@
             android:layout_gravity="center_vertical"
             android:layout_below="@+id/lapView"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:visibility="visible" />
 
 
     </RelativeLayout>

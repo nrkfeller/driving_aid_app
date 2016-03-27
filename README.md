@@ -1,6 +1,6 @@
 # driving_aid_app
 
-You will need to copy/paste the following to the END of your "build.gradle(Module:app)" file under the "gradle" tab in the project:
+You will need to copy/paste the following to the END of your "build.gradle(Module:app)" file under the "gradle" tab in the project **IF IT IS NOT ALREADY THERE**:
 
 
 	repositories {

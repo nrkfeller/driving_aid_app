@@ -36,6 +36,7 @@ public class UserSettingActivity extends    PreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("prefGps"));
             bindPreferenceSummaryToValue(findPreference("prefAccelerometer"));
             bindPreferenceSummaryToValue(findPreference("prefTimer"));
+            bindPreferenceSummaryToValue(findPreference("prefLineGraph"));
         }
     }
     /**
