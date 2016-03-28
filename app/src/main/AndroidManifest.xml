@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/conc_sae"
+        android:icon="@mipmap/car_nav"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -24,16 +24,17 @@
         <activity android:name=".TrackingActivity" />
         <activity android:name=".ScriptActivity" />
         <activity android:name=".RecordingsActivity" />
+        <activity android:name=".GraphTest"></activity>
         <activity android:name=".AboutActivity" />
-        <activity
-            android:name=".PreferenceActivity"
-            android:label="@string/title_activity_preference"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name=".PreferenceActivity"-->
+            <!--android:label="@string/title_activity_preference"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name=".UserSettingActivity"
             android:label="@string/title_activity_user_setting"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GraphTest"></activity>
+
     </application>
 
 </manifest>

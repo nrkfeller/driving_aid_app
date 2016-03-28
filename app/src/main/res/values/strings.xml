@@ -37,13 +37,14 @@
     <string name="pref_maps">MAPS</string>
     <string name="pref_accelerometer">ACCELEROMETER</string>
     <string name="pref_gyroscope">GYROSCOPE</string>
+    <string name="prefLineGraph">Line Graph</string>
     <string name="pref_sync_frequency">Sync frequency</string>
     <string name="pref_sync_frequency_summary">Set the sync frequency</string>
     <string name="pref_user_name">Set username</string>
     <string name="pref_user_name_summary">Set your username</string>
 
     <string name="pref_user_profile">User Profile</string>
-    <string name="pref_update_setting">Update Settings</string>
-
+    <string name="pref_UI_Setting">UI Display Settings</string>
+    <string name="pref_Database_Setting">Data Acquisition Settings</string>
 
 </resources>

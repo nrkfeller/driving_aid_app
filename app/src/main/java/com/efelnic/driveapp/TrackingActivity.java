@@ -21,6 +21,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.app.ActionBar;
+
+
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -56,7 +60,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-public class TrackingActivity extends AppCompatActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
+public class TrackingActivity extends MainActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
 
     LocationManager locationManager;
@@ -97,7 +101,7 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
-
+        //this.setContentView(R.layout.activity_tracking);
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
@@ -110,7 +114,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             provider = locationManager.getBestProvider(new Criteria(), false);
             Location location = locationManager.getLastKnownLocation(provider);
 
-        //TODO If App isn't given enough time to connect to provider for GPS, the TrackingActivity crashes... Implement something that catches this error and tells user to wait a moment (maybe with a toast?)
 
             if (location == null) {
 
@@ -123,25 +126,11 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             }
 
 
-
-
-        // Make sure that GPS is enabled on the device
-        LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if(!enabled) {
-            showDialogGPS();
-            Toast.makeText(getApplicationContext(), "onCreate", Toast.LENGTH_LONG).show();
-        }
-
-
         //SETTINGS TOGGLE
         checkSettings();
 
-
         //RealTime line chart
         lineChartFormat();
-
-
 
 
         //Loic
@@ -182,10 +171,10 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     public void checkSettings(){
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        gpsSetting  = sp.getBoolean("prefGps", false);
-        accelSetting = sp.getBoolean("prefAccelerometer", false);
-        timerSetting = sp.getBoolean("prefTimer", false);
-        lineGraphSetting = sp.getBoolean("prefLineGraph", false);
+        gpsSetting  = sp.getBoolean("prefGpsUI", false);
+        accelSetting = sp.getBoolean("prefAccelerometerUI", false);
+        timerSetting = sp.getBoolean("prefTimerUI", false);
+        lineGraphSetting = sp.getBoolean("prefLineGraphUI", false);
 
         //GPS
         gpsTitle = (TextView) findViewById(R.id.gpsView);
@@ -431,14 +420,30 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     }
     //End of Chronometer, Accel, position tracking methods
 
+    //Allows the settings to be accessed from tracking screen
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+    //end of settings
+
+
     @Override
     protected void onResume() {
         super.onResume();
+
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
 
+        checkSettings();
 
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);

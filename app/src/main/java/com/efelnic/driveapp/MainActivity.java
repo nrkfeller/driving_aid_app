@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int RESULT_SETTINGS = 1;
+    protected static final int RESULT_SETTINGS = 1;
 
 
     @Override
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.settings, menu);
         return true;
     }
@@ -84,23 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode) {
-            case RESULT_SETTINGS:
-                showUserSettings();
-                break;
-
-        }
-
-    }
-
-    private void showUserSettings() {
+    protected void showUserSettings() {
         SharedPreferences sharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this);
 
@@ -121,6 +110,23 @@ public class MainActivity extends AppCompatActivity {
 
         settingsTextView.setText(builder.toString());
     }
+
+
+
+    //**Settings menu in TRACKING ACTIVITY crashes when this is enabled
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        switch (requestCode) {
+//            case RESULT_SETTINGS:
+//                showUserSettings();
+//                break;
+//
+//        }
+//
+//    }
+
 
 }
 
