@@ -23,7 +23,10 @@
         android:textSize="40sp"
         android:layout_centerHorizontal="true"
         android:onClick="goToTrackingActivity"
-        android:background="@drawable/button_green" />
+        android:background="@drawable/button_green"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
 
     <TextView
         android:id="@+id/textUserSettings"

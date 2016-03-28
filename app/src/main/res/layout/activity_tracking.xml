@@ -172,30 +172,30 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="26sp"
-            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Time"
             android:id="@+id/timerTitle"
             android:layout_gravity="top"
             android:layout_below="@+id/speedView"
-            android:layout_alignRight="@+id/chronometer"
             android:layout_alignEnd="@+id/chronometer"
             android:layout_alignParentStart="false"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:layout_alignParentRight="true"
+            android:gravity="center_horizontal" />
 
         <Chronometer
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/chronometer"
             android:textSize="25sp"
-            android:layout_gravity="center_horizontal|bottom|left"
             android:layout_below="@+id/lapView"
-            android:layout_toRightOf="@+id/longitudeView"
+            android:layout_toRightOf="@+id/timerView"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="75dp"
-            android:visibility="visible" />
+            android:visibility="visible"
+            android:gravity="center_horizontal" />
 
         <TextView
             android:layout_width="match_parent"
@@ -209,7 +209,7 @@
             android:visibility="visible" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Time_Timer"

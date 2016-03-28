@@ -12,8 +12,10 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
 
 public class UserSettingActivity extends    PreferenceActivity {
 
@@ -22,7 +24,6 @@ public class UserSettingActivity extends    PreferenceActivity {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.settings);
-
 
     }
     @Override
@@ -117,6 +118,9 @@ public class UserSettingActivity extends    PreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("prefGpsData"));
             bindPreferenceSummaryToValue(findPreference("prefAccelerometerData"));
             bindPreferenceSummaryToValue(findPreference("prefTimerData"));
+
+            //ChronotextSize
+            bindPreferenceSummaryToValue(findPreference("prefChronoTextSize"));
 
         }
     }

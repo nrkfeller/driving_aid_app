@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <PreferenceCategory android:title="@string/pref_user_profile" >
         <EditTextPreference
             android:title="@string/pref_user_name"
@@ -9,60 +10,69 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_UI_Setting" >
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="prefGpsUI"
             android:summary="@string/pref_send_report_summary"
             android:title="@string/pref_gps" >
-        </CheckBoxPreference>
+
+        </SwitchPreference>
 
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="prefTimerUI"
-            android:title="Timer" >
-        </CheckBoxPreference>
+            android:title="Chronometer" >
+        </SwitchPreference>
 
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="prefAccelerometerUI"
             android:title="@string/pref_accelerometer" >
-        </CheckBoxPreference>
+        </SwitchPreference>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="prefLineGraphUI"
             android:title="@string/prefLineGraph" >
-        </CheckBoxPreference>
+        </SwitchPreference>
 
 
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_Database_Setting" >
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="prefGpsData"
             android:summary="@string/pref_send_report_summary"
             android:title="@string/pref_gps" >
-        </CheckBoxPreference>
+        </SwitchPreference>
 
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="prefTimerData"
             android:title="Timer" >
-        </CheckBoxPreference>
+        </SwitchPreference>
 
 
-        <CheckBoxPreference
+       <SwitchPreference
             android:defaultValue="false"
             android:key="prefAccelerometerData"
             android:title="@string/pref_accelerometer" >
-        </CheckBoxPreference>
+        </SwitchPreference>
 
 
+
+    <ListPreference
+        android:key="prefChronoTextSize"
+        android:title="Chronometer Text Size"
+        android:entries="@array/prefChronTextSize"
+        android:entryValues="@array/prefChronTextValues"
+        android:defaultValue="25" >
+        </ListPreference>
 
 
 

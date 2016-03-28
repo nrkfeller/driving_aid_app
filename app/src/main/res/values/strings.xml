@@ -8,7 +8,7 @@
     <string name="Ready_GPS_Altitude">Altitude : </string>
     <string name="Ready_GPS_Speed">Speed : </string>
     <string name="Ready_Time">Time Data</string>
-    <string name="Ready_Time_Timer">Timer : </string>
+    <string name="Ready_Time_Timer">Timer: </string>
     <string name="Ready_Time_Lap">Lap : </string>
     <string name="Ready_Accelerometer">Linear Accelerometer Data</string>
     <string name="Ready_Gyroscope">3D Accelerometer Data</string>
@@ -46,5 +46,6 @@
     <string name="pref_user_profile">User Profile</string>
     <string name="pref_UI_Setting">UI Display Settings</string>
     <string name="pref_Database_Setting">Data Acquisition Settings</string>
+
 
 </resources>

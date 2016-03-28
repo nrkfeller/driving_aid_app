@@ -90,6 +90,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     float lin_accel;
     double time = 0;
     boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting;
+    String chronTextSizeSetting;
 
     //Bar Chart Loic
     //LinearLayout la; // used for charts
@@ -101,7 +102,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
-        
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
@@ -175,6 +176,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         accelSetting = sp.getBoolean("prefAccelerometerUI", false);
         timerSetting = sp.getBoolean("prefTimerUI", false);
         lineGraphSetting = sp.getBoolean("prefLineGraphUI", false);
+        chronTextSizeSetting = sp.getString("prefChronoTextSize", "25");
 
         //GPS
         gpsTitle = (TextView) findViewById(R.id.gpsView);
@@ -250,6 +252,31 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             lineGraphView.setVisibility(View.VISIBLE);
         else
             lineGraphView.setVisibility(View.GONE);
+
+        //Chrono text size
+        switch(chronTextSizeSetting)
+        {
+            case "25":
+                timerTitle.setTextSize(25);
+                timerView.setTextSize(25);
+                chronoView.setTextSize(25);
+                lapView.setTextSize(25);
+                break;
+
+            case "40":
+                timerTitle.setTextSize(40);
+                timerView.setTextSize(40);
+                chronoView.setTextSize(40);
+                lapView.setTextSize(40);
+                break;
+
+            case "50":
+                timerTitle.setTextSize(50);
+                timerView.setTextSize(50);
+                chronoView.setTextSize(50);
+                lapView.setTextSize(50);
+                break;
+        }
     }
 
     //Line Chart Methods
