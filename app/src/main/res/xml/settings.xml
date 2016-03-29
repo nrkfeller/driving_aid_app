@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <PreferenceCategory android:title="@string/pref_user_profile" >
         <EditTextPreference
             android:title="@string/pref_user_name"
@@ -8,45 +9,80 @@
             android:key="prefUsername"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_update_setting" >
-        <CheckBoxPreference
+    <PreferenceCategory android:title="@string/pref_UI_Setting" >
+        <SwitchPreference
             android:defaultValue="false"
-            android:key="prefGps"
+            android:key="prefGpsUI"
             android:summary="@string/pref_send_report_summary"
             android:title="@string/pref_gps" >
-        </CheckBoxPreference>
+
+        </SwitchPreference>
 
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
-            android:key="prefTimer"
-            android:title="Timer" >
-        </CheckBoxPreference>
+            android:key="prefTimerUI"
+            android:title="Chronometer" >
+        </SwitchPreference>
 
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
-            android:key="prefAccelerometer"
-            android:title="@string/pref_accelerometer" >
-        </CheckBoxPreference>
+            android:key="prefAccelerometerUI"
+            android:title="@string/pref_accelerometerUI" >
+        </SwitchPreference>
 
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
-            android:key="prefLineGraph"
-            android:title="Line Graph" >
-        </CheckBoxPreference>
+            android:key="prefLineGraphUI"
+            android:title="@string/prefLineGraph" >
+        </SwitchPreference>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="prefSpeedometer"
+            android:title="@string/pref_speedometer" >
+        </SwitchPreference>
 
 
 
-        <ListPreference
-            android:key="prefSyncFrequency"
-            android:entries="@array/syncFrequency"
-            android:summary="@string/pref_sync_frequency_summary"
-            android:entryValues="@array/syncFrequencyValues"
-            android:title="@string/pref_sync_frequency" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_Database_Setting" >
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="prefGpsData"
+            android:summary="@string/pref_send_report_summary"
+            android:title="@string/pref_gps" >
+        </SwitchPreference>
 
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="prefTimerData"
+            android:title="Timer" >
+        </SwitchPreference>
+
+
+       <SwitchPreference
+            android:defaultValue="false"
+            android:key="prefAccelerometerData"
+            android:title="@string/pref_accelerometerUI" >
+        </SwitchPreference>
+
+
+
+    <ListPreference
+        android:key="prefChronoTextSize"
+        android:title="Chronometer Text Size"
+        android:entries="@array/prefChronTextSize"
+        android:entryValues="@array/prefChronTextValues"
+        android:defaultValue="25" >
+        </ListPreference>
+
+
+
+    </PreferenceCategory>
 
 
 

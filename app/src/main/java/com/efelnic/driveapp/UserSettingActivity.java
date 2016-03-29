@@ -8,10 +8,14 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
+import android.view.View;
 
 public class UserSettingActivity extends    PreferenceActivity {
 
@@ -21,24 +25,26 @@ public class UserSettingActivity extends    PreferenceActivity {
 
         addPreferencesFromResource(R.xml.settings);
 
-
     }
-    public static class GeneralPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.settings);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("prefGps"));
-            bindPreferenceSummaryToValue(findPreference("prefAccelerometer"));
-            bindPreferenceSummaryToValue(findPreference("prefTimer"));
-            bindPreferenceSummaryToValue(findPreference("prefLineGraph"));
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            // This ID represents the Home or Up button. In the case of this
+            // activity, the Up button is shown. Use NavUtils to allow users
+            // to navigate up one level in the application structure. For
+            // more details, see the Navigation pattern on Android Design:
+            //
+            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+            //
+            // TODO: If Settings has multiple levels, Up should navigate up
+            // that hierarchy.
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
+
     /**
      * A preference value change listener that updates the preference's summary
      * to reflect its new value.
@@ -91,7 +97,47 @@ public class UserSettingActivity extends    PreferenceActivity {
                         .getDefaultSharedPreferences(preference.getContext())
                         .getString(preference.getKey(), ""));
     }
+    public static class GeneralPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.settings);
+
+            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
+            // to their values. When their values change, their summaries are
+            // updated to reflect the new value, per the Android Design
+            // guidelines.
+
+            //UI
+            bindPreferenceSummaryToValue(findPreference("prefGpsUI"));
+            bindPreferenceSummaryToValue(findPreference("prefAccelerometerUI"));
+            bindPreferenceSummaryToValue(findPreference("prefTimerUI"));
+            bindPreferenceSummaryToValue(findPreference("prefLineGraphUI"));
+            bindPreferenceSummaryToValue(findPreference("prefSpeedometer"));
+
+            //Database
+            bindPreferenceSummaryToValue(findPreference("prefGpsData"));
+            bindPreferenceSummaryToValue(findPreference("prefAccelerometerData"));
+            bindPreferenceSummaryToValue(findPreference("prefTimerData"));
+
+            //ChronotextSize
+            bindPreferenceSummaryToValue(findPreference("prefChronoTextSize"));
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 }
+
+
 
 
 

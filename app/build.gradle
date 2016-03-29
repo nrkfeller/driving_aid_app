@@ -37,4 +37,9 @@ repositories {
 }
 dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.3'
+<<<<<<< HEAD
 }
+=======
+    compile 'com.cardiomood.android:android-widgets:0.1.1'
+}
+>>>>>>> e16438dd45218a32370ed44050124e149f9ae7a0

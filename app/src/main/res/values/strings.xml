@@ -8,7 +8,7 @@
     <string name="Ready_GPS_Altitude">Altitude : </string>
     <string name="Ready_GPS_Speed">Speed : </string>
     <string name="Ready_Time">Time Data</string>
-    <string name="Ready_Time_Timer">Timer : </string>
+    <string name="Ready_Time_Timer">Timer: </string>
     <string name="Ready_Time_Lap">Lap : </string>
     <string name="Ready_Accelerometer">Linear Accelerometer Data</string>
     <string name="Ready_Gyroscope">3D Accelerometer Data</string>
@@ -35,15 +35,17 @@
     <string name="pref_gps">GPS</string>
     <string name="pref_send_report_summary">Helps to fix bugs</string>
     <string name="pref_maps">MAPS</string>
-    <string name="pref_accelerometer">ACCELEROMETER</string>
-    <string name="pref_gyroscope">GYROSCOPE</string>
+    <string name="pref_accelerometerUI">ACCELEROMETER</string>
+    <string name="pref_speedometer">SPEEDOMETER</string>
+    <string name="prefLineGraph">Line Graph</string>
     <string name="pref_sync_frequency">Sync frequency</string>
     <string name="pref_sync_frequency_summary">Set the sync frequency</string>
     <string name="pref_user_name">Set username</string>
     <string name="pref_user_name_summary">Set your username</string>
 
     <string name="pref_user_profile">User Profile</string>
-    <string name="pref_update_setting">Update Settings</string>
+    <string name="pref_UI_Setting">UI Display Settings</string>
+    <string name="pref_Database_Setting">Data Acquisition Settings</string>
 
 
 </resources>

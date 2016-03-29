@@ -21,6 +21,7 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.app.ActionBar;
+
+
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -44,6 +48,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 
+import com.cardiomood.android.controls.gauge.SpeedometerGauge;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -56,7 +61,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-public class TrackingActivity extends AppCompatActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
+public class TrackingActivity extends MainActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
 
     LocationManager locationManager;
@@ -78,14 +83,18 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
               timerTitle, timerView, lapView, chronoView, // time + lap
               accTitle, accView, // lin accel
               compAccTitle, xrotView, yrotView, zrotView; // componential accel
-    View      lineGraphView;//Line graph
+    View      lineGraphView, speedometerView;//Line graph
 
     boolean bPermissionGranted;
 
     private LineChart mChart;
     float lin_accel;
     double time = 0;
-    boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting;
+    boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting, speedometerSetting;
+    String chronTextSizeSetting;
+
+
+    private SpeedometerGauge speedometer;
 
     //Bar Chart Loic
     //LinearLayout la; // used for charts
@@ -102,44 +111,34 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             bPermissionGranted = checkLocationPermission();
         }
 
+        //SETTINGS TOGGLE
+        checkSettings();
+
+        //Start Chrono, accel, speedometer
         startChronometer();
         startAccel();
+        startSpeedometer();
+
+        //RealTime line chart
+        lineChartFormat();
+
 
         //Location Stuffs
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             provider = locationManager.getBestProvider(new Criteria(), false);
             Location location = locationManager.getLastKnownLocation(provider);
 
-        //TODO If App isn't given enough time to connect to provider for GPS, the TrackingActivity crashes... Implement something that catches this error and tells user to wait a moment (maybe with a toast?)
+            if (gpsSetting) {
 
-            if (location == null) {
+                if (location == null) {
 
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-                Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_LONG).show();
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                    Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
+                }
             }
-        else
-            {
-                Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
-            }
 
-
-
-
-        // Make sure that GPS is enabled on the device
-        LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if(!enabled) {
-            showDialogGPS();
-            Toast.makeText(getApplicationContext(), "onCreate", Toast.LENGTH_LONG).show();
-        }
-
-
-        //SETTINGS TOGGLE
-        checkSettings();
-
-
-        //RealTime line chart
-        lineChartFormat();
 
 
 
@@ -182,10 +181,12 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     public void checkSettings(){
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        gpsSetting  = sp.getBoolean("prefGps", false);
-        accelSetting = sp.getBoolean("prefAccelerometer", false);
-        timerSetting = sp.getBoolean("prefTimer", false);
-        lineGraphSetting = sp.getBoolean("prefLineGraph", false);
+        gpsSetting  = sp.getBoolean("prefGpsUI", false);
+        accelSetting = sp.getBoolean("prefAccelerometerUI", false);
+        timerSetting = sp.getBoolean("prefTimerUI", false);
+        lineGraphSetting = sp.getBoolean("prefLineGraphUI", false);
+        speedometerSetting = sp.getBoolean("prefSpeedometer", false);
+        chronTextSizeSetting = sp.getString("prefChronoTextSize", "25");
 
         //GPS
         gpsTitle = (TextView) findViewById(R.id.gpsView);
@@ -254,6 +255,31 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             lapView.setVisibility(View.GONE);
         }
 
+        //Chrono text size
+        switch(chronTextSizeSetting)
+        {
+            case "25":
+                timerTitle.setTextSize(25);
+                timerView.setTextSize(25);
+                chronoView.setTextSize(25);
+                lapView.setTextSize(25);
+                break;
+
+            case "40":
+                timerTitle.setTextSize(40);
+                timerView.setTextSize(40);
+                chronoView.setTextSize(40);
+                lapView.setTextSize(40);
+                break;
+
+            case "50":
+                timerTitle.setTextSize(50);
+                timerView.setTextSize(50);
+                chronoView.setTextSize(50);
+                lapView.setTextSize(50);
+                break;
+        }
+
         //LineGraph
         lineGraphView = (LineChart) findViewById(R.id.chart1);
 
@@ -261,6 +287,13 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
             lineGraphView.setVisibility(View.VISIBLE);
         else
             lineGraphView.setVisibility(View.GONE);
+
+        //Speedometer
+        speedometerView = (SpeedometerGauge) findViewById(R.id.speedometer);
+        if (speedometerSetting)
+            speedometerView.setVisibility(View.VISIBLE);
+        else speedometerView.setVisibility(View.GONE);
+
     }
 
     //Line Chart Methods
@@ -431,14 +464,30 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     }
     //End of Chronometer, Accel, position tracking methods
 
+    //Allows the settings to be accessed from tracking screen
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
+    }
+    //end of settings
+
+
     @Override
     protected void onResume() {
         super.onResume();
+
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
 
+        checkSettings();
 
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
@@ -449,30 +498,32 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
         LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        if (location == null){
+        if (gpsSetting){
+            if (location == null){
 
-            if(!enabled) {
-                showDialogGPS();
+                if(!enabled) {
+                    showDialogGPS();
+                }
+                // request location update!!
+                else {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_LONG).show();
+                }
             }
-            // request location update!!
             else {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
-                Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_LONG).show();
+                if(!enabled) {
+                    showDialogGPS();
+                }
+                else if(enabled && (locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null)){
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                }
             }
         }
-        else {
-            if(!enabled) {
-                showDialogGPS();
-            }
-            else if(enabled && (locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null)){
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
-            }
 
-        }
     }
 
     @Override
@@ -488,27 +539,31 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 
     @Override
     public void onLocationChanged(Location location) {
-
+    double conversionRatio = 3.6;
 
         if (location != null) {
             Double lat = location.getLatitude();
             Double lng = location.getLongitude();
             Double alt = location.getAltitude();
-            float spd = location.getSpeed();
+            double spd = (location.getSpeed()) * conversionRatio; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
 
-            altView.setText("Altitude : " + Double.toString(alt));
             latView.setText("Latitude : " + Double.toString(lat));
             lngView.setText("Longitude : " + Double.toString(lng));
-            spdView.setText("Speed : " + Float.toString(spd));
+            altView.setText("Altitude : " + Double.toString(alt) + " meters");
+            spdView.setText("Speed : " + Double.toString(spd) + " km/h");
+
+            speedometer.setSpeed(spd);
         }
 
         else{
             LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
             boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            if(!enabled) {
-                showDialogGPS();
+            if(gpsSetting) {
+                if(!enabled) {
+                    showDialogGPS();
+                }
+                else Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 4 ", Toast.LENGTH_SHORT).show();
             }
-            else Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 4 ", Toast.LENGTH_SHORT).show();
         }
 
         //Loic
@@ -617,7 +672,25 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
     }
 
 
+    public void startSpeedometer() {
+        speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
 
+        speedometer.setLabelConverter(new SpeedometerGauge.LabelConverter() {
+            @Override
+            public String getLabelFor(double progress, double maxProgress) {
+                return String.valueOf((int) Math.round(progress));
+            }
+        });
+
+        speedometer.setLabelTextSize(50);
+        speedometer.setMaxSpeed(45);
+        speedometer.setMajorTickStep(5);
+        speedometer.setMinorTicks(1);
+        speedometer.addColoredRange(0, 15, Color.GREEN);
+        speedometer.addColoredRange(15, 30, Color.YELLOW);
+        speedometer.addColoredRange(30, 45, Color.RED);
+
+    }
 
 
 
@@ -649,5 +722,6 @@ public class TrackingActivity extends AppCompatActivity implements LocationListe
 //        la.addView(custom_view);
 //        return custom_view;
 //    }
+
 
 }
