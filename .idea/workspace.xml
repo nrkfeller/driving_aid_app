@@ -10,27 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b336f87-2ff9-49a1-8276-6ef66f7953a7" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\Roberto\driving_aid_app\app\src\main\res\layout\content_user_setting.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_widgets_0_1_1.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_script.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_script.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_setting.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_setting.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_23_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/animated_vector_drawable_23_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/design_23_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/design_23_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/settings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_23_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_vector_drawable_23_2_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="driving_aid_app.iws" />
@@ -60,67 +43,78 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.59284496">
+              <caret line="555" column="12" selection-start-line="555" selection-start-column="12" selection-end-line="555" selection-end-column="12" />
+              <folding>
+                <element signature="e#3379#3395#0" expanded="false" />
+                <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkSettings#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#11729#11788#0" expanded="false" />
+                <element signature="e#11899#11923#0" expanded="false" />
+                <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#13600#13652#0" expanded="false" />
+                <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#14561#14615#0" expanded="false" />
+                <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#19982#19988#0" expanded="false" />
+                <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#22177#22184#0" expanded="false" />
+                <element signature="e#23472#23537#0" expanded="false" />
+                <element signature="e#24494#24723#0" expanded="true" />
+                <element signature="e#24722#24723#0" expanded="true" />
+                <element signature="e#25075#25082#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Location.java" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk1/sources/android-23/android/location/Location.java">
+          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="265" column="20" selection-start-line="265" selection-start-column="20" selection-end-line="265" selection-end-column="20" />
+              <caret line="596" column="18" selection-start-line="596" selection-start-column="18" selection-end-line="596" selection-end-column="18" />
+              <folding>
+                <element signature="e#21088#21089#0" expanded="true" />
+                <element signature="e#21120#21121#0" expanded="true" />
+                <element signature="e#22004#22005#0" expanded="true" />
+                <element signature="e#22033#22034#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SpeedometerGauge.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.cardiomood.android/android-widgets/0.1.1/743529577c5d4160c8838e4262df49affa5c53a8/android-widgets-0.1.1-sources.jar!/com/cardiomood/android/controls/gauge/SpeedometerGauge.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="176" column="16" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/settings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding>
-                <element signature="e#157#184#0" expanded="true" />
-                <element signature="e#241#265#0" expanded="true" />
-                <element signature="e#294#326#0" expanded="true" />
-                <element signature="e#433#458#0" expanded="true" />
-                <element signature="e#592#626#0" expanded="true" />
-                <element signature="e#653#671#0" expanded="true" />
-                <element signature="e#1021#1049#0" expanded="true" />
-                <element signature="e#1216#1239#0" expanded="true" />
-                <element signature="e#1338#1369#0" expanded="true" />
-                <element signature="e#1505#1539#0" expanded="true" />
-                <element signature="e#1566#1584#0" expanded="true" />
-                <element signature="e#1930#1958#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_user_setting.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_setting.xml">
-          <provider editor-type-id="android-designer">
+      <file leaf-file-name="activity_tracking.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml">
+          <provider selected="true" editor-type-id="android-designer">
             <state />
           </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64272213">
-              <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
-              <folding>
-                <element signature="e#396#436#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserSettingActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
+          <provider editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-              <folding>
-                <element signature="method#onOptionsItemSelected#0;class#UserSettingActivity#0" expanded="false" />
-                <element signature="docComment;field#sBindPreferenceSummaryToValueListener#0;class#UserSettingActivity#0" expanded="false" />
-                <element signature="e#2181#2242#0" expanded="false" />
-                <element signature="e#2744#2804#0" expanded="false" />
-                <element signature="docComment;method#bindPreferenceSummaryToValue#0;class#UserSettingActivity#0" expanded="false" />
-                <element signature="method#bindPreferenceSummaryToValue#0;class#UserSettingActivity#0" expanded="false" />
-              </folding>
+              <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -596,6 +590,11 @@
                 <option name="description" value="Prepare com.android.support:support-vector-drawable:23.2.0" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2320Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Prepare com.cardiomood.android:android-widgets:0.1.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="prepareComCardiomoodAndroidAndroidWidgets011Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
@@ -1170,6 +1169,11 @@
                 <option name="name" value="prepareComAndroidSupportSupportVectorDrawable2320Library" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Prepare com.cardiomood.android:android-widgets:0.1.1" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
+                <option name="name" value="prepareComCardiomoodAndroidAndroidWidgets011Library" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="prepareDebugAndroidTestDependencies" />
               </ExternalTaskPojo>
@@ -1353,7 +1357,7 @@
     <option name="modificationStamps">
       <map>
         <entry key="C:\Users\PCS\Documents\driving_aid_app" value="4377576796021" />
-        <entry key="C:\Users\Roberto\driving_aid_app" value="4377082669558" />
+        <entry key="C:\Users\Roberto\driving_aid_app" value="4377086303646" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1572,6 +1576,7 @@
                             <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/appcompat-v7/23.2.0/appcompat-v7-23.2.0.aar" />
                             <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/design/23.2.0/design-23.2.0.aar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.PhilJay/MPAndroidChart/v2.2.3/f474798fde03291398b1a016118b9809a79550b7/MPAndroidChart-v2.2.3.jar" />
+                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.cardiomood.android/android-widgets/0.1.1/cb7e26444484d6025cbde7fb380e5b6f015e930b/android-widgets-0.1.1.aar" />
                             <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/support-v4/23.2.0/support-v4-23.2.0.aar" />
                             <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/animated-vector-drawable/23.2.0/animated-vector-drawable-23.2.0.aar" />
                             <option value="$USER_HOME$/AppData/Local/Android/sdk1/extras/android/m2repository/com/android/support/support-vector-drawable/23.2.0/support-vector-drawable-23.2.0.aar" />
@@ -1720,9 +1725,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/button_selector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_script.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/AdvancedUserSettingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/SettingsFragment.java" />
@@ -1734,6 +1737,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_user_setting.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_user_setting.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
       </list>
     </option>
   </component>
@@ -1777,23 +1783,9 @@
               <option name="myItemId" value="driving_aid_app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="driving_aid_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xml" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+              <option name="myItemId" value="Gradle Scripts" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1808,42 +1800,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="driving_aid_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="driving_aid_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="menu" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1873,56 +1829,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="driving_aid_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="driving_aid_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="driveapp" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="driving_aid_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -1937,7 +1843,7 @@
     <property name="recentsLimit" value="5" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="ZX1G224DPJ" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_19" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AndroidStudioProjects/driving_aid_app" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/AndroidWidgets-master" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="430" />
   </component>
   <component name="RecentsManager">
@@ -2112,6 +2018,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="2b336f87-2ff9-49a1-8276-6ef66f7953a7" name="Default" comment="" />
@@ -2162,7 +2071,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2237,17 +2146,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="182" column="12" selection-start-line="182" selection-start-column="12" selection-end-line="182" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk1/sources/android-23/android/preference/Preference.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.054054055">
@@ -2299,40 +2197,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="265" column="20" selection-start-line="265" selection-start-column="20" selection-end-line="265" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/settings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.19767442">
           <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/settings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#157#184#0" expanded="true" />
-            <element signature="e#241#265#0" expanded="true" />
-            <element signature="e#294#326#0" expanded="true" />
-            <element signature="e#433#458#0" expanded="true" />
-            <element signature="e#592#626#0" expanded="true" />
-            <element signature="e#653#671#0" expanded="true" />
-            <element signature="e#1021#1049#0" expanded="true" />
-            <element signature="e#1216#1239#0" expanded="true" />
-            <element signature="e#1338#1369#0" expanded="true" />
-            <element signature="e#1505#1539#0" expanded="true" />
-            <element signature="e#1566#1584#0" expanded="true" />
-            <element signature="e#1930#1958#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2376,9 +2245,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="58" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08688245">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#157#184#0" expanded="false" />
+            <element signature="e#241#265#0" expanded="false" />
+            <element signature="e#294#326#0" expanded="false" />
+            <element signature="e#433#458#0" expanded="false" />
+            <element signature="e#592#626#0" expanded="false" />
+            <element signature="e#653#671#0" expanded="false" />
+            <element signature="e#1021#1049#0" expanded="false" />
+            <element signature="e#1216#1239#0" expanded="false" />
+            <element signature="e#1338#1369#0" expanded="false" />
+            <element signature="e#1505#1539#0" expanded="false" />
+            <element signature="e#1566#1584#0" expanded="false" />
+            <element signature="e#1930#1958#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9131175">
           <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
           <folding>
             <element signature="method#onOptionsItemSelected#0;class#UserSettingActivity#0" expanded="false" />
@@ -2396,10 +2294,84 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64272213">
-          <caret line="20" column="60" selection-start-line="20" selection-start-column="60" selection-end-line="20" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.66487455">
+          <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.cardiomood.android/android-widgets/0.1.1/jars/classes.jar!/com/cardiomood/android/controls/gauge/SpeedometerGauge.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3482143">
+          <caret line="327" column="17" selection-start-line="327" selection-start-column="17" selection-end-line="327" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.cardiomood.android/android-widgets/0.1.1/743529577c5d4160c8838e4262df49affa5c53a8/android-widgets-0.1.1-sources.jar!/com/cardiomood/android/controls/gauge/SpeedometerGauge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="176" column="16" selection-start-line="176" selection-start-column="16" selection-end-line="176" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk1/sources/android-23/android/location/Location.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="596" column="18" selection-start-line="596" selection-start-column="18" selection-end-line="596" selection-end-column="18" />
           <folding>
-            <element signature="e#396#436#0" expanded="true" />
+            <element signature="e#21088#21089#0" expanded="true" />
+            <element signature="e#21120#21121#0" expanded="true" />
+            <element signature="e#22004#22005#0" expanded="true" />
+            <element signature="e#22033#22034#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59284496">
+          <caret line="555" column="12" selection-start-line="555" selection-start-column="12" selection-end-line="555" selection-end-column="12" />
+          <folding>
+            <element signature="e#3379#3395#0" expanded="false" />
+            <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkSettings#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#11729#11788#0" expanded="false" />
+            <element signature="e#11899#11923#0" expanded="false" />
+            <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#13600#13652#0" expanded="false" />
+            <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#14561#14615#0" expanded="false" />
+            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#19982#19988#0" expanded="false" />
+            <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#22177#22184#0" expanded="false" />
+            <element signature="e#23472#23537#0" expanded="false" />
+            <element signature="e#24494#24723#0" expanded="true" />
+            <element signature="e#24722#24723#0" expanded="true" />
+            <element signature="e#25075#25082#0" expanded="false" />
           </folding>
         </state>
       </provider>

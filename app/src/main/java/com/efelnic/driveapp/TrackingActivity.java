@@ -48,6 +48,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 
+import com.cardiomood.android.controls.gauge.SpeedometerGauge;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -92,6 +93,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting;
     String chronTextSizeSetting;
 
+
+    private SpeedometerGauge speedometer;
+
     //Bar Chart Loic
     //LinearLayout la; // used for charts
     //View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
@@ -132,6 +136,28 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
         //RealTime line chart
         lineChartFormat();
+
+        startSpeedometer();
+
+//        speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
+//
+//        speedometer.setLabelConverter(new SpeedometerGauge.LabelConverter() {
+//            @Override
+//            public String getLabelFor(double progress, double maxProgress) {
+//                return String.valueOf((int) Math.round(progress));
+//            }
+//        });
+//
+//        speedometer.setLabelTextSize(50);
+//        speedometer.setMaxSpeed(45);
+//        speedometer.setMajorTickStep(5);
+//        speedometer.setMinorTicks(1);
+//        speedometer.addColoredRange(0, 15, Color.GREEN);
+//        speedometer.addColoredRange(15, 30, Color.YELLOW);
+//        speedometer.addColoredRange(30, 45, Color.RED);
+
+
+
 
 
         //Loic
@@ -488,7 +514,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             }
             // request location update!!
             else {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                 Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_LONG).show();
             }
         }
@@ -520,18 +546,20 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
     @Override
     public void onLocationChanged(Location location) {
-
+    double conversionRatio = 3.6;
 
         if (location != null) {
             Double lat = location.getLatitude();
             Double lng = location.getLongitude();
             Double alt = location.getAltitude();
-            float spd = location.getSpeed();
-
-            altView.setText("Altitude : " + Double.toString(alt));
+            double spd = (location.getSpeed()) * conversionRatio; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
+            
             latView.setText("Latitude : " + Double.toString(lat));
             lngView.setText("Longitude : " + Double.toString(lng));
-            spdView.setText("Speed : " + Float.toString(spd));
+            altView.setText("Altitude : " + Double.toString(alt) + " meters");
+            spdView.setText("Speed : " + Double.toString(spd) + " km/h");
+
+            speedometer.setSpeed(spd);
         }
 
         else{
@@ -649,7 +677,25 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
 
 
+    public void startSpeedometer() {
+        speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
 
+        speedometer.setLabelConverter(new SpeedometerGauge.LabelConverter() {
+            @Override
+            public String getLabelFor(double progress, double maxProgress) {
+                return String.valueOf((int) Math.round(progress));
+            }
+        });
+
+        speedometer.setLabelTextSize(50);
+        speedometer.setMaxSpeed(45);
+        speedometer.setMajorTickStep(5);
+        speedometer.setMinorTicks(1);
+        speedometer.addColoredRange(0, 15, Color.GREEN);
+        speedometer.addColoredRange(15, 30, Color.YELLOW);
+        speedometer.addColoredRange(30, 45, Color.RED);
+
+    }
 
 
 
@@ -681,5 +727,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //        la.addView(custom_view);
 //        return custom_view;
 //    }
+
 
 }
