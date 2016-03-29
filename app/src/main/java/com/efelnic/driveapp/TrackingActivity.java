@@ -91,7 +91,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     float lin_accel;
     double time = 0;
     boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting, speedometerSetting;
-    String chronTextSizeSetting;
+    String gpsTextSizeSetting, accelTextSizeSetting, chronTextSizeSetting, speedometerTextSizeSetting;
 
 
     private SpeedometerGauge speedometer;
@@ -186,7 +186,12 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         timerSetting = sp.getBoolean("prefTimerUI", false);
         lineGraphSetting = sp.getBoolean("prefLineGraphUI", false);
         speedometerSetting = sp.getBoolean("prefSpeedometer", false);
+
+        //Text Settings
+        gpsTextSizeSetting = sp.getString("prefGPSTextSize", "25");
+        accelTextSizeSetting = sp.getString("prefAccelTextSize", "25");
         chronTextSizeSetting = sp.getString("prefChronoTextSize", "25");
+        speedometerTextSizeSetting = sp.getString("prefSpeedometerTextSize", "40");
 
         //GPS
         gpsTitle = (TextView) findViewById(R.id.gpsView);
@@ -255,6 +260,34 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             lapView.setVisibility(View.GONE);
         }
 
+        //TextSizes
+        //GPS
+        switch(gpsTextSizeSetting)
+        {
+            case "25":
+                gpsTitle.setTextSize(25);
+                latView.setTextSize(25);
+                lngView.setTextSize(25);
+                altView.setTextSize(25);
+                spdView.setTextSize(25);
+                break;
+
+            case "40":
+                gpsTitle.setTextSize(40);
+                latView.setTextSize(40);
+                lngView.setTextSize(40);
+                altView.setTextSize(40);
+                spdView.setTextSize(40);
+                break;
+
+            case "50":
+                gpsTitle.setTextSize(50);
+                latView.setTextSize(50);
+                lngView.setTextSize(50);
+                altView.setTextSize(50);
+                spdView.setTextSize(50);
+                break;
+        }
         //Chrono text size
         switch(chronTextSizeSetting)
         {
@@ -279,6 +312,53 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 lapView.setTextSize(50);
                 break;
         }
+        //Accel
+        switch(accelTextSizeSetting)
+        {
+            case "25":
+                accTitle.setTextSize(25);
+                accView.setTextSize(25);
+                compAccTitle.setTextSize(25);
+                xrotView.setTextSize(25);
+                yrotView.setTextSize(25);
+                zrotView.setTextSize(25);
+                break;
+
+            case "40":
+                accTitle.setTextSize(40);
+                accView.setTextSize(40);
+                compAccTitle.setTextSize(40);
+                xrotView.setTextSize(40);
+                yrotView.setTextSize(40);
+                zrotView.setTextSize(40);
+                break;
+
+            case "50":
+                accTitle.setTextSize(50);
+                accView.setTextSize(50);
+                compAccTitle.setTextSize(50);
+                xrotView.setTextSize(50);
+                yrotView.setTextSize(50);
+                zrotView.setTextSize(50);
+                break;
+        }
+        //Speedometer
+        switch(speedometerTextSizeSetting)
+        {
+            case "40":
+              speedometer.setLabelTextSize(40);
+                break;
+
+            case "50":
+                speedometer.setLabelTextSize(50);
+                break;
+
+            case "60":
+                speedometer.setLabelTextSize(50);
+                break;
+        }
+
+
 
         //LineGraph
         lineGraphView = (LineChart) findViewById(R.id.chart1);
@@ -682,7 +762,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             }
         });
 
-        speedometer.setLabelTextSize(50);
+       // speedometer.setLabelTextSize(50);
         speedometer.setMaxSpeed(45);
         speedometer.setMajorTickStep(5);
         speedometer.setMinorTicks(1);

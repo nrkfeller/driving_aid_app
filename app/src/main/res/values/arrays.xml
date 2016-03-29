@@ -2,17 +2,30 @@
 
 
 <resources>
-<string-array name="prefChronTextSize">
+<string-array name="prefTextSize">
     <item name="25">Small (Default)</item>
     <item name="40">Medium</item>
     <item name="50">Large</item>
 
 </string-array>
-<string-array name="prefChronTextValues">
+<string-array name="prefTextValues">
     <item name="25">25</item>
     <item name="40">40</item>
     <item name="50">50</item>
 
 </string-array>
+
+    <string-array name="prefSpeedTextSize">
+        <item name="40">Small (Default)</item>
+        <item name="50">Medium</item>
+        <item name="60">Large</item>
+
+    </string-array>
+    <string-array name="prefSpeedTextValues">
+        <item name="40">40</item>
+        <item name="50">50</item>
+        <item name="60">60</item>
+
+    </string-array>
 
 </resources>
