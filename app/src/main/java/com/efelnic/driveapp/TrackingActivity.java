@@ -83,14 +83,14 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
               timerTitle, timerView, lapView, chronoView, // time + lap
               accTitle, accView, // lin accel
               compAccTitle, xrotView, yrotView, zrotView; // componential accel
-    View      lineGraphView;//Line graph
+    View      lineGraphView, speedometerView;//Line graph
 
     boolean bPermissionGranted;
 
     private LineChart mChart;
     float lin_accel;
     double time = 0;
-    boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting;
+    boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting, speedometerSetting;
     String chronTextSizeSetting;
 
 
@@ -202,6 +202,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         accelSetting = sp.getBoolean("prefAccelerometerUI", false);
         timerSetting = sp.getBoolean("prefTimerUI", false);
         lineGraphSetting = sp.getBoolean("prefLineGraphUI", false);
+        speedometerSetting = sp.getBoolean("prefSpeedometer", false);
         chronTextSizeSetting = sp.getString("prefChronoTextSize", "25");
 
         //GPS
@@ -271,14 +272,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             lapView.setVisibility(View.GONE);
         }
 
-        //LineGraph
-        lineGraphView = (LineChart) findViewById(R.id.chart1);
-
-        if(lineGraphSetting)
-            lineGraphView.setVisibility(View.VISIBLE);
-        else
-            lineGraphView.setVisibility(View.GONE);
-
         //Chrono text size
         switch(chronTextSizeSetting)
         {
@@ -303,6 +296,21 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 lapView.setTextSize(50);
                 break;
         }
+
+        //LineGraph
+        lineGraphView = (LineChart) findViewById(R.id.chart1);
+
+        if(lineGraphSetting)
+            lineGraphView.setVisibility(View.VISIBLE);
+        else
+            lineGraphView.setVisibility(View.GONE);
+
+        //Speedometer
+        speedometerView = (SpeedometerGauge) findViewById(R.id.speedometer);
+        if (speedometerSetting)
+            speedometerView.setVisibility(View.VISIBLE);
+        else speedometerView.setVisibility(View.GONE);
+
     }
 
     //Line Chart Methods
@@ -553,7 +561,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             Double lng = location.getLongitude();
             Double alt = location.getAltitude();
             double spd = (location.getSpeed()) * conversionRatio; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
-            
+
             latView.setText("Latitude : " + Double.toString(lat));
             lngView.setText("Longitude : " + Double.toString(lng));
             altView.setText("Altitude : " + Double.toString(alt) + " meters");

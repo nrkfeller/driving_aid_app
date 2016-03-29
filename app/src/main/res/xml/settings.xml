@@ -29,13 +29,19 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="prefAccelerometerUI"
-            android:title="@string/pref_accelerometer" >
+            android:title="@string/pref_accelerometerUI" >
         </SwitchPreference>
 
         <SwitchPreference
             android:defaultValue="false"
             android:key="prefLineGraphUI"
             android:title="@string/prefLineGraph" >
+        </SwitchPreference>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="prefSpeedometer"
+            android:title="@string/pref_speedometer" >
         </SwitchPreference>
 
 
@@ -61,7 +67,7 @@
        <SwitchPreference
             android:defaultValue="false"
             android:key="prefAccelerometerData"
-            android:title="@string/pref_accelerometer" >
+            android:title="@string/pref_accelerometerUI" >
         </SwitchPreference>
 
 
