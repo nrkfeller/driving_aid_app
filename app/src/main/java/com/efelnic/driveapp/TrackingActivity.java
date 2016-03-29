@@ -111,50 +111,33 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             bPermissionGranted = checkLocationPermission();
         }
 
+        //SETTINGS TOGGLE
+        checkSettings();
+
+        //Start Chrono, accel, speedometer
         startChronometer();
         startAccel();
+        startSpeedometer();
+
+        //RealTime line chart
+        lineChartFormat();
+
 
         //Location Stuffs
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             provider = locationManager.getBestProvider(new Criteria(), false);
             Location location = locationManager.getLastKnownLocation(provider);
 
+            if (gpsSetting) {
 
-            if (location == null) {
+                if (location == null) {
 
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-                Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_LONG).show();
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                    Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
+                }
             }
-        else
-            {
-                Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
-            }
-
-
-        //SETTINGS TOGGLE
-        checkSettings();
-
-        //RealTime line chart
-        lineChartFormat();
-
-        startSpeedometer();
-
-//        speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
-//
-//        speedometer.setLabelConverter(new SpeedometerGauge.LabelConverter() {
-//            @Override
-//            public String getLabelFor(double progress, double maxProgress) {
-//                return String.valueOf((int) Math.round(progress));
-//            }
-//        });
-//
-//        speedometer.setLabelTextSize(50);
-//        speedometer.setMaxSpeed(45);
-//        speedometer.setMajorTickStep(5);
-//        speedometer.setMinorTicks(1);
-//        speedometer.addColoredRange(0, 15, Color.GREEN);
-//        speedometer.addColoredRange(15, 30, Color.YELLOW);
-//        speedometer.addColoredRange(30, 45, Color.RED);
 
 
 
@@ -515,30 +498,32 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        if (location == null){
+        if (gpsSetting){
+            if (location == null){
 
-            if(!enabled) {
-                showDialogGPS();
+                if(!enabled) {
+                    showDialogGPS();
+                }
+                // request location update!!
+                else {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_LONG).show();
+                }
             }
-            // request location update!!
             else {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-                Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_LONG).show();
+                if(!enabled) {
+                    showDialogGPS();
+                }
+                else if(enabled && (locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null)){
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                }
             }
         }
-        else {
-            if(!enabled) {
-                showDialogGPS();
-            }
-            else if(enabled && (locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null)){
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
-            }
 
-        }
     }
 
     @Override
@@ -573,10 +558,12 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         else{
             LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
             boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            if(!enabled) {
-                showDialogGPS();
+            if(gpsSetting) {
+                if(!enabled) {
+                    showDialogGPS();
+                }
+                else Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 4 ", Toast.LENGTH_SHORT).show();
             }
-            else Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 4 ", Toast.LENGTH_SHORT).show();
         }
 
         //Loic
