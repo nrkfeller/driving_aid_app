@@ -125,6 +125,9 @@ public class UserSettingActivity extends    PreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("prefAccelTextSize"));
             bindPreferenceSummaryToValue(findPreference("prefChronoTextSize"));
             bindPreferenceSummaryToValue(findPreference("prefSpeedometerTextSize"));
+
+            //Miscellaneous
+            bindPreferenceSummaryToValue(findPreference("prefSpeedUnits"));
         }
     }
 

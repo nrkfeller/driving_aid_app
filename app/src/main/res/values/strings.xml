@@ -37,7 +37,7 @@
     <string name="pref_maps">MAPS</string>
     <string name="pref_accelerometerUI">ACCELEROMETER</string>
     <string name="pref_speedometer">SPEEDOMETER</string>
-    <string name="prefLineGraph">Line Graph</string>
+    <string name="prefLineGraph">LINE GRAPH</string>
 
 
     <string name="pref_user_profile">User Profile</string>

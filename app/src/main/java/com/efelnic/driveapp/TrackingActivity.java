@@ -90,7 +90,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     private LineChart mChart;
     float lin_accel;
     double time = 0;
-    boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting, speedometerSetting;
+    boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting, speedometerSetting, speedUnitSetting;
     String gpsTextSizeSetting, accelTextSizeSetting, chronTextSizeSetting, speedometerTextSizeSetting;
 
 
@@ -181,11 +181,13 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     public void checkSettings(){
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
         gpsSetting  = sp.getBoolean("prefGpsUI", false);
         accelSetting = sp.getBoolean("prefAccelerometerUI", false);
         timerSetting = sp.getBoolean("prefTimerUI", false);
         lineGraphSetting = sp.getBoolean("prefLineGraphUI", false);
         speedometerSetting = sp.getBoolean("prefSpeedometer", false);
+
 
         //Text Settings
         gpsTextSizeSetting = sp.getString("prefGPSTextSize", "25");
@@ -619,18 +621,28 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
     @Override
     public void onLocationChanged(Location location) {
-    double conversionRatio = 3.6;
+    double conversionRatioToKM = 3.6;
+    double conversionFromKmToMi = 0.62137;
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
 
         if (location != null) {
             Double lat = location.getLatitude();
             Double lng = location.getLongitude();
             Double alt = location.getAltitude();
-            double spd = (location.getSpeed()) * conversionRatio; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
+            double spd = (location.getSpeed()) * conversionRatioToKM; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
 
             latView.setText("Latitude : " + Double.toString(lat));
             lngView.setText("Longitude : " + Double.toString(lng));
             altView.setText("Altitude : " + Double.toString(alt) + " meters");
             spdView.setText("Speed : " + Double.toString(spd) + " km/h");
+
+            if(speedUnitSetting){
+                spd = spd * conversionFromKmToMi;
+                spdView.setText("Speed : " + Double.toString(spd) + " mph");
+            }
+
 
             speedometer.setSpeed(spd);
         }
@@ -701,6 +713,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         //Send value to entry function for plotting
         addEntry(lin_accel);
 
+        //TODO round the numbers before displaying them on the screen
 
         // Loic
 //        // Bar charts
@@ -762,7 +775,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             }
         });
 
-       // speedometer.setLabelTextSize(50);
+
         speedometer.setMaxSpeed(45);
         speedometer.setMajorTickStep(5);
         speedometer.setMinorTicks(1);
