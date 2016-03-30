@@ -100,8 +100,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     //LinearLayout la; // used for charts
     //View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,9 +136,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                     Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
                 }
             }
-
-
-
 
 
         //Loic
