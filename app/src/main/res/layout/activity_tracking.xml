@@ -227,6 +227,24 @@
             android:id="@+id/speedometer"
             android:layout_below="@+id/chart1" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save race now"
+            android:id="@+id/saveRaceButton"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="view data"
+            android:id="@+id/viewDataButton"
+            android:layout_alignBottom="@+id/altitudeView"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
     </RelativeLayout>
 
 </ScrollView>

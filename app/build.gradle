@@ -29,6 +29,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'com.android.support:design:23.2.0'
+    compile files('libs/gson-2.6.2.jar')
 }
 
 // TODO If there is nothing under this line, refer to README.md file to add MPCHARTS Library

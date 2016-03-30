@@ -9,13 +9,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.efelnic.driveapp.RecordingsActivity">
 
-    <TextView
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:id="@+id/listView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/queryButton" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Recordings_text"
-        android:id="@+id/textView"
+        android:text="Query!"
+        android:id="@+id/queryButton"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/listView"
+        android:layout_alignEnd="@+id/listView"
+        android:onClick="grabAllData" />
 </RelativeLayout>

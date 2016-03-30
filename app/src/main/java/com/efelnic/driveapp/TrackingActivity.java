@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.hardware.Sensor;
@@ -33,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -44,6 +46,7 @@ import android.support.v7.app.ActionBar;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
@@ -60,12 +63,21 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.gson.Gson;
 
 public class TrackingActivity extends MainActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
 
     LocationManager locationManager;
     String provider;
+
+    DatabaseHelper myDb;
+    ArrayList<String> accelerationList;
+    ArrayList<String> speedList;
+    Gson gsonAccel = new Gson();
+    Gson gsonSpeed = new Gson();
+
+    Button saveRaceButton, viewDataButton;
 
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -105,6 +117,14 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
+        saveRaceButton = (Button) findViewById(R.id.saveRaceButton);
+        viewDataButton = (Button) findViewById(R.id.viewDataButton);
+
+        accelerationList = new ArrayList<String>();
+        speedList = new ArrayList<String>();
+
+        myDb = new DatabaseHelper(this);
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
@@ -137,6 +157,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 }
             }
 
+        SaveRace();
+        viewData();
+
 
         //Loic
 //        //Create Bar chart
@@ -149,6 +172,59 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //        time_bar = drawChart(5,5);
 
     }
+
+    public void viewData() {
+        viewDataButton.setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        Cursor res = myDb.getAllData();
+                        if (res.getCount() == 0){
+                            showMessage("Error", "No data found");
+                            return;
+                        }
+
+                        StringBuffer buffer = new StringBuffer();
+                        while ( res.moveToNext() ) {
+                            buffer.append("ID : " + res.getString(0) + "\n");
+                            buffer.append("Distance : " + res.getString(1) + "\n");
+                            buffer.append("Speed : " + res.getString(2) + "\n\n");
+                        }
+
+                        showMessage("Data", buffer.toString());
+                    }
+                }
+        );
+    }
+    public void showMessage(String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(Message);
+        builder.show();
+    }
+
+    public void SaveRace() {
+        saveRaceButton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String inputAccel = gsonAccel.toJson(accelerationList);
+                        String inputSpeed = gsonSpeed.toJson(speedList);
+                        boolean isinserted = myDb.insertData("distance test", inputAccel, chronoView.getText().toString(), inputSpeed);
+                        if (isinserted == true){
+                            Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(TrackingActivity.this, "Error: Race Not Saved", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                }
+        );
+    }
+
+
 
     // Show a dialog to the user requesting that GPS be enabled
     private void showDialogGPS() {
@@ -632,6 +708,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             lngView.setText("Longitude : " + Double.toString(lng));
             altView.setText("Altitude : " + Double.toString(alt) + " meters");
             spdView.setText("Speed : " + Double.toString(spd) + " km/h");
+            speedList.add(Double.toString(spd));
 
             if(speedUnitSetting){
                 spd = spd * conversionFromKmToMi;
@@ -699,6 +776,8 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         linear_acceleration[2] = event.values[2] - gravity[2];
 
         double  lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
+
+        accelerationList.add(String.valueOf(lin_accel));
 
         accView.setText("Accel : " + lin_accel * 10);
         xrotView.setText("Orientation X : " + Float.toString(event.values[2]));
@@ -785,8 +864,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
 
 
-
-    // Loic
+//     Loic
 //    // Chart creation function
 //    private View drawChart(int color, int height) {
 //        switch(color) {
