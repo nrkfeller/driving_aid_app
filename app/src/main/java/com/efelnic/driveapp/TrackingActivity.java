@@ -252,7 +252,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     public void checkSettings(){
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        //speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
         gpsSetting  = sp.getBoolean("prefGpsUI", false);
         accelSetting = sp.getBoolean("prefAccelerometerUI", false);
         timerSetting = sp.getBoolean("prefTimerUI", false);
@@ -264,7 +263,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         gpsTextSizeSetting = sp.getString("prefGPSTextSize", "25");
         accelTextSizeSetting = sp.getString("prefAccelTextSize", "25");
         chronTextSizeSetting = sp.getString("prefChronoTextSize", "25");
-        speedometerTextSizeSetting = sp.getString("prefSpeedometerTextSize", "40");
+
 
         //GPS
         gpsTitle = (TextView) findViewById(R.id.gpsView);
@@ -415,21 +414,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 zrotView.setTextSize(50);
                 break;
         }
-        //Speedometer
-        switch(speedometerTextSizeSetting)
-        {
-            case "40":
-              speedometer.setLabelTextSize(40);
-                break;
 
-            case "50":
-                speedometer.setLabelTextSize(50);
-                break;
-
-            case "60":
-                speedometer.setLabelTextSize(50);
-                break;
-        }
 
 
 
@@ -641,6 +626,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         }
 
         checkSettings();
+        checkSpeedometerTextSize();
 
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
@@ -668,11 +654,11 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                     showDialogGPS();
                 }
                 else if(enabled && (locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null)){
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 400, 0, this);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                 }
             }
         }
@@ -840,6 +826,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
 
     public void startSpeedometer() {
+
         speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
 
         speedometer.setLabelConverter(new SpeedometerGauge.LabelConverter() {
@@ -856,6 +843,32 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         speedometer.addColoredRange(0, 15, Color.GREEN);
         speedometer.addColoredRange(15, 30, Color.YELLOW);
         speedometer.addColoredRange(30, 45, Color.RED);
+
+
+        checkSpeedometerTextSize();
+
+    }
+    public void checkSpeedometerTextSize(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        speedometerTextSizeSetting = sp.getString("prefSpeedometerTextSize", "40");
+
+        switch(speedometerTextSizeSetting)
+        {
+            case "40":
+                speedometer.setLabelTextSize(40);
+                break;
+
+            case "50":
+                speedometer.setLabelTextSize(50);
+                break;
+
+            case "60":
+                speedometer.setLabelTextSize(50);
+                break;
+            default:
+                speedometer.setLabelTextSize(40);
+        }
+
 
     }
 

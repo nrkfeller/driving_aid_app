@@ -88,7 +88,7 @@
             android:key="prefSpeedometerTextSize"
             android:title="Speedometer Text Size"
             android:entries="@array/prefSpeedTextSize"
-            android:entryValues="@array/prefSpeedTextSize"
+            android:entryValues="@array/prefSpeedTextValues"
             android:defaultValue="40" >
         </ListPreference>
 
