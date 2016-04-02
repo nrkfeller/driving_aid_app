@@ -2,7 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_rough_black">
 
 
     <RelativeLayout
@@ -37,6 +38,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="26sp"
+            android:textColor="#ffffff"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Accelerometer"
@@ -49,6 +51,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Accel: "
             android:id="@+id/accelView"
@@ -63,6 +66,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="26sp"
+            android:textColor="#ffffff"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Gyroscope"
@@ -75,6 +79,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="X rotation : "
             android:id="@+id/xrotationView"
@@ -85,6 +90,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Y rotation: "
             android:id="@+id/yrotationView"
@@ -96,6 +102,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Z rotation: "
             android:id="@+id/zrotationView"
@@ -107,6 +114,7 @@
         <com.github.mikephil.charting.charts.LineChart
             android:layout_width="fill_parent"
             android:layout_height="300dp"
+            android:textColor="#ffffff"
             android:id="@+id/chart1"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -117,6 +125,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="26sp"
+            android:textColor="#ffffff"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="GPS Data"
@@ -129,6 +138,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/latitudeView"
             android:layout_below="@+id/gpsView"
@@ -138,6 +148,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/longitudeView"
             android:layout_below="@+id/latitudeView"
@@ -149,6 +160,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/altitudeView"
             android:layout_below="@+id/longitudeView"
@@ -160,6 +172,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/speedView"
             android:layout_below="@+id/altitudeView"
@@ -171,6 +184,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textSize="26sp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Time"
@@ -186,6 +200,7 @@
         <Chronometer
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:id="@+id/chronometer"
             android:textSize="25sp"
             android:layout_below="@+id/lapView"
@@ -200,6 +215,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Time_Lap"
             android:id="@+id/lapView"
@@ -211,6 +227,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ffffff"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/Ready_Time_Timer"
             android:id="@+id/timerView"
@@ -223,6 +240,7 @@
         <com.cardiomood.android.controls.gauge.SpeedometerGauge
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:textColor="#ffffff"
             android:padding="8dp"
             android:id="@+id/speedometer"
             android:layout_below="@+id/chart1" />

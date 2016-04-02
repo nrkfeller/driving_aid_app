@@ -765,10 +765,17 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
         accelerationList.add(String.valueOf(lin_accel));
 
-        accView.setText("Accel : " + lin_accel * 10);
-        xrotView.setText("Orientation X : " + Float.toString(event.values[2]));
-        yrotView.setText("Orientation Y : " + Float.toString(event.values[1]));
-        zrotView.setText("Orientation Z : " + Float.toString(event.values[0]));
+        // rounding values to format "#.##"
+        double x = Math.round(event.values[2] * 100.0)/100.0;
+        double y = Math.round(event.values[1] * 100.0)/100.0;
+        double z = Math.round(event.values[0] * 100.0)/100.0;
+        double accel = Math.round(lin_accel * 100.0)/100.0;
+
+        //Send values to txt display
+        accView.setText("Accel : " + accel * 10);
+        xrotView.setText("Orientation X : " + x);
+        yrotView.setText("Orientation Y : " + y);
+        zrotView.setText("Orientation Z : " + z );
 
         //Send value to entry function for plotting
         addEntry(lin_accel);
