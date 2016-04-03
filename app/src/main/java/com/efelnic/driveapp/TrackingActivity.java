@@ -140,7 +140,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         //RealTime line chart
         lineChartFormat();
 
-
         //Location Stuffs
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             provider = locationManager.getBestProvider(new Criteria(), false);
@@ -160,7 +159,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         SaveRace();
         viewData();
 
-
         //Loic
 //        //Create Bar chart
 //        la = (LinearLayout)findViewById(R.id.barchart);
@@ -170,7 +168,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //        lin_acel_bar = drawChart(8,10);
 //        speed_bar = drawChart(3,10);
 //        time_bar = drawChart(5,5);
-
     }
 
     public void viewData() {
@@ -191,7 +188,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                             buffer.append("Distance : " + res.getString(1) + "\n");
                             buffer.append("Speed : " + res.getString(2) + "\n\n");
                         }
-
                         showMessage("Data", buffer.toString());
                     }
                 }
@@ -223,8 +219,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 }
         );
     }
-
-
 
     // Show a dialog to the user requesting that GPS be enabled
     private void showDialogGPS() {
@@ -415,9 +409,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 break;
         }
 
-
-
-
         //LineGraph
         lineGraphView = (LineChart) findViewById(R.id.chart1);
 
@@ -528,7 +519,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             // this automatically refreshes the chart (calls invalidate())
             mChart.moveViewTo(linedata.getXValCount()-7, 55f,
                     YAxis.AxisDependency.LEFT);
-
         }
     }
     private LineDataSet createSet() {
@@ -615,7 +605,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
     //end of settings
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -630,7 +619,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
-
 
         //Check if there is a previous known location and if gps is enabled!
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -662,7 +650,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 }
             }
         }
-
     }
 
     @Override
@@ -690,19 +677,24 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             Double alt = location.getAltitude();
             double spd = (location.getSpeed()) * conversionRatioToKM; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
 
-            latView.setText("Latitude : " + Double.toString(lat));
-            lngView.setText("Longitude : " + Double.toString(lng));
-            altView.setText("Altitude : " + Double.toString(alt) + " meters");
-            spdView.setText("Speed : " + Double.toString(spd) + " km/h");
-            speedList.add(Double.toString(spd));
+            // rounding values to format "#.##"
+            double latt = Math.round(lat* 100.00)/100.00;
+            double lngi = Math.round(lng* 100.00)/100.00;
+            double alti = Math.round(alt* 100.00)/100.00;
+            double sped = Math.round(spd* 100.00)/100.00;
+
+            latView.setText("Latitude : " + Double.toString(latt));
+            lngView.setText("Longitude : " + Double.toString(lngi));
+            altView.setText("Altitude : " + Double.toString(alti) + " meters");
+            spdView.setText("Speed : " + Double.toString(sped) + " km/h");
+            speedList.add(Double.toString(sped));
 
             if(speedUnitSetting){
                 spd = spd * conversionFromKmToMi;
-                spdView.setText("Speed : " + Double.toString(spd) + " mph");
+                spdView.setText("Speed : " + Double.toString(sped) + " mph");
             }
 
-
-            speedometer.setSpeed(spd);
+            speedometer.setSpeed(sped);
         }
 
         else{
@@ -769,18 +761,16 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         double x = Math.round(event.values[2] * 100.0)/100.0;
         double y = Math.round(event.values[1] * 100.0)/100.0;
         double z = Math.round(event.values[0] * 100.0)/100.0;
-        double accel = Math.round(lin_accel * 100.0)/100.0;
+        double accel = Math.round(lin_accel * 100.0)/10.0;
 
         //Send values to txt display
-        accView.setText("Accel : " + accel * 10);
+        accView.setText("Accel : " + accel);
         xrotView.setText("Orientation X : " + x);
         yrotView.setText("Orientation Y : " + y);
         zrotView.setText("Orientation Z : " + z );
 
         //Send value to entry function for plotting
         addEntry(lin_accel);
-
-        //TODO round the numbers before displaying them on the screen
 
         // Loic
 //        // Bar charts
@@ -876,14 +866,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 speedometer.setLabelTextSize(40);
         }
 
-
     }
-
-
-
-
-
-
 //     Loic
 //    // Chart creation function
 //    private View drawChart(int color, int height) {
@@ -908,6 +891,5 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //        la.addView(custom_view);
 //        return custom_view;
 //    }
-
 
 }

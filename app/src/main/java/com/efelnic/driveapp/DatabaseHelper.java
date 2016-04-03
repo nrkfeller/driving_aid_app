@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * Created by PCS on 2016-03-30.
  */
@@ -19,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_3 = "ACCELERATION";
     public static final String COL_4 = "DURATION";
     public static final String COL_5 = "SPEED";
+    public static final String COL_6 = "DATE";
 
 
     public DatabaseHelper(Context context) {
@@ -27,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db .execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION TEXT, DURATION TEXT, SPEED TEXT)");
+        db .execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION TEXT, DURATION TEXT, SPEED TEXT)");//, DATE TEXT)");
 
     }
 
@@ -37,10 +41,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
 
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
         contentValues.put(COL_2, distance);
         contentValues.put(COL_3, acceleration);
         contentValues.put(COL_4, duration);
         contentValues.put(COL_5, speed);
+        //contentValues.put(COL_6, timeStamp);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 

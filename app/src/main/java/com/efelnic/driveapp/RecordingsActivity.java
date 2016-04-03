@@ -43,8 +43,12 @@ public class RecordingsActivity extends AppCompatActivity   {
 
             StringBuffer buffer = new StringBuffer();
             while (res.moveToNext()){
-                databaseEntries.add(res.getString(1));
-                databaseEntries.add(res.getString(2));
+                //databaseEntries.add("Date : " + res.getString(6));
+                databaseEntries.add("ID: " + res.getString(1));
+                databaseEntries.add("distance: " + res.getString(2));
+                databaseEntries.add("acceleration: " + res.getString(3));
+                databaseEntries.add("duration: " + res.getString(4));
+                databaseEntries.add("speed: " + res.getString(5));
             }
         } catch (Exception e){
             Toast.makeText(RecordingsActivity.this, "Database is Empty", Toast.LENGTH_LONG).show();
