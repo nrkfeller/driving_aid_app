@@ -3,12 +3,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<item
-    android:id="@+id/menu_settings"
-    ic_menu_preferences=""
-    android:orderInCategory="100"
-    app:showAsAction="never"
-    android:title="@string/menu_settings"
-    android:icon="@android:drawable/ic_menu_preferences"/>
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:title="@string/menu_settings"
+        android:icon="@android:drawable/ic_menu_preferences"/>
+
+    <item
+        android:id="@+id/menu_save"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom"
+        android:title="@string/Save"
+        android:icon="@android:drawable/ic_menu_save"/>
+
+    <item
+        android:id="@+id/menu_pause"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom"
+        android:title="@string/Pause"
+        android:icon="@android:drawable/ic_media_pause"/>
+
+    <item
+        android:id="@+id/menu_play"
+        android:orderInCategory="4"
+        app:showAsAction="ifRoom"
+        android:title="@string/Play"
+        android:icon="@android:drawable/ic_media_play"/>
 
 </menu>

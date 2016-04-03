@@ -13,7 +13,7 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="prefTimerData"
-            android:title="CHRONOMETER" >
+            android:title="@string/Chronometer" >
         </SwitchPreference>
 
         <SwitchPreference
@@ -36,7 +36,7 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="prefTimerUI"
-            android:title="CHRONOMETER" >
+            android:title="@string/Chronometer" >
         </SwitchPreference>
 
         <SwitchPreference

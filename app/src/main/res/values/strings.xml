@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">DriveApp</string>
 
@@ -28,7 +29,7 @@
 
     <string name="app_name1">Android_Preferences_example</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+
     <string name="title_activity_main">MainActivity</string>
 
 
@@ -44,5 +45,8 @@
     <string name="pref_UI_Setting">UI Display Settings</string>
     <string name="pref_Database_Setting">Data Acquisition Settings</string>
 
-
+    <string name="menu_settings">Settings</string>
+    <string name="Pause">Pause</string>
+    <string name="Play">Play</string>
+    <string name="Save">Save</string>
 </resources>
