@@ -34,15 +34,7 @@
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:padding="@dimen/activity_vertical_margin"-->
-        <!--tools:context=".MainActivity" />-->
-
-    <ImageView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:src="@drawable/flag"
-        android:id="@+id/FlagImage"
-        android:layout_marginTop="30dp"
-        android:layout_toRightOf="@+id/readyButton" />
+    <!--tools:context=".MainActivity" />-->
 
     <Button
         android:layout_width="300dp"

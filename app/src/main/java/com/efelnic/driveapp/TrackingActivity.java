@@ -47,7 +47,9 @@ import android.support.v7.app.ActionBar;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
@@ -75,6 +77,8 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     DatabaseHelper myDb;
     ArrayList<String> accelerationList;
     ArrayList<String> speedList;
+    ArrayList<String> List;
+
     Gson gsonAccel = new Gson();
     Gson gsonSpeed = new Gson();
 
@@ -124,7 +128,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         setContentView(R.layout.activity_tracking);
 
         //saveRaceButton = (Button) findViewById(R.id.saveRaceButton);
-        viewDataButton = (Button) findViewById(R.id.viewDataButton);
+        //viewDataButton = (Button) findViewById(R.id.viewDataButton);
 
         accelerationList = new ArrayList<String>();
         speedList = new ArrayList<String>();
@@ -163,7 +167,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             }
 
         //SaveRace();
-        viewData();
+        //viewData();
 
         //Loic
 //        //Create Bar chart
@@ -176,29 +180,30 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //        time_bar = drawChart(5,5);
     }
 
-    public void viewData() {
-        viewDataButton.setOnClickListener(
-                new View.OnClickListener() {
+//    public void viewData() {
+//        viewDataButton.setOnClickListener(
+//                new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        Cursor res = myDb.getAllData();
+//                        if (res.getCount() == 0){
+//                            showMessage("Error", "No data found");
+//                            return;
+//                        }
+//
+//                        StringBuffer buffer = new StringBuffer();
+//                        while ( res.moveToNext() ) {
+//                            buffer.append("ID : " + res.getString(0) + "\n");
+//                            buffer.append("Distance : " + res.getString(1) + "\n");
+//                            buffer.append("Speed : " + res.getString(2) + "\n\n");
+//                        }
+//                        showMessage("Data", buffer.toString());
+//                    }
+//                }
+//        );
+//    }
 
-                    @Override
-                    public void onClick(View v) {
-                        Cursor res = myDb.getAllData();
-                        if (res.getCount() == 0){
-                            showMessage("Error", "No data found");
-                            return;
-                        }
-
-                        StringBuffer buffer = new StringBuffer();
-                        while ( res.moveToNext() ) {
-                            buffer.append("ID : " + res.getString(0) + "\n");
-                            buffer.append("Distance : " + res.getString(1) + "\n");
-                            buffer.append("Speed : " + res.getString(2) + "\n\n");
-                        }
-                        showMessage("Data", buffer.toString());
-                    }
-                }
-        );
-    }
     public void showMessage(String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -207,6 +212,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         builder.show();
     }
 
+// TODO: database
     public void SaveRace(MenuItem item) {
         //onOptionsItemSelected(item.getItemId());
         //saveRaceButton.setOnClickListener(
@@ -215,7 +221,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                //     public void onClick(View v) {
                         String inputAccel = gsonAccel.toJson(accelerationList);
                         String inputSpeed = gsonSpeed.toJson(speedList);
-                        boolean isinserted = myDb.insertData("distance test", inputAccel, chronoView.getText().toString(), inputSpeed);
+                        String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
+                        boolean isinserted = myDb.insertData(" TO DO!!!", inputAccel, chronoView.getText().toString(), inputSpeed, date);
                         if (isinserted) {
                             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_LONG).show();
                         } else {
