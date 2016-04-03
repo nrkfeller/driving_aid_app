@@ -10,11 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14e86880-db5b-4744-95f3-eb2a70735a6e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="driving_aid_app.iws" />
@@ -44,27 +43,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4572954">
+              <caret line="218" column="38" selection-start-line="218" selection-start-column="38" selection-end-line="218" selection-end-column="38" />
+              <folding>
+                <element signature="e#4190#4206#0" expanded="false" />
+                <element signature="e#5917#5923#0" expanded="false" />
+                <element signature="method#viewData#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#8789#9048#0" expanded="true" />
+                <element signature="e#9047#9048#0" expanded="true" />
+                <element signature="e#9095#9261#0" expanded="true" />
+                <element signature="e#9260#9261#0" expanded="true" />
+                <element signature="e#23082#23083#0" expanded="true" />
+                <element signature="e#23144#23145#0" expanded="true" />
+                <element signature="e#33450#33679#0" expanded="true" />
+                <element signature="e#33678#33679#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="settings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/settings.xml">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/settings.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="99" column="46" selection-start-line="99" selection-start-column="46" selection-end-line="99" selection-end-column="46" />
+              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
               <folding>
-                <element signature="e#157#188#0" expanded="true" />
-                <element signature="e#353#371#0" expanded="true" />
-                <element signature="e#536#557#0" expanded="true" />
-                <element signature="e#730#760#0" expanded="true" />
-                <element signature="e#857#882#0" expanded="true" />
-                <element signature="e#1045#1063#0" expanded="true" />
-                <element signature="e#1227#1248#0" expanded="true" />
-                <element signature="e#1419#1449#0" expanded="true" />
-                <element signature="e#1616#1639#0" expanded="true" />
-                <element signature="e#1806#1832#0" expanded="true" />
-                <element signature="e#2874#2908#0" expanded="true" />
-                <element signature="e#2935#2964#0" expanded="true" />
-                <element signature="e#3436#3461#0" expanded="true" />
-                <element signature="e#3584#3609#0" expanded="true" />
-                <element signature="e#3689#3710#0" expanded="true" />
+                <element signature="e#305#328#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -73,58 +81,18 @@
       <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.481482">
-              <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="59" />
+            <state vertical-scroll-proportion="-19.148148">
+              <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8772242">
-              <caret line="484" column="44" selection-start-line="484" selection-start-column="44" selection-end-line="484" selection-end-column="44" />
-              <folding>
-                <element signature="e#4190#4206#0" expanded="false" />
-                <element signature="e#5913#5919#0" expanded="false" />
-                <element signature="method#viewData#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#19165#19224#0" expanded="false" />
-                <element signature="e#19335#19359#0" expanded="false" />
-                <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#21036#21088#0" expanded="false" />
-                <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#21996#22050#0" expanded="false" />
-                <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#28271#28277#0" expanded="false" />
-                <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#30752#30759#0" expanded="false" />
-                <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#34235#34246#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="View.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk1/sources/android-23/android/view/View.java">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="17176" column="16" selection-start-line="17176" selection-start-column="16" selection-end-line="17176" selection-end-column="16" />
+              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="85" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -136,8 +104,21 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.206897">
-              <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+            <state vertical-scroll-proportion="-6.793103">
+              <caret line="249" column="0" selection-start-line="249" selection-start-column="0" selection-end-line="256" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.0">
+              <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -1749,11 +1730,13 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/settings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
       </list>
@@ -1957,6 +1940,7 @@
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="ZX1G224DPJ" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_19" />
     <property name="FullScreen" value="false" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager2.WIDTH" value="317" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -2145,7 +2129,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34078807" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.399361" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2155,13 +2139,13 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.171459" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20095949" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -2192,7 +2176,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2203,34 +2187,17 @@
           <caret line="194" column="5" selection-start-line="194" selection-start-column="5" selection-end-line="194" selection-end-column="5" />
           <folding>
             <element signature="e#4190#4206#0" expanded="false" />
-            <element signature="e#5913#5919#0" expanded="false" />
+            <element signature="e#5917#5923#0" expanded="false" />
             <element signature="method#viewData#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#19165#19224#0" expanded="false" />
-            <element signature="e#19335#19359#0" expanded="false" />
-            <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21036#21088#0" expanded="false" />
-            <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21996#22050#0" expanded="false" />
-            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#28271#28277#0" expanded="false" />
-            <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#30752#30759#0" expanded="false" />
-            <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#34235#34246#0" expanded="false" />
+            <element signature="e#8789#9048#0" expanded="true" />
+            <element signature="e#9047#9048#0" expanded="true" />
+            <element signature="e#9095#9261#0" expanded="true" />
+            <element signature="e#9260#9261#0" expanded="true" />
+            <element signature="e#23082#23083#0" expanded="true" />
+            <element signature="e#23144#23145#0" expanded="true" />
+            <element signature="e#33450#33679#0" expanded="true" />
+            <element signature="e#33678#33679#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2295,34 +2262,17 @@
           <caret line="194" column="5" selection-start-line="194" selection-start-column="5" selection-end-line="194" selection-end-column="5" />
           <folding>
             <element signature="e#4190#4206#0" expanded="false" />
-            <element signature="e#5913#5919#0" expanded="false" />
+            <element signature="e#5917#5923#0" expanded="false" />
             <element signature="method#viewData#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#19165#19224#0" expanded="false" />
-            <element signature="e#19335#19359#0" expanded="false" />
-            <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21036#21088#0" expanded="false" />
-            <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21996#22050#0" expanded="false" />
-            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#28271#28277#0" expanded="false" />
-            <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#30752#30759#0" expanded="false" />
-            <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#34235#34246#0" expanded="false" />
+            <element signature="e#8789#9048#0" expanded="true" />
+            <element signature="e#9047#9048#0" expanded="true" />
+            <element signature="e#9095#9261#0" expanded="true" />
+            <element signature="e#9260#9261#0" expanded="true" />
+            <element signature="e#23082#23083#0" expanded="true" />
+            <element signature="e#23144#23145#0" expanded="true" />
+            <element signature="e#33450#33679#0" expanded="true" />
+            <element signature="e#33678#33679#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2387,34 +2337,17 @@
           <caret line="194" column="5" selection-start-line="194" selection-start-column="5" selection-end-line="194" selection-end-column="5" />
           <folding>
             <element signature="e#4190#4206#0" expanded="false" />
-            <element signature="e#5913#5919#0" expanded="false" />
+            <element signature="e#5917#5923#0" expanded="false" />
             <element signature="method#viewData#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#19165#19224#0" expanded="false" />
-            <element signature="e#19335#19359#0" expanded="false" />
-            <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21036#21088#0" expanded="false" />
-            <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21996#22050#0" expanded="false" />
-            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#28271#28277#0" expanded="false" />
-            <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#30752#30759#0" expanded="false" />
-            <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#34235#34246#0" expanded="false" />
+            <element signature="e#8789#9048#0" expanded="true" />
+            <element signature="e#9047#9048#0" expanded="true" />
+            <element signature="e#9095#9261#0" expanded="true" />
+            <element signature="e#9260#9261#0" expanded="true" />
+            <element signature="e#23082#23083#0" expanded="true" />
+            <element signature="e#23144#23145#0" expanded="true" />
+            <element signature="e#33450#33679#0" expanded="true" />
+            <element signature="e#33678#33679#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2479,34 +2412,17 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#4190#4206#0" expanded="false" />
-            <element signature="e#5913#5919#0" expanded="false" />
+            <element signature="e#5917#5923#0" expanded="false" />
             <element signature="method#viewData#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#19165#19224#0" expanded="false" />
-            <element signature="e#19335#19359#0" expanded="false" />
-            <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21036#21088#0" expanded="false" />
-            <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21996#22050#0" expanded="false" />
-            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#28271#28277#0" expanded="false" />
-            <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#30752#30759#0" expanded="false" />
-            <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#34235#34246#0" expanded="false" />
+            <element signature="e#8789#9048#0" expanded="true" />
+            <element signature="e#9047#9048#0" expanded="true" />
+            <element signature="e#9095#9261#0" expanded="true" />
+            <element signature="e#9260#9261#0" expanded="true" />
+            <element signature="e#23082#23083#0" expanded="true" />
+            <element signature="e#23144#23145#0" expanded="true" />
+            <element signature="e#33450#33679#0" expanded="true" />
+            <element signature="e#33678#33679#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2545,17 +2461,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="57" column="51" selection-start-line="57" selection-start-column="51" selection-end-line="57" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -2625,19 +2530,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/settings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25888324">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding>
-            <element signature="e#305#328#0" expanded="true" />
-            <element signature="e#531#545#0" expanded="true" />
-            <element signature="e#742#757#0" expanded="true" />
-            <element signature="e#955#969#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_setting.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2668,36 +2560,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80241495">
-          <caret line="130" column="76" selection-start-line="130" selection-start-column="76" selection-end-line="130" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.206897">
-          <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.481482">
-          <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/settings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="2.3231812">
           <caret line="99" column="46" selection-start-line="99" selection-start-column="46" selection-end-line="99" selection-end-column="46" />
           <folding>
             <element signature="e#157#188#0" expanded="true" />
@@ -2719,40 +2584,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/com/efelnic/driveapp/R.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.4074073">
+          <caret line="2583" column="32" selection-start-line="2583" selection-start-column="32" selection-end-line="2583" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5631229">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.148148">
+          <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.793103">
+          <caret line="249" column="0" selection-start-line="249" selection-start-column="0" selection-end-line="256" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+          <folding>
+            <element signature="e#305#328#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="85" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8772242">
-          <caret line="484" column="44" selection-start-line="484" selection-start-column="44" selection-end-line="484" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.4572954">
+          <caret line="218" column="38" selection-start-line="218" selection-start-column="38" selection-end-line="218" selection-end-column="38" />
           <folding>
             <element signature="e#4190#4206#0" expanded="false" />
-            <element signature="e#5913#5919#0" expanded="false" />
+            <element signature="e#5917#5923#0" expanded="false" />
             <element signature="method#viewData#0;class#TrackingActivity#0" expanded="false" />
             <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#19165#19224#0" expanded="false" />
-            <element signature="e#19335#19359#0" expanded="false" />
-            <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21036#21088#0" expanded="false" />
-            <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21996#22050#0" expanded="false" />
-            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#28271#28277#0" expanded="false" />
-            <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#30752#30759#0" expanded="false" />
-            <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#34235#34246#0" expanded="false" />
+            <element signature="e#8789#9048#0" expanded="true" />
+            <element signature="e#9047#9048#0" expanded="true" />
+            <element signature="e#9095#9261#0" expanded="true" />
+            <element signature="e#9260#9261#0" expanded="true" />
+            <element signature="e#23082#23083#0" expanded="true" />
+            <element signature="e#23144#23145#0" expanded="true" />
+            <element signature="e#33450#33679#0" expanded="true" />
+            <element signature="e#33678#33679#0" expanded="true" />
           </folding>
         </state>
       </provider>

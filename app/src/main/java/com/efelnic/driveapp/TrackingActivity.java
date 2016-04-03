@@ -123,7 +123,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
-        saveRaceButton = (Button) findViewById(R.id.saveRaceButton);
+        //saveRaceButton = (Button) findViewById(R.id.saveRaceButton);
         viewDataButton = (Button) findViewById(R.id.viewDataButton);
 
         accelerationList = new ArrayList<String>();
@@ -162,7 +162,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 }
             }
 
-        SaveRace();
+        //SaveRace();
         viewData();
 
         //Loic
@@ -207,23 +207,24 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         builder.show();
     }
 
-    public void SaveRace() {
-        saveRaceButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+    public void SaveRace(MenuItem item) {
+        //onOptionsItemSelected(item.getItemId());
+        //saveRaceButton.setOnClickListener(
+               // new View.OnClickListener() {
+                //    @Override
+               //     public void onClick(View v) {
                         String inputAccel = gsonAccel.toJson(accelerationList);
                         String inputSpeed = gsonSpeed.toJson(speedList);
                         boolean isinserted = myDb.insertData("distance test", inputAccel, chronoView.getText().toString(), inputSpeed);
-                        if (isinserted == true){
+                        if (isinserted) {
                             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(TrackingActivity.this, "Error: Race Not Saved", Toast.LENGTH_LONG).show();
                         }
 
-                    }
-                }
-        );
+                   // }
+               // };
+        //);
     }
 
     // Show a dialog to the user requesting that GPS be enabled
@@ -665,8 +666,24 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
 
-        return super.onOptionsItemSelected(item);
+
+//            case R.id.menu_settings:
+//                Intent i = new Intent(this, UserSettingActivity.class);
+//                startActivityForResult(i, RESULT_SETTINGS);
+//                break;
+
+            case R.id.menu_save:
+                SaveRace(item);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+
     }
     //end of settings
 
@@ -749,7 +766,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
             latView.setText("Latitude : " + Double.toString(latt));
             lngView.setText("Longitude : " + Double.toString(lngi));
-            altView.setText("Altitude : " + Double.toString(alti) + " meters");
+            altView.setText("Altitude : " + Double.toString(alti) + "m");
             spdView.setText("Speed : " + Double.toString(sped) + " km/h");
             speedList.add(Double.toString(sped));
 

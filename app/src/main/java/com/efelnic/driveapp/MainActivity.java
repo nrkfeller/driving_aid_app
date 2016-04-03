@@ -89,27 +89,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    protected void showUserSettings() {
-        SharedPreferences sharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this);
-
-        StringBuilder builder = new StringBuilder();
-
-        //What is this? (only commented part)
-//        builder.append("\n Username: "
-//                + sharedPrefs.getString("prefUsername", "NULL"));
+    //What is this for??
+//    protected void showUserSettings() {
+//        SharedPreferences sharedPrefs = PreferenceManager
+//                .getDefaultSharedPreferences(this);
 //
-//        builder.append("\n Send report:"
-//                + sharedPrefs.getBoolean("prefSendReport", false));
+//        StringBuilder builder = new StringBuilder();
 //
-//        builder.append("\n Sync Frequency: "
-//                + sharedPrefs.getString("prefSyncFrequency", "NULL"));
-        //
-
-        TextView settingsTextView = (TextView) findViewById(R.id.textUserSettings);
-
-        settingsTextView.setText(builder.toString());
-    }
+//        //What is this? (only commented part)
+////        builder.append("\n Username: "
+////                + sharedPrefs.getString("prefUsername", "NULL"));
+////
+////        builder.append("\n Send report:"
+////                + sharedPrefs.getBoolean("prefSendReport", false));
+////
+////        builder.append("\n Sync Frequency: "
+////                + sharedPrefs.getString("prefSyncFrequency", "NULL"));
+//        //
+//
+//        //TextView settingsTextView = (TextView) findViewById(R.id.textUserSettings);
+//
+//        //settingsTextView.setText(builder.toString());
+//    }
 
 
 
