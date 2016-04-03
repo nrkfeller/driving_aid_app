@@ -34,7 +34,7 @@
 
 
     <string name="pref_gps">GPS</string>
-    <string name="pref_send_report_summary">Helps to fix bugs</string>
+
     <string name="pref_maps">MAPS</string>
     <string name="pref_accelerometerUI">ACCELEROMETER</string>
     <string name="pref_speedometer">SPEEDOMETER</string>
@@ -50,4 +50,13 @@
     <string name="Play">Play</string>
     <string name="Save">Save</string>
     <string name="Chronometer">CHRONOMETER</string>
+
+    <string name="pref_backgroundColor">prefBackgroundColor</string>
+    <string name="backgroundColor">Background Color</string>
+    <string name="pref_speedUnits">prefSpeedUnits</string>
+    <string name="speed_units">Speed Units</string>
+    <string name="pref_speedometerTextSize">prefSpeedometerTextSize</string>
+    <string name="speedometerTextSize">Speedometer Text Size</string>
+
+
 </resources>

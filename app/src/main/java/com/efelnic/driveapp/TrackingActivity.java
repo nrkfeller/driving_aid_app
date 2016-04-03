@@ -38,6 +38,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.ActionBar;
@@ -97,19 +98,21 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
               accTitle, accView, // lin accel
               compAccTitle, xrotView, yrotView, zrotView; // componential accel
     View      lineGraphView, speedometerView;//Line graph
+    ScrollView mainLayout;
 
     boolean bPermissionGranted;
 
     private LineChart mChart;
     float lin_accel;
     double time = 0;
-    boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting, speedometerSetting, speedUnitSetting;
+    boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting, speedometerSetting, speedUnitSetting, backgroundColorSetting;
     String gpsTextSizeSetting, accelTextSizeSetting, chronTextSizeSetting, speedometerTextSizeSetting;
 
     private final static double conversionRatioToKM = 3.6; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
     private final static double conversionFromKmToMi = 0.62137; // KM/H to MPH
 
     private SpeedometerGauge speedometer;
+
 
     //Bar Chart Loic
     //LinearLayout la; // used for charts
@@ -254,177 +257,236 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         timerSetting = sp.getBoolean("prefTimerUI", false);
         lineGraphSetting = sp.getBoolean("prefLineGraphUI", false);
         speedometerSetting = sp.getBoolean("prefSpeedometer", false);
+        backgroundColorSetting = sp.getBoolean("prefBackgroundColor", false);
 
-
-        //Text Settings
         gpsTextSizeSetting = sp.getString("prefGPSTextSize", "25");
         accelTextSizeSetting = sp.getString("prefAccelTextSize", "25");
         chronTextSizeSetting = sp.getString("prefChronoTextSize", "25");
 
 
+        //Displayed or not
         //GPS
-        gpsTitle = (TextView) findViewById(R.id.gpsView);
-        latView = (TextView) findViewById(R.id.latitudeView);
-        lngView = (TextView) findViewById(R.id.longitudeView);
-        altView = (TextView) findViewById(R.id.altitudeView);
-        spdView = (TextView) findViewById(R.id.speedView);
+            gpsTitle = (TextView) findViewById(R.id.gpsView);
+            latView = (TextView) findViewById(R.id.latitudeView);
+            lngView = (TextView) findViewById(R.id.longitudeView);
+            altView = (TextView) findViewById(R.id.altitudeView);
+            spdView = (TextView) findViewById(R.id.speedView);
 
-        if(gpsSetting){
-            gpsTitle.setVisibility(View.VISIBLE);
-            latView.setVisibility(View.VISIBLE);
-            lngView.setVisibility(View.VISIBLE);
-            altView.setVisibility(View.VISIBLE);
-            spdView.setVisibility(View.VISIBLE);
-        }
+            if(gpsSetting){
+                gpsTitle.setVisibility(View.VISIBLE);
+                latView.setVisibility(View.VISIBLE);
+                lngView.setVisibility(View.VISIBLE);
+                altView.setVisibility(View.VISIBLE);
+                spdView.setVisibility(View.VISIBLE);
+            }
 
-        else{
-            gpsTitle.setVisibility(View.GONE);
-            latView.setVisibility(View.GONE);
-            lngView.setVisibility(View.GONE);
-            altView.setVisibility(View.GONE);
-            spdView.setVisibility(View.GONE);
-        }
-        //ACCEL
-        accTitle = (TextView) findViewById(R.id.accelTitle);
-        accView = (TextView) findViewById(R.id.accelView);
-        compAccTitle = (TextView) findViewById(R.id.compAccView);
-        xrotView = (TextView) findViewById(R.id.xrotationView);
-        yrotView = (TextView) findViewById(R.id.yrotationView);
-        zrotView = (TextView) findViewById(R.id.zrotationView);
+            else{
+                gpsTitle.setVisibility(View.GONE);
+                latView.setVisibility(View.GONE);
+                lngView.setVisibility(View.GONE);
+                altView.setVisibility(View.GONE);
+                spdView.setVisibility(View.GONE);
+            }
+            //ACCEL
+            accTitle = (TextView) findViewById(R.id.accelTitle);
+            accView = (TextView) findViewById(R.id.accelView);
+            compAccTitle = (TextView) findViewById(R.id.compAccView);
+            xrotView = (TextView) findViewById(R.id.xrotationView);
+            yrotView = (TextView) findViewById(R.id.yrotationView);
+            zrotView = (TextView) findViewById(R.id.zrotationView);
 
-        if(accelSetting){
-            accTitle.setVisibility(View.VISIBLE);
-            accView.setVisibility(View.VISIBLE);
-            compAccTitle.setVisibility(View.VISIBLE);
-            xrotView.setVisibility(View.VISIBLE);
-            yrotView.setVisibility(View.VISIBLE);
-            zrotView.setVisibility(View.VISIBLE);
+            if(accelSetting){
+                accTitle.setVisibility(View.VISIBLE);
+                accView.setVisibility(View.VISIBLE);
+                compAccTitle.setVisibility(View.VISIBLE);
+                xrotView.setVisibility(View.VISIBLE);
+                yrotView.setVisibility(View.VISIBLE);
+                zrotView.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                accTitle.setVisibility(View.GONE);
+                accView.setVisibility(View.GONE);
+                compAccTitle.setVisibility(View.GONE);
+                xrotView.setVisibility(View.GONE);
+                yrotView.setVisibility(View.GONE);
+                zrotView.setVisibility(View.GONE);
+            }
+
+            //TIMER
+            timerTitle = (TextView) findViewById(R.id.timerTitle);
+            timerView = (TextView) findViewById(R.id.timerView);
+            chronoView = (TextView) findViewById(R.id.chronometer);
+            lapView = (TextView) findViewById(R.id.lapView);
+
+            if(timerSetting){
+                timerTitle.setVisibility(View.VISIBLE);
+                timerView.setVisibility(View.VISIBLE);
+                chronoView.setVisibility(View.VISIBLE);
+                lapView.setVisibility(View.VISIBLE);
+            }
+            else{
+                timerTitle.setVisibility(View.GONE);
+                timerView.setVisibility(View.GONE);
+                chronoView.setVisibility(View.GONE);
+                lapView.setVisibility(View.GONE);
+            }
+
+
+            //LineGraph
+            lineGraphView = (LineChart) findViewById(R.id.chart1);
+
+            if(lineGraphSetting)
+                lineGraphView.setVisibility(View.VISIBLE);
+            else
+                lineGraphView.setVisibility(View.GONE);
+
+            //Speedometer
+            speedometerView = (SpeedometerGauge) findViewById(R.id.speedometer);
+            if (speedometerSetting)
+                speedometerView.setVisibility(View.VISIBLE);
+            else speedometerView.setVisibility(View.GONE);
+
+        //Text Sizes
+
+            //GPS
+            switch(gpsTextSizeSetting)
+            {
+                case "25":
+                    gpsTitle.setTextSize(25);
+                    latView.setTextSize(25);
+                    lngView.setTextSize(25);
+                    altView.setTextSize(25);
+                    spdView.setTextSize(25);
+                    break;
+
+                case "40":
+                    gpsTitle.setTextSize(40);
+                    latView.setTextSize(40);
+                    lngView.setTextSize(40);
+                    altView.setTextSize(40);
+                    spdView.setTextSize(40);
+                    break;
+
+                case "50":
+                    gpsTitle.setTextSize(50);
+                    latView.setTextSize(50);
+                    lngView.setTextSize(50);
+                    altView.setTextSize(50);
+                    spdView.setTextSize(50);
+                    break;
+            }
+            //Chrono text size
+            switch(chronTextSizeSetting)
+            {
+                case "25":
+                    timerTitle.setTextSize(25);
+                    timerView.setTextSize(25);
+                    chronoView.setTextSize(25);
+                    lapView.setTextSize(25);
+                    break;
+
+                case "40":
+                    timerTitle.setTextSize(40);
+                    timerView.setTextSize(40);
+                    chronoView.setTextSize(40);
+                    lapView.setTextSize(40);
+                    break;
+
+                case "50":
+                    timerTitle.setTextSize(50);
+                    timerView.setTextSize(50);
+                    chronoView.setTextSize(50);
+                    lapView.setTextSize(50);
+                    break;
+            }
+            //Accel
+            switch(accelTextSizeSetting)
+            {
+                case "25":
+                    accTitle.setTextSize(25);
+                    accView.setTextSize(25);
+                    compAccTitle.setTextSize(25);
+                    xrotView.setTextSize(25);
+                    yrotView.setTextSize(25);
+                    zrotView.setTextSize(25);
+                    break;
+
+                case "40":
+                    accTitle.setTextSize(40);
+                    accView.setTextSize(40);
+                    compAccTitle.setTextSize(40);
+                    xrotView.setTextSize(40);
+                    yrotView.setTextSize(40);
+                    zrotView.setTextSize(40);
+                    break;
+
+                case "50":
+                    accTitle.setTextSize(50);
+                    accView.setTextSize(50);
+                    compAccTitle.setTextSize(50);
+                    xrotView.setTextSize(50);
+                    yrotView.setTextSize(50);
+                    zrotView.setTextSize(50);
+                    break;
+            }
+
+        //background Color
+        mainLayout = (ScrollView) findViewById(R.id.scrollView);
+        if(backgroundColorSetting)
+        {
+            mainLayout.setBackgroundColor(Color.BLACK);
+
+            //GPS
+            gpsTitle.setTextColor(Color.WHITE);
+            latView.setTextColor(Color.WHITE);
+            lngView.setTextColor(Color.WHITE);
+            altView.setTextColor(Color.WHITE);
+            spdView.setTextColor(Color.WHITE);
+
+            //accel
+            accTitle.setTextColor(Color.WHITE);
+            accView.setTextColor(Color.WHITE);
+            compAccTitle.setTextColor(Color.WHITE);
+            xrotView.setTextColor(Color.WHITE);
+            yrotView.setTextColor(Color.WHITE);
+            zrotView.setTextColor(Color.WHITE);
+
+            //Chrono
+            timerTitle.setTextColor(Color.WHITE);
+            timerView.setTextColor(Color.WHITE);
+            chronoView.setTextColor(Color.WHITE);
+            lapView.setTextColor(Color.WHITE);
+
         }
         else
         {
-            accTitle.setVisibility(View.GONE);
-            accView.setVisibility(View.GONE);
-            compAccTitle.setVisibility(View.GONE);
-            xrotView.setVisibility(View.GONE);
-            yrotView.setVisibility(View.GONE);
-            zrotView.setVisibility(View.GONE);
+            mainLayout.setBackgroundColor(Color.WHITE);
+
+            //GPS
+            gpsTitle.setTextColor(Color.BLACK);
+            latView.setTextColor(Color.BLACK);
+            lngView.setTextColor(Color.BLACK);
+            altView.setTextColor(Color.BLACK);
+            spdView.setTextColor(Color.BLACK);
+
+            //accel
+            accTitle.setTextColor(Color.BLACK);
+            accView.setTextColor(Color.BLACK);
+            compAccTitle.setTextColor(Color.BLACK);
+            xrotView.setTextColor(Color.BLACK);
+            yrotView.setTextColor(Color.BLACK);
+            zrotView.setTextColor(Color.BLACK);
+
+            //Chrono
+            timerTitle.setTextColor(Color.BLACK);
+            timerView.setTextColor(Color.BLACK);
+            chronoView.setTextColor(Color.BLACK);
+            lapView.setTextColor(Color.BLACK);
         }
 
-        //TIMER
-        timerTitle = (TextView) findViewById(R.id.timerTitle);
-        timerView = (TextView) findViewById(R.id.timerView);
-        chronoView = (TextView) findViewById(R.id.chronometer);
-        lapView = (TextView) findViewById(R.id.lapView);
 
-        if(timerSetting){
-            timerTitle.setVisibility(View.VISIBLE);
-            timerView.setVisibility(View.VISIBLE);
-            chronoView.setVisibility(View.VISIBLE);
-            lapView.setVisibility(View.VISIBLE);
-        }
-        else{
-            timerTitle.setVisibility(View.GONE);
-            timerView.setVisibility(View.GONE);
-            chronoView.setVisibility(View.GONE);
-            lapView.setVisibility(View.GONE);
-        }
 
-        //TextSizes
-        //GPS
-        switch(gpsTextSizeSetting)
-        {
-            case "25":
-                gpsTitle.setTextSize(25);
-                latView.setTextSize(25);
-                lngView.setTextSize(25);
-                altView.setTextSize(25);
-                spdView.setTextSize(25);
-                break;
-
-            case "40":
-                gpsTitle.setTextSize(40);
-                latView.setTextSize(40);
-                lngView.setTextSize(40);
-                altView.setTextSize(40);
-                spdView.setTextSize(40);
-                break;
-
-            case "50":
-                gpsTitle.setTextSize(50);
-                latView.setTextSize(50);
-                lngView.setTextSize(50);
-                altView.setTextSize(50);
-                spdView.setTextSize(50);
-                break;
-        }
-        //Chrono text size
-        switch(chronTextSizeSetting)
-        {
-            case "25":
-                timerTitle.setTextSize(25);
-                timerView.setTextSize(25);
-                chronoView.setTextSize(25);
-                lapView.setTextSize(25);
-                break;
-
-            case "40":
-                timerTitle.setTextSize(40);
-                timerView.setTextSize(40);
-                chronoView.setTextSize(40);
-                lapView.setTextSize(40);
-                break;
-
-            case "50":
-                timerTitle.setTextSize(50);
-                timerView.setTextSize(50);
-                chronoView.setTextSize(50);
-                lapView.setTextSize(50);
-                break;
-        }
-        //Accel
-        switch(accelTextSizeSetting)
-        {
-            case "25":
-                accTitle.setTextSize(25);
-                accView.setTextSize(25);
-                compAccTitle.setTextSize(25);
-                xrotView.setTextSize(25);
-                yrotView.setTextSize(25);
-                zrotView.setTextSize(25);
-                break;
-
-            case "40":
-                accTitle.setTextSize(40);
-                accView.setTextSize(40);
-                compAccTitle.setTextSize(40);
-                xrotView.setTextSize(40);
-                yrotView.setTextSize(40);
-                zrotView.setTextSize(40);
-                break;
-
-            case "50":
-                accTitle.setTextSize(50);
-                accView.setTextSize(50);
-                compAccTitle.setTextSize(50);
-                xrotView.setTextSize(50);
-                yrotView.setTextSize(50);
-                zrotView.setTextSize(50);
-                break;
-        }
-
-        //LineGraph
-        lineGraphView = (LineChart) findViewById(R.id.chart1);
-
-        if(lineGraphSetting)
-            lineGraphView.setVisibility(View.VISIBLE);
-        else
-            lineGraphView.setVisibility(View.GONE);
-
-        //Speedometer
-        speedometerView = (SpeedometerGauge) findViewById(R.id.speedometer);
-        if (speedometerSetting)
-            speedometerView.setVisibility(View.VISIBLE);
-        else speedometerView.setVisibility(View.GONE);
 
     }
 

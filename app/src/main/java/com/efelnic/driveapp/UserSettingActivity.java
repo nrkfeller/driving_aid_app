@@ -128,6 +128,7 @@ public class UserSettingActivity extends    PreferenceActivity {
 
             //Miscellaneous
             bindPreferenceSummaryToValue(findPreference("prefSpeedUnits"));
+            bindPreferenceSummaryToValue(findPreference("prefBackgroundColor"));
         }
     }
 

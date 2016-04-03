@@ -85,8 +85,8 @@
         </ListPreference>
 
         <ListPreference
-            android:key="prefSpeedometerTextSize"
-            android:title="Speedometer Text Size"
+            android:key="@string/pref_speedometerTextSize"
+            android:title="@string/speedometerTextSize"
             android:entries="@array/prefSpeedTextSize"
             android:entryValues="@array/prefSpeedTextValues"
             android:defaultValue="40" >
@@ -97,9 +97,16 @@
     <PreferenceCategory android:title="Miscellaneous" >
         <SwitchPreference
             android:defaultValue="false"
-            android:key="prefSpeedUnits"
-            android:summary="Left is km/h, right is mph"
-            android:title="Speed Units" >
+            android:key="@string/pref_backgroundColor"
+            android:summary="Left/Right --> White/Black"
+            android:title="@string/backgroundColor" >
+
+        </SwitchPreference>
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_speedUnits"
+            android:summary="Left/Right --> Kmh/Mph"
+            android:title="@string/speed_units" >
 
         </SwitchPreference>
 
