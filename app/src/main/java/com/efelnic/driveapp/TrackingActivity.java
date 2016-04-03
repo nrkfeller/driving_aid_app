@@ -105,6 +105,8 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting, speedometerSetting, speedUnitSetting;
     String gpsTextSizeSetting, accelTextSizeSetting, chronTextSizeSetting, speedometerTextSizeSetting;
 
+    private final static double conversionRatioToKM = 3.6; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
+    private final static double conversionFromKmToMi = 0.62137; // KM/H to MPH
 
     private SpeedometerGauge speedometer;
 
@@ -665,8 +667,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
     @Override
     public void onLocationChanged(Location location) {
-    double conversionRatioToKM = 3.6;
-    double conversionFromKmToMi = 0.62137;
+
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
