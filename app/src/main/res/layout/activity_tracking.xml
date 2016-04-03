@@ -243,7 +243,8 @@
             android:textColor="#ffffff"
             android:padding="8dp"
             android:id="@+id/speedometer"
-            android:layout_below="@+id/chart1" />
+            android:layout_below="@+id/chart1"
+            android:onClick="getLocation" />
 
         <Button
             android:layout_width="wrap_content"

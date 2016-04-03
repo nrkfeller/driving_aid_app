@@ -87,6 +87,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     float[] gravity = new float[3];
     float[] linear_acceleration = new float[3];
 
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final float NS2S = 1.0f / 1000000000.0f;
     private final float[] deltaRotationVector = new float[4];
     private float timestamp;
@@ -790,7 +791,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+
 
     public boolean checkLocationPermission(){
         if (ContextCompat.checkSelfPermission(this,
