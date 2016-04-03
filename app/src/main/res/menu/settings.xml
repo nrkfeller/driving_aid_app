@@ -15,20 +15,23 @@
         android:orderInCategory="2"
         app:showAsAction="ifRoom"
         android:title="@string/Save"
-        android:icon="@android:drawable/ic_menu_save"/>
+        android:icon="@android:drawable/ic_menu_save"
+        android:visible="false"/>
+
 
     <item
         android:id="@+id/menu_pause"
         android:orderInCategory="3"
         app:showAsAction="ifRoom"
         android:title="@string/Pause"
-        android:icon="@android:drawable/ic_media_pause"/>
+        android:icon="@android:drawable/ic_media_pause"
+        android:visible="false"/>
 
     <item
         android:id="@+id/menu_play"
         android:orderInCategory="4"
         app:showAsAction="ifRoom"
         android:title="@string/Play"
-        android:icon="@android:drawable/ic_media_play"/>
-
+        android:icon="@android:drawable/ic_media_play"
+        android:visible="false"/>
 </menu>

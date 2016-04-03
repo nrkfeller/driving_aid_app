@@ -12,8 +12,7 @@
     <list default="true" id="14e86880-db5b-4744-95f3-eb2a70735a6e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/settings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="driving_aid_app.iws" />
@@ -43,11 +42,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4572954">
-              <caret line="218" column="38" selection-start-line="218" selection-start-column="38" selection-end-line="218" selection-end-column="38" />
+            <state vertical-scroll-proportion="-10.551724">
+              <caret line="669" column="29" selection-start-line="669" selection-start-column="29" selection-end-line="669" selection-end-column="29" />
               <folding>
                 <element signature="e#4190#4206#0" expanded="false" />
                 <element signature="e#5917#5923#0" expanded="false" />
@@ -59,18 +58,18 @@
                 <element signature="e#9260#9261#0" expanded="true" />
                 <element signature="e#23082#23083#0" expanded="true" />
                 <element signature="e#23144#23145#0" expanded="true" />
-                <element signature="e#33450#33679#0" expanded="true" />
-                <element signature="e#33678#33679#0" expanded="true" />
+                <element signature="e#33711#33940#0" expanded="true" />
+                <element signature="e#33939#33940#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/settings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.83417934">
+              <caret line="35" column="8" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
               <folding>
                 <element signature="e#305#328#0" expanded="true" />
               </folding>
@@ -92,7 +91,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="85" selection-end-column="9" />
+              <caret line="74" column="0" selection-start-line="74" selection-start-column="2" selection-end-line="79" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -1734,11 +1733,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/settings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/settings.xml" />
       </list>
     </option>
   </component>
@@ -2196,8 +2195,8 @@
             <element signature="e#9260#9261#0" expanded="true" />
             <element signature="e#23082#23083#0" expanded="true" />
             <element signature="e#23144#23145#0" expanded="true" />
-            <element signature="e#33450#33679#0" expanded="true" />
-            <element signature="e#33678#33679#0" expanded="true" />
+            <element signature="e#33711#33940#0" expanded="true" />
+            <element signature="e#33939#33940#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2271,8 +2270,8 @@
             <element signature="e#9260#9261#0" expanded="true" />
             <element signature="e#23082#23083#0" expanded="true" />
             <element signature="e#23144#23145#0" expanded="true" />
-            <element signature="e#33450#33679#0" expanded="true" />
-            <element signature="e#33678#33679#0" expanded="true" />
+            <element signature="e#33711#33940#0" expanded="true" />
+            <element signature="e#33939#33940#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2346,8 +2345,8 @@
             <element signature="e#9260#9261#0" expanded="true" />
             <element signature="e#23082#23083#0" expanded="true" />
             <element signature="e#23144#23145#0" expanded="true" />
-            <element signature="e#33450#33679#0" expanded="true" />
-            <element signature="e#33678#33679#0" expanded="true" />
+            <element signature="e#33711#33940#0" expanded="true" />
+            <element signature="e#33939#33940#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2421,8 +2420,8 @@
             <element signature="e#9260#9261#0" expanded="true" />
             <element signature="e#23082#23083#0" expanded="true" />
             <element signature="e#23144#23145#0" expanded="true" />
-            <element signature="e#33450#33679#0" expanded="true" />
-            <element signature="e#33678#33679#0" expanded="true" />
+            <element signature="e#33711#33940#0" expanded="true" />
+            <element signature="e#33939#33940#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2584,14 +2583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/com/efelnic/driveapp/R.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.4074073">
-          <caret line="2583" column="32" selection-start-line="2583" selection-start-column="32" selection-end-line="2583" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5631229">
@@ -2611,14 +2602,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.148148">
-          <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -2630,28 +2613,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/settings.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-          <folding>
-            <element signature="e#305#328#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="85" selection-end-column="9" />
+        <state vertical-scroll-proportion="-19.148148">
+          <caret line="47" column="18" selection-start-line="47" selection-start-column="18" selection-end-line="47" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4572954">
-          <caret line="218" column="38" selection-start-line="218" selection-start-column="38" selection-end-line="218" selection-end-column="38" />
+        <state vertical-scroll-proportion="-10.551724">
+          <caret line="669" column="29" selection-start-line="669" selection-start-column="29" selection-end-line="669" selection-end-column="29" />
           <folding>
             <element signature="e#4190#4206#0" expanded="false" />
             <element signature="e#5917#5923#0" expanded="false" />
@@ -2663,8 +2636,26 @@
             <element signature="e#9260#9261#0" expanded="true" />
             <element signature="e#23082#23083#0" expanded="true" />
             <element signature="e#23144#23145#0" expanded="true" />
-            <element signature="e#33450#33679#0" expanded="true" />
-            <element signature="e#33678#33679#0" expanded="true" />
+            <element signature="e#33711#33940#0" expanded="true" />
+            <element signature="e#33939#33940#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="0" selection-start-line="74" selection-start-column="2" selection-end-line="79" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.83417934">
+          <caret line="35" column="8" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
+          <folding>
+            <element signature="e#305#328#0" expanded="true" />
           </folding>
         </state>
       </provider>

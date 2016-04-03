@@ -662,6 +662,12 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.settings, menu);
+        MenuItem save = menu.findItem(R.id.menu_save);
+        MenuItem play = menu.findItem(R.id.menu_play);
+        MenuItem pause = menu.findItem(R.id.menu_pause);
+        save.setVisible(true);
+        play.setVisible(true);
+        pause.setVisible(true);
         return true;
     }
     @Override

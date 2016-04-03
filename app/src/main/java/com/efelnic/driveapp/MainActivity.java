@@ -1,6 +1,7 @@
 package com.efelnic.driveapp;
 
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -71,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.settings, menu);
+//        MenuItem save = menu.findItem(R.id.menu_save);
+//        MenuItem play = menu.findItem(R.id.menu_play);
+//        MenuItem pause = menu.findItem(R.id.menu_pause);
+//        save.setVisible(false);
+//        play.setVisible(false);
+//        pause.setVisible(false);
+
+
         return true;
     }
 
