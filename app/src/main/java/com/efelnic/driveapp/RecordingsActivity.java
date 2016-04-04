@@ -3,6 +3,7 @@ package com.efelnic.driveapp;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,6 +31,7 @@ public class RecordingsActivity extends AppCompatActivity {
 
     DatabaseHelper myDb;
     Button queryButton;
+    Button deleteButton;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -43,10 +45,12 @@ public class RecordingsActivity extends AppCompatActivity {
 
         myDb = new DatabaseHelper(this);
 
-        String testing = myDb.getRowcol(2, 5);
-        System.out.println(testing);
+// Test to see if .getRowcol work (yes it did)
+//        String testing = myDb.getRowcol(2, 5);
+//        System.out.println(testing);
 
         queryButton = (Button) findViewById(R.id.queryButton);
+        deleteButton = (Button) findViewById(R.id.deleteButton);
 
         String[] recordings = {"1", "2", "3"};
         ListAdapter recordingsAdapter = new CustomAdapter(this, recordings);
@@ -65,6 +69,9 @@ public class RecordingsActivity extends AppCompatActivity {
 
     }
 
+    public void deleteEverything(View view){
+        myDb.deleteEverything();
+    }
 
     public void grabAllData(View view) {
         ListView myListView = (ListView) findViewById(R.id.recordingsListView);

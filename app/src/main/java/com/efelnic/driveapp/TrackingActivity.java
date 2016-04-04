@@ -152,6 +152,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         // new View.OnClickListener() {
         //    @Override
         //     public void onClick(View v) {
+        //TODO: Accel String empty (loic's phone)
         String inputAccel = gsonAccel.toJson(accelerationList);
         String inputSpeed = gsonSpeed.toJson(speedList);
 //        String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());

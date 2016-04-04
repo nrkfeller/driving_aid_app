@@ -9,6 +9,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.efelnic.driveapp.RecordingsActivity">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Query! =D"
+        android:id="@+id/queryButton"
+        android:layout_centerHorizontal="true"
+        android:onClick="grabAllData" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Database"
+        android:id="@+id/deleteButton"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/queryButton"
+        android:onClick="deleteEverything"/>
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="400dp"
@@ -16,14 +33,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/queryButton" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Query!"
-        android:id="@+id/queryButton"
-        android:layout_centerHorizontal="true"
-        android:onClick="grabAllData" />
+        android:layout_below="@+id/deleteButton" />
 
 </RelativeLayout>
