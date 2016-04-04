@@ -10,9 +10,6 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-/**
- * Created by PCS on 2016-03-30.
- */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "race.db";
@@ -24,15 +21,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_5 = "SPEED";
     public static final String COL_6 = "DATE";
 
-
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db .execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION TEXT, DURATION TEXT, SPEED TEXT, DATE TEXT)"); //, DATE TEXT)");
-
+        db .execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION FLOAT, DURATION TEXT, SPEED TEXT, DATE TEXT)"); //, DATE TEXT)");
     }
 
     public boolean insertData(String distance, String acceleration, String duration, String speed){
@@ -72,6 +67,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return result;
     }
+
+    public String getRowcol(int id, int col){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor stuff = db.rawQuery("select * from " + TABLE_NAME + " WHERE ID=" + Integer.toString(id), null);
+
+        if(stuff != null)
+            stuff.moveToFirst();
+
+        String data = stuff.getString(col);
+        return data;
+    }
+
 
     public void deleteEverything(){
         SQLiteDatabase db = this.getReadableDatabase();
