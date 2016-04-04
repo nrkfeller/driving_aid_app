@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+<!--Not sure we're going to use these-->
+    <!--<PreferenceCategory android:title="@string/pref_Database_Setting" >-->
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="prefGpsData"-->
+            <!--android:summary=""-->
+            <!--android:title="@string/pref_gps" >-->
+        <!--</SwitchPreference>-->
 
-    <PreferenceCategory android:title="@string/pref_Database_Setting" >
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="prefGpsData"
-            android:summary=""
-            android:title="@string/pref_gps" >
-        </SwitchPreference>
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="prefTimerData"-->
+            <!--android:title="@string/Chronometer" >-->
+        <!--</SwitchPreference>-->
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="prefTimerData"
-            android:title="@string/Chronometer" >
-        </SwitchPreference>
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="prefAccelerometerData"-->
+            <!--android:title="@string/pref_accelerometerUI" >-->
+        <!--</SwitchPreference>-->
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="prefAccelerometerData"
-            android:title="@string/pref_accelerometerUI" >
-        </SwitchPreference>
-
-    </PreferenceCategory>
+    <!--</PreferenceCategory>-->
 
     <PreferenceCategory android:title="@string/pref_UI_Setting" >
         <SwitchPreference
