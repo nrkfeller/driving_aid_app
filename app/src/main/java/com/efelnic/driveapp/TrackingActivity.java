@@ -205,6 +205,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
+
         //Permissions
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();

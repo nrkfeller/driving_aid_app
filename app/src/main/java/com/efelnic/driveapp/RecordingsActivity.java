@@ -32,6 +32,7 @@ public class RecordingsActivity extends AppCompatActivity {
     DatabaseHelper myDb;
     Button queryButton;
     Button deleteButton;
+    Cursor cursor;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -62,18 +63,36 @@ public class RecordingsActivity extends AppCompatActivity {
         recordingsListView.setAdapter(recordingsAdapter);
 
  //TODO: OnClickListener
-        recordingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String recording = String.valueOf(parent.getItemAtPosition(position));
-                        Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RecordingsActivity.this, DatabaseItemActivity.class);
-                        startActivity(intent);
-                    }
-                }
-        );
+        recordingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                      @Override
+                                                      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                          String recording = String.valueOf(parent.getItemAtPosition(position));
+                                                          Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
+                                                          Intent intent = new Intent(RecordingsActivity.this, DatabaseItemActivity.class);
+                                                          startActivity(intent);
+                                                      }
 
+                                                  }
+        );
+        //TODO: OnClickListener (LONG CLICK)
+        recordingsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+                                                      @Override
+                                                      public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                                                        //  int recording = (int) parent.getItemAtPosition(position);
+                                                          String recording = String.valueOf(parent.getItemAtPosition(position));
+                                                          myDb.deleteByID(recording);
+                                                          Toast.makeText(getApplicationContext(), "Nothing For Now", Toast.LENGTH_SHORT).show();
+                                                          //updateList();
+                                                          //myDb.getAllData();
+                                                          return true;
+                                                      }
+
+                                                  }
+        );
     }
+
+
+
 
     public void deleteEverything(View view){
         myDb.deleteEverything();
@@ -92,12 +111,12 @@ public class RecordingsActivity extends AppCompatActivity {
             StringBuffer buffer = new StringBuffer();
             while (res.moveToNext()) {
 
- //               databaseEntries.add("ID: " + res.getString(0));
+                databaseEntries.add("ID: " + res.getString(0));
 //                databaseEntries.add("distance: " + res.getString(1));
 //                databaseEntries.add("acceleration: " + res.getFloat(2));
 //                databaseEntries.add("duration: " + res.getString(3));
 //                databaseEntries.add("speed: " + res.getString(4));
-                databaseEntries.add("Date : " + res.getString(5));
+//                databaseEntries.add("Date : " + res.getString(5));
             }
         } catch (Exception e) {
             Toast.makeText(RecordingsActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();

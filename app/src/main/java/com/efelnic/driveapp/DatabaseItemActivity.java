@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class DatabaseItemActivity extends AppCompatActivity {
+public class DatabaseItemActivity extends RecordingsActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

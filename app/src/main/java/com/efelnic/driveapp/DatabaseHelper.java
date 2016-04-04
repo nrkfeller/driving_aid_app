@@ -10,6 +10,8 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "race.db";
@@ -21,13 +23,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_5 = "SPEED";
     public static final String COL_6 = "DATE";
 
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db .execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION FLOAT, DURATION TEXT, SPEED TEXT, DATE TEXT)"); //, DATE TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION FLOAT, DURATION TEXT, SPEED TEXT, DATE TEXT)"); //, DATE TEXT)");
     }
 
     public boolean insertData(String distance, String acceleration, String duration, String speed){
@@ -71,7 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getIdData(){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor result = db.query("select * from " + TABLE_NAME, new String[] {"id", "date"}, null, null, null, null, null);
+        Cursor result = db.query("select * from " + TABLE_NAME, new String[]{"id", "date"}, null, null, null, null, null);
 
         return result;
     }
@@ -103,5 +106,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //---deletes a particular title---
+    public void deleteByID(String ID)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        try
+        {
+            db.delete(TABLE_NAME, "ID = ?", new String[] {ID});
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            db.close();
+        }
+    }
 
 }
