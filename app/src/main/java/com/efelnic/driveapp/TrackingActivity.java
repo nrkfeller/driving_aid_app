@@ -160,9 +160,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         //TODO DATE
         boolean isinserted = myDb.insertData("NothingForNow", inputAccel, chronoView.getText().toString(), inputSpeed);
         if (isinserted) {
-            Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(TrackingActivity.this, "Error: Race Not Saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(TrackingActivity.this, "Error: Race Not Saved", Toast.LENGTH_SHORT).show();
         }
 
         // }
@@ -221,9 +221,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             if (location == null) {
 
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-                Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_SHORT).show();
             }
         }
         //Start Chrono, accel, speedometer
@@ -284,7 +284,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 // request location update!!
                 else {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_SHORT).show();
                 }
             }
             else {
@@ -295,7 +295,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                 }
                 else{
-                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_SHORT).show();
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                 }
             }
@@ -522,7 +522,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     if (location == null){
         // request location update!!
         locationManager.requestLocationUpdates (LocationManager.GPS_PROVIDER, 0, 0, this);
-        Toast.makeText(getApplicationContext(), "GPS is loading. One moment for GPS please!", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "GPS is loading. One moment for GPS please!", Toast.LENGTH_SHORT).show();
     }
     onLocationChanged(location);
 }

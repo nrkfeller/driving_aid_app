@@ -52,20 +52,26 @@ public class RecordingsActivity extends AppCompatActivity {
         queryButton = (Button) findViewById(R.id.queryButton);
         deleteButton = (Button) findViewById(R.id.deleteButton);
 
-        String[] recordings = {"1", "2", "3"};
-        ListAdapter recordingsAdapter = new CustomAdapter(this, recordings);
+//        String[] recordings = {"1", "2", "3"};
+//        CustomAdapter recordingsAdapter = new CustomAdapter(this, recordings);
+        // Construct the data source
+        ArrayList<User> arrayOfUsers = new ArrayList<User>();
+        // Create the adapter to convert the array to views
+        CustomAdapter recordingsAdapter = new CustomAdapter(this, arrayOfUsers);
         ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
         recordingsListView.setAdapter(recordingsAdapter);
 
-// TODO: OnClickListener
-//        recordingsListView.setOnClickListener(new AdapterView.OnItemClickListener(){
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        String recording = String.valueOf(parent.getItemAtPosition(position));
-//                        Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//        );
+ //TODO: OnClickListener
+        recordingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String recording = String.valueOf(parent.getItemAtPosition(position));
+                        Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RecordingsActivity.this, DatabaseItemActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
 
     }
 
@@ -86,15 +92,15 @@ public class RecordingsActivity extends AppCompatActivity {
             StringBuffer buffer = new StringBuffer();
             while (res.moveToNext()) {
 
-                databaseEntries.add("ID: " + res.getString(0));
-                databaseEntries.add("distance: " + res.getString(1));
-                databaseEntries.add("acceleration: " + res.getFloat(2));
-                databaseEntries.add("duration: " + res.getString(3));
-                databaseEntries.add("speed: " + res.getString(4));
+ //               databaseEntries.add("ID: " + res.getString(0));
+//                databaseEntries.add("distance: " + res.getString(1));
+//                databaseEntries.add("acceleration: " + res.getFloat(2));
+//                databaseEntries.add("duration: " + res.getString(3));
+//                databaseEntries.add("speed: " + res.getString(4));
                 databaseEntries.add("Date : " + res.getString(5));
             }
         } catch (Exception e) {
-            Toast.makeText(RecordingsActivity.this, "Database is Empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(RecordingsActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
         myListView.setAdapter(arrayAdapter);
@@ -112,6 +118,10 @@ public class RecordingsActivity extends AppCompatActivity {
         super.onStop();
 
     }
+
+
+
+
     /*
     public void viewData(){
 
@@ -133,13 +143,17 @@ public class RecordingsActivity extends AppCompatActivity {
             }
         } catch (Exception e ) {
 
-            Toast.makeText(RecordingsActivity.this, "DB is empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(RecordingsActivity.this, "DB is empty", Toast.LENGTH_SHORT).show();
         }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
 
         myListView.setAdapter(arrayAdapter);
     } */
+
+
+
+
 }
 
 

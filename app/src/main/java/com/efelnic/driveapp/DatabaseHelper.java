@@ -68,6 +68,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public Cursor getIdData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor result = db.query("select * from " + TABLE_NAME, new String[] {"id", "date"}, null, null, null, null, null);
+
+        return result;
+    }
+
     public String getRowcol(int id, int col){
         SQLiteDatabase db = this.getReadableDatabase();
 
