@@ -78,10 +78,11 @@ import com.google.gson.Gson;
 public class TrackingActivity extends MainActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
 //Location & Permission Vars
-    LocationManager locationManager;
-    String provider;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     boolean bPermissionGranted;
+    LocationManager locationManager;
+    String provider;
+
 
 //Database Vars
     DatabaseHelper myDb;
@@ -112,8 +113,8 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     ScrollView mainLayout;
 
 //Conversion &
-    private final static double conversionRatioToKM = 3.6; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
-    private final static double conversionFromKmToMi = 0.62137; // KM/H to MPH
+    private final static double CONVERSION_METERSPERSECOND_TO_KMH = 3.6; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
+    private final static double CONVERSION_KMH_TO_MPH = 0.62137; // KM/H to MPH
 
 //Settings Vars
     boolean gpsUISetting, accelUISetting, timerUISetting, lineGraphUISetting, speedometerUISetting, speedUnitSetting, backgroundColorSetting;
@@ -322,7 +323,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             Double lat = location.getLatitude();
             Double lng = location.getLongitude();
             Double alt = location.getAltitude();
-            double spd = (location.getSpeed()) * conversionRatioToKM; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
+            double spd = (location.getSpeed()) * CONVERSION_METERSPERSECOND_TO_KMH; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
 
             // rounding values to format "#.##"
             double latt = Math.round(lat* 100.00)/100.00;
@@ -337,7 +338,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             speedList.add(Double.toString(sped));
 
             if(speedUnitSetting){
-                sped = sped * conversionFromKmToMi;
+                sped = sped * CONVERSION_KMH_TO_MPH;
                 spdView.setText("Speed : " + Double.toString(sped) + " mph");
             }
             speedometer.setSpeed(sped);
