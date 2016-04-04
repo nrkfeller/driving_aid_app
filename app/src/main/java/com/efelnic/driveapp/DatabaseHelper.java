@@ -31,20 +31,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db .execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION TEXT, DURATION TEXT, SPEED TEXT, DATE TEXT)");//, DATE TEXT)");
+        db .execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION TEXT, DURATION TEXT, SPEED TEXT, DATE TEXT)"); //, DATE TEXT)");
 
     }
 
-    public boolean insertData(String distance, String acceleration, String duration, String speed, String date ){
+    public boolean insertData(String distance, String acceleration, String duration, String speed){
 
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
         contentValues.put(COL_2, distance);
         contentValues.put(COL_3, acceleration);
         contentValues.put(COL_4, duration);
         contentValues.put(COL_5, speed);
-        contentValues.put(COL_6, date);
+        contentValues.put(COL_6, timeStamp);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 

@@ -1,3 +1,10 @@
+/*REFERENCES: Thank you to Philipp Jahoda and Anton Danshin,  who created these libraries for letting us use them in our app!
+
+Using libraries from
+https://github.com/PhilJay/MPAndroidChart - Philipp Jahoda
+https://github.com/ntoskrnl/AndroidWidgets - Anton Danshin
+*/
+
 package com.efelnic.driveapp;
 
 import android.Manifest;
@@ -70,10 +77,13 @@ import com.google.gson.Gson;
 
 public class TrackingActivity extends MainActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
-
+//Location & Permission Vars
     LocationManager locationManager;
     String provider;
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    boolean bPermissionGranted;
 
+//Database Vars
     DatabaseHelper myDb;
     ArrayList<String> accelerationList;
     ArrayList<String> speedList;
@@ -82,8 +92,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     Gson gsonAccel = new Gson();
     Gson gsonSpeed = new Gson();
 
-    Button saveRaceButton, viewDataButton;
+    Button viewDataButton;
 
+//Sensor Vars
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private Sensor mGyroscope;
@@ -92,95 +103,71 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     float[] gravity = new float[3];
     float[] linear_acceleration = new float[3];
 
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private static final float NS2S = 1.0f / 1000000000.0f;
-    private final float[] deltaRotationVector = new float[4];
-    private float timestamp;
-
-    TextView  gpsTitle, latView, lngView, altView, spdView, //gps + speed
-              timerTitle, timerView, lapView, chronoView, // time + lap
-              accTitle, accView, // lin accel
-              compAccTitle, xrotView, yrotView, zrotView; // componential accel
-    View      lineGraphView, speedometerView;//Line graph
+//Different View Vars
+    TextView gpsTitle, latView, lngView, altView, spdView, //gps + speed
+            timerTitle, timerView, lapView, chronoView, // time + lap
+            accTitle, accView, // lin accel
+            compAccTitle, xrotView, yrotView, zrotView; // componential accel
+    View lineGraphView, speedometerView;//Line graph
     ScrollView mainLayout;
 
-    boolean bPermissionGranted;
-
-    private LineChart mChart;
-    float lin_accel;
-    double time = 0;
-    boolean gpsSetting, accelSetting, timerSetting, lineGraphSetting, speedometerSetting, speedUnitSetting, backgroundColorSetting;
-    String gpsTextSizeSetting, accelTextSizeSetting, chronTextSizeSetting, speedometerTextSizeSetting;
-
+//Conversion &
     private final static double conversionRatioToKM = 3.6; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
     private final static double conversionFromKmToMi = 0.62137; // KM/H to MPH
 
-    private SpeedometerGauge speedometer;
+//Settings Vars
+    boolean gpsUISetting, accelUISetting, timerUISetting, lineGraphUISetting, speedometerUISetting, speedUnitSetting, backgroundColorSetting;
+    String gpsTextSizeSetting, accelTextSizeSetting, chronTextSizeSetting, speedometerTextSizeSetting;
 
+//LineChart and Speedometer Vars.
+    private SpeedometerGauge speedometer;
+    private LineChart mChart;
+    double time = 0; //used to add x-values in addEntry (for line chart)
+
+//Not Used
+    private static final float NS2S = 1.0f / 1000000000.0f;
+    private final float[] deltaRotationVector = new float[4];
+    private float timestamp;
 
     //Bar Chart Loic
     //LinearLayout la; // used for charts
     //View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tracking);
 
-        //saveRaceButton = (Button) findViewById(R.id.saveRaceButton);
-        //viewDataButton = (Button) findViewById(R.id.viewDataButton);
 
-        accelerationList = new ArrayList<String>();
-        speedList = new ArrayList<String>();
+    //**** START OF METHODS ****//
 
-        myDb = new DatabaseHelper(this);
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            bPermissionGranted = checkLocationPermission();
+
+
+//Database Methods
+
+
+
+    // TODO: database
+    public void SaveRace(MenuItem item) {
+        //onOptionsItemSelected(item.getItemId());
+        //saveRaceButton.setOnClickListener(
+        // new View.OnClickListener() {
+        //    @Override
+        //     public void onClick(View v) {
+        String inputAccel = gsonAccel.toJson(accelerationList);
+        String inputSpeed = gsonSpeed.toJson(speedList);
+//        String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
+        //TODO DATE
+        boolean isinserted = myDb.insertData("NothingForNow", inputAccel, chronoView.getText().toString(), inputSpeed);
+        if (isinserted) {
+            Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(TrackingActivity.this, "Error: Race Not Saved", Toast.LENGTH_LONG).show();
         }
 
-        //SETTINGS TOGGLE
-        checkSettings();
-
-        //Start Chrono, accel, speedometer
-        startChronometer();
-        startAccel();
-        startSpeedometer();
-
-        //RealTime line chart
-        lineChartFormat();
-
-        //Location Stuffs
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            provider = locationManager.getBestProvider(new Criteria(), false);
-            Location location = locationManager.getLastKnownLocation(provider);
-
-            if (gpsSetting) {
-
-                if (location == null) {
-
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-                    Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
-                }
-            }
-
-        //SaveRace();
-        //viewData();
-
-        //Loic
-//        //Create Bar chart
-//        la = (LinearLayout)findViewById(R.id.barchart);
-//        bar1 = drawChart(7,10);
-//        bar2 = drawChart(7,10);
-//        bar3 = drawChart(7,10);
-//        lin_acel_bar = drawChart(8,10);
-//        speed_bar = drawChart(3,10);
-//        time_bar = drawChart(5,5);
+        // }
+        // };
+        //);
     }
-
-//    public void viewData() {
+    //    public void viewData() {
 //        viewDataButton.setOnClickListener(
 //                new View.OnClickListener() {
 //
@@ -204,6 +191,265 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //        );
 //    }
 
+//End of Database Methods
+
+
+
+
+// "ON-" Methods
+    //Create, resume, pause
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tracking);
+
+        //Permissions
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bPermissionGranted = checkLocationPermission();
+        }
+        //Location Stuffs
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        provider = locationManager.getBestProvider(new Criteria(), false);
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        //SETTINGS TOGGLE
+        checkSettings();
+        if (gpsUISetting) {
+
+            if (location == null) {
+
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_LONG).show();
+            }
+        }
+        //Start Chrono, accel, speedometer
+        startChronometer();
+        startAccel();
+        startSpeedometer();
+
+        //RealTime line chart
+        lineChartFormat();
+
+
+        //DATABASE
+        //saveRaceButton = (Button) findViewById(R.id.saveRaceButton);
+        //viewDataButton = (Button) findViewById(R.id.viewDataButton);
+        accelerationList = new ArrayList<String>();
+        speedList = new ArrayList<String>();
+        myDb = new DatabaseHelper(this);
+
+        //SaveRace();
+        //viewData();
+
+
+        //Loic
+//        //Create Bar chart
+//        la = (LinearLayout)findViewById(R.id.barchart);
+//        bar1 = drawChart(7,10);
+//        bar2 = drawChart(7,10);
+//        bar3 = drawChart(7,10);
+//        lin_acel_bar = drawChart(8,10);
+//        speed_bar = drawChart(3,10);
+//        time_bar = drawChart(5,5);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bPermissionGranted = checkLocationPermission();
+        }
+
+        checkSettings();
+        checkSpeedometerTextSize();
+
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
+
+        //Check if there is a previous known location and if gps is enabled!
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if (gpsUISetting){
+            if (location == null){
+
+                if(!enabled) {
+                    showDialogGPS();
+                }
+                // request location update!!
+                else {
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_LONG).show();
+                }
+            }
+            else {
+                if(!enabled) {
+                    showDialogGPS();
+                }
+                else if(enabled && (locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null)){
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                }
+            }
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bPermissionGranted = checkLocationPermission();
+        }
+        mSensorManager.unregisterListener(this);
+        locationManager.removeUpdates(this);
+    }
+    //End of Create, resume, pause
+
+    //ON- "Changed"
+    @Override
+    public void onLocationChanged(Location location) {
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
+
+        if (location != null) {
+            Double lat = location.getLatitude();
+            Double lng = location.getLongitude();
+            Double alt = location.getAltitude();
+            double spd = (location.getSpeed()) * conversionRatioToKM; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
+
+            // rounding values to format "#.##"
+            double latt = Math.round(lat* 100.00)/100.00;
+            double lngi = Math.round(lng* 100.00)/100.00;
+            double alti = Math.round(alt* 100.00)/100.00;
+            double sped = Math.round(spd* 100.00)/100.00;
+
+            latView.setText("Latitude : " + Double.toString(latt));
+            lngView.setText("Longitude : " + Double.toString(lngi));
+            altView.setText("Altitude : " + Double.toString(alti) + "m");
+            spdView.setText("Speed : " + Double.toString(sped) + " km/h");
+            speedList.add(Double.toString(sped));
+
+            if(speedUnitSetting){
+                sped = sped * conversionFromKmToMi;
+                spdView.setText("Speed : " + Double.toString(sped) + " mph");
+            }
+            speedometer.setSpeed(sped);
+        }
+        else{
+            LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+            boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            if(gpsUISetting) {
+                if(!enabled) {
+                    showDialogGPS();
+                }
+                else Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 4 ", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        //Loic
+        // speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
+    }
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        //Rounding
+        DecimalFormat df = new DecimalFormat("##.##");
+        df.setRoundingMode(RoundingMode.DOWN);
+
+        //Gravity filter
+        gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
+        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
+        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+
+        //Acceleration components after gravity has been filtered
+        linear_acceleration[0] = event.values[0] - gravity[0];
+        linear_acceleration[1] = event.values[1] - gravity[1];
+        linear_acceleration[2] = event.values[2] - gravity[2];
+
+        //Calculate Linear Acceleration
+        double lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
+
+        //Database
+        accelerationList.add(String.valueOf(lin_accel));
+
+        // rounding values to format "#.##"
+        double x = Math.round(event.values[2] * 100.0)/100.0;
+        double y = Math.round(event.values[1] * 100.0)/100.0;
+        double z = Math.round(event.values[0] * 100.0)/100.0;
+        double accel = Math.round(lin_accel * 100.0)/10.0;
+
+        //Send values to txt display
+        accView.setText("Accel : " + accel);
+        xrotView.setText("Orientation X : " + x);
+        yrotView.setText("Orientation Y : " + y);
+        zrotView.setText("Orientation Z : " + z );
+
+        //Send value to entry function for plotting (on REAL time line chart)
+        addEntry(lin_accel);
+
+        // Loic
+//        // Bar charts
+//        int temp_x = Math.round(event.values[2] * 10);
+//        int temp_y = Math.round(event.values[1] * 10);
+//        int temp_z = Math.round(event.values[0] * 10);
+//        int temp_A = (int)Math.round((Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]))*100);
+//
+//        bar1.setLayoutParams(new LinearLayout.LayoutParams(90, temp_x));
+//        bar2.setLayoutParams(new LinearLayout.LayoutParams(90, temp_y));
+//        bar3.setLayoutParams(new LinearLayout.LayoutParams(90, temp_z));
+//        lin_acel_bar.setLayoutParams(new LinearLayout.LayoutParams(90, temp_A));
+    }
+    //End of ON- "Changed"
+
+    //Not yet used
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+    @Override
+    public void onProviderEnabled(String provider) {
+    }
+    @Override
+    public void onProviderDisabled(String provider) {
+    }
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+    //End of Not yet used
+//End "ON-" Methods
+
+//Creating options menu and items
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.settings, menu);
+    MenuItem save = menu.findItem(R.id.menu_save);//Display save option
+        save.setVisible(true);
+    MenuItem play = menu.findItem(R.id.menu_play);//Display play option
+        play.setVisible(true);
+    MenuItem pause = menu.findItem(R.id.menu_pause);//Display pause option
+        pause.setVisible(true);
+
+    return true;
+}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_save:
+                SaveRace(item); // Save race data to database
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+//end of Options menu and items
+
+// Alert dialog and dialog popup in case Location service is Disabled
     public void showMessage(String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -211,31 +457,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         builder.setMessage(Message);
         builder.show();
     }
-
-// TODO: database
-    public void SaveRace(MenuItem item) {
-        //onOptionsItemSelected(item.getItemId());
-        //saveRaceButton.setOnClickListener(
-               // new View.OnClickListener() {
-                //    @Override
-               //     public void onClick(View v) {
-                        String inputAccel = gsonAccel.toJson(accelerationList);
-                        String inputSpeed = gsonSpeed.toJson(speedList);
-                        String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-
-                        boolean isinserted = myDb.insertData(" TO DO!!!", inputAccel, chronoView.getText().toString(), inputSpeed, date);
-                        if (isinserted) {
-                            Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(TrackingActivity.this, "Error: Race Not Saved", Toast.LENGTH_LONG).show();
-                        }
-
-                   // }
-               // };
-        //);
-    }
-
-    // Show a dialog to the user requesting that GPS be enabled
     private void showDialogGPS() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
@@ -256,250 +477,70 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         AlertDialog alert = builder.create();
         alert.show();
     }
+    public boolean checkLocationPermission(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
-    //Check the settings
-    public void checkSettings(){
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        gpsSetting  = sp.getBoolean("prefGpsUI", false);
-        accelSetting = sp.getBoolean("prefAccelerometerUI", false);
-        timerSetting = sp.getBoolean("prefTimerUI", false);
-        lineGraphSetting = sp.getBoolean("prefLineGraphUI", false);
-        speedometerSetting = sp.getBoolean("prefSpeedometer", false);
-        backgroundColorSetting = sp.getBoolean("prefBackgroundColor", false);
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
 
-        gpsTextSizeSetting = sp.getString("prefGPSTextSize", "25");
-        accelTextSizeSetting = sp.getString("prefAccelTextSize", "25");
-        chronTextSizeSetting = sp.getString("prefChronoTextSize", "25");
+                //Prompt the user once explanation has been shown
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
 
-
-        //Displayed or not
-        //GPS
-            gpsTitle = (TextView) findViewById(R.id.gpsView);
-            latView = (TextView) findViewById(R.id.latitudeView);
-            lngView = (TextView) findViewById(R.id.longitudeView);
-            altView = (TextView) findViewById(R.id.altitudeView);
-            spdView = (TextView) findViewById(R.id.speedView);
-
-            if(gpsSetting){
-                gpsTitle.setVisibility(View.VISIBLE);
-                latView.setVisibility(View.VISIBLE);
-                lngView.setVisibility(View.VISIBLE);
-                altView.setVisibility(View.VISIBLE);
-                spdView.setVisibility(View.VISIBLE);
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
             }
-
-            else{
-                gpsTitle.setVisibility(View.GONE);
-                latView.setVisibility(View.GONE);
-                lngView.setVisibility(View.GONE);
-                altView.setVisibility(View.GONE);
-                spdView.setVisibility(View.GONE);
-            }
-            //ACCEL
-            accTitle = (TextView) findViewById(R.id.accelTitle);
-            accView = (TextView) findViewById(R.id.accelView);
-            compAccTitle = (TextView) findViewById(R.id.compAccView);
-            xrotView = (TextView) findViewById(R.id.xrotationView);
-            yrotView = (TextView) findViewById(R.id.yrotationView);
-            zrotView = (TextView) findViewById(R.id.zrotationView);
-
-            if(accelSetting){
-                accTitle.setVisibility(View.VISIBLE);
-                accView.setVisibility(View.VISIBLE);
-                compAccTitle.setVisibility(View.VISIBLE);
-                xrotView.setVisibility(View.VISIBLE);
-                yrotView.setVisibility(View.VISIBLE);
-                zrotView.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                accTitle.setVisibility(View.GONE);
-                accView.setVisibility(View.GONE);
-                compAccTitle.setVisibility(View.GONE);
-                xrotView.setVisibility(View.GONE);
-                yrotView.setVisibility(View.GONE);
-                zrotView.setVisibility(View.GONE);
-            }
-
-            //TIMER
-            timerTitle = (TextView) findViewById(R.id.timerTitle);
-            timerView = (TextView) findViewById(R.id.timerView);
-            chronoView = (TextView) findViewById(R.id.chronometer);
-            lapView = (TextView) findViewById(R.id.lapView);
-
-            if(timerSetting){
-                timerTitle.setVisibility(View.VISIBLE);
-                timerView.setVisibility(View.VISIBLE);
-                chronoView.setVisibility(View.VISIBLE);
-                lapView.setVisibility(View.VISIBLE);
-            }
-            else{
-                timerTitle.setVisibility(View.GONE);
-                timerView.setVisibility(View.GONE);
-                chronoView.setVisibility(View.GONE);
-                lapView.setVisibility(View.GONE);
-            }
-
-
-            //LineGraph
-            lineGraphView = (LineChart) findViewById(R.id.chart1);
-
-            if(lineGraphSetting)
-                lineGraphView.setVisibility(View.VISIBLE);
-            else
-                lineGraphView.setVisibility(View.GONE);
-
-            //Speedometer
-            speedometerView = (SpeedometerGauge) findViewById(R.id.speedometer);
-            if (speedometerSetting)
-                speedometerView.setVisibility(View.VISIBLE);
-            else speedometerView.setVisibility(View.GONE);
-
-        //Text Sizes
-
-            //GPS
-            switch(gpsTextSizeSetting)
-            {
-                case "25":
-                    gpsTitle.setTextSize(25);
-                    latView.setTextSize(25);
-                    lngView.setTextSize(25);
-                    altView.setTextSize(25);
-                    spdView.setTextSize(25);
-                    break;
-
-                case "40":
-                    gpsTitle.setTextSize(40);
-                    latView.setTextSize(40);
-                    lngView.setTextSize(40);
-                    altView.setTextSize(40);
-                    spdView.setTextSize(40);
-                    break;
-
-                case "50":
-                    gpsTitle.setTextSize(50);
-                    latView.setTextSize(50);
-                    lngView.setTextSize(50);
-                    altView.setTextSize(50);
-                    spdView.setTextSize(50);
-                    break;
-            }
-            //Chrono text size
-            switch(chronTextSizeSetting)
-            {
-                case "25":
-                    timerTitle.setTextSize(25);
-                    timerView.setTextSize(25);
-                    chronoView.setTextSize(25);
-                    lapView.setTextSize(25);
-                    break;
-
-                case "40":
-                    timerTitle.setTextSize(40);
-                    timerView.setTextSize(40);
-                    chronoView.setTextSize(40);
-                    lapView.setTextSize(40);
-                    break;
-
-                case "50":
-                    timerTitle.setTextSize(50);
-                    timerView.setTextSize(50);
-                    chronoView.setTextSize(50);
-                    lapView.setTextSize(50);
-                    break;
-            }
-            //Accel
-            switch(accelTextSizeSetting)
-            {
-                case "25":
-                    accTitle.setTextSize(25);
-                    accView.setTextSize(25);
-                    compAccTitle.setTextSize(25);
-                    xrotView.setTextSize(25);
-                    yrotView.setTextSize(25);
-                    zrotView.setTextSize(25);
-                    break;
-
-                case "40":
-                    accTitle.setTextSize(40);
-                    accView.setTextSize(40);
-                    compAccTitle.setTextSize(40);
-                    xrotView.setTextSize(40);
-                    yrotView.setTextSize(40);
-                    zrotView.setTextSize(40);
-                    break;
-
-                case "50":
-                    accTitle.setTextSize(50);
-                    accView.setTextSize(50);
-                    compAccTitle.setTextSize(50);
-                    xrotView.setTextSize(50);
-                    yrotView.setTextSize(50);
-                    zrotView.setTextSize(50);
-                    break;
-            }
-
-        //background Color
-        mainLayout = (ScrollView) findViewById(R.id.scrollView);
-        if(backgroundColorSetting)
-        {
-            mainLayout.setBackgroundColor(Color.BLACK);
-
-            //GPS
-            gpsTitle.setTextColor(Color.WHITE);
-            latView.setTextColor(Color.WHITE);
-            lngView.setTextColor(Color.WHITE);
-            altView.setTextColor(Color.WHITE);
-            spdView.setTextColor(Color.WHITE);
-
-            //accel
-            accTitle.setTextColor(Color.WHITE);
-            accView.setTextColor(Color.WHITE);
-            compAccTitle.setTextColor(Color.WHITE);
-            xrotView.setTextColor(Color.WHITE);
-            yrotView.setTextColor(Color.WHITE);
-            zrotView.setTextColor(Color.WHITE);
-
-            //Chrono
-            timerTitle.setTextColor(Color.WHITE);
-            timerView.setTextColor(Color.WHITE);
-            chronoView.setTextColor(Color.WHITE);
-            lapView.setTextColor(Color.WHITE);
-
+            return false;
+        } else {
+            return true;
         }
-        else
-        {
-            mainLayout.setBackgroundColor(Color.WHITE);
-
-            //GPS
-            gpsTitle.setTextColor(Color.BLACK);
-            latView.setTextColor(Color.BLACK);
-            lngView.setTextColor(Color.BLACK);
-            altView.setTextColor(Color.BLACK);
-            spdView.setTextColor(Color.BLACK);
-
-            //accel
-            accTitle.setTextColor(Color.BLACK);
-            accView.setTextColor(Color.BLACK);
-            compAccTitle.setTextColor(Color.BLACK);
-            xrotView.setTextColor(Color.BLACK);
-            yrotView.setTextColor(Color.BLACK);
-            zrotView.setTextColor(Color.BLACK);
-
-            //Chrono
-            timerTitle.setTextColor(Color.BLACK);
-            timerView.setTextColor(Color.BLACK);
-            chronoView.setTextColor(Color.BLACK);
-            lapView.setTextColor(Color.BLACK);
-        }
-
-
-
-
     }
+//End of Alerts
 
-    //Line Chart Methods
+
+//getLocation, Chronometer, Accel, position tracking methods
+    public void getLocation(View view) {
+    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        bPermissionGranted = checkLocationPermission();
+    }
+    Location location = locationManager.getLastKnownLocation(provider);
+
+    //If no previous location saved, tell user to wait for gps to load
+    if (location == null){
+        // request location update!!
+        locationManager.requestLocationUpdates (LocationManager.GPS_PROVIDER, 0, 0, this);
+        Toast.makeText(getApplicationContext(), "GPS is loading. One moment for GPS please!", Toast.LENGTH_LONG).show();
+    }
+    onLocationChanged(location);
+}
+    public void startChronometer() {
+    Chronometer c = (Chronometer) findViewById(R.id.chronometer);
+    c.setFormat("%s");
+    c.start();
+}
+    public void startAccel() {
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
+        mGyroscope  = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+    }
+    //Not yet used
+    public void startPositionTracking(){
+    }
+//End of getLocation, Chronometer, Accel, position tracking methods
+
+
+//Line Chart Methods
     public void lineChartFormat(){
         //RealTime line chart
         mChart = (LineChart) findViewById(R.id.chart1);
@@ -611,33 +652,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         set.setDrawValues(false);
         return set;
     }
-    //**POSSIBLE SETTINGS FOR CHARTS, NOT CONFIGURED YET**
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.realtime, menu);
-//        return true;
-//    }
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            case R.id.actionAdd: {
-//                addEntry();
-//                break;
-//            }
-//            case R.id.actionClear: {
-//                mChart.clearValues();
-//                Toast.makeText(this, "Chart cleared!", Toast.LENGTH_SHORT).show();
-//                break;
-//            }
-////            case R.id.actionFeedMultiple: {
-////                feedMultiple();
-////                break;
-////            }
-//        }
-//        return true;
-//    }
-
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
         Log.i("Entry selected", e.toString());
@@ -646,277 +660,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     public void onNothingSelected() {
         Log.i("Nothing selected", "Nothing selected.");
     }
-    //End of Line Chart Methods
+//End of Line Chart Methods
 
-    //Chronometer, Accel, position tracking methods
-    public void startChronometer() {
-
-            Chronometer c = (Chronometer) findViewById(R.id.chronometer);
-            c.setFormat("%s");
-            c.start();
-    }
-    public void startAccel() {
-
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-        mGyroscope  = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-
-    }
-    public void startPositionTracking(){
-    }
-    //End of Chronometer, Accel, position tracking methods
-
-    //Allows the settings to be accessed from tracking screen
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.settings, menu);
-        MenuItem save = menu.findItem(R.id.menu_save);
-        MenuItem play = menu.findItem(R.id.menu_play);
-        MenuItem pause = menu.findItem(R.id.menu_pause);
-        save.setVisible(true);
-        play.setVisible(true);
-        pause.setVisible(true);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-
-//            case R.id.menu_settings:
-//                Intent i = new Intent(this, UserSettingActivity.class);
-//                startActivityForResult(i, RESULT_SETTINGS);
-//                break;
-
-            case R.id.menu_save:
-                SaveRace(item);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
-
-
-    }
-    //end of settings
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            bPermissionGranted = checkLocationPermission();
-        }
-
-        checkSettings();
-        checkSpeedometerTextSize();
-
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-        mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
-
-        //Check if there is a previous known location and if gps is enabled!
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-        if (gpsSetting){
-            if (location == null){
-
-                if(!enabled) {
-                    showDialogGPS();
-                }
-                // request location update!!
-                else {
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 2 ", Toast.LENGTH_LONG).show();
-                }
-            }
-            else {
-                if(!enabled) {
-                    showDialogGPS();
-                }
-                else if(enabled && (locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null)){
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 3", Toast.LENGTH_LONG).show();
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-                }
-            }
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            bPermissionGranted = checkLocationPermission();
-        }
-        mSensorManager.unregisterListener(this);
-        locationManager.removeUpdates(this);
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-
-
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
-
-        if (location != null) {
-            Double lat = location.getLatitude();
-            Double lng = location.getLongitude();
-            Double alt = location.getAltitude();
-            double spd = (location.getSpeed()) * conversionRatioToKM; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
-
-            // rounding values to format "#.##"
-            double latt = Math.round(lat* 100.00)/100.00;
-            double lngi = Math.round(lng* 100.00)/100.00;
-            double alti = Math.round(alt* 100.00)/100.00;
-            double sped = Math.round(spd* 100.00)/100.00;
-
-            latView.setText("Latitude : " + Double.toString(latt));
-            lngView.setText("Longitude : " + Double.toString(lngi));
-            altView.setText("Altitude : " + Double.toString(alti) + "m");
-            spdView.setText("Speed : " + Double.toString(sped) + " km/h");
-            speedList.add(Double.toString(sped));
-
-            if(speedUnitSetting){
-                spd = spd * conversionFromKmToMi;
-                spdView.setText("Speed : " + Double.toString(sped) + " mph");
-            }
-
-            speedometer.setSpeed(sped);
-        }
-
-        else{
-            LocationManager mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-            boolean enabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-            if(gpsSetting) {
-                if(!enabled) {
-                    showDialogGPS();
-                }
-                else Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 4 ", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        //Loic
-       // speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-    }
-
-    public void getLocation(View view) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            bPermissionGranted = checkLocationPermission();
-        }
-        Location location = locationManager.getLastKnownLocation(provider);
-
-        //If no previous location saved, tell user to wait for gps to load
-        if (location == null){
-            // request location update!!
-            locationManager.requestLocationUpdates (LocationManager.GPS_PROVIDER, 0, 0, this);
-            Toast.makeText(getApplicationContext(), "GPS is loading. One moment for GPS please!", Toast.LENGTH_LONG).show();
-        }
-        onLocationChanged(location);
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-
-        DecimalFormat df = new DecimalFormat("##.##");
-        df.setRoundingMode(RoundingMode.DOWN);
-
-        gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
-        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
-        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
-
-        linear_acceleration[0] = event.values[0] - gravity[0];
-        linear_acceleration[1] = event.values[1] - gravity[1];
-        linear_acceleration[2] = event.values[2] - gravity[2];
-
-        double  lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
-
-        accelerationList.add(String.valueOf(lin_accel));
-
-        // rounding values to format "#.##"
-        double x = Math.round(event.values[2] * 100.0)/100.0;
-        double y = Math.round(event.values[1] * 100.0)/100.0;
-        double z = Math.round(event.values[0] * 100.0)/100.0;
-        double accel = Math.round(lin_accel * 100.0)/10.0;
-
-        //Send values to txt display
-        accView.setText("Accel : " + accel);
-        xrotView.setText("Orientation X : " + x);
-        yrotView.setText("Orientation Y : " + y);
-        zrotView.setText("Orientation Z : " + z );
-
-        //Send value to entry function for plotting
-        addEntry(lin_accel);
-
-        // Loic
-//        // Bar charts
-//        int temp_x = Math.round(event.values[2] * 10);
-//        int temp_y = Math.round(event.values[1] * 10);
-//        int temp_z = Math.round(event.values[0] * 10);
-//        int temp_A = (int)Math.round((Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]))*100);
-//
-//        bar1.setLayoutParams(new LinearLayout.LayoutParams(90, temp_x));
-//        bar2.setLayoutParams(new LinearLayout.LayoutParams(90, temp_y));
-//        bar3.setLayoutParams(new LinearLayout.LayoutParams(90, temp_z));
-//        lin_acel_bar.setLayoutParams(new LinearLayout.LayoutParams(90, temp_A));
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
-
-
-
-    public boolean checkLocationPermission(){
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                // Show an expanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-                //Prompt the user once explanation has been shown
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
-            }
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-
+//Speedometer Method
     public void startSpeedometer() {
 
         speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
@@ -940,6 +686,263 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         checkSpeedometerTextSize();
 
     }
+
+//Settings Methods
+    //Check ALL the settings
+    public void checkSettings(){
+
+        //UI Display
+        checkGpsUISetting();
+        checkAccelUISetting();
+        checkTimerUISetting();
+        checkLineGraphUISetting();
+        checkSpeedometerUISetting();
+
+        //Text Sizes
+        checkGPSTextSizeSetting();
+        checkAccelTextSizeSetting();
+        checkChronoTextSizeSetting();
+
+        //Background
+        checkBackgroundColorSetting();
+    }
+    //Individual Settings methods
+    public void checkGpsUISetting() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        gpsUISetting = sp.getBoolean("prefGpsUI", false);
+        //GPS
+        gpsTitle = (TextView) findViewById(R.id.gpsView);
+        latView = (TextView) findViewById(R.id.latitudeView);
+        lngView = (TextView) findViewById(R.id.longitudeView);
+        altView = (TextView) findViewById(R.id.altitudeView);
+        spdView = (TextView) findViewById(R.id.speedView);
+
+        if (gpsUISetting) {
+            gpsTitle.setVisibility(View.VISIBLE);
+            latView.setVisibility(View.VISIBLE);
+            lngView.setVisibility(View.VISIBLE);
+            altView.setVisibility(View.VISIBLE);
+            spdView.setVisibility(View.VISIBLE);
+        } else {
+            gpsTitle.setVisibility(View.GONE);
+            latView.setVisibility(View.GONE);
+            lngView.setVisibility(View.GONE);
+            altView.setVisibility(View.GONE);
+            spdView.setVisibility(View.GONE);
+        }
+    }
+    public void checkAccelUISetting() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        accelUISetting = sp.getBoolean("prefAccelerometerUI", false);
+
+        accTitle = (TextView) findViewById(R.id.accelTitle);
+        accView = (TextView) findViewById(R.id.accelView);
+        compAccTitle = (TextView) findViewById(R.id.compAccView);
+        xrotView = (TextView) findViewById(R.id.xrotationView);
+        yrotView = (TextView) findViewById(R.id.yrotationView);
+        zrotView = (TextView) findViewById(R.id.zrotationView);
+
+        if (accelUISetting) {
+            accTitle.setVisibility(View.VISIBLE);
+            accView.setVisibility(View.VISIBLE);
+            compAccTitle.setVisibility(View.VISIBLE);
+            xrotView.setVisibility(View.VISIBLE);
+            yrotView.setVisibility(View.VISIBLE);
+            zrotView.setVisibility(View.VISIBLE);
+        } else {
+            accTitle.setVisibility(View.GONE);
+            accView.setVisibility(View.GONE);
+            compAccTitle.setVisibility(View.GONE);
+            xrotView.setVisibility(View.GONE);
+            yrotView.setVisibility(View.GONE);
+            zrotView.setVisibility(View.GONE);
+        }
+    }
+    public void checkTimerUISetting() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        timerUISetting = sp.getBoolean("prefTimerUI", false);
+
+        timerTitle = (TextView) findViewById(R.id.timerTitle);
+        timerView = (TextView) findViewById(R.id.timerView);
+        chronoView = (TextView) findViewById(R.id.chronometer);
+        lapView = (TextView) findViewById(R.id.lapView);
+
+        if (timerUISetting) {
+            timerTitle.setVisibility(View.VISIBLE);
+            timerView.setVisibility(View.VISIBLE);
+            chronoView.setVisibility(View.VISIBLE);
+            lapView.setVisibility(View.VISIBLE);
+        } else {
+            timerTitle.setVisibility(View.GONE);
+            timerView.setVisibility(View.GONE);
+            chronoView.setVisibility(View.GONE);
+            lapView.setVisibility(View.GONE);
+        }
+    }
+    public void checkLineGraphUISetting(){
+
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        lineGraphUISetting = sp.getBoolean("prefLineGraphUI", false);
+        lineGraphView = findViewById(R.id.chart1);
+
+        if(lineGraphUISetting)
+            lineGraphView.setVisibility(View.VISIBLE);
+        else
+            lineGraphView.setVisibility(View.GONE);
+    }
+    public void checkSpeedometerUISetting() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        speedometerUISetting = sp.getBoolean("prefSpeedometer", false);
+        speedometerView =  findViewById(R.id.speedometer);
+
+        if (speedometerUISetting)
+            speedometerView.setVisibility(View.VISIBLE);
+        else speedometerView.setVisibility(View.GONE);
+    }
+    public void checkGPSTextSizeSetting(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        gpsTextSizeSetting = sp.getString("prefGPSTextSize", "25");
+
+        switch(gpsTextSizeSetting)
+        {
+            case "25":
+                gpsTitle.setTextSize(25);
+                latView.setTextSize(25);
+                lngView.setTextSize(25);
+                altView.setTextSize(25);
+                spdView.setTextSize(25);
+                break;
+
+            case "40":
+                gpsTitle.setTextSize(40);
+                latView.setTextSize(40);
+                lngView.setTextSize(40);
+                altView.setTextSize(40);
+                spdView.setTextSize(40);
+                break;
+
+            case "50":
+                gpsTitle.setTextSize(50);
+                latView.setTextSize(50);
+                lngView.setTextSize(50);
+                altView.setTextSize(50);
+                spdView.setTextSize(50);
+                break;
+        }
+    }
+    public void checkAccelTextSizeSetting(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        accelTextSizeSetting = sp.getString("prefAccelTextSize", "25");
+        switch(accelTextSizeSetting)
+        {
+            case "25":
+                accTitle.setTextSize(25);
+                accView.setTextSize(25);
+                compAccTitle.setTextSize(25);
+                xrotView.setTextSize(25);
+                yrotView.setTextSize(25);
+                zrotView.setTextSize(25);
+                break;
+
+            case "40":
+                accTitle.setTextSize(40);
+                accView.setTextSize(40);
+                compAccTitle.setTextSize(40);
+                xrotView.setTextSize(40);
+                yrotView.setTextSize(40);
+                zrotView.setTextSize(40);
+                break;
+
+            case "50":
+                accTitle.setTextSize(50);
+                accView.setTextSize(50);
+                compAccTitle.setTextSize(50);
+                xrotView.setTextSize(50);
+                yrotView.setTextSize(50);
+                zrotView.setTextSize(50);
+                break;
+        }
+
+    }
+    public void checkChronoTextSizeSetting(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        chronTextSizeSetting = sp.getString("prefChronoTextSize", "25");
+        switch(chronTextSizeSetting)
+        {
+            case "25":
+                timerTitle.setTextSize(25);
+                timerView.setTextSize(25);
+                chronoView.setTextSize(25);
+                lapView.setTextSize(25);
+                break;
+
+            case "40":
+                timerTitle.setTextSize(40);
+                timerView.setTextSize(40);
+                chronoView.setTextSize(40);
+                lapView.setTextSize(40);
+                break;
+
+            case "50":
+                timerTitle.setTextSize(50);
+                timerView.setTextSize(50);
+                chronoView.setTextSize(50);
+                lapView.setTextSize(50);
+                break;
+        }
+    }
+    public void checkBackgroundColorSetting(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        backgroundColorSetting = sp.getBoolean("prefBackgroundColor", false);
+
+        mainLayout = (ScrollView) findViewById(R.id.scrollView);
+        if(backgroundColorSetting)
+        {
+            mainLayout.setBackgroundColor(Color.BLACK);
+            //GPS
+            gpsTitle.setTextColor(Color.WHITE);
+            latView.setTextColor(Color.WHITE);
+            lngView.setTextColor(Color.WHITE);
+            altView.setTextColor(Color.WHITE);
+            spdView.setTextColor(Color.WHITE);
+            //accel
+            accTitle.setTextColor(Color.WHITE);
+            accView.setTextColor(Color.WHITE);
+            compAccTitle.setTextColor(Color.WHITE);
+            xrotView.setTextColor(Color.WHITE);
+            yrotView.setTextColor(Color.WHITE);
+            zrotView.setTextColor(Color.WHITE);
+            //Chrono
+            timerTitle.setTextColor(Color.WHITE);
+            timerView.setTextColor(Color.WHITE);
+            chronoView.setTextColor(Color.WHITE);
+            lapView.setTextColor(Color.WHITE);
+
+        }
+        else
+        {
+            mainLayout.setBackgroundColor(Color.WHITE);
+            //GPS
+            gpsTitle.setTextColor(Color.BLACK);
+            latView.setTextColor(Color.BLACK);
+            lngView.setTextColor(Color.BLACK);
+            altView.setTextColor(Color.BLACK);
+            spdView.setTextColor(Color.BLACK);
+            //accel
+            accTitle.setTextColor(Color.BLACK);
+            accView.setTextColor(Color.BLACK);
+            compAccTitle.setTextColor(Color.BLACK);
+            xrotView.setTextColor(Color.BLACK);
+            yrotView.setTextColor(Color.BLACK);
+            zrotView.setTextColor(Color.BLACK);
+            //Chrono
+            timerTitle.setTextColor(Color.BLACK);
+            timerView.setTextColor(Color.BLACK);
+            chronoView.setTextColor(Color.BLACK);
+            lapView.setTextColor(Color.BLACK);
+        }
+    }
     public void checkSpeedometerTextSize(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         speedometerTextSizeSetting = sp.getString("prefSpeedometerTextSize", "40");
@@ -962,6 +965,8 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         }
 
     }
+//End of Settings Methods
+
 //     Loic
 //    // Chart creation function
 //    private View drawChart(int color, int height) {
