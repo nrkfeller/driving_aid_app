@@ -61,33 +61,52 @@ public class RecordingsActivity extends AppCompatActivity {
         CustomAdapter recordingsAdapter = new CustomAdapter(this, arrayOfUsers);
         ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
         recordingsListView.setAdapter(recordingsAdapter);
+        grabAllData(recordingsListView);
 
- //TODO: OnClickListener
+        //TODO: OnClickListener
         recordingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                       @Override
                                                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                          String recording = String.valueOf(parent.getItemAtPosition(position));
-                                                          Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
-                                                          Intent intent = new Intent(RecordingsActivity.this, DatabaseItemActivity.class);
-                                                          startActivity(intent);
-                                                      }
+                  String recording = String.valueOf(parent.getItemAtPosition(position));
 
-                                                  }
+                  Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
+
+
+                  Bundle b = new Bundle();
+                  //Then, associate the string data stored in anystring with bundle key "myname"
+                                                          long ID = parent.getItemIdAtPosition(position);
+//                                                          Cursor c = myDb.getRow(recording);
+//                                                          String row = myDb.getRow(recording);
+                  b.putLong("ID", id);
+                  //Now, create an Intent object
+                  Intent intent = new Intent(RecordingsActivity.this, DatabaseItemActivity.class);
+
+                  //Pass bundle object b to the intent
+
+                  intent.putExtras(b);
+                  // and start second activity
+
+                  startActivity(intent);
+
+              }
+
+          }
         );
         //TODO: OnClickListener (LONG CLICK)
         recordingsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-                                                      @Override
-                                                      public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                                                        //  int recording = (int) parent.getItemAtPosition(position);
-                                                          String recording = String.valueOf(parent.getItemAtPosition(position));
-                                                          myDb.deleteByID(recording);
-                                                          Toast.makeText(getApplicationContext(), "Nothing For Now", Toast.LENGTH_SHORT).show();
-                                                          //updateList();
-                                                          //myDb.getAllData();
-                                                          return true;
-                                                      }
+                                                          @Override
+                                                          public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                                                              //  int recording = (int) parent.getItemAtPosition(position);
+                                                              String recording = String.valueOf(parent.getItemAtPosition(position));
+                                                              id = parent.getItemIdAtPosition(position);
+                                                              myDb.deleteData(recording);
+                                                              Toast.makeText(getApplicationContext(), "Nothing For Now", Toast.LENGTH_SHORT).show();
+                                                              //updateList();
+                                                              //myDb.getAllData();
+                                                              return true;
+                                                          }
 
-                                                  }
+                                                      }
         );
     }
 
@@ -111,12 +130,12 @@ public class RecordingsActivity extends AppCompatActivity {
             StringBuffer buffer = new StringBuffer();
             while (res.moveToNext()) {
 
-                databaseEntries.add("ID: " + res.getString(0));
+//                databaseEntries.add("ID: " + res.getString(0));
 //                databaseEntries.add("distance: " + res.getString(1));
 //                databaseEntries.add("acceleration: " + res.getFloat(2));
 //                databaseEntries.add("duration: " + res.getString(3));
 //                databaseEntries.add("speed: " + res.getString(4));
-//                databaseEntries.add("Date : " + res.getString(5));
+                databaseEntries.add("Date : " + res.getString(5));
             }
         } catch (Exception e) {
             Toast.makeText(RecordingsActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();

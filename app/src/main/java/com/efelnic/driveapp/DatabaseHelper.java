@@ -91,6 +91,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor getRow(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor stuff = db.rawQuery("select * from " + TABLE_NAME + " WHERE ID=" + id, null);
+
+//        if(stuff != null)
+//            stuff.moveToFirst();
+
+        return stuff;
+    }
+
 
     public void deleteEverything(){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -122,5 +133,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.close();
         }
     }
+
 
 }

@@ -26,6 +26,7 @@
         <activity android:name=".RecordingsActivity" />
         <activity android:name=".GraphTest" />
         <activity android:name=".AboutActivity" />
+        <activity android:name=".DatabaseItemActivity"/>
         <!-- <activity -->
         <!-- android:name=".PreferenceActivity" -->
         <!-- android:label="@string/title_activity_preference" -->
@@ -42,15 +43,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".DatabaseItemActivity"
-            android:label="@string/title_activity_database_item"
-            android:parentActivityName=".RecordingsActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.efelnic.driveapp.RecordingsActivity" />
-        </activity>
+
+
+
     </application>
 
 </manifest>

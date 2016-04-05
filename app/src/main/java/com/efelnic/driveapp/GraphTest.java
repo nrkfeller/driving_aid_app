@@ -21,10 +21,9 @@ public class GraphTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_test);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Boolean a = sp.getBoolean("prefGps", false);
 
-        if (a == true){
+
+
             ArrayList<Entry> entries = new ArrayList<>();
             entries.add(new Entry(4f, 0));
             entries.add(new Entry(8f, 1));
@@ -50,10 +49,7 @@ public class GraphTest extends AppCompatActivity {
             RadarData data = new RadarData(labels, dataSet);
             chart.setData(data);
             chart.setDescription("# of times Alice called Bob");
-        }
-        else{
-            //
-        }
+
 
     }
 

@@ -77,14 +77,14 @@ import com.google.gson.Gson;
 
 public class TrackingActivity extends MainActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
-//Location & Permission Vars
+    //Location & Permission Vars
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     boolean bPermissionGranted;
     LocationManager locationManager;
     String provider;
 
 
-//Database Vars
+    //Database Vars
     DatabaseHelper myDb;
     ArrayList<String> accelerationList;
     ArrayList<String> speedList;
@@ -95,7 +95,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
     Button viewDataButton;
 
-//Sensor Vars
+    //Sensor Vars
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
     private Sensor mGyroscope;
@@ -104,7 +104,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     float[] gravity = new float[3];
     float[] linear_acceleration = new float[3];
 
-//Different View Vars
+    //Different View Vars
     TextView gpsTitle, latView, lngView, altView, spdView, //gps + speed
             timerTitle, timerView, lapView, chronoView, // time + lap
             accTitle, accView, // lin accel
@@ -112,20 +112,20 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     View lineGraphView, speedometerView;//Line graph
     ScrollView mainLayout;
 
-//Conversion &
+    //Conversion &
     private final static double CONVERSION_METERSPERSECOND_TO_KMH = 3.6; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
     private final static double CONVERSION_KMH_TO_MPH = 0.62137; // KM/H to MPH
 
-//Settings Vars
+    //Settings Vars
     boolean gpsUISetting, accelUISetting, timerUISetting, lineGraphUISetting, speedometerUISetting, speedUnitSetting, backgroundColorSetting;
     String gpsTextSizeSetting, accelTextSizeSetting, chronTextSizeSetting, speedometerTextSizeSetting;
 
-//LineChart and Speedometer Vars.
+    //LineChart and Speedometer Vars.
     private SpeedometerGauge speedometer;
     private LineChart mChart;
     double time = 0; //used to add x-values in addEntry (for line chart)
 
-//Not Used
+    //Not Used
     private static final float NS2S = 1.0f / 1000000000.0f;
     private final float[] deltaRotationVector = new float[4];
     private float timestamp;
@@ -198,7 +198,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
 
 
-// "ON-" Methods
+    // "ON-" Methods
     //Create, resume, pause
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -427,19 +427,19 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     //End of Not yet used
 //End "ON-" Methods
 
-//Creating options menu and items
+    //Creating options menu and items
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    getMenuInflater().inflate(R.menu.settings, menu);
-    MenuItem save = menu.findItem(R.id.menu_save);//Display save option
+        getMenuInflater().inflate(R.menu.settings, menu);
+        MenuItem save = menu.findItem(R.id.menu_save);//Display save option
         save.setVisible(true);
-    MenuItem play = menu.findItem(R.id.menu_play);//Display play option
+        MenuItem play = menu.findItem(R.id.menu_play);//Display play option
         play.setVisible(true);
-    MenuItem pause = menu.findItem(R.id.menu_pause);//Display pause option
+        MenuItem pause = menu.findItem(R.id.menu_pause);//Display pause option
         pause.setVisible(true);
 
-    return true;
-}
+        return true;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -452,7 +452,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
 //end of Options menu and items
 
-// Alert dialog and dialog popup in case Location service is Disabled
+    // Alert dialog and dialog popup in case Location service is Disabled
     public void showMessage(String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -512,26 +512,26 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //End of Alerts
 
 
-//getLocation, Chronometer, Accel, position tracking methods
+    //getLocation, Chronometer, Accel, position tracking methods
     public void getLocation(View view) {
-    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        bPermissionGranted = checkLocationPermission();
-    }
-    Location location = locationManager.getLastKnownLocation(provider);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bPermissionGranted = checkLocationPermission();
+        }
+        Location location = locationManager.getLastKnownLocation(provider);
 
-    //If no previous location saved, tell user to wait for gps to load
-    if (location == null){
-        // request location update!!
-        locationManager.requestLocationUpdates (LocationManager.GPS_PROVIDER, 0, 0, this);
-        Toast.makeText(getApplicationContext(), "GPS is loading. One moment for GPS please!", Toast.LENGTH_SHORT).show();
+        //If no previous location saved, tell user to wait for gps to load
+        if (location == null){
+            // request location update!!
+            locationManager.requestLocationUpdates (LocationManager.GPS_PROVIDER, 0, 0, this);
+            Toast.makeText(getApplicationContext(), "GPS is loading. One moment for GPS please!", Toast.LENGTH_SHORT).show();
+        }
+        onLocationChanged(location);
     }
-    onLocationChanged(location);
-}
     public void startChronometer() {
-    Chronometer c = (Chronometer) findViewById(R.id.chronometer);
-    c.setFormat("%s");
-    c.start();
-}
+        Chronometer c = (Chronometer) findViewById(R.id.chronometer);
+        c.setFormat("%s");
+        c.start();
+    }
     public void startAccel() {
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
@@ -543,7 +543,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //End of getLocation, Chronometer, Accel, position tracking methods
 
 
-//Line Chart Methods
+    //Line Chart Methods
     public void lineChartFormat(){
         //RealTime line chart
         mChart = (LineChart) findViewById(R.id.chart1);
@@ -573,7 +573,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         // add empty data
         mChart.setData(data);
 
-       // Typeface tf = Typeface.createFromAsset(getAssets(), "");
+        // Typeface tf = Typeface.createFromAsset(getAssets(), "");
 
         // get the legend (only possible after setting data)
         Legend l = mChart.getLegend();
@@ -581,7 +581,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         // modify the legend ...
         // l.setPosition(LegendPosition.LEFT_OF_CHART);
         l.setForm(Legend.LegendForm.LINE);
-       // l.setTypeface(tf);
+        // l.setTypeface(tf);
         l.setTextColor(Color.WHITE);
 
         XAxis xl = mChart.getXAxis();
@@ -665,7 +665,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
 //End of Line Chart Methods
 
-//Speedometer Method
+    //Speedometer Method
     public void startSpeedometer() {
 
         speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
@@ -690,7 +690,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
     }
 
-//Settings Methods
+    //Settings Methods
     //Check ALL the settings
     public void checkSettings(){
 
