@@ -77,6 +77,7 @@ public class RecordingsActivity extends AppCompatActivity {
                                                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                           String recording = String.valueOf(parent.getItemAtPosition(position));
                                                           Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
+                                                         // Cursor c = myDb.getIdData();
 
                                                           //Send ID as a bundle through intent to next activity
                                                           Bundle b = new Bundle();
@@ -155,7 +156,32 @@ public class RecordingsActivity extends AppCompatActivity {
     }
 
 
+    public void grabEntryData(String date) {
 
+        try {
+
+            Cursor res = myDb.getIdData();
+//            if (res.getCount() == 0) {
+//                return;
+//            }
+
+            StringBuffer buffer = new StringBuffer();
+
+
+            while (res.moveToNext()) {
+
+//                databaseEntries.add("ID: " + res.getString(0));
+//                databaseEntries.add("distance: " + res.getString(1));
+//                databaseEntries.add("acceleration: " + res.getString(2));
+//                databaseEntries.add("duration: " + res.getString(3));
+//                databaseEntries.add("speed: " + res.getString(4));
+//                databaseEntries.add("Date : " + res.getString(5));
+            }
+        } catch (Exception e) {
+            Toast.makeText(RecordingsActivity.this, "Entry is Empty", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
 
 

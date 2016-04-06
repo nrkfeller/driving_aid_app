@@ -76,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getIdData(){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor result = db.query("select * from " + TABLE_NAME, new String[]{"id", "date"}, null, null, null, null, null);
+        Cursor result = db.query("select * from " + TABLE_NAME, new String[]{"ID", "DATE"}, null, null, null, null, null);
 
         return result;
     }
@@ -108,8 +108,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteEverything(){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        db.execSQL("DELETE FROM " + TABLE_NAME);
-
+        //db.execSQL("DELETE FROM " + TABLE_NAME);
+        //temporary way, until we need to delete individual items
+        db.execSQL("DROP TABLE " + TABLE_NAME);//Deletes entire table
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION FLOAT, DURATION TEXT, SPEED TEXT, DATE TEXT)"); //, DATE TEXT)"); //Creates emtpy table in order to restart ids
     }
 
     public Integer deleteData(String id){
