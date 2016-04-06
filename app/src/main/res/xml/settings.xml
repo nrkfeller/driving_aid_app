@@ -4,20 +4,20 @@
 <!--Not sure we're going to use these-->
     <!--<PreferenceCategory android:title="@string/pref_Database_Setting" >-->
         <!--<SwitchPreference-->
-            <!--android:defaultValue="false"-->
+            <!--android:defaultValue="true"-->
             <!--android:key="prefGpsData"-->
             <!--android:summary=""-->
             <!--android:title="@string/pref_gps" >-->
         <!--</SwitchPreference>-->
 
         <!--<SwitchPreference-->
-            <!--android:defaultValue="false"-->
+            <!--android:defaultValue="true"-->
             <!--android:key="prefTimerData"-->
             <!--android:title="@string/Chronometer" >-->
         <!--</SwitchPreference>-->
 
         <!--<SwitchPreference-->
-            <!--android:defaultValue="false"-->
+            <!--android:defaultValue="true"-->
             <!--android:key="prefAccelerometerData"-->
             <!--android:title="@string/pref_accelerometerUI" >-->
         <!--</SwitchPreference>-->
@@ -26,7 +26,7 @@
 
     <PreferenceCategory android:title="@string/pref_UI_Setting" >
         <SwitchPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="prefGpsUI"
             android:summary=""
             android:title="@string/pref_gps" >
@@ -34,25 +34,25 @@
         </SwitchPreference>
 
         <SwitchPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="prefTimerUI"
             android:title="@string/Chronometer" >
         </SwitchPreference>
 
         <SwitchPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="prefAccelerometerUI"
             android:title="@string/pref_accelerometerUI" >
         </SwitchPreference>
 
         <SwitchPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="prefLineGraphUI"
             android:title="@string/prefLineGraph" >
         </SwitchPreference>
 
         <SwitchPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="prefSpeedometer"
             android:title="@string/pref_speedometer" >
         </SwitchPreference>

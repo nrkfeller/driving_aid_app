@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class DatabaseItemActivity extends AppCompatActivity {
 
     ListView myListView;
-
     DatabaseHelper myDb;
 
 
@@ -26,26 +25,21 @@ public class DatabaseItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database_item);
+
         myListView = (ListView) findViewById(R.id.recordingItemListView);
         myDb = new DatabaseHelper(this);
 
         grabEntryData(myListView);
 
-
-
     }
 
     public void grabEntryData(View view) {
         myListView = (ListView) findViewById(R.id.recordingItemListView);
-
-
-
         final ArrayList<String> databaseEntries = new ArrayList<String>();
-
 
         //Now, you need to get the data from the bundle
         Bundle extras = getIntent().getExtras();
-        //Finally, get the value of the string data associated with key named "myname"
+        //Finally, get the value of the string data associated with key named "ID"
         long id = extras.getLong("ID");
         String s = String.valueOf(id);
 
@@ -60,8 +54,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
 
 
             while (res.moveToNext()) {
-
-//                databaseEntries.add("ID: " + res.getString(0));
                 databaseEntries.add("distance: " + res.getString(1));
                 databaseEntries.add("acceleration: " + res.getString(2));
                 databaseEntries.add("duration: " + res.getString(3));

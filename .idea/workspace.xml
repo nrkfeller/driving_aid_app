@@ -13,15 +13,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="428bc14b-5fb2-4053-9b6d-c383ea5aa0ec" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_database_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_database_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" />
     </list>
     <ignored path="driving_aid_app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,10 +60,20 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="65" column="69" selection-start-line="65" selection-start-column="69" selection-end-line="65" selection-end-column="69" />
+              <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/settings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.35915494">
+              <caret line="98" column="39" selection-start-line="98" selection-start-column="39" selection-end-line="98" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,9 +82,11 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="142" column="70" selection-start-line="142" selection-start-column="70" selection-end-line="142" selection-end-column="70" />
+              <caret line="50" column="38" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#onStart#0;class#RecordingsActivity#0" expanded="false" />
+                <element signature="method#onStop#0;class#RecordingsActivity#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -91,21 +98,21 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.137931">
-              <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+            <state vertical-scroll-proportion="-0.5862069">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding>
-                <element signature="e#650#683#0" expanded="true" />
-                <element signature="e#712#747#0" expanded="true" />
+                <element signature="e#294#327#0" expanded="true" />
+                <element signature="e#356#391#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.71057516">
-              <caret line="325" column="49" selection-start-line="325" selection-start-column="49" selection-end-line="325" selection-end-column="49" />
+            <state vertical-scroll-proportion="-9.689655">
+              <caret line="319" column="0" selection-start-line="319" selection-start-column="0" selection-end-line="319" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1733,10 +1740,11 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/GraphTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseHelper.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_database_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_database_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" />
       </list>
     </option>
   </component>
@@ -1783,6 +1791,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Gradle Scripts" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="driving_aid_app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xml" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2034,7 +2060,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3652822" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3652822" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44621938" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -2073,14 +2099,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java</url>
-          <line>64</line>
-          <properties />
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -2115,6 +2133,8 @@
           <caret line="144" column="5" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#onStart#0;class#RecordingsActivity#0" expanded="false" />
+            <element signature="method#onStop#0;class#RecordingsActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2127,8 +2147,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
-            <element signature="e#650#683#0" expanded="true" />
-            <element signature="e#712#747#0" expanded="true" />
+            <element signature="e#294#327#0" expanded="true" />
+            <element signature="e#356#391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2174,6 +2194,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_database_item.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5862069">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="e#294#327#0" expanded="true" />
+            <element signature="e#356#391#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.689655">
+          <caret line="319" column="0" selection-start-line="319" selection-start-column="0" selection-end-line="319" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="38" selection-start-line="50" selection-start-column="38" selection-end-line="50" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onStart#0;class#RecordingsActivity#0" expanded="false" />
+            <element signature="method#onStop#0;class#RecordingsActivity#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2184,44 +2238,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="142" column="70" selection-start-line="142" selection-start-column="70" selection-end-line="142" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="69" selection-start-line="65" selection-start-column="69" selection-end-line="65" selection-end-column="69" />
+          <caret line="66" column="44" selection-start-line="66" selection-start-column="44" selection-end-line="66" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_database_item.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/xml/settings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.137931">
-          <caret line="19" column="39" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
-          <folding>
-            <element signature="e#650#683#0" expanded="true" />
-            <element signature="e#712#747#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.71057516">
-          <caret line="325" column="49" selection-start-line="325" selection-start-column="49" selection-end-line="325" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.35915494">
+          <caret line="98" column="39" selection-start-line="98" selection-start-column="39" selection-end-line="98" selection-end-column="39" />
           <folding />
         </state>
       </provider>
