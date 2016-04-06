@@ -63,7 +63,7 @@ public class DatabaseItemActivity extends AppCompatActivity {
 
 //                databaseEntries.add("ID: " + res.getString(0));
                 databaseEntries.add("distance: " + res.getString(1));
-                databaseEntries.add("acceleration: " + res.getFloat(2));
+                databaseEntries.add("acceleration: " + res.getString(2));
                 databaseEntries.add("duration: " + res.getString(3));
                 databaseEntries.add("speed: " + res.getString(4));
                 databaseEntries.add("Date : " + res.getString(5));

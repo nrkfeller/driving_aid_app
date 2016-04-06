@@ -50,10 +50,18 @@ public class RecordingsActivity extends AppCompatActivity {
 //        String testing = myDb.getRowcol(2, 5);
 //        System.out.println(testing);
 
-        queryButton = (Button) findViewById(R.id.queryButton);
+        //queryButton = (Button) findViewById(R.id.queryButton);
         deleteButton = (Button) findViewById(R.id.deleteButton);
 
-//        String[] recordings = {"1", "2", "3"};
+//        // testing string manipulation (useful for data retrieval and plotting)
+//        String testings_manipulations = "[\"0.1234\",\"5.678\"]";
+//        String test1 = testings_manipulations.replace("\"", "");
+//        String test2 = test1.replace("[", "");
+//        String test3 = test2.replace("]", "");
+//
+//        String[] recordings = {"1", "2", "3", testings_manipulations, test1, test2, test3 };
+
+
 //        CustomAdapter recordingsAdapter = new CustomAdapter(this, recordings);
         // Construct the data source
         ArrayList<User> arrayOfUsers = new ArrayList<User>();
@@ -132,7 +140,7 @@ public class RecordingsActivity extends AppCompatActivity {
 
 //                databaseEntries.add("ID: " + res.getString(0));
 //                databaseEntries.add("distance: " + res.getString(1));
-//                databaseEntries.add("acceleration: " + res.getFloat(2));
+//                databaseEntries.add("acceleration: " + res.getString(2));
 //                databaseEntries.add("duration: " + res.getString(3));
 //                databaseEntries.add("speed: " + res.getString(4));
                 databaseEntries.add("Date : " + res.getString(5));

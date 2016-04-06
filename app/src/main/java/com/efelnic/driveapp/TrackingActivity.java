@@ -204,7 +204,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
-
+        Toast.makeText(getApplicationContext(), "Make sure to customize your Settings", Toast.LENGTH_LONG).show();
 
         //Permissions
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -224,7 +224,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                 Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "works", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "GPS works", Toast.LENGTH_SHORT).show();
             }
         }
         //Start Chrono, accel, speedometer
