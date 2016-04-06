@@ -40,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
         // Have the Date in a nice format
-        String Date = timeStamp.substring(4,6) + "/" + timeStamp.substring(6,8) + "/" + timeStamp.substring(0,4) + " - " + timeStamp.substring(9,11) + ":" + timeStamp.substring(11,13);
+        String Date = timeStamp.substring(4,6) + "/" + timeStamp.substring(6,8) + "/" + timeStamp.substring(0,4) + " - " + timeStamp.substring(9,11) + ":" + timeStamp.substring(11,13) + ":" + timeStamp.substring(13, 15) + "s";
 
         contentValues.put(COL_2, distance);
         contentValues.put(COL_3, acceleration);

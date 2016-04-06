@@ -712,7 +712,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     //Individual Settings methods
     public void checkGpsUISetting() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        gpsUISetting = sp.getBoolean("prefGpsUI", false);
+        gpsUISetting = sp.getBoolean("prefGpsUI", true);
         //GPS
         gpsTitle = (TextView) findViewById(R.id.gpsView);
         latView = (TextView) findViewById(R.id.latitudeView);
@@ -736,7 +736,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
     public void checkAccelUISetting() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        accelUISetting = sp.getBoolean("prefAccelerometerUI", false);
+        accelUISetting = sp.getBoolean("prefAccelerometerUI", true);
 
         accTitle = (TextView) findViewById(R.id.accelTitle);
         accView = (TextView) findViewById(R.id.accelView);
@@ -763,7 +763,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
     public void checkTimerUISetting() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        timerUISetting = sp.getBoolean("prefTimerUI", false);
+        timerUISetting = sp.getBoolean("prefTimerUI", true);
 
         timerTitle = (TextView) findViewById(R.id.timerTitle);
         timerView = (TextView) findViewById(R.id.timerView);
@@ -786,7 +786,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        lineGraphUISetting = sp.getBoolean("prefLineGraphUI", false);
+        lineGraphUISetting = sp.getBoolean("prefLineGraphUI", true);
         lineGraphView = findViewById(R.id.chart1);
 
         if(lineGraphUISetting)
@@ -796,7 +796,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
     public void checkSpeedometerUISetting() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        speedometerUISetting = sp.getBoolean("prefSpeedometer", false);
+        speedometerUISetting = sp.getBoolean("prefSpeedometer", true);
         speedometerView =  findViewById(R.id.speedometer);
 
         if (speedometerUISetting)

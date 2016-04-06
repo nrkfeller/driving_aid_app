@@ -50,7 +50,7 @@ public class RecordingsActivity extends AppCompatActivity {
 //        String testing = myDb.getRowcol(2, 5);
 //        System.out.println(testing);
 
-        //queryButton = (Button) findViewById(R.id.queryButton);
+        queryButton = (Button) findViewById(R.id.queryButton);
         deleteButton = (Button) findViewById(R.id.deleteButton);
 
 //        // testing string manipulation (useful for data retrieval and plotting)
@@ -80,7 +80,7 @@ public class RecordingsActivity extends AppCompatActivity {
 
                                                           //Send ID as a bundle through intent to next activity
                                                           Bundle b = new Bundle();
-                                                          //Then, associate the string data stored in anystring with bundle key "ID"
+                                                          //Then, associate the string data stored in id with bundle key "ID"
                                                           long ID = parent.getItemIdAtPosition(position);
                                                           b.putLong("ID", id);
                                                           //Now, create an Intent object
@@ -128,6 +128,10 @@ public class RecordingsActivity extends AppCompatActivity {
 
             StringBuffer buffer = new StringBuffer();
             while (res.moveToNext()) {
+//                databaseEntries.add("distance: " + res.getString(1));
+//                databaseEntries.add("acceleration: " + res.getString(2));
+//                databaseEntries.add("duration: " + res.getString(3));
+//                databaseEntries.add("speed: " + res.getString(4));
                 databaseEntries.add("Date : " + res.getString(5)); //Only show date of each entry to reduce clutter
             }
         } catch (Exception e) {
