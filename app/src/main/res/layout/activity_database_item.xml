@@ -29,15 +29,15 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="AccelString"
-        android:id="@+id/accelString"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/graphButton"
-        android:layout_alignBottom="@+id/recordingItemListView" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:text="AccelString"-->
+        <!--android:id="@+id/accelString"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignStart="@+id/graphButton"-->
+        <!--android:layout_alignBottom="@+id/recordingItemListView" />-->
 
 </RelativeLayout>

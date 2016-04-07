@@ -163,7 +163,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         String inputZAccel = gsonZAccel.toJson(ZaccelList);
         String inputSpeed = gsonSpeed.toJson(speedList);
 
-        boolean isinserted = myDb.insertData("NoDistanceForNow", inputAccel, chronoView.getText().toString(), inputSpeed, inputXAccel, inputYAccel, inputZAccel );
+        boolean isinserted = myDb.insertData(chronoView.getText().toString(), "NoDistanceForNow",  inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel );
         if (isinserted) {
             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_SHORT).show();
         } else {

@@ -46,7 +46,7 @@ public class RecordingsActivity extends AppCompatActivity {
 
         myDb = new DatabaseHelper(this);
 
-        queryButton = (Button) findViewById(R.id.queryButton);
+        //queryButton = (Button) findViewById(R.id.queryButton);
         deleteButton = (Button) findViewById(R.id.deleteButton);
 
 //        CustomAdapter recordingsAdapter = new CustomAdapter(this, recordings);
@@ -98,6 +98,12 @@ public class RecordingsActivity extends AppCompatActivity {
 
     public void deleteEverything(View view){
         myDb.deleteEverything();
+        //refresh list (create new one so screen refreshes)
+        ArrayList<User> arrayOfUsers = new ArrayList<User>();
+        CustomAdapter recordingsAdapter = new CustomAdapter(this, arrayOfUsers);
+        ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
+        recordingsListView.setAdapter(recordingsAdapter);
+        grabAllData(recordingsListView);
     }
 
     public void grabAllData(View view) {
@@ -116,7 +122,7 @@ public class RecordingsActivity extends AppCompatActivity {
 //                databaseEntries.add("acceleration: " + res.getString(2));
 //                databaseEntries.add("duration: " + res.getString(3));
 //                databaseEntries.add("speed: " + res.getString(4));
-                databaseEntries.add("Date : " + res.getString(5)); //Only show date of each entry to reduce clutter
+                databaseEntries.add("Date : " + res.getString(1)); //Only show date of each entry to reduce clutter
             }
         } catch (Exception e) {
             Toast.makeText(RecordingsActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();

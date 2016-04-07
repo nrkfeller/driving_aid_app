@@ -33,9 +33,9 @@ public class DatabaseItemActivity extends AppCompatActivity {
     ListView myListView;
 
     DatabaseHelper myDb;
-    String accel, speed, dist;
+    String date, duration, dist, speed, accel, xAccel, yAccel, zAccel;
 
-    List<String> accelArray, distArray, speedArray;
+    List<String> accelArray, distArray, speedArray, xAccelArray, yAccelArray, zAccelArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,8 @@ public class DatabaseItemActivity extends AppCompatActivity {
 
         grabEntryData(myListView);
 
-        radarGraph();
-        scatterGraph();
+        //radarGraph();
+       // scatterGraph();
     }
 
     public void grabEntryData(View view) {
@@ -70,16 +70,25 @@ public class DatabaseItemActivity extends AppCompatActivity {
             StringBuffer buffer = new StringBuffer();
 
             while (res.moveToNext()) {
-
-//                databaseEntries.add("ID: " + res.getString(0));
-                databaseEntries.add("distance: " + res.getString(1));
-                databaseEntries.add("acceleration: " + res.getString(2));
-                databaseEntries.add("duration: " + res.getString(3));
-                databaseEntries.add("speed: " + res.getString(4));
-                databaseEntries.add("Date : " + res.getString(5));
-                dist = res.getString(1);
-                accel = res.getString(2);
+                //save data in variables in order to pass them later
+                date = res.getString(1);
+                duration = res.getString(2);
+                dist = res.getString(3);
                 speed = res.getString(4);
+                accel = res.getString(5);
+                xAccel = res.getString(6);
+                yAccel = res.getString(7);
+                zAccel = res.getString(8);
+                //display data
+                databaseEntries.add("Date : " + date);
+                databaseEntries.add("Duration: " + duration);
+                databaseEntries.add("Distance: " + dist);
+                databaseEntries.add("Speed: " + speed);
+                databaseEntries.add("Acceleration: " + accel);
+                databaseEntries.add("X-Accel: " + xAccel);
+                databaseEntries.add("Y-Accel: " + yAccel);
+                databaseEntries.add("Z-Accel: " + zAccel);
+
             }
         } catch (Exception e) {
             Toast.makeText(DatabaseItemActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();
@@ -90,6 +99,9 @@ public class DatabaseItemActivity extends AppCompatActivity {
         accelArray = createListFromString(accel);
         speedArray = createListFromString(speed);
         distArray = createListFromString(dist);
+        xAccelArray = createListFromString(xAccel);
+        yAccelArray = createListFromString(yAccel);
+        zAccelArray = createListFromString(zAccel);
     }
     public List createListFromString(String string){
         //Split accel into arraylist of strings

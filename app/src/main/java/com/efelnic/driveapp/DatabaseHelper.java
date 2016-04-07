@@ -15,11 +15,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "race.db";
     public static final String TABLE_NAME = "race_table";
     public static final String COL_1 = "ID";
-    public static final String COL_2 = "DISTANCE";
-    public static final String COL_3 = "ACCELERATION";
-    public static final String COL_4 = "DURATION";
+    public static final String COL_2 = "DATE";
+    public static final String COL_3 = "DURATION";
+    public static final String COL_4 = "DISTANCE";
     public static final String COL_5 = "SPEED";
-    public static final String COL_6 = "DATE";
+    public static final String COL_6 = "ACCELERATION";
     public static final String COL_7 = "XACCEL";
     public static final String COL_8 = "YACCEL";
     public static final String COL_9 = "ZACCEL";
@@ -30,23 +30,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION TEXT, DURATION TEXT, SPEED TEXT, DATE TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT, DURATION TEXT, DISTANCE TEXT, SPEED TEXT, ACCELERATION TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT)");
     }
 
-    public boolean insertData(String distance, String acceleration, String duration, String speed, String xaccel, String yaccel, String zaccel){
+    public boolean insertData(String duration, String distance, String speed, String acceleration, String xaccel, String yaccel, String zaccel){
 
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+//        String Date = timeStamp.substring(4,6) + "/" + timeStamp.substring(6,8) + "/" + timeStamp.substring(0,4) + " - " + timeStamp.substring(9,11) + ":" + timeStamp.substring(11,13) + ":" + timeStamp.substring(13, 15) + "s";
         // Have the Date in a nice format
-        String Date = timeStamp.substring(4,6) + "/" + timeStamp.substring(6,8) + "/" + timeStamp.substring(0,4) + " - " + timeStamp.substring(9,11) + ":" + timeStamp.substring(11,13) + ":" + timeStamp.substring(13, 15) + "s";
 
-        contentValues.put(COL_2, distance);
-        contentValues.put(COL_3, acceleration);
-        contentValues.put(COL_4, duration);
+        String date = new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss.SS").format(Calendar.getInstance().getTime());//With MILLISECONDS, remove the '.SS' to get rid of them
+
+        contentValues.put(COL_2, date);
+        contentValues.put(COL_3, duration);
+        contentValues.put(COL_4, distance);
         contentValues.put(COL_5, speed);
-        contentValues.put(COL_6, Date);
+        contentValues.put(COL_6, acceleration);
         contentValues.put(COL_7, xaccel);
         contentValues.put(COL_8, yaccel);
         contentValues.put(COL_9, zaccel);
@@ -113,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //db.execSQL("DELETE FROM " + TABLE_NAME);
         //temporary way, until we need to delete individual items
         db.execSQL("DROP TABLE " + TABLE_NAME);//Deletes entire table
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION FLOAT, DURATION TEXT, SPEED TEXT, DATE TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT)"); //, DATE TEXT)"); //Creates emtpy table in order to restart ids
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT, DURATION TEXT, DISTANCE TEXT, SPEED TEXT, ACCELERATION TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT)"); //Creates emtpy table in order to restart ids
     }
 
     public Integer deleteData(String id){
