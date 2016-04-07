@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,15 +45,53 @@ public class DatabaseItemActivity extends AppCompatActivity {
         myListView = (ListView) findViewById(R.id.recordingItemListView);
         myDb = new DatabaseHelper(this);
 
-        grabEntryData(myListView);
-
+        grabEntryData();
+        //displayData(myListView);
         //radarGraph();
        // scatterGraph();
-    }
 
-    public void grabEntryData(View view) {
+
+
+        Button RawDataButton = (Button)findViewById(R.id.rawDataButton);
+        RawDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DatabaseItemActivity.this, RawDataActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("DATE", date);
+                extras.putString("DURATION", duration);
+                extras.putString("DISTANCE", dist );
+                extras.putString("SPEED", speed);
+                extras.putString("ACCELERATION", accel );
+                extras.putString("XACCEL", xAccel );
+                extras.putString("YACCEL", yAccel);
+                extras.putString("ZACCEL", zAccel);
+                intent.putExtras(extras);
+                startActivity(intent);
+            }
+
+
+        });
+    }
+    public void displayData(View view){
         myListView = (ListView) findViewById(R.id.recordingItemListView);
         final ArrayList<String> databaseEntries = new ArrayList<String>();
+        //display data
+        databaseEntries.add("Date : " + date);
+        databaseEntries.add("Duration: " + duration);
+        databaseEntries.add("Distance: " + dist);
+        databaseEntries.add("Speed: " + speed);
+        databaseEntries.add("Acceleration: " + accel);
+        databaseEntries.add("X-Accel: " + xAccel);
+        databaseEntries.add("Y-Accel: " + yAccel);
+        databaseEntries.add("Z-Accel: " + zAccel);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
+        myListView.setAdapter(arrayAdapter);
+    }
+    public void grabEntryData() {
+//        myListView = (ListView) findViewById(R.id.recordingItemListView);
+//        final ArrayList<String> databaseEntries = new ArrayList<String>();
 
         //Now, you need to get the data from the bundle
         Bundle extras = getIntent().getExtras();
@@ -79,22 +118,23 @@ public class DatabaseItemActivity extends AppCompatActivity {
                 xAccel = res.getString(6);
                 yAccel = res.getString(7);
                 zAccel = res.getString(8);
-                //display data
-                databaseEntries.add("Date : " + date);
-                databaseEntries.add("Duration: " + duration);
-                databaseEntries.add("Distance: " + dist);
-                databaseEntries.add("Speed: " + speed);
-                databaseEntries.add("Acceleration: " + accel);
-                databaseEntries.add("X-Accel: " + xAccel);
-                databaseEntries.add("Y-Accel: " + yAccel);
-                databaseEntries.add("Z-Accel: " + zAccel);
-
             }
+//                //display data
+//                databaseEntries.add("Date : " + date);
+//                databaseEntries.add("Duration: " + duration);
+//                databaseEntries.add("Distance: " + dist);
+//                databaseEntries.add("Speed: " + speed);
+//                databaseEntries.add("Acceleration: " + accel);
+//                databaseEntries.add("X-Accel: " + xAccel);
+//                databaseEntries.add("Y-Accel: " + yAccel);
+//                databaseEntries.add("Z-Accel: " + zAccel);
+
+            //}
         } catch (Exception e) {
             Toast.makeText(DatabaseItemActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
-        myListView.setAdapter(arrayAdapter);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
+//        myListView.setAdapter(arrayAdapter);
 
         accelArray = createListFromString(accel);
         speedArray = createListFromString(speed);
