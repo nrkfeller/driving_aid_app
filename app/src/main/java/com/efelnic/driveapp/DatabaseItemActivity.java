@@ -35,7 +35,7 @@ public class DatabaseItemActivity extends AppCompatActivity {
     DatabaseHelper myDb;
     String accel, speed, dist;
 
-    List<String> accelArray;
+    List<String> accelArray, distArray, speedArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,12 +92,18 @@ public class DatabaseItemActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
         myListView.setAdapter(arrayAdapter);
 
-        //Split accel into arraylist of strings
-        String accel2 = accel.replace("[", ""); // remove [
-        String accel3 = accel2.replace("]", "");// remove ]
-        String accel4 = accel3.replaceAll("\"", ""); // remove QUOTATION marks
-        accelArray = Arrays.asList((accel4.split(",")));//remove COMMAS
 
+
+        accelArray = createListFromString(accel);
+        speedArray = createListFromString(speed);
+        distArray = createListFromString(dist);
+    }
+    public List createListFromString(String string){
+        //Split accel into arraylist of strings
+        String string2 = string.replace("[", ""); // remove [
+        String string3 = string2.replace("]", "");// remove ]
+        String string4 = string3.replaceAll("\"", ""); // remove QUOTATION marks
+        return Arrays.asList((string4.split(",")));//remove COMMAS
     }
 
     public void scatterGraph(){

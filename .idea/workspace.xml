@@ -59,10 +59,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecordingsActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RecordingsActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.060606062">
+            <state vertical-scroll-proportion="0.0">
               <caret line="108" column="2" selection-start-line="108" selection-start-column="2" selection-end-line="108" selection-end-column="2" />
               <folding>
                 <element signature="e#2761#4455#0" expanded="true" />
@@ -74,14 +74,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseItemActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DatabaseItemActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="62" column="58" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.3778966">
+              <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
               <folding>
-                <element signature="e#3885#3893#0" expanded="true" />
-                <element signature="e#4585#4593#0" expanded="true" />
+                <element signature="e#4117#4125#0" expanded="true" />
+                <element signature="e#4817#4825#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1723,9 +1723,9 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_graph_test.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/GraphTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_database_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java" />
       </list>
     </option>
   </component>
@@ -2092,10 +2092,30 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java</url>
+          <line>96</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java</url>
+          <line>97</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java</url>
+          <line>98</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="19" />
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2212,17 +2232,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="62" column="58" selection-start-line="62" selection-start-column="58" selection-end-line="62" selection-end-column="58" />
-          <folding>
-            <element signature="e#3885#3893#0" expanded="true" />
-            <element signature="e#4585#4593#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2250,13 +2259,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.060606062">
+        <state vertical-scroll-proportion="0.0">
           <caret line="108" column="2" selection-start-line="108" selection-start-column="2" selection-end-line="108" selection-end-column="2" />
           <folding>
             <element signature="e#2761#4455#0" expanded="true" />
             <element signature="e#4454#4455#0" expanded="true" />
             <element signature="e#5709#5710#0" expanded="true" />
             <element signature="e#5748#5749#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3778966">
+          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding>
+            <element signature="e#4117#4125#0" expanded="true" />
+            <element signature="e#4817#4825#0" expanded="true" />
           </folding>
         </state>
       </provider>
