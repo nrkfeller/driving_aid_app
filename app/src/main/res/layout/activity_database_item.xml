@@ -20,4 +20,24 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-    </RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Graph"
+        android:id="@+id/graphButton"
+        android:layout_alignTop="@+id/recordingItemListView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="AccelString"
+        android:id="@+id/accelString"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/graphButton"
+        android:layout_alignBottom="@+id/recordingItemListView" />
+
+</RelativeLayout>

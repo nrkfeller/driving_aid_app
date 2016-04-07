@@ -433,10 +433,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         getMenuInflater().inflate(R.menu.settings, menu);
         MenuItem save = menu.findItem(R.id.menu_save);//Display save option
         save.setVisible(true);
-        MenuItem play = menu.findItem(R.id.menu_play);//Display play option
-        play.setVisible(true);
-        MenuItem pause = menu.findItem(R.id.menu_pause);//Display pause option
-        pause.setVisible(true);
 
         return true;
     }
