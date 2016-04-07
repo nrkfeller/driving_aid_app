@@ -10,8 +10,6 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
-
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "race.db";
@@ -22,7 +20,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_4 = "DURATION";
     public static final String COL_5 = "SPEED";
     public static final String COL_6 = "DATE";
-
+    public static final String COL_7 = "XACCEL";
+    public static final String COL_8 = "YACCEL";
+    public static final String COL_9 = "ZACCEL";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -30,10 +30,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION FLOAT, DURATION TEXT, SPEED TEXT, DATE TEXT)"); //, DATE TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION TEXT, DURATION TEXT, SPEED TEXT, DATE TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT)");
     }
 
-    public boolean insertData(String distance, String acceleration, String duration, String speed){
+    public boolean insertData(String distance, String acceleration, String duration, String speed, String xaccel, String yaccel, String zaccel){
 
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -47,6 +47,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_4, duration);
         contentValues.put(COL_5, speed);
         contentValues.put(COL_6, Date);
+        contentValues.put(COL_7, xaccel);
+        contentValues.put(COL_8, yaccel);
+        contentValues.put(COL_9, zaccel);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
@@ -62,7 +65,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
-
     }
 
     public Cursor getAllData(){
@@ -111,14 +113,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //db.execSQL("DELETE FROM " + TABLE_NAME);
         //temporary way, until we need to delete individual items
         db.execSQL("DROP TABLE " + TABLE_NAME);//Deletes entire table
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION FLOAT, DURATION TEXT, SPEED TEXT, DATE TEXT)"); //, DATE TEXT)"); //Creates emtpy table in order to restart ids
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DISTANCE TEXT, ACCELERATION FLOAT, DURATION TEXT, SPEED TEXT, DATE TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT)"); //, DATE TEXT)"); //Creates emtpy table in order to restart ids
     }
 
     public Integer deleteData(String id){
         SQLiteDatabase db = this.getReadableDatabase();
 
         return db.delete(TABLE_NAME, "ID = ?", new String[] { id });
-
     }
 
     //---deletes a particular title---

@@ -87,10 +87,15 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     //Database Vars
     DatabaseHelper myDb;
     ArrayList<String> accelerationList;
+    ArrayList<String> XaccelList;
+    ArrayList<String> YaccelList;
+    ArrayList<String> ZaccelList;
     ArrayList<String> speedList;
-    ArrayList<String> List;
 
     Gson gsonAccel = new Gson();
+    Gson gsonXAccel = new Gson();
+    Gson gsonYAccel = new Gson();
+    Gson gsonZAccel = new Gson();
     Gson gsonSpeed = new Gson();
 
     Button viewDataButton;
@@ -152,13 +157,13 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         // new View.OnClickListener() {
         //    @Override
         //     public void onClick(View v) {
-        //TODO: Accel String empty (loic's phone)
         String inputAccel = gsonAccel.toJson(accelerationList);
+        String inputXAccel = gsonXAccel.toJson(XaccelList);
+        String inputYAccel = gsonYAccel.toJson(YaccelList);
+        String inputZAccel = gsonZAccel.toJson(ZaccelList);
         String inputSpeed = gsonSpeed.toJson(speedList);
-//        String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
-        //TODO DATE
-        boolean isinserted = myDb.insertData("NothingForNow", inputAccel, chronoView.getText().toString(), inputSpeed);
+        boolean isinserted = myDb.insertData("NoDistanceForNow", inputAccel, chronoView.getText().toString(), inputSpeed, inputXAccel, inputYAccel, inputZAccel );
         if (isinserted) {
             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_SHORT).show();
         } else {
@@ -204,7 +209,8 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
-        Toast.makeText(getApplicationContext(), "Make sure to customize your Settings", Toast.LENGTH_LONG).show();
+        //TODO: toast when all settings are off
+        //Toast.makeText(getApplicationContext(), "Make sure to customize your Settings", Toast.LENGTH_LONG).show();
 
         //Permissions
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -224,7 +230,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                 Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "GPS works", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getApplicationContext(), "GPS works", Toast.LENGTH_SHORT).show();
             }
         }
         //Start Chrono, accel, speedometer
@@ -240,6 +246,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         //saveRaceButton = (Button) findViewById(R.id.saveRaceButton);
         //viewDataButton = (Button) findViewById(R.id.viewDataButton);
         accelerationList = new ArrayList<String>();
+        XaccelList = new ArrayList<String>();
+        YaccelList = new ArrayList<String>();
+        ZaccelList = new ArrayList<String>();
         speedList = new ArrayList<String>();
         myDb = new DatabaseHelper(this);
 
@@ -381,6 +390,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
         //Database
         accelerationList.add(String.valueOf(lin_accel));
+        XaccelList.add(String.valueOf(event.values[2]));
+        YaccelList.add(String.valueOf(event.values[1]));
+        ZaccelList.add(String.valueOf(event.values[0]));
 
         // rounding values to format "#.##"
         double x = Math.round(event.values[2] * 100.0)/100.0;

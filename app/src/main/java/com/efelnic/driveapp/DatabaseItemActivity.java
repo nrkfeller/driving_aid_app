@@ -48,14 +48,11 @@ public class DatabaseItemActivity extends AppCompatActivity {
 
         radarGraph();
         scatterGraph();
-
-
     }
 
     public void grabEntryData(View view) {
         myListView = (ListView) findViewById(R.id.recordingItemListView);
         final ArrayList<String> databaseEntries = new ArrayList<String>();
-
 
         //Now, you need to get the data from the bundle
         Bundle extras = getIntent().getExtras();
@@ -71,8 +68,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
 //            }
 
             StringBuffer buffer = new StringBuffer();
-
-
 
             while (res.moveToNext()) {
 
@@ -92,8 +87,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
         myListView.setAdapter(arrayAdapter);
 
-
-
         accelArray = createListFromString(accel);
         speedArray = createListFromString(speed);
         distArray = createListFromString(dist);
@@ -108,16 +101,11 @@ public class DatabaseItemActivity extends AppCompatActivity {
 
     public void scatterGraph(){
 
-
-
-
   //+      TextView accelTest = (TextView) findViewById(R.id.accelString);
 //        accelTest.setText(accelArray.get(1));
 
-
         ArrayList<Entry> entries = new ArrayList<>(); // y-values
         ArrayList<String> labels = new ArrayList<String>(); //x values
-
 
         for (int i = 0; i< accelArray.size(); i++){
 
@@ -126,9 +114,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
         }
         ScatterDataSet dataSet = new ScatterDataSet(entries, "Accelerometer");
 
-
-
-
         Context context = this;
 
         ScatterChart chart = new ScatterChart(context);
@@ -136,18 +121,12 @@ public class DatabaseItemActivity extends AppCompatActivity {
         ScatterData data = new ScatterData(labels, dataSet);
         chart.setData(data);
         chart.setDescription("Your Accelerometer Values");
-
-
     }
+
+
     public void radarGraph(){
-
-
-
-
-
         ArrayList<Entry> entries = new ArrayList<>(); // y-values
         ArrayList<String> labels = new ArrayList<String>(); //x values
-
 
         for (int i = 0; i < accelArray.size(); i++){
 
@@ -156,9 +135,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
         }
         RadarDataSet dataSet = new RadarDataSet(entries, "Accelerometer");
 
-
-
-
         Context context = this;
 
         RadarChart chart = new RadarChart(context);
@@ -166,7 +142,5 @@ public class DatabaseItemActivity extends AppCompatActivity {
         RadarData data = new RadarData(labels, dataSet);
         chart.setData(data);
         chart.setDescription("Your Accelerometer Values");
-
-
     }
 }

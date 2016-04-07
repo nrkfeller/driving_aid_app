@@ -46,21 +46,8 @@ public class RecordingsActivity extends AppCompatActivity {
 
         myDb = new DatabaseHelper(this);
 
-// Test to see if .getRowcol work (yes it did)
-//        String testing = myDb.getRowcol(2, 5);
-//        System.out.println(testing);
-
         queryButton = (Button) findViewById(R.id.queryButton);
         deleteButton = (Button) findViewById(R.id.deleteButton);
-
-//        // testing string manipulation (useful for data retrieval and plotting)
-//        String testings_manipulations = "[\"0.1234\",\"5.678\"]";
-//        String test1 = testings_manipulations.replace("\"", "");
-//        String test2 = test1.replace("[", "");
-//        String test3 = test2.replace("]", "");
-//
-//        String[] recordings = {"1", "2", "3", testings_manipulations, test1, test2, test3 };
-
 
 //        CustomAdapter recordingsAdapter = new CustomAdapter(this, recordings);
         // Construct the data source
@@ -78,7 +65,6 @@ public class RecordingsActivity extends AppCompatActivity {
                                                           String recording = String.valueOf(parent.getItemAtPosition(position));
                                                           Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
 
-
                                                           //Send ID as a bundle through intent to next activity
                                                           Bundle b = new Bundle();
                                                           //Then, associate the string data stored in id with bundle key "ID"
@@ -90,7 +76,6 @@ public class RecordingsActivity extends AppCompatActivity {
                                                           intent.putExtras(b);
                                                           // and start second activity
                                                           startActivity(intent);
-
                                                       }
 
                                                   }
@@ -110,8 +95,6 @@ public class RecordingsActivity extends AppCompatActivity {
 //                                                      }
 //        );
     }
-
-
 
     public void deleteEverything(View view){
         myDb.deleteEverything();
@@ -145,28 +128,21 @@ public class RecordingsActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
-
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
     }
 
-
     public void grabEntryData(String date) {
-
         try {
-
             Cursor res = myDb.getIdData();
 //            if (res.getCount() == 0) {
 //                return;
 //            }
 
             StringBuffer buffer = new StringBuffer();
-
 
             while (res.moveToNext()) {
 
@@ -180,7 +156,6 @@ public class RecordingsActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(RecordingsActivity.this, "Entry is Empty", Toast.LENGTH_SHORT).show();
         }
-
     }
 
 
