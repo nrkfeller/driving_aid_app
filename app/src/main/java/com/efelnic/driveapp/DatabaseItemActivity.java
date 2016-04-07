@@ -33,7 +33,8 @@ public class DatabaseItemActivity extends AppCompatActivity {
     ListView myListView;
 
     DatabaseHelper myDb;
-    String accel;
+    String accel, speed, dist;
+
     List<String> accelArray;
 
     @Override
@@ -81,18 +82,19 @@ public class DatabaseItemActivity extends AppCompatActivity {
                 databaseEntries.add("duration: " + res.getString(3));
                 databaseEntries.add("speed: " + res.getString(4));
                 databaseEntries.add("Date : " + res.getString(5));
+                dist = res.getString(1);
                 accel = res.getString(2);
+                speed = res.getString(4);
             }
         } catch (Exception e) {
             Toast.makeText(DatabaseItemActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();
         }
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
         myListView.setAdapter(arrayAdapter);
+
         //Split accel into arraylist of strings
-
-        String accel2= accel.replace("[", ""); // remove [
+        String accel2 = accel.replace("[", ""); // remove [
         String accel3 = accel2.replace("]", "");// remove ]
-
         String accel4 = accel3.replaceAll("\"", ""); // remove QUOTATION marks
         accelArray = Arrays.asList((accel4.split(",")));//remove COMMAS
 
@@ -141,7 +143,7 @@ public class DatabaseItemActivity extends AppCompatActivity {
         ArrayList<String> labels = new ArrayList<String>(); //x values
 
 
-        for (int i = 0; i< accelArray.size(); i++){
+        for (int i = 0; i < accelArray.size(); i++){
 
             entries.add(new Entry( Float.valueOf(accelArray.get(i)), i));
             labels.add("i");

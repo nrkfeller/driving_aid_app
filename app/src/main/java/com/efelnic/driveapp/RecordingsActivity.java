@@ -77,7 +77,7 @@ public class RecordingsActivity extends AppCompatActivity {
                                                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                           String recording = String.valueOf(parent.getItemAtPosition(position));
                                                           Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
-                                                         // Cursor c = myDb.getIdData();
+
 
                                                           //Send ID as a bundle through intent to next activity
                                                           Bundle b = new Bundle();
@@ -95,20 +95,20 @@ public class RecordingsActivity extends AppCompatActivity {
 
                                                   }
         );
-        //TODO: OnClickListener (LONG CLICK)
-        recordingsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-                                                          @Override
-                                                          public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                                                              //  int recording = (int) parent.getItemAtPosition(position);
-                                                              String recording = String.valueOf(parent.getItemAtPosition(position));
-                                                              id = parent.getItemIdAtPosition(position);
-                                                              myDb.deleteData(recording);
-                                                              Toast.makeText(getApplicationContext(), "Nothing For Now", Toast.LENGTH_SHORT).show();
-                                                              return true;
-                                                          }
-
-                                                      }
-        );
+//        //TODO: OnClickListener (LONG CLICK)
+//        recordingsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+//                                                          @Override
+//                                                          public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                                                              //  int recording = (int) parent.getItemAtPosition(position);
+//                                                              String recording = String.valueOf(parent.getItemAtPosition(position));
+//                                                              id = parent.getItemIdAtPosition(position);
+//                                                              myDb.deleteData(recording);
+//                                                              Toast.makeText(getApplicationContext(), "Nothing For Now", Toast.LENGTH_SHORT).show();
+//                                                              return true;
+//                                                          }
+//
+//                                                      }
+//        );
     }
 
 
