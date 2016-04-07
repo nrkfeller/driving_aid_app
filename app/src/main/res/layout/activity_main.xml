@@ -55,7 +55,7 @@
     <ImageView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:src="@drawable/script"
+        android:src="@drawable/file"
         android:id="@+id/ScriptImage"
         android:layout_marginTop="180dp"
         android:layout_toRightOf="@+id/ScriptButton" />
@@ -79,7 +79,7 @@
     <ImageView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:src="@drawable/analytics"
+        android:src="@drawable/folder"
         android:id="@+id/AnalyticsImage"
         android:layout_marginTop="275dp"
         android:layout_toRightOf="@+id/RecordingsButton" />
@@ -88,7 +88,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:id="@+id/AboutButton"
-        android:background="@drawable/about_white"
+        android:background="@drawable/about"
         android:layout_marginTop="0dp"
         android:layout_below="@+id/RecordingsButton"
         android:layout_centerHorizontal="true"
@@ -99,9 +99,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Graph"
-        android:layout_marginTop="10dp"
         android:id="@+id/GraphButton"
-        android:layout_below="@+id/AboutButton"
+        android:layout_alignBottom="@+id/AboutButton"
+        android:layout_alignLeft="@+id/RecordingsButton"
+        android:layout_alignStart="@+id/RecordingsButton" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Logo"
+        android:src="@drawable/driveapp_logo"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
