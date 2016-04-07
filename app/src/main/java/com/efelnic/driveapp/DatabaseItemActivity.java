@@ -9,6 +9,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -16,8 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.charts.ScatterChart;
@@ -37,20 +42,27 @@ public class DatabaseItemActivity extends AppCompatActivity {
     String date, duration, dist, speed, accel, xAccel, yAccel, zAccel;
 
     List<String> accelArray, distArray, speedArray, xAccelArray, yAccelArray, zAccelArray;
+    ArrayList<ChartItem> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_database_item);
-        myListView = (ListView) findViewById(R.id.recordingItemListView);
+
+
         myDb = new DatabaseHelper(this);
 
         grabEntryData();
         //displayData(myListView);
         //radarGraph();
        // scatterGraph();
-
-
+        myListView = (ListView) findViewById(R.id.chartListView);
+        list = new ArrayList<>();
+        list.add(new LineChartItem(lineGraph(), getApplicationContext()));
+        ChartDataAdapter cda = new ChartDataAdapter(getApplicationContext(), list);
+        myListView.setAdapter(cda);
 
         Button RawDataButton = (Button)findViewById(R.id.rawDataButton);
         RawDataButton.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +86,7 @@ public class DatabaseItemActivity extends AppCompatActivity {
         });
     }
     public void displayData(View view){
-        myListView = (ListView) findViewById(R.id.recordingItemListView);
+        //myListView = (ListView) findViewById(R.id.recordingItemListView);
         final ArrayList<String> databaseEntries = new ArrayList<String>();
         //display data
         databaseEntries.add("Date : " + date);
@@ -87,7 +99,7 @@ public class DatabaseItemActivity extends AppCompatActivity {
         databaseEntries.add("Z-Accel: " + zAccel);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
-        myListView.setAdapter(arrayAdapter);
+        //myListView.setAdapter(arrayAdapter);
     }
     public void grabEntryData() {
 //        myListView = (ListView) findViewById(R.id.recordingItemListView);
@@ -151,9 +163,47 @@ public class DatabaseItemActivity extends AppCompatActivity {
         return Arrays.asList((string4.split(",")));//remove COMMAS
     }
 
+
+    private LineData lineGraph(){
+
+        //+      TextView accelTest = (TextView) findViewById(R.id.accelString);
+//        accelTest.setText(accelArray.get(1));
+
+        ArrayList<Entry> entries = new ArrayList<>(); // y-values
+        ArrayList<String> xVals = new ArrayList<String>(); //x values
+
+        for (int i = 0; i< accelArray.size(); i++){
+
+            entries.add(new Entry( Float.valueOf(accelArray.get(i)), i));
+            xVals.add(String.valueOf(i));
+            //labels.add("i");
+        }
+
+        LineDataSet line1 = new LineDataSet(entries, "Accelerometer");
+
+        Context context = this;
+
+        LineChart lineChart = new LineChart(context);
+        //setContentView(chart);
+        LineData accelLine = new LineData(xVals, line1);
+        lineChart.setData(accelLine);
+        lineChart.setDescription("Your Accelerometer Values");
+
+        return accelLine;
+
+    }
+
+
+
+
+
+
+
+
+
     public void scatterGraph(){
 
-  //+      TextView accelTest = (TextView) findViewById(R.id.accelString);
+        //+      TextView accelTest = (TextView) findViewById(R.id.accelString);
 //        accelTest.setText(accelArray.get(1));
 
         ArrayList<Entry> entries = new ArrayList<>(); // y-values
@@ -175,7 +225,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
         chart.setDescription("Your Accelerometer Values");
     }
 
-
     public void radarGraph(){
         ArrayList<Entry> entries = new ArrayList<>(); // y-values
         ArrayList<String> labels = new ArrayList<String>(); //x values
@@ -195,4 +244,30 @@ public class DatabaseItemActivity extends AppCompatActivity {
         chart.setData(data);
         chart.setDescription("Your Accelerometer Values");
     }
+
+    /** adapter that supports 3 different item types */
+    private class ChartDataAdapter extends ArrayAdapter<ChartItem> {
+
+        public ChartDataAdapter(Context context, List<ChartItem> objects) {
+            super(context, 0, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getItem(position).getView(position, convertView, getContext());
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            // return the views type
+            return getItem(position).getItemType();
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 3; // we have 3 different item-types
+        }
+    }
 }
+
+
