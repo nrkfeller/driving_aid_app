@@ -1,6 +1,8 @@
 package com.efelnic.driveapp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -46,19 +48,50 @@ public class RecordingsActivity extends AppCompatActivity {
 
         myDb = new DatabaseHelper(this);
 
-        //queryButton = (Button) findViewById(R.id.queryButton);
-        deleteButton = (Button) findViewById(R.id.deleteButton);
+
 
 //        CustomAdapter recordingsAdapter = new CustomAdapter(this, recordings);
         // Construct the data source
         ArrayList<User> arrayOfUsers = new ArrayList<User>();
         // Create the adapter to convert the array to views
         CustomAdapter recordingsAdapter = new CustomAdapter(this, arrayOfUsers);
-        ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
+        final ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
         recordingsListView.setAdapter(recordingsAdapter);
         grabAllData(recordingsListView);
 
-        //TODO: OnClickListener
+
+        Button deleteButton = (Button)findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        RecordingsActivity.this);
+                alert.setTitle("Alert!!");
+                alert.setMessage("Are you sure to delete record");
+                alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteEverything(recordingsListView);
+                        dialog.dismiss();
+
+                    }
+                });
+                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                });
+
+                alert.show();
+            }
+        });
+
+
         recordingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                       @Override
                                                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
