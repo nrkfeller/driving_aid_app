@@ -50,8 +50,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.ActionBar;
 
-
-
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -83,15 +81,31 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     LocationManager locationManager;
     String provider;
 
-
     //Database Vars
     DatabaseHelper myDb;
     ArrayList<String> accelerationList;
+    ArrayList<String> XaccelList;
+    ArrayList<String> YaccelList;
+    ArrayList<String> ZaccelList;
     ArrayList<String> speedList;
-    ArrayList<String> List;
+    String distValue;
 
     Gson gsonAccel = new Gson();
+    Gson gsonXAccel = new Gson();
+    Gson gsonYAccel = new Gson();
+    Gson gsonZAccel = new Gson();
     Gson gsonSpeed = new Gson();
+    Gson gsonDistance = new Gson();
+
+    double dist = 0;
+//    double curLat = 0;
+//    double curLng = 0;
+//    double lastLat = 0;
+//    double lastLng = 0;
+    private  Location location;
+    private Location lastLocation = location;
+
+    double curLat, curLng, lastLat, lastLng;
 
     Button viewDataButton;
 
@@ -134,15 +148,10 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     //LinearLayout la; // used for charts
     //View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
 
-
-
     //**** START OF METHODS ****//
 
 
-
-
 //Database Methods
-
 
 
     // TODO: database
@@ -152,13 +161,15 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         // new View.OnClickListener() {
         //    @Override
         //     public void onClick(View v) {
-        //TODO: Accel String empty (loic's phone)
         String inputAccel = gsonAccel.toJson(accelerationList);
+        String inputXAccel = gsonXAccel.toJson(XaccelList);
+        String inputYAccel = gsonYAccel.toJson(YaccelList);
+        String inputZAccel = gsonZAccel.toJson(ZaccelList);
         String inputSpeed = gsonSpeed.toJson(speedList);
-//        String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        String inputDist = gsonDistance.toJson(distValue);
 
-        //TODO DATE
-        boolean isinserted = myDb.insertData("NothingForNow", inputAccel, chronoView.getText().toString(), inputSpeed);
+
+        boolean isinserted = myDb.insertData(chronoView.getText().toString(), inputDist,  inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel );
         if (isinserted) {
             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_SHORT).show();
         } else {
@@ -195,16 +206,14 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 
 //End of Database Methods
 
-
-
-
     // "ON-" Methods
     //Create, resume, pause
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
-        Toast.makeText(getApplicationContext(), "Make sure to customize your Settings", Toast.LENGTH_LONG).show();
+        //TODO: toast when all settings are off
+        //Toast.makeText(getApplicationContext(), "Make sure to customize your Settings", Toast.LENGTH_LONG).show();
 
         //Permissions
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -214,6 +223,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), false);
         Location location = locationManager.getLastKnownLocation(provider);
+        lastLocation = location;
 
         //SETTINGS TOGGLE
         checkSettings();
@@ -224,7 +234,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
                 Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getApplicationContext(), "GPS works", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getApplicationContext(), "GPS works", Toast.LENGTH_SHORT).show();
             }
         }
         //Start Chrono, accel, speedometer
@@ -240,6 +250,9 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         //saveRaceButton = (Button) findViewById(R.id.saveRaceButton);
         //viewDataButton = (Button) findViewById(R.id.viewDataButton);
         accelerationList = new ArrayList<String>();
+        XaccelList = new ArrayList<String>();
+        YaccelList = new ArrayList<String>();
+        ZaccelList = new ArrayList<String>();
         speedList = new ArrayList<String>();
         myDb = new DatabaseHelper(this);
 
@@ -321,11 +334,29 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
 
+
+
         if (location != null) {
-            Double lat = location.getLatitude();
-            Double lng = location.getLongitude();
-            Double alt = location.getAltitude();
+            double lat = location.getLatitude();
+            double lng = location.getLongitude();
+            double alt = location.getAltitude();
             double spd = (location.getSpeed()) * CONVERSION_METERSPERSECOND_TO_KMH; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
+
+            dist += dist + lastLocation.distanceTo(location);
+            distValue = String.valueOf(dist);
+            lastLocation = location;
+
+//            curLat = lat;
+//            curLng = lng;
+
+//            if(curLat!=lastLat || curLng!=lastLng) {
+//                dist += getDistance(lastLat, lastLng, curLat, curLng);
+//                //dist += calculateDistance(lastLat, lastLng, curLat, curLng);
+//                distValue = String.valueOf(dist);
+//                lastLat = curLat;
+//                lastLng = curLng;
+//
+//            }
 
             // rounding values to format "#.##"
             double latt = Math.round(lat* 100.00)/100.00;
@@ -356,6 +387,8 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             }
         }
 
+
+
         //Loic
         // speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
     }
@@ -379,14 +412,17 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         //Calculate Linear Acceleration
         double lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
 
-        //Database
-        accelerationList.add(String.valueOf(lin_accel));
-
         // rounding values to format "#.##"
         double x = Math.round(event.values[2] * 100.0)/100.0;
         double y = Math.round(event.values[1] * 100.0)/100.0;
         double z = Math.round(event.values[0] * 100.0)/100.0;
         double accel = Math.round(lin_accel * 100.0)/10.0;
+
+        //Database
+        accelerationList.add(String.valueOf(accel));
+        XaccelList.add(String.valueOf(x));
+        YaccelList.add(String.valueOf(y));
+        ZaccelList.add(String.valueOf(z));
 
         //Send values to txt display
         accView.setText("Accel : " + accel);
@@ -433,10 +469,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         getMenuInflater().inflate(R.menu.settings, menu);
         MenuItem save = menu.findItem(R.id.menu_save);//Display save option
         save.setVisible(true);
-        MenuItem play = menu.findItem(R.id.menu_play);//Display play option
-        play.setVisible(true);
-        MenuItem pause = menu.findItem(R.id.menu_pause);//Display pause option
-        pause.setVisible(true);
 
         return true;
     }
@@ -542,8 +574,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
 //End of getLocation, Chronometer, Accel, position tracking methods
 
-
-    //Line Chart Methods
+//Line Chart Methods
     public void lineChartFormat(){
         //RealTime line chart
         mChart = (LineChart) findViewById(R.id.chart1);
@@ -665,7 +696,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
 //End of Line Chart Methods
 
-    //Speedometer Method
+//Speedometer Method
     public void startSpeedometer() {
 
         speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
@@ -689,8 +720,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         checkSpeedometerTextSize();
 
     }
-
-    //Settings Methods
+//Settings Methods
     //Check ALL the settings
     public void checkSettings(){
 
@@ -955,18 +985,15 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             case "40":
                 speedometer.setLabelTextSize(40);
                 break;
-
             case "50":
                 speedometer.setLabelTextSize(50);
                 break;
-
             case "60":
                 speedometer.setLabelTextSize(50);
                 break;
             default:
                 speedometer.setLabelTextSize(40);
         }
-
     }
 //End of Settings Methods
 
@@ -995,4 +1022,21 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //        return custom_view;
 //    }
 
+    public double getDistance(double lat1, double lon1, double lat2, double lon2) {
+        double latA = Math.toRadians(lat1);
+        double lonA = Math.toRadians(lon1);
+        double latB = Math.toRadians(lat2);
+        double lonB = Math.toRadians(lon2);
+        double cosAng = (Math.cos(latA) * Math.cos(latB) * Math.cos(lonB-lonA)) +
+                (Math.sin(latA) * Math.sin(latB));
+        double ang = Math.acos(cosAng);
+        double dist = ang *6371;
+
+        return dist;
+    }
+    public static double calculateDistance(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
+        float[] results = new float[3];
+        Location.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, results);
+        return results[0];
+    }
 }

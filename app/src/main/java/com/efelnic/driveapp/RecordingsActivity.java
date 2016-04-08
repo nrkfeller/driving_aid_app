@@ -1,6 +1,8 @@
 package com.efelnic.driveapp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +11,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,12 +31,13 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
-public class RecordingsActivity extends AppCompatActivity {
+public class RecordingsActivity extends MainActivity {
 
     DatabaseHelper myDb;
     Button queryButton;
-    Button deleteButton;
+
     Cursor cursor;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -46,20 +51,6 @@ public class RecordingsActivity extends AppCompatActivity {
 
         myDb = new DatabaseHelper(this);
 
-// Test to see if .getRowcol work (yes it did)
-//        String testing = myDb.getRowcol(2, 5);
-//        System.out.println(testing);
-
-        queryButton = (Button) findViewById(R.id.queryButton);
-        deleteButton = (Button) findViewById(R.id.deleteButton);
-
-//        // testing string manipulation (useful for data retrieval and plotting)
-//        String testings_manipulations = "[\"0.1234\",\"5.678\"]";
-//        String test1 = testings_manipulations.replace("\"", "");
-//        String test2 = test1.replace("[", "");
-//        String test3 = test2.replace("]", "");
-//
-//        String[] recordings = {"1", "2", "3", testings_manipulations, test1, test2, test3 };
 
 
 //        CustomAdapter recordingsAdapter = new CustomAdapter(this, recordings);
@@ -67,17 +58,17 @@ public class RecordingsActivity extends AppCompatActivity {
         ArrayList<User> arrayOfUsers = new ArrayList<User>();
         // Create the adapter to convert the array to views
         CustomAdapter recordingsAdapter = new CustomAdapter(this, arrayOfUsers);
-        ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
+        final ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
         recordingsListView.setAdapter(recordingsAdapter);
         grabAllData(recordingsListView);
 
-        //TODO: OnClickListener
+
+
         recordingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                       @Override
                                                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                           String recording = String.valueOf(parent.getItemAtPosition(position));
                                                           Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
-                                                         // Cursor c = myDb.getIdData();
 
                                                           //Send ID as a bundle through intent to next activity
                                                           Bundle b = new Bundle();
@@ -90,31 +81,35 @@ public class RecordingsActivity extends AppCompatActivity {
                                                           intent.putExtras(b);
                                                           // and start second activity
                                                           startActivity(intent);
-
                                                       }
 
                                                   }
         );
-        //TODO: OnClickListener (LONG CLICK)
-        recordingsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-                                                          @Override
-                                                          public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                                                              //  int recording = (int) parent.getItemAtPosition(position);
-                                                              String recording = String.valueOf(parent.getItemAtPosition(position));
-                                                              id = parent.getItemIdAtPosition(position);
-                                                              myDb.deleteData(recording);
-                                                              Toast.makeText(getApplicationContext(), "Nothing For Now", Toast.LENGTH_SHORT).show();
-                                                              return true;
-                                                          }
-
-                                                      }
-        );
+//        //TODO: OnClickListener (LONG CLICK)
+//        recordingsListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+//                                                          @Override
+//                                                          public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                                                              //  int recording = (int) parent.getItemAtPosition(position);
+//                                                              String recording = String.valueOf(parent.getItemAtPosition(position));
+//                                                              id = parent.getItemIdAtPosition(position);
+//                                                              myDb.deleteData(recording);
+//                                                              Toast.makeText(getApplicationContext(), "Nothing For Now", Toast.LENGTH_SHORT).show();
+//                                                              return true;
+//                                                          }
+//
+//                                                      }
+//        );
     }
 
-
-
     public void deleteEverything(View view){
+
         myDb.deleteEverything();
+        //refresh list (create new one so screen refreshes)
+        ArrayList<User> arrayOfUsers = new ArrayList<User>();
+        CustomAdapter recordingsAdapter = new CustomAdapter(this, arrayOfUsers);
+        ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
+        recordingsListView.setAdapter(recordingsAdapter);
+        grabAllData(recordingsListView);
     }
 
     public void grabAllData(View view) {
@@ -133,7 +128,7 @@ public class RecordingsActivity extends AppCompatActivity {
 //                databaseEntries.add("acceleration: " + res.getString(2));
 //                databaseEntries.add("duration: " + res.getString(3));
 //                databaseEntries.add("speed: " + res.getString(4));
-                databaseEntries.add("Date : " + res.getString(5)); //Only show date of each entry to reduce clutter
+                databaseEntries.add("Date : " + res.getString(1)); //Only show date of each entry to reduce clutter
             }
         } catch (Exception e) {
             Toast.makeText(RecordingsActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();
@@ -145,28 +140,21 @@ public class RecordingsActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
-
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
     }
 
-
     public void grabEntryData(String date) {
-
         try {
-
             Cursor res = myDb.getIdData();
 //            if (res.getCount() == 0) {
 //                return;
 //            }
 
             StringBuffer buffer = new StringBuffer();
-
 
             while (res.moveToNext()) {
 
@@ -180,9 +168,49 @@ public class RecordingsActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(RecordingsActivity.this, "Entry is Empty", Toast.LENGTH_SHORT).show();
         }
-
     }
 
+
+    //Creating options menu and items
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        MenuItem settings = menu.findItem(R.id.menu_settings);//Remove Settings button
+        settings.setVisible(false);
+        MenuItem delete = menu.findItem(R.id.menu_delete);//Remove Settings button
+        delete.setVisible(true);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        final ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
+        if (item.getItemId() == R.id.menu_delete){
+            AlertDialog.Builder alert = new AlertDialog.Builder(
+                    RecordingsActivity.this);
+            alert.setTitle("Alert!!");
+            alert.setMessage("Are you sure you want to delete the database?");
+            alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    deleteEverything(recordingsListView);
+                    dialog.dismiss();
+
+                }
+
+            });
+            alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.dismiss();
+                }
+            });
+            alert.show();
+        }
+
+        return super.onOptionsItemSelected(item);
+        }
 
 
 }

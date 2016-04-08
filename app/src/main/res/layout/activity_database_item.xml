@@ -16,8 +16,38 @@
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/recordingItemListView"
+            android:id="@+id/chartListView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-    </RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Graph"
+        android:id="@+id/graphButton"
+        android:layout_alignTop="@+id/chartListView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Raw Data"
+        android:id="@+id/rawDataButton"
+        android:layout_below="@+id/graphButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="44dp" />
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+        <!--android:text="AccelString"-->
+        <!--android:id="@+id/accelString"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignStart="@+id/graphButton"-->
+        <!--android:layout_alignBottom="@+id/recordingItemListView" />-->
+
+</RelativeLayout>
