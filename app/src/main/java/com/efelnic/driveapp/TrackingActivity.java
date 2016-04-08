@@ -88,12 +88,24 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     ArrayList<String> YaccelList;
     ArrayList<String> ZaccelList;
     ArrayList<String> speedList;
+    String distValue;
 
     Gson gsonAccel = new Gson();
     Gson gsonXAccel = new Gson();
     Gson gsonYAccel = new Gson();
     Gson gsonZAccel = new Gson();
     Gson gsonSpeed = new Gson();
+    Gson gsonDistance = new Gson();
+
+    double dist = 0;
+//    double curLat = 0;
+//    double curLng = 0;
+//    double lastLat = 0;
+//    double lastLng = 0;
+    private  Location location;
+    private Location lastLocation = location;
+
+    double curLat, curLng, lastLat, lastLng;
 
     Button viewDataButton;
 
@@ -154,8 +166,10 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         String inputYAccel = gsonYAccel.toJson(YaccelList);
         String inputZAccel = gsonZAccel.toJson(ZaccelList);
         String inputSpeed = gsonSpeed.toJson(speedList);
+        String inputDist = gsonDistance.toJson(distValue);
 
-        boolean isinserted = myDb.insertData(chronoView.getText().toString(), "NoDistanceForNow",  inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel );
+
+        boolean isinserted = myDb.insertData(chronoView.getText().toString(), inputDist,  inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel );
         if (isinserted) {
             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_SHORT).show();
         } else {
@@ -209,6 +223,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), false);
         Location location = locationManager.getLastKnownLocation(provider);
+        lastLocation = location;
 
         //SETTINGS TOGGLE
         checkSettings();
@@ -319,11 +334,29 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
 
+
+
         if (location != null) {
-            Double lat = location.getLatitude();
-            Double lng = location.getLongitude();
-            Double alt = location.getAltitude();
+            double lat = location.getLatitude();
+            double lng = location.getLongitude();
+            double alt = location.getAltitude();
             double spd = (location.getSpeed()) * CONVERSION_METERSPERSECOND_TO_KMH; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
+
+            dist += dist + lastLocation.distanceTo(location);
+            distValue = String.valueOf(dist);
+            lastLocation = location;
+
+//            curLat = lat;
+//            curLng = lng;
+
+//            if(curLat!=lastLat || curLng!=lastLng) {
+//                dist += getDistance(lastLat, lastLng, curLat, curLng);
+//                //dist += calculateDistance(lastLat, lastLng, curLat, curLng);
+//                distValue = String.valueOf(dist);
+//                lastLat = curLat;
+//                lastLng = curLng;
+//
+//            }
 
             // rounding values to format "#.##"
             double latt = Math.round(lat* 100.00)/100.00;
@@ -353,6 +386,8 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
                 else Toast.makeText(getApplicationContext(), "GPS is loading. One moment please! - 4 ", Toast.LENGTH_SHORT).show();
             }
         }
+
+
 
         //Loic
         // speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
@@ -987,4 +1022,21 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //        return custom_view;
 //    }
 
+    public double getDistance(double lat1, double lon1, double lat2, double lon2) {
+        double latA = Math.toRadians(lat1);
+        double lonA = Math.toRadians(lon1);
+        double latB = Math.toRadians(lat2);
+        double lonB = Math.toRadians(lon2);
+        double cosAng = (Math.cos(latA) * Math.cos(latB) * Math.cos(lonB-lonA)) +
+                (Math.sin(latA) * Math.sin(latB));
+        double ang = Math.acos(cosAng);
+        double dist = ang *6371;
+
+        return dist;
+    }
+    public static double calculateDistance(double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
+        float[] results = new float[3];
+        Location.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, results);
+        return results[0];
+    }
 }
