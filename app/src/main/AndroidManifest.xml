@@ -24,7 +24,6 @@
         <activity android:name=".TrackingActivity" />
         <activity android:name=".ScriptActivity" />
         <activity android:name=".RecordingsActivity" />
-        <activity android:name=".GraphTest" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".DatabaseItemActivity" />
         <!-- <activity -->
