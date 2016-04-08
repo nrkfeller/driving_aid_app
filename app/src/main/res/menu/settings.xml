@@ -28,10 +28,10 @@
         android:visible="false"/>
 
     <item
-        android:id="@+id/menu_play"
+        android:id="@+id/menu_delete"
         android:orderInCategory="4"
         app:showAsAction="ifRoom"
-        android:title="@string/Play"
-        android:icon="@android:drawable/ic_media_play"
+        android:title="Delete"
+        android:icon="@android:drawable/ic_menu_delete"
         android:visible="false"/>
 </menu>

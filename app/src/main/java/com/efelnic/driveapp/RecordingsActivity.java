@@ -11,6 +11,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,12 +31,13 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
-public class RecordingsActivity extends AppCompatActivity {
+public class RecordingsActivity extends MainActivity {
 
     DatabaseHelper myDb;
     Button queryButton;
-    Button deleteButton;
+
     Cursor cursor;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -59,37 +62,6 @@ public class RecordingsActivity extends AppCompatActivity {
         recordingsListView.setAdapter(recordingsAdapter);
         grabAllData(recordingsListView);
 
-
-        Button deleteButton = (Button)findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AlertDialog.Builder alert = new AlertDialog.Builder(
-                        RecordingsActivity.this);
-                alert.setTitle("Alert!!");
-                alert.setMessage("Are you sure to delete record");
-                alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteEverything(recordingsListView);
-                        dialog.dismiss();
-
-                    }
-                });
-                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-                    }
-                });
-
-                alert.show();
-            }
-        });
 
 
         recordingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -130,6 +102,7 @@ public class RecordingsActivity extends AppCompatActivity {
     }
 
     public void deleteEverything(View view){
+
         myDb.deleteEverything();
         //refresh list (create new one so screen refreshes)
         ArrayList<User> arrayOfUsers = new ArrayList<User>();
@@ -197,6 +170,47 @@ public class RecordingsActivity extends AppCompatActivity {
         }
     }
 
+
+    //Creating options menu and items
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        MenuItem settings = menu.findItem(R.id.menu_settings);//Remove Settings button
+        settings.setVisible(false);
+        MenuItem delete = menu.findItem(R.id.menu_delete);//Remove Settings button
+        delete.setVisible(true);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        final ListView recordingsListView = (ListView) findViewById(R.id.recordingsListView);
+        if (item.getItemId() == R.id.menu_delete){
+            AlertDialog.Builder alert = new AlertDialog.Builder(
+                    RecordingsActivity.this);
+            alert.setTitle("Alert!!");
+            alert.setMessage("Are you sure you want to delete the database?");
+            alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    deleteEverything(recordingsListView);
+                    dialog.dismiss();
+
+                }
+
+            });
+            alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    dialog.dismiss();
+                }
+            });
+            alert.show();
+        }
+
+        return super.onOptionsItemSelected(item);
+        }
 
 
 }
