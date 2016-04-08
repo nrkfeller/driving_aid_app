@@ -9,9 +9,10 @@ import com.github.mikephil.charting.data.ChartData;
  * Created by Roberto on 4/7/2016.
  */
 public abstract class ChartItem {
-    protected static final int TYPE_BARCHART = 0;
+    protected static final int TYPE_RADARCHART = 0;
     protected static final int TYPE_LINECHART = 1;
     protected static final int TYPE_PIECHART = 2;
+    protected static final int TYPE_BARCHART = 3;
 
     protected ChartData<?> mChartData;
 

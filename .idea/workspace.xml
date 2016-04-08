@@ -39,11 +39,69 @@
       <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.448276">
-              <caret line="165" column="111" selection-start-line="165" selection-start-column="111" selection-end-line="165" selection-end-column="111" />
+            <state vertical-scroll-proportion="-19.758621">
+              <caret line="540" column="0" selection-start-line="540" selection-start-column="0" selection-end-line="540" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#4939#4955#0" expanded="false" />
+                <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#5193#5235#0" expanded="false" />
+                <element signature="e#6113#6117#0" expanded="false" />
+                <element signature="e#6155#6185#0" expanded="false" />
+                <element signature="method#onCreate#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#7398#7437#0" expanded="false" />
+                <element signature="e#8654#8664#0" expanded="false" />
+                <element signature="e#9092#9105#0" expanded="false" />
+                <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onLocationChanged#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#13706#13712#0" expanded="false" />
+                <element signature="e#15576#15583#0" expanded="false" />
+                <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#16683#16704#0" expanded="false" />
+                <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#19012#19077#0" expanded="false" />
+                <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#22192#22251#0" expanded="false" />
+                <element signature="e#22362#22386#0" expanded="false" />
+                <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#24064#24116#0" expanded="false" />
+                <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkSettings#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkGpsUISetting#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkAccelUISetting#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkTimerUISetting#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkLineGraphUISetting#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkSpeedometerUISetting#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkGPSTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkAccelTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkChronoTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkBackgroundColorSetting#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="method#checkSpeedometerTextSize#0;class#TrackingActivity#0" expanded="false" />
+                <element signature="e#36496#36521#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.41391304">
+              <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -58,30 +116,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseHelper.java">
+      <file leaf-file-name="DatabaseItemActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="21" column="52" selection-start-line="21" selection-start-column="52" selection-end-line="21" selection-end-column="52" />
-              <folding />
+              <caret line="270" column="32" selection-start-line="270" selection-start-column="32" selection-end-line="270" selection-end-column="32" />
+              <folding>
+                <element signature="e#3088#3849#0" expanded="true" />
+                <element signature="e#3848#3849#0" expanded="true" />
+                <element signature="e#4139#4147#0" expanded="true" />
+                <element signature="e#5176#5184#0" expanded="true" />
+                <element signature="e#7318#7326#0" expanded="true" />
+                <element signature="e#8225#8233#0" expanded="true" />
+                <element signature="e#11269#11277#0" expanded="true" />
+                <element signature="e#14451#14459#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseItemActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java">
+      <file leaf-file-name="PieChartItem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/PieChartItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.72757477">
-              <caret line="64" column="18" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
               <folding>
-                <element signature="e#2474#3235#0" expanded="true" />
-                <element signature="e#3234#3235#0" expanded="true" />
-                <element signature="e#3926#3934#0" expanded="true" />
-                <element signature="method#grabEntryData#0;class#DatabaseItemActivity#0" expanded="false" />
-                <element signature="e#7108#7116#0" expanded="true" />
-                <element signature="method#scatterGraph#0;class#DatabaseItemActivity#0" expanded="false" />
-                <element signature="e#8013#8021#0" expanded="true" />
-                <element signature="method#radarGraph#0;class#DatabaseItemActivity#0" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,8 +150,8 @@
       <file leaf-file-name="list_item_linechart.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_linechart.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.5172415">
-              <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
+            <state vertical-scroll-proportion="-5.862069">
+              <caret line="10" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -100,11 +160,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChartItem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/ChartItem.java">
+      <file leaf-file-name="list_item_radarchart.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_radarchart.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.275862">
+              <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RadarChartItem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RadarChartItem.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+              <caret line="74" column="39" selection-start-line="74" selection-start-column="39" selection-end-line="74" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -112,41 +185,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RawDataActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RawDataActivity.java">
+      <file leaf-file-name="ChartItem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/ChartItem.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
-                <element signature="e#1865#1873#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_database_item.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_database_item.xml">
+      <file leaf-file-name="LineChartItem.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/LineChartItem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.275862">
-              <caret line="18" column="42" selection-start-line="18" selection-start-column="42" selection-end-line="18" selection-end-column="42" />
-              <folding />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="85" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="85" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_raw_data.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_raw_data.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.965517">
-              <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -155,8 +214,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="layoutResourceFile_vertical" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -1777,15 +1836,20 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_recordings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RecordingsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_raw_data.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_raw_data.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RawDataActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/ChartItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/LineChartItem.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_linechart.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_database_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RadarChartItem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_radarchart.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_linechart.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/ChartItem.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_piechart.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/PieChartItem.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -1841,6 +1905,24 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="driving_aid_app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1922,6 +2004,9 @@
     <property name="last_opened_file_path" value="$USER_HOME$/AndroidStudioProjects/driving_aid_app" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Roberto\driving_aid_app\app\src\main\res\layout" />
+    </key>
     <key name="android.template.packageName">
       <recent name="com.efelnic.driveapp" />
     </key>
@@ -2090,6 +2175,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6c587687-ff5b-454a-826e-05649347176e" name="Default" comment="" />
@@ -2110,7 +2198,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290735" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3290735" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -2135,11 +2223,21 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -2167,16 +2265,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="124" column="63" selection-start-line="124" selection-start-column="63" selection-end-line="124" selection-end-column="63" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.448276">
-          <caret line="165" column="111" selection-start-line="165" selection-start-column="111" selection-end-line="165" selection-end-column="111" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2222,20 +2310,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/LineChartItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4363002">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="85" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="85" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#741#742#0" expanded="true" />
-            <element signature="e#782#783#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_linechart.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_radarchart.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5172415">
-          <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
+        <state vertical-scroll-proportion="-5.275862">
+          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -2246,7 +2332,49 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/ChartItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/RadarChartItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="74" column="39" selection-start-line="74" selection-start-column="39" selection-end-line="74" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_linechart.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.862069">
+          <caret line="10" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_piechart.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32635254">
+          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/PieChartItem.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="16" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -2255,18 +2383,84 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/DatabaseItemActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.72757477">
-          <caret line="64" column="18" selection-start-line="64" selection-start-column="18" selection-end-line="64" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="270" column="32" selection-start-line="270" selection-start-column="32" selection-end-line="270" selection-end-column="32" />
           <folding>
-            <element signature="e#2474#3235#0" expanded="true" />
-            <element signature="e#3234#3235#0" expanded="true" />
-            <element signature="e#3926#3934#0" expanded="true" />
-            <element signature="method#grabEntryData#0;class#DatabaseItemActivity#0" expanded="false" />
-            <element signature="e#7108#7116#0" expanded="true" />
-            <element signature="method#scatterGraph#0;class#DatabaseItemActivity#0" expanded="false" />
-            <element signature="e#8013#8021#0" expanded="true" />
-            <element signature="method#radarGraph#0;class#DatabaseItemActivity#0" expanded="false" />
+            <element signature="e#3088#3849#0" expanded="true" />
+            <element signature="e#3848#3849#0" expanded="true" />
+            <element signature="e#4139#4147#0" expanded="true" />
+            <element signature="e#5176#5184#0" expanded="true" />
+            <element signature="e#7318#7326#0" expanded="true" />
+            <element signature="e#8225#8233#0" expanded="true" />
+            <element signature="e#11269#11277#0" expanded="true" />
+            <element signature="e#14451#14459#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-19.758621">
+          <caret line="540" column="0" selection-start-line="540" selection-start-column="0" selection-end-line="540" selection-end-column="0" />
+          <folding>
+            <element signature="e#4939#4955#0" expanded="false" />
+            <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#5193#5235#0" expanded="false" />
+            <element signature="e#6113#6117#0" expanded="false" />
+            <element signature="e#6155#6185#0" expanded="false" />
+            <element signature="method#onCreate#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#7398#7437#0" expanded="false" />
+            <element signature="e#8654#8664#0" expanded="false" />
+            <element signature="e#9092#9105#0" expanded="false" />
+            <element signature="method#onResume#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onLocationChanged#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#13706#13712#0" expanded="false" />
+            <element signature="e#15576#15583#0" expanded="false" />
+            <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#16683#16704#0" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#19012#19077#0" expanded="false" />
+            <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#22192#22251#0" expanded="false" />
+            <element signature="e#22362#22386#0" expanded="false" />
+            <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#24064#24116#0" expanded="false" />
+            <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkSettings#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkGpsUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkAccelUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkTimerUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkLineGraphUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkSpeedometerUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkGPSTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkAccelTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkChronoTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkBackgroundColorSetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkSpeedometerTextSize#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#36496#36521#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41391304">
+          <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>

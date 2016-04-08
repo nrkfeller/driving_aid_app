@@ -50,8 +50,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.ActionBar;
 
-
-
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -82,7 +80,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     boolean bPermissionGranted;
     LocationManager locationManager;
     String provider;
-
 
     //Database Vars
     DatabaseHelper myDb;
@@ -139,15 +136,10 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     //LinearLayout la; // used for charts
     //View bar1, bar2, bar3, lin_acel_bar, speed_bar, time_bar;
 
-
-
     //**** START OF METHODS ****//
 
 
-
-
 //Database Methods
-
 
 
     // TODO: database
@@ -199,9 +191,6 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //    }
 
 //End of Database Methods
-
-
-
 
     // "ON-" Methods
     //Create, resume, pause
@@ -388,17 +377,17 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         //Calculate Linear Acceleration
         double lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
 
-        //Database
-        accelerationList.add(String.valueOf(lin_accel));
-        XaccelList.add(String.valueOf(event.values[2]));
-        YaccelList.add(String.valueOf(event.values[1]));
-        ZaccelList.add(String.valueOf(event.values[0]));
-
         // rounding values to format "#.##"
         double x = Math.round(event.values[2] * 100.0)/100.0;
         double y = Math.round(event.values[1] * 100.0)/100.0;
         double z = Math.round(event.values[0] * 100.0)/100.0;
         double accel = Math.round(lin_accel * 100.0)/10.0;
+
+        //Database
+        accelerationList.add(String.valueOf(accel));
+        XaccelList.add(String.valueOf(x));
+        YaccelList.add(String.valueOf(y));
+        ZaccelList.add(String.valueOf(z));
 
         //Send values to txt display
         accView.setText("Accel : " + accel);
@@ -550,8 +539,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
 //End of getLocation, Chronometer, Accel, position tracking methods
 
-
-    //Line Chart Methods
+//Line Chart Methods
     public void lineChartFormat(){
         //RealTime line chart
         mChart = (LineChart) findViewById(R.id.chart1);
@@ -673,7 +661,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
     }
 //End of Line Chart Methods
 
-    //Speedometer Method
+//Speedometer Method
     public void startSpeedometer() {
 
         speedometer = (SpeedometerGauge) findViewById(R.id.speedometer);
@@ -697,8 +685,7 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         checkSpeedometerTextSize();
 
     }
-
-    //Settings Methods
+//Settings Methods
     //Check ALL the settings
     public void checkSettings(){
 
@@ -963,18 +950,15 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
             case "40":
                 speedometer.setLabelTextSize(40);
                 break;
-
             case "50":
                 speedometer.setLabelTextSize(50);
                 break;
-
             case "60":
                 speedometer.setLabelTextSize(50);
                 break;
             default:
                 speedometer.setLabelTextSize(40);
         }
-
     }
 //End of Settings Methods
 

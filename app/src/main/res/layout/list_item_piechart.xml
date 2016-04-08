@@ -4,9 +4,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <com.github.mikephil.charting.charts.LineChart
+    <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        android:layout_height="345dp" />
 
 </LinearLayout>
