@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class ScriptActivity extends MainActivity {
@@ -35,7 +36,7 @@ public class ScriptActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_script);
 
-        timeAndMessages = new HashMap();
+        timeAndMessages = (HashMap) loadMap();
 
         message = (EditText)findViewById(R.id.messageText);
         time = (EditText)findViewById(R.id.timeText);
@@ -53,7 +54,16 @@ public class ScriptActivity extends MainActivity {
 
     public void removeMessage(View view) {
         timeAndMessages = new HashMap();
-        Toast.makeText(getApplicationContext(), "Messages Cleared", Toast.LENGTH_LONG).show();
+        SharedPreferences pSharedPref = getApplicationContext().getSharedPreferences("MyVariables", Context.MODE_PRIVATE);
+        if (pSharedPref != null){
+            Toast.makeText(getApplicationContext(), "Messages Cleared", Toast.LENGTH_LONG).show();
+            JSONObject jsonObject = new JSONObject(timeAndMessages);
+            String jsonString = jsonObject.toString();
+            SharedPreferences.Editor editor = pSharedPref.edit();
+            editor.remove("My_map").commit();
+            editor.putString("My_map", jsonString);
+            editor.commit();
+        }
     }
 
     public void viewAllMessages(View view) {
@@ -72,7 +82,7 @@ public class ScriptActivity extends MainActivity {
 
         SharedPreferences pSharedPref = getApplicationContext().getSharedPreferences("MyVariables", Context.MODE_PRIVATE);
         if (pSharedPref != null){
-            Toast.makeText(getApplicationContext(), timeAndMessages.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Commited Race Script", Toast.LENGTH_LONG).show();
             JSONObject jsonObject = new JSONObject(timeAndMessages);
             String jsonString = jsonObject.toString();
             SharedPreferences.Editor editor = pSharedPref.edit();
@@ -81,5 +91,25 @@ public class ScriptActivity extends MainActivity {
             editor.commit();
         }
 
+    }
+
+    private Map<String,String> loadMap(){
+        Map<String,String> outputMap = new HashMap<String,String>();
+        SharedPreferences pSharedPref = getApplicationContext().getSharedPreferences("MyVariables", Context.MODE_PRIVATE);
+        try{
+            if (pSharedPref != null){
+                String jsonString = pSharedPref.getString("My_map", (new JSONObject()).toString());
+                JSONObject jsonObject = new JSONObject(jsonString);
+                Iterator<String> keysItr = jsonObject.keys();
+                while(keysItr.hasNext()) {
+                    String key = keysItr.next();
+                    String value = (String) jsonObject.get(key);
+                    outputMap.put(key, value);
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return outputMap;
     }
 }
