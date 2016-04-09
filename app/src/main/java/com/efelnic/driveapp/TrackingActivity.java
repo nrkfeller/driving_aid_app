@@ -87,6 +87,15 @@ import org.json.JSONObject;
 
 public class TrackingActivity extends ScriptActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
+
+    //ProximitySensor
+ TextView proximityText;
+    SensorManager sm;
+    Sensor proximitySensor;
+    int newCount=0;
+
+
+
     //Location & Permission Vars
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     boolean bPermissionGranted;
@@ -220,10 +229,23 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
     // "ON-" Methods
     //Create, resume, pause
+
+    //Proximity Sensor
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
+        sm=(SensorManager)getSystemService(SENSOR_SERVICE);
+        proximitySensor=sm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        proximityText=(TextView)findViewById(R.id.proximityTextView);
+
+        sm.registerListener(this,proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+
+
         //TODO: toast when all settings are off
         //Toast.makeText(getApplicationContext(), "Make sure to customize your Settings", Toast.LENGTH_LONG).show();
 
@@ -317,7 +339,10 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     @Override
     protected void onResume() {
         super.onResume();
+        if (sm != null) {
+            sm.registerListener(mProximityListener, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
 
+        }
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
@@ -363,6 +388,9 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     protected void onPause() {
         super.onPause();
 
+        if (sm !=null) {
+            sm.unregisterListener(mProximityListener);
+        }
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
@@ -436,48 +464,95 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         //Loic
         // speed_bar.setLayoutParams(new LinearLayout.LayoutParams(90, (int) Math.round(spd)));
     }
+
     @Override
-    public void onSensorChanged(SensorEvent event) {
+    public void onStatusChanged(String provider, int status, Bundle extras) {
 
-        //Rounding
-        DecimalFormat df = new DecimalFormat("##.##");
-        df.setRoundingMode(RoundingMode.DOWN);
+    }
 
-        //Gravity filter
-        gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
-        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
-        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+    @Override
+    public void onProviderEnabled(String provider) {
 
-        //Acceleration components after gravity has been filtered
-        linear_acceleration[0] = event.values[0] - gravity[0];
-        linear_acceleration[1] = event.values[1] - gravity[1];
-        linear_acceleration[2] = event.values[2] - gravity[2];
+    }
 
-        //Calculate Linear Acceleration
-        double lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
+    @Override
+    public void onProviderDisabled(String provider) {
 
-        // rounding values to format "#.##"
-        double x = Math.round(event.values[2] * 100.0)/100.0;
-        double y = Math.round(event.values[1] * 100.0)/100.0;
-        double z = Math.round(event.values[0] * 100.0)/100.0;
-        double accel = Math.round(lin_accel * 100.0)/10.0;
+    }
 
-        //Database
-        accelerationList.add(String.valueOf(accel));
-        XaccelList.add(String.valueOf(x));
-        YaccelList.add(String.valueOf(y));
-        ZaccelList.add(String.valueOf(z));
+    //ProximitySensor
+    private  SensorEventListener mProximityListener = new SensorEventListener() {
 
-        //Send values to txt display
-        accView.setText("Accel : " + accel);
-        xrotView.setText("Orientation X : " + x);
-        yrotView.setText("Orientation Y : " + y);
-        zrotView.setText("Orientation Z : " + z );
+        boolean High=false,Low=false,Highagain=false;
 
-        //Send value to entry function for plotting (on REAL time line chart)
-        addEntry(lin_accel);
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
 
-        // Loic
+
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+
+            //ProximitySensor
+            float[] value=event.values;
+            if(value[0]>=proximitySensor.getMaximumRange()) {
+                High=true;
+            }
+
+            if(High&&value[0]<=5) {
+                Low=true;
+            }
+
+            if(Low&&value[0]>=proximitySensor.getMaximumRange()) {
+                Highagain=true;
+            }
+
+            if(Highagain) {
+                newCount++;
+                proximityText.setText(newCount+"");
+                High=Low=Highagain=false;
+            }
+
+            //Rounding
+            DecimalFormat df = new DecimalFormat("##.##");
+            df.setRoundingMode(RoundingMode.DOWN);
+
+            //Gravity filter
+            gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
+            gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
+            gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+
+            //Acceleration components after gravity has been filtered
+            linear_acceleration[0] = event.values[0] - gravity[0];
+            linear_acceleration[1] = event.values[1] - gravity[1];
+            linear_acceleration[2] = event.values[2] - gravity[2];
+
+            //Calculate Linear Acceleration
+            double lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
+
+            // rounding values to format "#.##"
+            double x = Math.round(event.values[2] * 100.0) / 100.0;
+            double y = Math.round(event.values[1] * 100.0) / 100.0;
+            double z = Math.round(event.values[0] * 100.0) / 100.0;
+            double accel = Math.round(lin_accel * 100.0) / 10.0;
+
+            //Database
+            accelerationList.add(String.valueOf(accel));
+            XaccelList.add(String.valueOf(x));
+            YaccelList.add(String.valueOf(y));
+            ZaccelList.add(String.valueOf(z));
+
+            //Send values to txt display
+            accView.setText("Accel : " + accel);
+            xrotView.setText("Orientation X : " + x);
+            yrotView.setText("Orientation Y : " + y);
+            zrotView.setText("Orientation Z : " + z);
+
+            //Send value to entry function for plotting (on REAL time line chart)
+            addEntry(lin_accel);
+
+            // Loic
 //        // Bar charts
 //        int temp_x = Math.round(event.values[2] * 10);
 //        int temp_y = Math.round(event.values[1] * 10);
@@ -488,22 +563,23 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 //        bar2.setLayoutParams(new LinearLayout.LayoutParams(90, temp_y));
 //        bar3.setLayoutParams(new LinearLayout.LayoutParams(90, temp_z));
 //        lin_acel_bar.setLayoutParams(new LinearLayout.LayoutParams(90, temp_A));
-    }
-    //End of ON- "Changed"
+        }
+        //End of ON- "Changed"
+
+
+    };
 
     //Not yet used
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-    }
-    @Override
-    public void onProviderEnabled(String provider) {
-    }
-    @Override
-    public void onProviderDisabled(String provider) {
-    }
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-    }
+    //@Override
+    //public void onStatusChanged(String provider, int status, Bundle extras) {
+    //}
+   // @Override
+   // public void onProviderEnabled(String provider) {
+    //}
+   // @Override
+   // public void onProviderDisabled(String provider) {
+   // }
+
     //End of Not yet used
 //End "ON-" Methods
 
@@ -1111,5 +1187,15 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         float[] results = new float[3];
         Location.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, results);
         return results[0];
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }

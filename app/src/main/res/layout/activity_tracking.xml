@@ -247,6 +247,16 @@
             android:layout_below="@+id/chart1"
             android:onClick="getLocation" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="0.0"
+            android:id="@+id/proximityTextView"
+            android:layout_alignRight="@+id/timerView"
+            android:layout_alignEnd="@+id/timerView"
+            android:layout_above="@+id/latitudeView" />
+
         <!--<Button-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
