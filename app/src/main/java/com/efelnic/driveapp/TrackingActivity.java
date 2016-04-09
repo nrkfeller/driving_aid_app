@@ -684,6 +684,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         c.setBase(SystemClock.elapsedRealtime());
         c.start();
 
+
         final Handler handler =  new Handler();
         Runnable run = new Runnable() {
             @Override

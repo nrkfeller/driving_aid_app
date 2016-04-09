@@ -51,6 +51,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.efelnic.driveapp.DatabaseItemActivity" />
         </activity>
+        <activity android:name=".PrivacyActivity" />
+        <activity android:name=".TermsActivity" />
+        <activity android:name=".CreditsActivity"></activity>
     </application>
 
 </manifest>
