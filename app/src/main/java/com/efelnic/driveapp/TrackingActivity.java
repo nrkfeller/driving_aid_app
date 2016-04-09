@@ -95,6 +95,8 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     int newCount=0;
 
 
+    Chronometer c;
+    long totalTimeNow = 0;
 
     //Location & Permission Vars
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -241,6 +243,8 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         sm=(SensorManager)getSystemService(SENSOR_SERVICE);
         proximitySensor=sm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         proximityText=(TextView)findViewById(R.id.proximityTextView);
+
+
 
         sm.registerListener(this,proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
 
@@ -511,6 +515,14 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
             if(Highagain) {
                 newCount++;
                 proximityText.setText(newCount+"");
+
+                long previousTotal = totalTimeNow;
+
+                totalTimeNow = (SystemClock.elapsedRealtime() - c.getBase()) / 1000;
+
+                long lapTime = totalTimeNow - previousTotal;
+
+                lapView.setText("Previous Lap : " + lapTime + " seconds");
                 High=Low=Highagain=false;
             }
 
@@ -680,7 +692,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         onLocationChanged(location);
     }
     public void startChronometer() {
-        final Chronometer c = (Chronometer) findViewById(R.id.chronometer);
+        c = (Chronometer) findViewById(R.id.chronometer);
         c.setBase(SystemClock.elapsedRealtime());
         c.start();
 
@@ -694,7 +706,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
                 int elapsedsec = (int)(elapsed/1000);
                 String elapsedString = Integer.toString(elapsedsec);
 
-
+                //ProximitySensor
                 //Toast.makeText(getApplicationContext(), String.valueOf(elapsedsec) , Toast.LENGTH_LONG).show();
 
                 if ( timeAndMessages.containsKey(elapsedString)) {
