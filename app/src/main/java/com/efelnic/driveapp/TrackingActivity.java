@@ -26,6 +26,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -40,6 +41,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -50,11 +52,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.app.ActionBar;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
@@ -72,8 +81,11 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-public class TrackingActivity extends MainActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
+import org.json.JSONObject;
+
+public class TrackingActivity extends ScriptActivity implements LocationListener, SensorEventListener, OnChartValueSelectedListener {
 
     //Location & Permission Vars
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -216,6 +228,15 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         //Toast.makeText(getApplicationContext(), "Make sure to customize your Settings", Toast.LENGTH_LONG).show();
 
         //Permissions
+//        timeAndMessages.put(3, "three secs");
+//        timeAndMessages.put(8, "otto secs");
+
+        timeAndMessages = (HashMap) loadMap();
+
+        //Toast.makeText(getApplicationContext(), timeAndMessages.toString(), Toast.LENGTH_LONG).show();
+
+
+
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
@@ -270,6 +291,29 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
 //        speed_bar = drawChart(3,10);
 //        time_bar = drawChart(5,5);
     }
+
+    private Map<String,String> loadMap(){
+        Map<String,String> outputMap = new HashMap<String,String>();
+        SharedPreferences pSharedPref = getApplicationContext().getSharedPreferences("MyVariables", Context.MODE_PRIVATE);
+        try{
+            if (pSharedPref != null){
+                String jsonString = pSharedPref.getString("My_map", (new JSONObject()).toString());
+                JSONObject jsonObject = new JSONObject(jsonString);
+                Iterator<String> keysItr = jsonObject.keys();
+                while(keysItr.hasNext()) {
+                    String key = keysItr.next();
+                    String value = (String) jsonObject.get(key);
+                    outputMap.put(key, value);
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return outputMap;
+    }
+
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -560,9 +604,38 @@ public class TrackingActivity extends MainActivity implements LocationListener, 
         onLocationChanged(location);
     }
     public void startChronometer() {
-        Chronometer c = (Chronometer) findViewById(R.id.chronometer);
-        c.setFormat("%s");
+        final Chronometer c = (Chronometer) findViewById(R.id.chronometer);
+        c.setBase(SystemClock.elapsedRealtime());
         c.start();
+
+        final Handler handler =  new Handler();
+        Runnable run = new Runnable() {
+            @Override
+            public void run() {
+
+                long elapsed = SystemClock.elapsedRealtime() - c.getBase();
+                int elapsedsec = (int)(elapsed/1000);
+                String elapsedString = Integer.toString(elapsedsec);
+
+
+                //Toast.makeText(getApplicationContext(), String.valueOf(elapsedsec) , Toast.LENGTH_LONG).show();
+
+                if ( timeAndMessages.containsKey(elapsedString)) {
+
+                    Toast toast = Toast.makeText(getApplicationContext(), timeAndMessages.get(elapsedString).toString() , Toast.LENGTH_LONG);
+                    ViewGroup group = (ViewGroup) toast.getView();
+                    TextView messageTextView = (TextView) group.getChildAt(0);
+                    messageTextView.setTextSize(25);
+                    toast.show();
+                }
+
+
+
+                handler.postDelayed(this, 1000);
+            }
+        };
+
+        handler.post(run);
     }
     public void startAccel() {
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
