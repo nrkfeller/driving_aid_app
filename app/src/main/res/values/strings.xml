@@ -26,7 +26,7 @@
     <string name="Privacy">Privacy Policy</string>
     <string name="Terms">Terms of Use</string>
     <string name="Credits">Credits</string>
-    <string name="About_Text">This is the About page. (underconstruction) \n \nMade by: \nRoberto Riccardi 2 9480668\nLoïc Lajoumard de Bellabre 2 6812260 \nNicolas Feller 2 5980925 \nAmbre Le Van Chau 2 6994873 \nYuan Song 2 6542972  </string>
+    <string name="Credits_Text">\nMade by ENCS Students: \nRoberto Riccardi 2 9480668\nLoïc Lajoumard de Bellabre 2 6812260 \nNicolas Feller 2 5980925 \nAmbre Le Van Chau 2 6994873 \nYuan Song 2 6542972  </string>
     <string name="title_activity_preference">PreferenceActivity</string>
     <string name="title_activity_user_setting">UserSettingActivity</string>
 
