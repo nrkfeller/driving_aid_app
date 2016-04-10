@@ -36,64 +36,54 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TrackingActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-25.758621">
-              <caret line="291" column="10" selection-start-line="291" selection-start-column="10" selection-end-line="291" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.5878906">
+              <caret line="786" column="12" selection-start-line="786" selection-start-column="12" selection-end-line="786" selection-end-column="12" />
               <folding>
                 <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#5866#5908#0" expanded="false" />
-                <element signature="e#6835#6839#0" expanded="false" />
-                <element signature="method#onCreate#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#7421#7460#0" expanded="false" />
-                <element signature="e#8961#8971#0" expanded="false" />
-                <element signature="e#9399#9412#0" expanded="false" />
+                <element signature="e#5883#5925#0" expanded="false" />
+                <element signature="e#6852#6856#0" expanded="false" />
+                <element signature="e#7440#7479#0" expanded="false" />
+                <element signature="e#8980#8990#0" expanded="false" />
+                <element signature="e#9418#9431#0" expanded="false" />
                 <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#onLocationChanged#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#13085#13100#0" expanded="false" />
-                <element signature="e#14883#14889#0" expanded="false" />
+                <element signature="e#13105#13120#0" expanded="false" />
+                <element signature="e#14903#14909#0" expanded="false" />
                 <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="class#17176:18294" expanded="false" />
-                <element signature="method#onAccuracyChanged#0;class#17176:18294" expanded="false" />
-                <element signature="method#onSensorChanged#0;class#17176:18294" expanded="false" />
-                <element signature="e#18296#18318#0" expanded="false" />
+                <element signature="method#onAccuracyChanged#0;class#17159:18365" expanded="false" />
+                <element signature="e#18367#18389#0" expanded="false" />
                 <element signature="method#loadMap#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#21833#21898#0" expanded="false" />
+                <element signature="e#21904#21969#0" expanded="false" />
                 <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#23984#24001#0" expanded="false" />
+                <element signature="e#24092#24109#0" expanded="false" />
                 <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#26078#26137#0" expanded="false" />
-                <element signature="e#26248#26272#0" expanded="false" />
-                <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="e#27955#28007#0" expanded="false" />
+                <element signature="e#26186#26245#0" expanded="false" />
+                <element signature="e#26356#26380#0" expanded="false" />
                 <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#checkSettings#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkGpsUISetting#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkAccelUISetting#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#checkTimerUISetting#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkLineGraphUISetting#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkDigitalSpeedometerUISetting#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkAnalogSpeedometerUISetting#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkGPSTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkDigitalSpeedTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkAccelTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#checkChronoTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
-                <element signature="method#checkBackgroundColorSetting#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkSpeedometerTextSize#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#checkSpeedometerMaxValue#0;class#TrackingActivity#0" expanded="false" />
                 <element signature="method#getDistance#0;class#TrackingActivity#0" expanded="false" />
@@ -103,16 +93,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_tracking.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_tracking.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml">
           <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="175" column="36" selection-start-line="175" selection-start-column="36" selection-end-line="175" selection-end-column="36" />
-              <folding />
+            <state vertical-scroll-proportion="-5.551724">
+              <caret line="175" column="42" selection-start-line="175" selection-start-column="42" selection-end-line="175" selection-end-column="42" />
+              <folding>
+                <element signature="e#1140#1169#0" expanded="true" />
+                <element signature="e#2340#2365#0" expanded="true" />
+                <element signature="e#8624#8648#0" expanded="true" />
+                <element signature="e#9188#9214#0" expanded="true" />
+              </folding>
             </state>
           </provider>
           <provider selected="true" editor-type-id="android-designer">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.296296">
+              <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -1734,11 +1739,11 @@
       <list>
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/ScriptActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/xml/settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/UserSettingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/arrays.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java" />
       </list>
     </option>
@@ -2066,7 +2071,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3940362" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3940362" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -2096,14 +2101,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java</url>
-          <line>279</line>
-          <properties />
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
@@ -2185,7 +2182,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="22" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2244,14 +2241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21794872">
-          <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk1/sources/android-23/android/preference/ListPreference.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2268,78 +2257,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.758621">
-          <caret line="291" column="10" selection-start-line="291" selection-start-column="10" selection-end-line="291" selection-end-column="10" />
-          <folding>
-            <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#5866#5908#0" expanded="false" />
-            <element signature="e#6835#6839#0" expanded="false" />
-            <element signature="method#onCreate#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#7421#7460#0" expanded="false" />
-            <element signature="e#8961#8971#0" expanded="false" />
-            <element signature="e#9399#9412#0" expanded="false" />
-            <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onLocationChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#13085#13100#0" expanded="false" />
-            <element signature="e#14883#14889#0" expanded="false" />
-            <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="class#17176:18294" expanded="false" />
-            <element signature="method#onAccuracyChanged#0;class#17176:18294" expanded="false" />
-            <element signature="method#onSensorChanged#0;class#17176:18294" expanded="false" />
-            <element signature="e#18296#18318#0" expanded="false" />
-            <element signature="method#loadMap#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#21833#21898#0" expanded="false" />
-            <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#23984#24001#0" expanded="false" />
-            <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#26078#26137#0" expanded="false" />
-            <element signature="e#26248#26272#0" expanded="false" />
-            <element signature="method#addEntry#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="e#27955#28007#0" expanded="false" />
-            <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkSettings#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkGpsUISetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkAccelUISetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkTimerUISetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkLineGraphUISetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkDigitalSpeedometerUISetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkAnalogSpeedometerUISetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkGPSTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkDigitalSpeedTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkAccelTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkChronoTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkBackgroundColorSetting#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkSpeedometerTextSize#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#checkSpeedometerMaxValue#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#getDistance#0;class#TrackingActivity#0" expanded="false" />
-            <element signature="method#calculateDistance#0;class#TrackingActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.cardiomood.android/android-widgets/0.1.1/743529577c5d4160c8838e4262df49affa5c53a8/android-widgets-0.1.1-sources.jar!/com/cardiomood/android/controls/gauge/SpeedometerGauge.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33203125">
           <caret line="391" column="24" selection-start-line="391" selection-start-column="20" selection-end-line="391" selection-end-column="24" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1495#1509#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1495#1509#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2357,16 +2281,16 @@
         <state vertical-scroll-proportion="0.8632163">
           <caret line="108" column="25" selection-start-line="108" selection-start-column="25" selection-end-line="108" selection-end-column="48" />
           <folding>
-            <element signature="e#1020#1045#0" expanded="true" />
-            <element signature="e#1207#1225#0" expanded="true" />
-            <element signature="e#1388#1409#0" expanded="true" />
-            <element signature="e#1579#1609#0" expanded="true" />
-            <element signature="e#1775#1798#0" expanded="true" />
-            <element signature="e#3529#3563#0" expanded="true" />
-            <element signature="e#4299#4324#0" expanded="true" />
-            <element signature="e#4404#4425#0" expanded="true" />
-            <element signature="e#4548#4578#0" expanded="true" />
-            <element signature="e#4662#4687#0" expanded="true" />
+            <element signature="e#1020#1045#0" expanded="false" />
+            <element signature="e#1207#1225#0" expanded="false" />
+            <element signature="e#1388#1409#0" expanded="false" />
+            <element signature="e#1579#1609#0" expanded="false" />
+            <element signature="e#1775#1798#0" expanded="false" />
+            <element signature="e#3529#3563#0" expanded="false" />
+            <element signature="e#4299#4324#0" expanded="false" />
+            <element signature="e#4404#4425#0" expanded="false" />
+            <element signature="e#4548#4578#0" expanded="false" />
+            <element signature="e#4662#4687#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2379,15 +2303,83 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.296296">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tracking.xml">
       <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="175" column="36" selection-start-line="175" selection-start-column="36" selection-end-line="175" selection-end-column="36" />
-          <folding />
+        <state vertical-scroll-proportion="-5.551724">
+          <caret line="175" column="42" selection-start-line="175" selection-start-column="42" selection-end-line="175" selection-end-column="42" />
+          <folding>
+            <element signature="e#1140#1169#0" expanded="true" />
+            <element signature="e#2340#2365#0" expanded="true" />
+            <element signature="e#8624#8648#0" expanded="true" />
+            <element signature="e#9188#9214#0" expanded="true" />
+          </folding>
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/efelnic/driveapp/TrackingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5878906">
+          <caret line="786" column="12" selection-start-line="786" selection-start-column="12" selection-end-line="786" selection-end-column="12" />
+          <folding>
+            <element signature="method#SaveRace#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#5883#5925#0" expanded="false" />
+            <element signature="e#6852#6856#0" expanded="false" />
+            <element signature="e#7440#7479#0" expanded="false" />
+            <element signature="e#8980#8990#0" expanded="false" />
+            <element signature="e#9418#9431#0" expanded="false" />
+            <element signature="method#onPause#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#13105#13120#0" expanded="false" />
+            <element signature="e#14903#14909#0" expanded="false" />
+            <element signature="method#onStatusChanged#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onProviderEnabled#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onProviderDisabled#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onSensorChanged#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onAccuracyChanged#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onAccuracyChanged#0;class#17159:18365" expanded="false" />
+            <element signature="e#18367#18389#0" expanded="false" />
+            <element signature="method#loadMap#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onCreateOptionsMenu#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onOptionsItemSelected#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#showMessage#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#showDialogGPS#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkLocationPermission#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#21904#21969#0" expanded="false" />
+            <element signature="method#getLocation#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#startChronometer#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#24092#24109#0" expanded="false" />
+            <element signature="method#startAccel#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#startPositionTracking#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#lineChartFormat#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="e#26186#26245#0" expanded="false" />
+            <element signature="e#26356#26380#0" expanded="false" />
+            <element signature="method#createSet#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#onValueSelected#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#startSpeedometer#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkGpsUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkAccelUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkLineGraphUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkDigitalSpeedometerUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkAnalogSpeedometerUISetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkGPSTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkDigitalSpeedTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkAccelTextSizeSetting#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkSpeedometerTextSize#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#checkSpeedometerMaxValue#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#getDistance#0;class#TrackingActivity#0" expanded="false" />
+            <element signature="method#calculateDistance#0;class#TrackingActivity#0" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

@@ -8,7 +8,7 @@
     <string name="Ready_GPS_Longitude">Longitude : </string>
     <string name="Ready_GPS_Altitude">Altitude : </string>
     <string name="Ready_GPS_Speed">Speed : </string>
-    <string name="Ready_Time">Time (s)</string>
+    <string name="Ready_Time">Time</string>
     <string name="Ready_Time_Timer">Timer: </string>
     <string name="Ready_Time_Lap">Lap : </string>
     <string name="Ready_Accelerometer">Linear Accelerometer (m/s<sup><small> 2 </small></sup>)</string>

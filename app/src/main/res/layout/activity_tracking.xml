@@ -189,7 +189,7 @@
             android:textColor="#FF000000"
             android:id="@+id/chronometer"
             android:textSize="25sp"
-            android:layout_below="@+id/lapView"
+            android:layout_below="@+id/previousLapView"
             android:layout_toRightOf="@+id/timerView"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -199,7 +199,7 @@
             android:gravity="center_horizontal" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FF000000"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -207,8 +207,9 @@
             android:id="@+id/lapView"
             android:layout_below="@+id/timerTitle"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:visibility="visible" />
+            android:layout_alignParentEnd="false"
+            android:visibility="visible"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -218,7 +219,7 @@
             android:text="@string/Ready_Time_Timer"
             android:id="@+id/timerView"
             android:layout_gravity="center_vertical"
-            android:layout_below="@+id/lapView"
+            android:layout_below="@+id/previousLapView"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:visibility="visible" />
@@ -233,14 +234,13 @@
             android:onClick="getLocation" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="0.0"
-            android:id="@+id/proximityTextView"
-            android:layout_alignRight="@+id/timerView"
-            android:layout_alignEnd="@+id/timerView"
-            android:layout_above="@+id/latitudeView" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Previous Lap:"
+            android:id="@+id/previousLapView"
+            android:layout_below="@+id/lapView"
+            android:layout_centerHorizontal="true" />
 
         <!--<Button-->
             <!--android:layout_width="wrap_content"-->

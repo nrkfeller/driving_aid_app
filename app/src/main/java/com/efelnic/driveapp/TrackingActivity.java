@@ -142,7 +142,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
     //Different View Vars
     TextView gpsTitle, latView, lngView, altView, spdView, //gps + speed
-            timerTitle, timerView, lapView, chronoView, // time + lap
+            timerTitle, timerView, lapView, previousLapView, chronoView, // time + lap
             accTitle, accView, // lin accel
             compAccTitle, xrotView, yrotView, zrotView; // componential accel
     View lineGraphView, speedometerView;//Line graph
@@ -202,7 +202,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         setContentView(R.layout.activity_tracking);
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
         proximitySensor = sm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        proximityText = (TextView) findViewById(R.id.proximityTextView);
+        //proximityText = (TextView) findViewById(R.id.proximityTextView);
 
 
         sm.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
@@ -289,6 +289,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         checkSettings();
         checkSpeedometerTextSize();
         checkSpeedometerMaxValue();
+
         //checkSpeedometerbackgroundColor();
 
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
@@ -449,10 +450,10 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         ZaccelList.add(String.valueOf(z));
 
         //Send values to txt display
-        accView.setText("Accel : " + accel);
-        xrotView.setText("Orientation X : " + x);
-        yrotView.setText("Orientation Y : " + y);
-        zrotView.setText("Orientation Z : " + z);
+        accView.setText("Accel: " + accel);
+        xrotView.setText("X : " + x);
+        yrotView.setText("Y : " + y);
+        zrotView.setText("Z : " + z);
 
         //Send value to entry function for plotting (on REAL time line chart)
         addEntry(lin_accel);
@@ -475,6 +476,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
         @Override
         public void onSensorChanged(SensorEvent event) {
+        previousLapView = (TextView) findViewById(R.id.previousLapView);
 
             //ProximitySensor
             float[] value = event.values;
@@ -492,7 +494,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
             if (Highagain) {
                 newCount++;
-                proximityText.setText(newCount + "");
+                lapView.setText("Laps Complete : " + newCount + "");
 
                 long previousTotal = totalTimeNow;
 
@@ -500,7 +502,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
                 long lapTime = totalTimeNow - previousTotal;
 
-                lapView.setText("Previous Lap : " + lapTime + " seconds");
+                previousLapView.setText("Previous Lap: " + lapTime + 's');
                 High = Low = Highagain = false;
             }
 
@@ -649,7 +651,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         c = (Chronometer) findViewById(R.id.chronometer);
         c.setBase(SystemClock.elapsedRealtime());
         c.start();
-
+        checkChronoTextSizeSetting();
 
         final Handler handler = new Handler();
         Runnable run = new Runnable() {
@@ -859,8 +861,8 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         //Text Sizes
         checkGPSTextSizeSetting();
         checkAccelTextSizeSetting();
-        checkChronoTextSizeSetting();
         checkDigitalSpeedTextSizeSetting();
+        checkChronoTextSizeSetting();
 
         //Background
         checkBackgroundColorSetting();
@@ -928,17 +930,20 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         timerView = (TextView) findViewById(R.id.timerView);
         chronoView = (TextView) findViewById(R.id.chronometer);
         lapView = (TextView) findViewById(R.id.lapView);
+        previousLapView = (TextView) findViewById(R.id.previousLapView);
 
         if (timerUISetting) {
             timerTitle.setVisibility(View.VISIBLE);
             timerView.setVisibility(View.VISIBLE);
             chronoView.setVisibility(View.VISIBLE);
             lapView.setVisibility(View.VISIBLE);
+            previousLapView.setVisibility(View.VISIBLE);
         } else {
             timerTitle.setVisibility(View.GONE);
             timerView.setVisibility(View.GONE);
             chronoView.setVisibility(View.GONE);
             lapView.setVisibility(View.GONE);
+            previousLapView.setVisibility(View.GONE);
         }
     }
 
@@ -1056,12 +1061,14 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     public void checkChronoTextSizeSetting() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         chronTextSizeSetting = sp.getString("prefChronoTextSize", "25");
+
         switch (chronTextSizeSetting) {
             case "25":
                 timerTitle.setTextSize(25);
                 timerView.setTextSize(25);
                 chronoView.setTextSize(25);
                 lapView.setTextSize(25);
+                previousLapView.setTextSize(25);
                 break;
 
             case "40":
@@ -1069,6 +1076,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
                 timerView.setTextSize(40);
                 chronoView.setTextSize(40);
                 lapView.setTextSize(40);
+                previousLapView.setTextSize(40);
                 break;
 
             case "50":
@@ -1076,6 +1084,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
                 timerView.setTextSize(50);
                 chronoView.setTextSize(50);
                 lapView.setTextSize(50);
+                previousLapView.setTextSize(50);
                 break;
         }
     }
