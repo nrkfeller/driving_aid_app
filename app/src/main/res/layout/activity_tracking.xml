@@ -15,25 +15,10 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.efelnic.driveapp.TrackingActivity"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:onClick="getLocation">
 
-        <!--<LinearLayout-->
-        <!--android:id="@+id/barchart"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_above="@+id/view"-->
-        <!--android:gravity="bottom"-->
-        <!--android:layout_marginTop="60dp"-->
-        <!--/>-->
 
-        <!--<View-->
-        <!--android:id="@+id/view"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:background="#0c0d0c"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--/>-->
 
         <TextView
             android:layout_width="fill_parent"

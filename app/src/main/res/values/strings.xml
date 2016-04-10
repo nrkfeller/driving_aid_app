@@ -8,11 +8,11 @@
     <string name="Ready_GPS_Longitude">Longitude : </string>
     <string name="Ready_GPS_Altitude">Altitude : </string>
     <string name="Ready_GPS_Speed">Speed : </string>
-    <string name="Ready_Time">Time</string>
+    <string name="Ready_Time">Time (s)</string>
     <string name="Ready_Time_Timer">Timer: </string>
     <string name="Ready_Time_Lap">Lap : </string>
-    <string name="Ready_Accelerometer">Linear Accelerometer</string>
-    <string name="Ready_Gyroscope">3D Accelerometer</string>
+    <string name="Ready_Accelerometer">Linear Accelerometer (m/s<sup><small> 2 </small></sup>)</string>
+    <string name="Ready_Gyroscope">3D Accelerometer (m/s<sup><small> 2 </small></sup>)</string>
 
     <string name="Script_name">Script</string>
     <string name="Script_text">This is the Script page. (under construction) \n \nThe user will be able to add and edit scripts. These script will give suggestions at given time marks. \n(ex: at 1min display "1min: Engine now warm, reduce speed")</string>

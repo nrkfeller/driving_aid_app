@@ -114,19 +114,21 @@ public class UserSettingActivity extends    PreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("prefTimerUI"));
             bindPreferenceSummaryToValue(findPreference("prefLineGraphUI"));
             bindPreferenceSummaryToValue(findPreference("prefSpeedometer"));
+            bindPreferenceSummaryToValue(findPreference("prefDigitalSpeedometer"));
 
-            //Database
-            bindPreferenceSummaryToValue(findPreference("prefGpsData"));
-            bindPreferenceSummaryToValue(findPreference("prefAccelerometerData"));
-            bindPreferenceSummaryToValue(findPreference("prefTimerData"));
+//            //Database
+//            bindPreferenceSummaryToValue(findPreference("prefGpsData"));
+//            bindPreferenceSummaryToValue(findPreference("prefAccelerometerData"));
+//            bindPreferenceSummaryToValue(findPreference("prefTimerData"));
 
             //TextSizes
             bindPreferenceSummaryToValue(findPreference("prefGPSTextSize"));
             bindPreferenceSummaryToValue(findPreference("prefAccelTextSize"));
             bindPreferenceSummaryToValue(findPreference("prefChronoTextSize"));
-            bindPreferenceSummaryToValue(findPreference("prefSpeedometerTextSize"));
+            bindPreferenceSummaryToValue(findPreference("prefDigitalSpeedometerTextSize"));
 
             //Miscellaneous
+            bindPreferenceSummaryToValue(findPreference("prefSpeedometerMaxValue"));
             bindPreferenceSummaryToValue(findPreference("prefSpeedUnits"));
             bindPreferenceSummaryToValue(findPreference("prefBackgroundColor"));
         }

@@ -94,16 +94,6 @@
         android:layout_centerHorizontal="true"
         />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Graph"
-        android:id="@+id/GraphButton"
-        android:layout_alignBottom="@+id/AboutButton"
-        android:layout_alignLeft="@+id/RecordingsButton"
-        android:layout_alignStart="@+id/RecordingsButton" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

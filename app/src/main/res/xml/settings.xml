@@ -50,11 +50,15 @@
             android:key="prefLineGraphUI"
             android:title="@string/prefLineGraph" >
         </SwitchPreference>
-
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="prefDigitalSpeedometer"
+            android:title="DIGITAL SPEEDOMETER" >
+        </SwitchPreference>
         <SwitchPreference
             android:defaultValue="true"
             android:key="prefSpeedometer"
-            android:title="@string/pref_speedometer" >
+            android:title="ANALOG SPEEDOMETER" >
         </SwitchPreference>
 
     </PreferenceCategory>
@@ -83,10 +87,16 @@
             android:entryValues="@array/prefTextValues"
             android:defaultValue="25" >
         </ListPreference>
-
+        <ListPreference
+            android:key="prefDigitialSpeedometerTextSize"
+            android:title="Digital Speedometer Text Size"
+            android:entries="@array/prefTextSize"
+            android:entryValues="@array/prefTextValues"
+            android:defaultValue="25" >
+        </ListPreference>
         <ListPreference
             android:key="@string/pref_speedometerTextSize"
-            android:title="@string/speedometerTextSize"
+            android:title="Analog Speedometer Text Size"
             android:entries="@array/prefSpeedTextSize"
             android:entryValues="@array/prefSpeedTextValues"
             android:defaultValue="40" >
@@ -95,13 +105,13 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Miscellaneous" >
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="@string/pref_backgroundColor"
-            android:summary="Left/Right --> White/Black"
-            android:title="@string/backgroundColor" >
-
-        </SwitchPreference>
+        <ListPreference
+            android:key="prefSpeedometerMaxValue"
+            android:title="Speedometer Max Speed Value (Analog)"
+            android:entries="@array/prefSpeedMaxSpeed"
+            android:entryValues="@array/prefSpeedMaxValues"
+            android:defaultValue="100" >
+        </ListPreference>
         <SwitchPreference
             android:defaultValue="false"
             android:key="@string/pref_speedUnits"
@@ -109,6 +119,14 @@
             android:title="@string/speed_units" >
 
         </SwitchPreference>
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/pref_backgroundColor"
+            android:summary="Left/Right --> White/Black"
+            android:title="@string/backgroundColor" >
+
+        </SwitchPreference>
+
 
 
     </PreferenceCategory>

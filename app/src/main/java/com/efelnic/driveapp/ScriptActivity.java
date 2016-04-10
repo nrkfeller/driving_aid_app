@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -112,4 +114,21 @@ public class ScriptActivity extends MainActivity {
         }
         return outputMap;
     }
+
+
+//Creating options menu and items
+    //Used to remove settings icon from actionbar(since activity extends MainActivity it is there by default
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        MenuItem settings = menu.findItem(R.id.menu_settings);//Display save option
+        settings.setVisible(false);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+//end of Options menu and items
 }
