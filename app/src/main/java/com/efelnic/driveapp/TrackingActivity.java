@@ -111,6 +111,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     ArrayList<String> YaccelList;
     ArrayList<String> ZaccelList;
     ArrayList<String> speedList;
+    ArrayList<String> lapTimesList;
     String distValue;
 
     Gson gsonAccel = new Gson();
@@ -118,6 +119,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     Gson gsonYAccel = new Gson();
     Gson gsonZAccel = new Gson();
     Gson gsonSpeed = new Gson();
+    Gson gsonLapTimes = new Gson();
     Gson gsonDistance = new Gson();
 
     double dist = 0;
@@ -179,9 +181,10 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         String inputZAccel = gsonZAccel.toJson(ZaccelList);
         String inputSpeed = gsonSpeed.toJson(speedList);
         String inputDist = gsonDistance.toJson(distValue);
+        String inputLapTimes = gsonLapTimes.toJson(lapTimesList);
 
 
-        boolean isinserted = myDb.insertData(chronoView.getText().toString(), inputDist, inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel);
+        boolean isinserted = myDb.insertData(chronoView.getText().toString(), inputDist, inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel, inputLapTimes);
         if (isinserted) {
             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_SHORT).show();
         } else {
@@ -258,6 +261,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         YaccelList = new ArrayList<String>();
         ZaccelList = new ArrayList<String>();
         speedList = new ArrayList<String>();
+        lapTimesList = new ArrayList<String>();
         myDb = new DatabaseHelper(this);
 
         //SaveRace();
@@ -501,9 +505,15 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
                 totalTimeNow = (SystemClock.elapsedRealtime() - c.getBase()) / 1000;
 
                 long lapTime = totalTimeNow - previousTotal;
+//TODO FIX THIS
+                lapTimesList.add(Long.toString(lapTime));
 
                 previousLapView.setText("Previous Lap: " + lapTime + 's');
                 High = Low = Highagain = false;
+
+                Chronometer lapc = (Chronometer) findViewById(R.id.lapchronometer);
+                lapc.setBase(SystemClock.elapsedRealtime());
+                lapc.start();
             }
 
 

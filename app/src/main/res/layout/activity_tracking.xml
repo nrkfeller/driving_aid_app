@@ -183,6 +183,25 @@
             android:layout_alignParentRight="true"
             android:gravity="center_horizontal" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Current : "
+            android:id="@+id/textView3"
+            android:layout_alignBottom="@+id/lapchronometer"
+            android:layout_toLeftOf="@+id/lapchronometer"
+            android:layout_toStartOf="@+id/lapchronometer" />
+
+        <Chronometer
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/lapchronometer"
+            android:textSize="25dp"
+            android:layout_alignTop="@+id/chronometer"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
         <Chronometer
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -23,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_7 = "XACCEL";
     public static final String COL_8 = "YACCEL";
     public static final String COL_9 = "ZACCEL";
+    public static final String COL_10 = "LAPTIME";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -30,10 +31,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT, DURATION TEXT, DISTANCE TEXT, SPEED TEXT, ACCELERATION TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT, DURATION TEXT, DISTANCE TEXT, SPEED TEXT, ACCELERATION TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT, LAPTIME TEXT)");
     }
 
-    public boolean insertData(String duration, String distance, String speed, String acceleration, String xaccel, String yaccel, String zaccel){
+    public boolean insertData(String duration, String distance, String speed, String acceleration, String xaccel, String yaccel, String zaccel, String laptime){
 
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -52,6 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_7, xaccel);
         contentValues.put(COL_8, yaccel);
         contentValues.put(COL_9, zaccel);
+        contentValues.put(COL_10, laptime);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
