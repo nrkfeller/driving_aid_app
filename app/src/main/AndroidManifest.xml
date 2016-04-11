@@ -55,7 +55,8 @@
         <activity android:name=".TermsActivity" />
         <activity android:name=".CreditsActivity" />
         <activity android:name=".SpeedChartActivity" />
-        <activity android:name=".MaxAvgBarChart"></activity>
+        <activity android:name=".MaxAvgBarChart" />
+        <activity android:name=".AccelLineGraphActivity"></activity>
     </application>
 
 </manifest>

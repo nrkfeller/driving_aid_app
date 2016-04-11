@@ -86,8 +86,13 @@ public class DatabaseItemActivity extends MainActivity {
                                                               // and start second activity
                                                               startActivity(barChart);
                                                           }
-
-
+                                                          if (position == 3){
+                                                              Intent lineChart = new Intent(DatabaseItemActivity.this, AccelLineGraphActivity.class);
+                                                              //Get Bundle
+                                                              lineChart.putExtras(getExtras());
+                                                              // and start second activity
+                                                              startActivity(lineChart);
+                                                          }
                                                       }
 
                                                   }
@@ -107,7 +112,6 @@ public class DatabaseItemActivity extends MainActivity {
 //        myListView.setAdapter(cda);
 
     }
-
     //Creating options menu and items
     //Used to remove settings icon from actionbar(since activity extends MainActivity it is there by default
     @Override
@@ -244,95 +248,9 @@ public Bundle getExtras(){
         return accelLines;
 
     }
-    private RadarData radarGraph(){
 
-        //+      TextView accelTest = (TextView) findViewById(R.id.accelString);
-//        accelTest.setText(accelArray.get(1));
-
-        ArrayList<Entry> entries = new ArrayList<>(); // y-values
-        ArrayList<String> xVals = new ArrayList<String>(); //x values
-
-        for (int i = 0; i< accelArray.size(); i++){
-
-            entries.add(new Entry( Float.valueOf(accelArray.get(i)), i));
-            xVals.add(String.valueOf(i));
-            //labels.add("i");
-        }
-
-        RadarDataSet radar = new RadarDataSet(entries, "Accelerometer");
-
-        Context context = this;
-
-        RadarChart radarChart = new RadarChart(context);
-        //setContentView(chart);
-        RadarData radarLine = new RadarData(xVals, radar);
-        //radarChart.setData(radarLine);
-        radarChart.setDescription("Your Accelerometer Values");
-
-        return radarLine;
-
-    }
-
-    private PieData pieGraph(){
-
-        //+      TextView accelTest = (TextView) findViewById(R.id.accelString);
-//        accelTest.setText(accelArray.get(1));
-
-        ArrayList<Entry> entries = new ArrayList<>(); // y-values
-        ArrayList<String> xVals = new ArrayList<String>(); //x values
-
-            Integer xAccelSize = xAccelArray.size();
-            Integer yAccelSize = yAccelArray.size();
-            Integer zAccelSize = zAccelArray.size();
-
-            Integer total = xAccelSize+yAccelSize+zAccelSize;
-
-            entries.add(new Entry( Float.valueOf(xAccelSize/total), 1));
-            entries.add(new Entry( Float.valueOf(yAccelSize/total), 2));
-            entries.add(new Entry( Float.valueOf(zAccelSize/total), 3));
-
-        ArrayList<Integer> colors = new ArrayList<Integer>();
-
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-        colors.add(ColorTemplate.getHoloBlue());
-
-            xVals.add(String.valueOf(1));
-            xVals.add(String.valueOf(2));
-            xVals.add(String.valueOf(3));
-            //labels.add("i");
-
-
-        PieDataSet pieSet = new PieDataSet(entries, "Accelerometer");
-        pieSet.setColors(colors);
-        Context context = this;
-
-        PieChart pieChart = new PieChart(context);
-        //setContentView(chart);
-        PieData pieLine = new PieData(xVals, pieSet);
-        pieLine.setValueFormatter(new PercentFormatter());
-       // pieChart.setData(radarLine);
-        pieChart.setDescription("Your Accelerometer Values");
-
-        return pieLine;
-
-    }
 
     public void grabEntryData() {
-
-
         //Now, you need to get the data from the bundle
         Bundle extras = getIntent().getExtras();
         //Finally, get the value of the string data associated with key named "myname"
@@ -372,18 +290,6 @@ public Bundle getExtras(){
                 avgLinAccel = res.getString(20);
 
             }
-
-//                //display data
-//                databaseEntries.add("Date : " + date);
-//                databaseEntries.add("Duration: " + duration);
-//                databaseEntries.add("Distance: " + dist);
-//                databaseEntries.add("Speed: " + speed);
-//                databaseEntries.add("Acceleration: " + accel);
-//                databaseEntries.add("X-Accel: " + xAccel);
-//                databaseEntries.add("Y-Accel: " + yAccel);
-//                databaseEntries.add("Z-Accel: " + zAccel);
-
-            //}
         } catch (Exception e) {
             Toast.makeText(DatabaseItemActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();
         }
@@ -394,12 +300,42 @@ public Bundle getExtras(){
         xAccelArray = createListFromString(xAccel);
         yAccelArray = createListFromString(yAccel);
         zAccelArray = createListFromString(zAccel);
-
     }
 
 
 
-    /** adapter that supports 3 different item types */
+
+
+
+    public void displayData(View view){
+        myListView = (ListView) findViewById(R.id.chartListView);
+        final ArrayList<String> databaseEntries = new ArrayList<String>();
+        //display data
+        databaseEntries.add("Date : " + date);
+        //databaseEntries.add("Duration: " + duration);
+        //databaseEntries.add("Distance: " + dist);
+        databaseEntries.add("Speed Line Chart " );
+        databaseEntries.add("Max/Avg Speed + Accel Bar Chart " );
+        databaseEntries.add("Accelerometer Line Graph (Linear, X, Y, and Z)" );
+        //databaseEntries.add("Acceleration: " + accel);
+        //databaseEntries.add("X-Accel: " + xAccel);
+       // databaseEntries.add("Y-Accel: " + yAccel);
+        //databaseEntries.add("Z-Accel: " + zAccel);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
+        myListView.setAdapter(arrayAdapter);
+    }
+
+    public List createListFromString(String string){
+        //Split accel into arraylist of strings
+        String string2 = string.replace("[", ""); // remove [
+        String string3 = string2.replace("]", "");// remove ]
+        String string4 = string3.replaceAll("\"", ""); // remove QUOTATION marks
+        return Arrays.asList((string4.split(",")));//remove COMMAS
+    }
+
+
+    //Not Used
     private class ChartDataAdapter extends ArrayAdapter<ChartItem> {
 
         public ChartDataAdapter(Context context, List<ChartItem> objects) {
@@ -423,30 +359,90 @@ public Bundle getExtras(){
         }
     }
 
-    public void displayData(View view){
-        myListView = (ListView) findViewById(R.id.chartListView);
-        final ArrayList<String> databaseEntries = new ArrayList<String>();
-        //display data
-        databaseEntries.add("Date : " + date);
-        //databaseEntries.add("Duration: " + duration);
-        //databaseEntries.add("Distance: " + dist);
-        databaseEntries.add("Speed Line Chart " );
-        databaseEntries.add("Max/Avg Speed + Accel Bar Chart " );
-        //databaseEntries.add("Acceleration: " + accel);
-        //databaseEntries.add("X-Accel: " + xAccel);
-       // databaseEntries.add("Y-Accel: " + yAccel);
-        //databaseEntries.add("Z-Accel: " + zAccel);
+    private RadarData radarGraph(){
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
-        myListView.setAdapter(arrayAdapter);
+        //+      TextView accelTest = (TextView) findViewById(R.id.accelString);
+//        accelTest.setText(accelArray.get(1));
+
+        ArrayList<Entry> entries = new ArrayList<>(); // y-values
+        ArrayList<String> xVals = new ArrayList<String>(); //x values
+
+        for (int i = 0; i< accelArray.size(); i++){
+
+            entries.add(new Entry( Float.valueOf(accelArray.get(i)), i));
+            xVals.add(String.valueOf(i));
+            //labels.add("i");
+        }
+
+        RadarDataSet radar = new RadarDataSet(entries, "Accelerometer");
+
+        Context context = this;
+
+        RadarChart radarChart = new RadarChart(context);
+        //setContentView(chart);
+        RadarData radarLine = new RadarData(xVals, radar);
+        //radarChart.setData(radarLine);
+        radarChart.setDescription("Your Accelerometer Values");
+
+        return radarLine;
+
     }
 
-    public List createListFromString(String string){
-        //Split accel into arraylist of strings
-        String string2 = string.replace("[", ""); // remove [
-        String string3 = string2.replace("]", "");// remove ]
-        String string4 = string3.replaceAll("\"", ""); // remove QUOTATION marks
-        return Arrays.asList((string4.split(",")));//remove COMMAS
+    private PieData pieGraph(){
+
+        //+      TextView accelTest = (TextView) findViewById(R.id.accelString);
+//        accelTest.setText(accelArray.get(1));
+
+        ArrayList<Entry> entries = new ArrayList<>(); // y-values
+        ArrayList<String> xVals = new ArrayList<String>(); //x values
+
+        Integer xAccelSize = xAccelArray.size();
+        Integer yAccelSize = yAccelArray.size();
+        Integer zAccelSize = zAccelArray.size();
+
+        Integer total = xAccelSize+yAccelSize+zAccelSize;
+
+        entries.add(new Entry( Float.valueOf(xAccelSize/total), 1));
+        entries.add(new Entry( Float.valueOf(yAccelSize/total), 2));
+        entries.add(new Entry( Float.valueOf(zAccelSize/total), 3));
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+        colors.add(ColorTemplate.getHoloBlue());
+
+        xVals.add(String.valueOf(1));
+        xVals.add(String.valueOf(2));
+        xVals.add(String.valueOf(3));
+        //labels.add("i");
+
+
+        PieDataSet pieSet = new PieDataSet(entries, "Accelerometer");
+        pieSet.setColors(colors);
+        Context context = this;
+
+        PieChart pieChart = new PieChart(context);
+        //setContentView(chart);
+        PieData pieLine = new PieData(xVals, pieSet);
+        pieLine.setValueFormatter(new PercentFormatter());
+        // pieChart.setData(radarLine);
+        pieChart.setDescription("Your Accelerometer Values");
+
+        return pieLine;
+
     }
 
     public void scatterGraph(){
