@@ -103,6 +103,7 @@ public class AccelLineGraphActivity extends AppCompatActivity {
 
         chart.setData(accelLines);
         chart.setDescription("Accelerometer Values");
+        chart.animateY(2500);
     }
 
     public List createListFromString(String string){
