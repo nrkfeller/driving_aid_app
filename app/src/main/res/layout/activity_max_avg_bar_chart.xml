@@ -7,16 +7,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.efelnic.driveapp.RecordingsActivity">
+    tools:context="com.efelnic.driveapp.MaxAvgBarChart">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/recordingsListView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:divider="@android:color/black"
-        android:dividerHeight="1.0sp"/>
+    <com.github.mikephil.charting.charts.BarChart
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/barChart"></com.github.mikephil.charting.charts.BarChart>
 
 </RelativeLayout>

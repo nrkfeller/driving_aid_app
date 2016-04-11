@@ -235,7 +235,8 @@
             android:layout_alignParentStart="true"
             android:visibility="visible" />
 
-        <com.cardiomood.android.controls.gauge.SpeedometerGauge
+        <!--<com.cardiomood.android.controls.gauge.SpeedometerGauge-->
+            <com.efelnic.driveapp.SpeedometerGauge
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:textColor="#FF000000"

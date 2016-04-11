@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/car_nav"
@@ -54,7 +53,9 @@
         </activity>
         <activity android:name=".PrivacyActivity" />
         <activity android:name=".TermsActivity" />
-        <activity android:name=".CreditsActivity"></activity>
+        <activity android:name=".CreditsActivity" />
+        <activity android:name=".SpeedChartActivity" />
+        <activity android:name=".MaxAvgBarChart"></activity>
     </application>
 
 </manifest>

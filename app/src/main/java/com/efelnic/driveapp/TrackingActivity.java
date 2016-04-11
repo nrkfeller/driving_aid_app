@@ -71,7 +71,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import android.os.Handler;
 
-import com.cardiomood.android.controls.gauge.SpeedometerGauge;
+
+//import com.cardiomood.android.controls.gauge.SpeedometerGauge;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -102,6 +103,8 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
     //Location & Permission Vars
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 10; // in Meters
+
     boolean bPermissionGranted;
     LocationManager locationManager;
     String provider;
@@ -130,13 +133,21 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     Gson gsonMaxXAccel = new Gson();
     Gson gsonMaxYAccel = new Gson();
     Gson gsonMaxZAccel = new Gson();
+    Gson gsonMaxSpeed = new Gson();
+    Gson gsonAvgXAcc = new Gson();
+    Gson gsonAvgYAcc = new Gson();
+    Gson gsonAvgZAcc = new Gson();
+    Gson gsonAvgLinAcc = new Gson();
+
+
     double dist = 0;
     //    double curLat = 0;
 //    double curLng = 0;
 //    double lastLat = 0;
 //    double lastLng = 0;
-    private Location location;
-    private Location lastLocation = location;
+
+
+    private Location lastLocation;
 
     double curLat, curLng, lastLat, lastLng;
 
@@ -184,13 +195,28 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         String inputYAccel = gsonYAccel.toJson(YaccelList);
         String inputZAccel = gsonZAccel.toJson(ZaccelList);
         String inputSpeed = gsonSpeed.toJson(speedList);
+
+        if (inputSpeed == null){
+            inputSpeed = 0 + "";
+        }
+
         String inputDist = gsonDistance.toJson(distValue);
         String inputLapTimes = gsonLapTimes.toJson(lapTimesList);
+
 
 
         //Add average speed
         float avgSpeed = calculateAverage(speedList);
         String inputAverageSpeed = gsonAvgSpeed.toJson((avgSpeed));
+        float maxSpeed;
+        //Add Max speed
+        if (speedList.size() == 0)
+            maxSpeed = 0;
+
+        else
+            maxSpeed = Float.valueOf(Collections.max(speedList));
+        String inputMaxSpeed= gsonMaxSpeed.toJson(maxSpeed);
+
 
         //Add average laptime
         float avgLapTime = calculateAverage(lapTimesList);
@@ -200,18 +226,33 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         float maxLinAccelValue = Float.valueOf(Collections.max(accelerationList));
         String inputMaxLinAccel= gsonMaxLinAccel.toJson(maxLinAccelValue);
 
-        //Add Max Linear Accel Value
+        //Add Max X Accel Value
         float maxXAccelValue = Float.valueOf(Collections.max(XaccelList));
         String inputMaxXAccel= gsonMaxXAccel.toJson(maxXAccelValue);
-        //Add Max Linear Accel Value
+        //Add Max YAccel Value
         float maxYAccelValue = Float.valueOf(Collections.max(YaccelList));
         String inputMaxYAccel= gsonMaxYAccel.toJson(maxYAccelValue);
-        //Add Max Linear Accel Value
+        //Add Max Z Accel Value
         float maxZAccelValue = Float.valueOf(Collections.max(ZaccelList));
         String inputMaxZAccel= gsonMaxZAccel.toJson(maxZAccelValue);
 
+        //Add average Lin Acc
+        float avgLinAcc = calculateAverage(accelerationList);
+        String inputAverageLinAcc = gsonAvgLinAcc.toJson((avgLinAcc));
 
-        boolean isinserted = myDb.insertData(chronoView.getText().toString(), inputDist, inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel, inputLapTimes, inputAverageSpeed, inputAverageLapTime, inputMaxLinAccel, inputMaxXAccel, inputMaxYAccel, inputMaxZAccel);
+
+        //Add average X Acc
+        float avgXAcc = calculateAverage(XaccelList);
+        String inputAverageXAcc = gsonAvgXAcc.toJson((avgXAcc));
+
+        //Add average Y Acc
+        float avgYAcc = calculateAverage(YaccelList);
+        String inputAverageYAcc = gsonAvgYAcc.toJson((avgYAcc));
+        //Add average Z Acc
+        float avgZAcc = calculateAverage(ZaccelList);
+        String inputAverageZAcc = gsonAvgZAcc.toJson((avgZAcc));
+
+        boolean isinserted = myDb.insertData(chronoView.getText().toString(), inputDist, inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel, inputLapTimes, inputAverageSpeed, inputAverageLapTime, inputMaxLinAccel, inputMaxXAccel, inputMaxYAccel, inputMaxZAccel, inputMaxSpeed, inputAverageXAcc, inputAverageYAcc, inputAverageZAcc, inputAverageLinAcc);
         if (isinserted) {
             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_SHORT).show();
         } else {
@@ -226,7 +267,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         String string4 = string3.replaceAll("\"", ""); // remove QUOTATION marks
         return Arrays.asList((string4.split(",")));//remove COMMAS
     }
-        private float calculateAverage(ArrayList<String> list) {
+    private float calculateAverage(ArrayList<String> list) {
         float sum = 0;
         if(!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
@@ -244,18 +285,16 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
+
+        //Proximity Sensor
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
         proximitySensor = sm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         sm.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
 
-        //Permissions
-//        timeAndMessages.put(3, "three secs");
-//        timeAndMessages.put(8, "otto secs");
-
+        //Script
         timeAndMessages = (HashMap) loadMap();
 
-        //Toast.makeText(getApplicationContext(), timeAndMessages.toString(), Toast.LENGTH_LONG).show();
-
+        //Permissions
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
@@ -263,7 +302,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), false);
         Location location = locationManager.getLastKnownLocation(provider);
-        lastLocation = location;
+
 
         //SETTINGS TOGGLE
         checkSettings();
@@ -271,12 +310,16 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
             if (location == null) {
 
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, this);
                 Toast.makeText(getApplicationContext(), "One moment for GPS please! - 1", Toast.LENGTH_SHORT).show();
             } else {
                 // Toast.makeText(getApplicationContext(), "GPS works", Toast.LENGTH_SHORT).show();
             }
         }
+        //For distance function
+        lastLocation = location;
+
+
         //Start Chrono, accel, speedometer
         startChronometer();
         startAccel();
@@ -313,6 +356,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         checkSettings();
         checkSpeedometerTextSize();
         checkSpeedometerMaxValue();
+        checkSpeedometerUnits();
         //If all UI settings are off, display toast
         if (AllUiSettingsOff())
             Toast.makeText(getApplicationContext(), "Make sure to customize your Settings!", Toast.LENGTH_LONG).show();
@@ -333,20 +377,22 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
                 }
                 // request location update!!
                 else {
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, this);
                     Toast.makeText(getApplicationContext(), "GPS is loading. One moment please!", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 if (!enabled) {
                     showDialogGPS();
                 } else if (enabled && (locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null)) {
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, this);
                 } else {
                     Toast.makeText(getApplicationContext(), "GPS is loading. One moment please!", Toast.LENGTH_SHORT).show();
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, this);
                 }
             }
         }
+        //For distance Calc
+        lastLocation = location;
     }
 
     @Override
@@ -371,16 +417,20 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
 
-
         if (location != null) {
             double lat = location.getLatitude();
             double lng = location.getLongitude();
             double alt = location.getAltitude();
             double spd = (location.getSpeed()) * CONVERSION_METERSPERSECOND_TO_KMH; //getSpeed returns the speed in m/s, so multiply by 3.6 to get km/h
 
-            dist += dist + lastLocation.distanceTo(location);
+//For distance
+////            dist += dist + lastLocation.distanceTo(location);
+//            lastLat = lastLocation.getLatitude();
+//            lastLng = lastLocation.getLongitude();
+//
+//            dist += dist + getDistance(lastLat, lastLng, lat, lng);
             distValue = String.valueOf(dist);
-            lastLocation = location;
+//            lastLocation = location;
 //TODO Distance
 //FOR DISTANCE
 //            curLat = lat;
@@ -396,20 +446,24 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 //            }
 
 //            // rounding values to format "#.##"
-//            double latt = Math.round(lat * 100.00) / 100.00;
-//            double lngi = Math.round(lng * 100.00) / 100.00;
-//            double alti = Math.round(alt * 100.00) / 100.00;
             double sped = Math.round(spd * 100.00) / 100.00;
 
-            latView.setText("Latitude : " + Double.toString(lat));
-            lngView.setText("Longitude : " + Double.toString(lng));
-            altView.setText("Altitude : " + Double.toString(alt) + "m");
-            spdView.setText("Speed : " + Double.toString(sped) + " km/h");
+            //To avoid concatenating text displayed with setText
+            String latt = "Latitude : " + Double.toString(lat);
+            String lngg = "Longitude : " + Double.toString(lng);
+            String altt = "Altitude : " + Double.toString(alt);
+            String spedd = "Speed : " + Double.toString(sped) + " km/h";
+
+            latView.setText(latt);
+            lngView.setText(lngg);
+            altView.setText(altt);
+            spdView.setText(spedd);
             speedList.add(Double.toString(sped));
 
             if (speedUnitSetting) {
                 sped = sped * CONVERSION_KMH_TO_MPH;
-                spdView.setText("Speed : " + Double.toString(sped) + " mph");
+                spedd = "Speed : " + Double.toString(sped) + "mph";
+                spdView.setText(spedd);
             }
             speedometer.setSpeed(sped);
         } else {
@@ -672,7 +726,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         //If no previous location saved, tell user to wait for gps to load
         if (location == null) {
             // request location update!!
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, MINIMUM_DISTANCE_CHANGE_FOR_UPDATES, this);
             Toast.makeText(getApplicationContext(), "GPS is loading. One moment please!", Toast.LENGTH_SHORT).show();
         }
         onLocationChanged(location);
@@ -876,7 +930,8 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
         checkSpeedometerTextSize();
         checkSpeedometerMaxValue();
-        //checkSpeedometerbackgroundColor();
+        checkSpeedometerUnits();
+
     }
 
     //Settings Methods
@@ -1228,6 +1283,15 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
                 speedometer.setMaxSpeed(200);
                 break;
         }
+    }
+    public void checkSpeedometerUnits(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        speedUnitSetting = sp.getBoolean("prefSpeedUnits", false);
+
+        if (speedUnitSetting)
+            speedometer.setUnitsText("mph");
+        else
+            speedometer.setUnitsText("km/h");
     }
 
     public boolean AllUiSettingsOff(){

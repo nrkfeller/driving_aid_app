@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -51,32 +52,59 @@ public class DatabaseItemActivity extends MainActivity {
     ListView myListView;
 
     DatabaseHelper myDb;
-    String date, duration, dist, speed, accel, xAccel, yAccel, zAccel, lapTimes, avgSpeed, avgLapTime, maxLinAccel, maxXAcc, maxyAcc, maxZacc;
+    String date, duration, dist, speed, accel, xAccel, yAccel, zAccel, lapTimes, avgSpeed, avgLapTime, maxLinAccel, avgLinAccel, maxXAcc, maxyAcc, maxZacc, maxSpeed, avgXAcc, avgYAcc, avgZAcc;
 
     List<String> accelArray, distArray, speedArray, xAccelArray, yAccelArray, zAccelArray;
-    ArrayList<ChartItem> list;
+    //ArrayList<ChartItem> list;
+    ArrayList<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_database_item);
 
         myDb = new DatabaseHelper(this);
 
         grabEntryData();
-        //displayData(myListView);
-        //radarGraph();
-       // scatterGraph();
-        myListView = (ListView) findViewById(R.id.chartListView);
-        list = new ArrayList<>();
-        list.add(new LineChartItem(lineGraph(), getApplicationContext()));
-        list.add(new RadarChartItem(radarGraph(), getApplicationContext()));
-        list.add(new LineChartItem(multiLineGraph(), getApplicationContext()));
-        list.add(new PieChartItem(pieGraph(), getApplicationContext()));
-        ChartDataAdapter cda = new ChartDataAdapter(getApplicationContext(), list);
-        myListView.setAdapter(cda);
+        displayData(myListView);
+
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                                      @Override
+                                                      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                          if (position == 1){
+                                                              Intent speedLine = new Intent(DatabaseItemActivity.this, SpeedChartActivity.class);
+                                                              //Get Bundle
+                                                              speedLine.putExtras(getExtras());
+                                                              // and start second activity
+                                                              startActivity(speedLine);
+                                                          }
+                                                          if (position == 2){
+                                                              Intent barChart = new Intent(DatabaseItemActivity.this, MaxAvgBarChart.class);
+                                                              //Get Bundle
+                                                              barChart.putExtras(getExtras());
+                                                              // and start second activity
+                                                              startActivity(barChart);
+                                                          }
+
+
+                                                      }
+
+                                                  }
+        );
+
+
+
+
+//        myListView = (ListView) findViewById(R.id.chartListView);
+//        list = new ArrayList<>();
+
+//        list.add(new LineChartItem(lineGraph(), getApplicationContext()));
+//        list.add(new RadarChartItem(radarGraph(), getApplicationContext()));
+//        list.add(new LineChartItem(multiLineGraph(), getApplicationContext()));
+//        list.add(new PieChartItem(pieGraph(), getApplicationContext()));
+//        ChartDataAdapter cda = new ChartDataAdapter(getApplicationContext(), list);
+//        myListView.setAdapter(cda);
 
     }
 
@@ -96,23 +124,39 @@ public class DatabaseItemActivity extends MainActivity {
         if (item.getItemId() == R.id.menu_rawData){
 
             Intent intent = new Intent(DatabaseItemActivity.this, RawDataActivity.class);
-            Bundle extras = new Bundle();
-            extras.putString("DATE", date);
-            extras.putString("DURATION", duration);
-            extras.putString("DISTANCE", dist );
-            extras.putString("SPEED", speed);
-            extras.putString("ACCELERATION", accel );
-            extras.putString("XACCEL", xAccel );
-            extras.putString("YACCEL", yAccel);
-            extras.putString("ZACCEL", zAccel);
-            intent.putExtras(extras);
+
+            intent.putExtras(getExtras());
             startActivity(intent);
             return true;
             }
             return super.onOptionsItemSelected(item);
     }
 //end of Options menu and items
+public Bundle getExtras(){
+    Bundle extras = new Bundle();
+    extras.putString("DATE", date);
+    extras.putString("DURATION", duration);
+    extras.putString("DISTANCE", dist);
+    extras.putString("SPEED", speed);
+    extras.putString("ACCELERATION", accel );
+    extras.putString("XACCEL", xAccel );
+    extras.putString("YACCEL", yAccel);
+    extras.putString("ZACCEL", zAccel);
+    extras.putString("LAPTIMES", lapTimes);
+    extras.putString("AVGSPEED", avgSpeed);
+    extras.putString("MAXLINACC", maxLinAccel);
+    extras.putString("AVGLINACC", avgLinAccel);
+    extras.putString("MAXXACC", maxXAcc);
+    extras.putString("MAXYACC", maxyAcc);
+    extras.putString("MAXZACC", maxZacc);
+    extras.putString("MAXSPEED", maxSpeed);
+    extras.putString("AVGXACC", avgXAcc);
+    extras.putString("AVGYACC", avgYAcc);
+    extras.putString("AVGZACC", avgZAcc);
 
+    return extras;
+
+}
 
     private LineData lineGraph(){
 
@@ -318,6 +362,14 @@ public class DatabaseItemActivity extends MainActivity {
                 avgSpeed = res.getString(10);
                 avgLapTime = res.getString(11);
                 maxLinAccel = res.getString(12);
+                maxXAcc = res.getString(13);
+                maxyAcc = res.getString(14);
+                maxZacc = res.getString(15);
+                maxSpeed = res.getString(16);
+                avgXAcc = res.getString(17);
+                avgYAcc = res.getString(18);
+                avgZAcc = res.getString(19);
+                avgLinAccel = res.getString(20);
 
             }
 
@@ -335,8 +387,6 @@ public class DatabaseItemActivity extends MainActivity {
         } catch (Exception e) {
             Toast.makeText(DatabaseItemActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();
         }
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
-//        myListView.setAdapter(arrayAdapter);
 
         accelArray = createListFromString(accel);
         speedArray = createListFromString(speed);
@@ -344,8 +394,6 @@ public class DatabaseItemActivity extends MainActivity {
         xAccelArray = createListFromString(xAccel);
         yAccelArray = createListFromString(yAccel);
         zAccelArray = createListFromString(zAccel);
-
-
 
     }
 
@@ -376,20 +424,21 @@ public class DatabaseItemActivity extends MainActivity {
     }
 
     public void displayData(View view){
-        //myListView = (ListView) findViewById(R.id.recordingItemListView);
+        myListView = (ListView) findViewById(R.id.chartListView);
         final ArrayList<String> databaseEntries = new ArrayList<String>();
         //display data
         databaseEntries.add("Date : " + date);
-        databaseEntries.add("Duration: " + duration);
-        databaseEntries.add("Distance: " + dist);
-        databaseEntries.add("Speed: " + speed);
-        databaseEntries.add("Acceleration: " + accel);
-        databaseEntries.add("X-Accel: " + xAccel);
-        databaseEntries.add("Y-Accel: " + yAccel);
-        databaseEntries.add("Z-Accel: " + zAccel);
+        //databaseEntries.add("Duration: " + duration);
+        //databaseEntries.add("Distance: " + dist);
+        databaseEntries.add("Speed Line Chart " );
+        databaseEntries.add("Max/Avg Speed + Accel Bar Chart " );
+        //databaseEntries.add("Acceleration: " + accel);
+        //databaseEntries.add("X-Accel: " + xAccel);
+       // databaseEntries.add("Y-Accel: " + yAccel);
+        //databaseEntries.add("Z-Accel: " + zAccel);
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
-        //myListView.setAdapter(arrayAdapter);
+        myListView.setAdapter(arrayAdapter);
     }
 
     public List createListFromString(String string){

@@ -127,22 +127,25 @@ public class RecordingsActivity extends MainActivity {
             StringBuffer buffer = new StringBuffer();
             while (res.moveToNext()) {
 
-
                 String lapTimes = res.getString(9);
                 List lapTimeArray = Arrays.asList((lapTimes.split(",")));//remove COMMAS
                 Integer numOfLaps = lapTimeArray.size();
 
+                //Round Values for display
                 double avgLapTime = Math.round(Float.valueOf(res.getString(11)) * 100.00) / 100.00;
+                double maxLinAcc = Math.round(Float.valueOf(res.getString(12)) * 100.00) / 100.00;
+                double maxXAcc = Math.round(Float.valueOf(res.getString(13)) * 100.00) / 100.00;
+                double maxYAcc = Math.round(Float.valueOf(res.getString(14)) * 100.00) / 100.00;
+                double maxZAcc = Math.round(Float.valueOf(res.getString(15)) * 100.00) / 100.00;
 
                 databaseEntries.add("Date : " + res.getString(1)+ "\n" +
                         "            Duration: " + res.getString(2) + "\n" +
+                        //"            Distance: " + res.getString(3) +"\n" +
                         "            Number of Laps: " + numOfLaps +"\n" +
                         "            Average Lap Time: " + avgLapTime + "s" + "\n" +
                         "            Average Speed: " + res.getString(10) + " kmh/mph" + "\n" +
-                        "            Max Linear Accel: " + res.getString(12) + " m/s/s" + "\n" +
-                        "            Max X Accel: " + res.getString(13) + " m/s/s" + "\n" +
-                        "            Max Y Accel: " + res.getString(14) + " m/s/s" + "\n" +
-                        "            Max Z Accel: " + res.getString(15) + " m/s/s"); //Only show date of each entry to reduce clutter
+                        "            Max Linear Accel: " + maxLinAcc + " m/s/s" + "\n" +
+                        "            Max X,Y,Z Accel: " + maxXAcc + ", "+ maxYAcc + ", "+ maxZAcc);
 
             }
         } catch (Exception e) {

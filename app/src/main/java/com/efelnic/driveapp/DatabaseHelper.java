@@ -31,6 +31,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_14 = "MAXXACC";
     public static final String COL_15 = "MAXYACC";
     public static final String COL_16 = "MAXZACC";
+    public static final String COL_17 = "MAXSPEED";
+    public static final String COL_18 = "AVGXACC";
+    public static final String COL_19 = "AVGYACC";
+    public static final String COL_20 = "AVGZACC";
+    public static final String COL_21 = "AVGLINACC";
+
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -38,11 +45,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT, DURATION TEXT, DISTANCE TEXT, SPEED TEXT, ACCELERATION TEXT, " +
-                "XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT, LAPTIME TEXT, AVERAGESPEED TEXT, AVERAGELAPTIME TEXT, MAXLINACCELVALUE TEXT, MAXXACC TEXT, MAXYACC TEXT, MAXZACC TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT, DURATION TEXT, DISTANCE TEXT, SPEED TEXT, ACCELERATION TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT, LAPTIME TEXT, AVERAGESPEED TEXT, AVERAGELAPTIME TEXT, MAXLINACCELVALUE TEXT, MAXXACC TEXT, MAXYACC TEXT, MAXZACC TEXT, MAXSPEED TEXT, AVGXACC TEXT, AVGYACC TEXT, AVGZACC TEXT, AVGLINACC TEXT)");
     }
 
-    public boolean insertData(String duration, String distance, String speed, String acceleration, String xaccel, String yaccel, String zaccel, String laptime, String avgspd, String avglaptime, String maxlinaccel, String maxxaccel, String maxyaccel, String maxzaccel){
+    public boolean insertData(String duration, String distance, String speed, String acceleration, String xaccel, String yaccel, String zaccel, String laptime, String avgspd, String avglaptime, String maxlinaccel, String maxxaccel, String maxyaccel, String maxzaccel, String maxspeed, String avgxacc, String avgyacc, String avgzacc, String avglinacc){
 
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -67,6 +73,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_14, maxxaccel);
         contentValues.put(COL_15, maxyaccel);
         contentValues.put(COL_16, maxzaccel);
+        contentValues.put(COL_17, maxspeed);
+        contentValues.put(COL_18, avgxacc);
+        contentValues.put(COL_19, avgyacc);
+        contentValues.put(COL_20, avgzacc);
+        contentValues.put(COL_21, avglinacc);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
@@ -130,7 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //db.execSQL("DELETE FROM " + TABLE_NAME);
         //temporary way, until we need to delete individual items
         db.execSQL("DROP TABLE " + TABLE_NAME);//Deletes entire table
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT, DURATION TEXT, DISTANCE TEXT, SPEED TEXT, ACCELERATION TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT, AVERAGESPEED TEXT, AVERAGELAPTIME TEXT, MAXLINACCELVALUE TEXT, MAXXACC TEXT, MAXYACC TEXT, MAXZACC TEXT)"); //Creates emtpy table in order to restart ids
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, DATE TEXT, DURATION TEXT, DISTANCE TEXT, SPEED TEXT, ACCELERATION TEXT, XACCEL TEXT, YACCEL TEXT, ZACCEL TEXT, AVERAGESPEED TEXT, AVERAGELAPTIME TEXT, MAXLINACCELVALUE TEXT, MAXXACC TEXT, MAXYACC TEXT, MAXZACC TEXT, MAXSPEED TEXT, AVGXACC TEXT, AVGYACC TEXT, AVGZACC TEXT, AVGLINACC TEXT)"); //Creates emtpy table in order to restart ids
     }
 
     public Integer deleteData(String id){
