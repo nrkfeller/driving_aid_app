@@ -30,13 +30,15 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class RecordingsActivity extends MainActivity {
 
     DatabaseHelper myDb;
-    Button queryButton;
 
-    Cursor cursor;
+
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -128,7 +130,28 @@ public class RecordingsActivity extends MainActivity {
 //                databaseEntries.add("acceleration: " + res.getString(2));
 //                databaseEntries.add("duration: " + res.getString(3));
 //                databaseEntries.add("speed: " + res.getString(4));
-                databaseEntries.add("Date : " + res.getString(1)); //Only show date of each entry to reduce clutter
+                String speed = res.getString(4);
+                String lapTimes = res.getString(9);
+                List lapTimeArray = Arrays.asList((lapTimes.split(",")));//remove COMMAS
+                Integer numOfLaps = lapTimeArray.size();
+
+
+//                List<Float> speedList = createListFromString(speed);
+//                double  avgSpeed = 0.0;
+//                if (speedList.size() == 1)
+//                    avgSpeed = speedList.get(0);
+//                else{
+//                double sum = 0.0;
+//                    for (int i = 0; i < speedList.size(); i++) {
+//                        sum += speedList.get(i);
+//                        double sum1 = sum;
+//                    }
+//                }
+               // double avgSpeed = sum / speedList.size();
+                //double avgSpeed = calculateAverage(speedList);
+
+
+                databaseEntries.add("Date : " + res.getString(1) + "\nDuration: " + res.getString(2) + "\nNumber of Laps: " + numOfLaps);// + "\nAverage Speed: " + avgSpeed); //Only show date of each entry to reduce clutter
             }
         } catch (Exception e) {
             Toast.makeText(RecordingsActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();
@@ -212,7 +235,26 @@ public class RecordingsActivity extends MainActivity {
         return super.onOptionsItemSelected(item);
         }
 
-
+    public List createListFromString(String string){
+        //Split accel into arraylist of strings
+        String string2 = string.replace("[", ""); // remove [
+        String string3 = string2.replace("]", "");// remove ]
+        String string4 = string3.replaceAll("\"", ""); // remove QUOTATION marks
+        return Arrays.asList((string4.split(",")));//remove COMMAS
+    }
+//    private double calculateAverage(List<Double> speedList) {
+//        Double sum = 0.0;
+//        if(!speedList.isEmpty()) {
+//            for (int i = 0; i < speedList.size(); i++) {
+//                sum += speedList.get(i);
+//            }
+//            if (sum != 0)
+//                return sum / speedList.size();
+//            else
+//                return 0.0;
+//        }
+//        return 0.0;
+//    }
 }
 
 

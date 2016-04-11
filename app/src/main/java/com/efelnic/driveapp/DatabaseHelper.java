@@ -39,11 +39,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
 
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-//        String Date = timeStamp.substring(4,6) + "/" + timeStamp.substring(6,8) + "/" + timeStamp.substring(0,4) + " - " + timeStamp.substring(9,11) + ":" + timeStamp.substring(11,13) + ":" + timeStamp.substring(13, 15) + "s";
-        // Have the Date in a nice format
 
-        String date = new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss.SS").format(Calendar.getInstance().getTime());//With MILLISECONDS, remove the '.SS' to get rid of them
+
+
+        String date = new SimpleDateFormat("yyyy/MM/dd - HH:mm:ss").format(Calendar.getInstance().getTime());//With MILLISECONDS, remove the '.SS' to get rid of them
 
         contentValues.put(COL_2, date);
         contentValues.put(COL_3, duration);

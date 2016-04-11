@@ -89,7 +89,6 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
 
     //ProximitySensor
-    TextView proximityText;
     SensorManager sm;
     Sensor proximitySensor;
     int newCount = 0;
@@ -144,7 +143,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
     //Different View Vars
     TextView gpsTitle, latView, lngView, altView, spdView, //gps + speed
-            timerTitle, timerView, lapView, previousLapView, chronoView, // time + lap
+            timerTitle, timerView, previousLapView, currentLapView, lapChronoView, lapView, chronoView, // time + lap
             accTitle, accView, // lin accel
             compAccTitle, xrotView, yrotView, zrotView; // componential accel
     View lineGraphView, speedometerView;//Line graph
@@ -170,11 +169,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
     //Database Methods
     public void SaveRace(MenuItem item) {
-        //onOptionsItemSelected(item.getItemId());
-        //saveRaceButton.setOnClickListener(
-        // new View.OnClickListener() {
-        //    @Override
-        //     public void onClick(View v) {
+
         String inputAccel = gsonAccel.toJson(accelerationList);
         String inputXAccel = gsonXAccel.toJson(XaccelList);
         String inputYAccel = gsonYAccel.toJson(YaccelList);
@@ -183,7 +178,6 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         String inputDist = gsonDistance.toJson(distValue);
         String inputLapTimes = gsonLapTimes.toJson(lapTimesList);
 
-
         boolean isinserted = myDb.insertData(chronoView.getText().toString(), inputDist, inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel, inputLapTimes);
         if (isinserted) {
             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_SHORT).show();
@@ -191,9 +185,6 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
             Toast.makeText(TrackingActivity.this, "Error: Race Not Saved", Toast.LENGTH_SHORT).show();
         }
 
-        // }
-        // };
-        //);
     }
 //End of Database Methods
 
@@ -205,14 +196,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         setContentView(R.layout.activity_tracking);
         sm = (SensorManager) getSystemService(SENSOR_SERVICE);
         proximitySensor = sm.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        //proximityText = (TextView) findViewById(R.id.proximityTextView);
-
-
         sm.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL);
-
-
-        //TODO: toast when all settings are off
-        //Toast.makeText(getApplicationContext(), "Make sure to customize your Settings", Toast.LENGTH_LONG).show();
 
         //Permissions
 //        timeAndMessages.put(3, "three secs");
@@ -221,7 +205,6 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         timeAndMessages = (HashMap) loadMap();
 
         //Toast.makeText(getApplicationContext(), timeAndMessages.toString(), Toast.LENGTH_LONG).show();
-
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
@@ -252,10 +235,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         //RealTime line chart
         lineChartFormat();
 
-
         //DATABASE
-        //saveRaceButton = (Button) findViewById(R.id.saveRaceButton);
-        //viewDataButton = (Button) findViewById(R.id.viewDataButton);
         accelerationList = new ArrayList<String>();
         XaccelList = new ArrayList<String>();
         YaccelList = new ArrayList<String>();
@@ -264,19 +244,9 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         lapTimesList = new ArrayList<String>();
         myDb = new DatabaseHelper(this);
 
-        //SaveRace();
-        //viewData();
-
-
-        //Loic
-//        //Create Bar chart
-//        la = (LinearLayout)findViewById(R.id.barchart);
-//        bar1 = drawChart(7,10);
-//        bar2 = drawChart(7,10);
-//        bar3 = drawChart(7,10);
-//        lin_acel_bar = drawChart(8,10);
-//        speed_bar = drawChart(3,10);
-//        time_bar = drawChart(5,5);
+        //If all UI settings are off, display toast
+        if (AllUiSettingsOff())
+            Toast.makeText(getApplicationContext(), "Make sure to customize your Settings!", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -289,12 +259,13 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             bPermissionGranted = checkLocationPermission();
         }
-
+        //Check Settings
         checkSettings();
         checkSpeedometerTextSize();
         checkSpeedometerMaxValue();
-
-        //checkSpeedometerbackgroundColor();
+        //If all UI settings are off, display toast
+        if (AllUiSettingsOff())
+            Toast.makeText(getApplicationContext(), "Make sure to customize your Settings!", Toast.LENGTH_LONG).show();
 
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
@@ -876,6 +847,9 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
 
         //Background
         checkBackgroundColorSetting();
+
+
+
     }
 
     //Individual Settings methods
@@ -936,11 +910,13 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         timerUISetting = sp.getBoolean("prefTimerUI", true);
 
-        timerTitle = (TextView) findViewById(R.id.timerTitle);
-        timerView = (TextView) findViewById(R.id.timerView);
-        chronoView = (TextView) findViewById(R.id.chronometer);
-        lapView = (TextView) findViewById(R.id.lapView);
-        previousLapView = (TextView) findViewById(R.id.previousLapView);
+        timerTitle = (TextView) findViewById(R.id.timerTitle);//timer section title
+        lapView = (TextView) findViewById(R.id.lapView);//lap counter
+        previousLapView = (TextView) findViewById(R.id.previousLapView);//previous lap time
+        currentLapView = (TextView) findViewById(R.id.currentLapView);//current lap time
+        lapChronoView = (TextView) findViewById(R.id.lapchronometer);//lap time chrono
+        timerView = (TextView) findViewById(R.id.timerView);//total time
+        chronoView = (TextView) findViewById(R.id.chronometer);// total time chronometer
 
         if (timerUISetting) {
             timerTitle.setVisibility(View.VISIBLE);
@@ -948,12 +924,16 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
             chronoView.setVisibility(View.VISIBLE);
             lapView.setVisibility(View.VISIBLE);
             previousLapView.setVisibility(View.VISIBLE);
+            currentLapView.setVisibility(View.VISIBLE);
+            lapChronoView.setVisibility(View.VISIBLE);
         } else {
             timerTitle.setVisibility(View.GONE);
-            timerView.setVisibility(View.GONE);
-            chronoView.setVisibility(View.GONE);
             lapView.setVisibility(View.GONE);
             previousLapView.setVisibility(View.GONE);
+            currentLapView.setVisibility(View.GONE);
+            lapChronoView.setVisibility(View.GONE);
+            timerView.setVisibility(View.GONE);
+            chronoView.setVisibility(View.GONE);
         }
     }
 
@@ -1075,26 +1055,32 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         switch (chronTextSizeSetting) {
             case "25":
                 timerTitle.setTextSize(25);
-                timerView.setTextSize(25);
-                chronoView.setTextSize(25);
                 lapView.setTextSize(25);
                 previousLapView.setTextSize(25);
+                currentLapView.setTextSize(25);
+                lapChronoView.setTextSize(25);
+                timerView.setTextSize(25);
+                chronoView.setTextSize(25);
                 break;
 
             case "40":
                 timerTitle.setTextSize(40);
-                timerView.setTextSize(40);
-                chronoView.setTextSize(40);
                 lapView.setTextSize(40);
                 previousLapView.setTextSize(40);
+                currentLapView.setTextSize(40);
+                lapChronoView.setTextSize(40);
+                timerView.setTextSize(40);
+                chronoView.setTextSize(40);
                 break;
 
             case "50":
                 timerTitle.setTextSize(50);
-                timerView.setTextSize(50);
-                chronoView.setTextSize(50);
                 lapView.setTextSize(50);
                 previousLapView.setTextSize(50);
+                currentLapView.setTextSize(50);
+                lapChronoView.setTextSize(40);
+                timerView.setTextSize(40);
+                chronoView.setTextSize(40);
                 break;
         }
     }
@@ -1148,16 +1134,6 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         }
     }
 
-//    public  void checkSpeedometerbackgroundColor(){
-//        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-//        backgroundColorSetting = sp.getBoolean("prefBackgroundColor", false);
-//
-//        if(backgroundColorSetting)
-//            speedometer.setDrawingCacheBackgroundColor(Color.WHITE);
-//        else
-//            speedometer.setDrawingCacheBackgroundColor(Color.BLACK);
-//
-//    }
     public void checkSpeedometerTextSize() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         speedometerTextSizeSetting = sp.getString("prefSpeedometerTextSize", "40");
@@ -1202,6 +1178,13 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         }
     }
 
+    public boolean AllUiSettingsOff(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if (!gpsUISetting && !digitalSpeedUISetting && !accelUISetting && !timerUISetting && !lineGraphUISetting && !speedometerUISetting)
+            return true;
+        else
+            return false;
+    }
 //End of Settings Methods
 
 

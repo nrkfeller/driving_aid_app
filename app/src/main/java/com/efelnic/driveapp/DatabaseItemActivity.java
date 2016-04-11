@@ -332,8 +332,7 @@ public class DatabaseItemActivity extends AppCompatActivity {
         //myListView.setAdapter(arrayAdapter);
     }
     public void grabEntryData() {
-//        myListView = (ListView) findViewById(R.id.recordingItemListView);
-//        final ArrayList<String> databaseEntries = new ArrayList<String>();
+
 
         //Now, you need to get the data from the bundle
         Bundle extras = getIntent().getExtras();
