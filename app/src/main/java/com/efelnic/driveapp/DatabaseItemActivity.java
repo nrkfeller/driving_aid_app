@@ -1,5 +1,6 @@
 package com.efelnic.driveapp;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +10,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -36,17 +39,19 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-public class DatabaseItemActivity extends AppCompatActivity {
+public class DatabaseItemActivity extends MainActivity {
 
     ListView myListView;
 
     DatabaseHelper myDb;
-    String date, duration, dist, speed, accel, xAccel, yAccel, zAccel;
+    String date, duration, dist, speed, accel, xAccel, yAccel, zAccel, lapTimes, avgSpeed, avgLapTime, maxLinAccel, maxXAcc, maxyAcc, maxZacc;
 
     List<String> accelArray, distArray, speedArray, xAccelArray, yAccelArray, zAccelArray;
     ArrayList<ChartItem> list;
@@ -57,7 +62,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_database_item);
-
 
         myDb = new DatabaseHelper(this);
 
@@ -74,34 +78,40 @@ public class DatabaseItemActivity extends AppCompatActivity {
         ChartDataAdapter cda = new ChartDataAdapter(getApplicationContext(), list);
         myListView.setAdapter(cda);
 
-
-
-
-
-
-
-        Button RawDataButton = (Button)findViewById(R.id.rawDataButton);
-        RawDataButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DatabaseItemActivity.this, RawDataActivity.class);
-                Bundle extras = new Bundle();
-                extras.putString("DATE", date);
-                extras.putString("DURATION", duration);
-                extras.putString("DISTANCE", dist );
-                extras.putString("SPEED", speed);
-                extras.putString("ACCELERATION", accel );
-                extras.putString("XACCEL", xAccel );
-                extras.putString("YACCEL", yAccel);
-                extras.putString("ZACCEL", zAccel);
-                intent.putExtras(extras);
-                startActivity(intent);
-            }
-
-
-        });
     }
 
+    //Creating options menu and items
+    //Used to remove settings icon from actionbar(since activity extends MainActivity it is there by default
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.settings, menu);
+        MenuItem settings = menu.findItem(R.id.menu_settings);//Remove settings button
+            settings.setVisible(false);
+        MenuItem rawData = menu.findItem(R.id.menu_rawData);//Display Raw Data option
+            rawData.setVisible(true);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_rawData){
+
+            Intent intent = new Intent(DatabaseItemActivity.this, RawDataActivity.class);
+            Bundle extras = new Bundle();
+            extras.putString("DATE", date);
+            extras.putString("DURATION", duration);
+            extras.putString("DISTANCE", dist );
+            extras.putString("SPEED", speed);
+            extras.putString("ACCELERATION", accel );
+            extras.putString("XACCEL", xAccel );
+            extras.putString("YACCEL", yAccel);
+            extras.putString("ZACCEL", zAccel);
+            intent.putExtras(extras);
+            startActivity(intent);
+            return true;
+            }
+            return super.onOptionsItemSelected(item);
+    }
+//end of Options menu and items
 
 
     private LineData lineGraph(){
@@ -124,7 +134,7 @@ public class DatabaseItemActivity extends AppCompatActivity {
         Context context = this;
 
         LineChart lineChart = new LineChart(context);
-        //setContentView(chart);
+
         LineData accelLine = new LineData(xVals, line1);
         lineChart.setData(accelLine);
         lineChart.setDescription("Your Accelerometer Values");
@@ -255,8 +265,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
             colors.add(c);
         colors.add(ColorTemplate.getHoloBlue());
 
-
-
             xVals.add(String.valueOf(1));
             xVals.add(String.valueOf(2));
             xVals.add(String.valueOf(3));
@@ -278,59 +286,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-    /** adapter that supports 3 different item types */
-    private class ChartDataAdapter extends ArrayAdapter<ChartItem> {
-
-        public ChartDataAdapter(Context context, List<ChartItem> objects) {
-            super(context, 0, objects);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            return getItem(position).getView(position, convertView, getContext());
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            // return the views type
-            return getItem(position).getItemType();
-        }
-
-        @Override
-        public int getViewTypeCount() {
-            return 3; // we have 3 different item-types
-        }
-    }
-
-
-
-
-    public void displayData(View view){
-        //myListView = (ListView) findViewById(R.id.recordingItemListView);
-        final ArrayList<String> databaseEntries = new ArrayList<String>();
-        //display data
-        databaseEntries.add("Date : " + date);
-        databaseEntries.add("Duration: " + duration);
-        databaseEntries.add("Distance: " + dist);
-        databaseEntries.add("Speed: " + speed);
-        databaseEntries.add("Acceleration: " + accel);
-        databaseEntries.add("X-Accel: " + xAccel);
-        databaseEntries.add("Y-Accel: " + yAccel);
-        databaseEntries.add("Z-Accel: " + zAccel);
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
-        //myListView.setAdapter(arrayAdapter);
-    }
     public void grabEntryData() {
 
 
@@ -359,7 +314,13 @@ public class DatabaseItemActivity extends AppCompatActivity {
                 xAccel = res.getString(6);
                 yAccel = res.getString(7);
                 zAccel = res.getString(8);
+                lapTimes = res.getString(9);
+                avgSpeed = res.getString(10);
+                avgLapTime = res.getString(11);
+                maxLinAccel = res.getString(12);
+
             }
+
 //                //display data
 //                databaseEntries.add("Date : " + date);
 //                databaseEntries.add("Duration: " + duration);
@@ -383,7 +344,54 @@ public class DatabaseItemActivity extends AppCompatActivity {
         xAccelArray = createListFromString(xAccel);
         yAccelArray = createListFromString(yAccel);
         zAccelArray = createListFromString(zAccel);
+
+
+
     }
+
+
+
+    /** adapter that supports 3 different item types */
+    private class ChartDataAdapter extends ArrayAdapter<ChartItem> {
+
+        public ChartDataAdapter(Context context, List<ChartItem> objects) {
+            super(context, 0, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return getItem(position).getView(position, convertView, getContext());
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            // return the views type
+            return getItem(position).getItemType();
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 3; // we have 3 different item-types
+        }
+    }
+
+    public void displayData(View view){
+        //myListView = (ListView) findViewById(R.id.recordingItemListView);
+        final ArrayList<String> databaseEntries = new ArrayList<String>();
+        //display data
+        databaseEntries.add("Date : " + date);
+        databaseEntries.add("Duration: " + duration);
+        databaseEntries.add("Distance: " + dist);
+        databaseEntries.add("Speed: " + speed);
+        databaseEntries.add("Acceleration: " + accel);
+        databaseEntries.add("X-Accel: " + xAccel);
+        databaseEntries.add("Y-Accel: " + yAccel);
+        databaseEntries.add("Z-Accel: " + zAccel);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, databaseEntries);
+        //myListView.setAdapter(arrayAdapter);
+    }
+
     public List createListFromString(String string){
         //Split accel into arraylist of strings
         String string2 = string.replace("[", ""); // remove [
@@ -391,8 +399,6 @@ public class DatabaseItemActivity extends AppCompatActivity {
         String string4 = string3.replaceAll("\"", ""); // remove QUOTATION marks
         return Arrays.asList((string4.split(",")));//remove COMMAS
     }
-
-
 
     public void scatterGraph(){
 

@@ -69,8 +69,8 @@ public class RecordingsActivity extends MainActivity {
         recordingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                       @Override
                                                       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                          String recording = String.valueOf(parent.getItemAtPosition(position));
-                                                          Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
+                                                          //String recording = String.valueOf(parent.getItemAtPosition(position));
+                                                          //Toast.makeText(RecordingsActivity.this, recording, Toast.LENGTH_SHORT).show();
 
                                                           //Send ID as a bundle through intent to next activity
                                                           Bundle b = new Bundle();
@@ -126,32 +126,24 @@ public class RecordingsActivity extends MainActivity {
 
             StringBuffer buffer = new StringBuffer();
             while (res.moveToNext()) {
-//                databaseEntries.add("distance: " + res.getString(1));
-//                databaseEntries.add("acceleration: " + res.getString(2));
-//                databaseEntries.add("duration: " + res.getString(3));
-//                databaseEntries.add("speed: " + res.getString(4));
-                String speed = res.getString(4);
+
+
                 String lapTimes = res.getString(9);
                 List lapTimeArray = Arrays.asList((lapTimes.split(",")));//remove COMMAS
                 Integer numOfLaps = lapTimeArray.size();
 
+                double avgLapTime = Math.round(Float.valueOf(res.getString(11)) * 100.00) / 100.00;
 
-//                List<Float> speedList = createListFromString(speed);
-//                double  avgSpeed = 0.0;
-//                if (speedList.size() == 1)
-//                    avgSpeed = speedList.get(0);
-//                else{
-//                double sum = 0.0;
-//                    for (int i = 0; i < speedList.size(); i++) {
-//                        sum += speedList.get(i);
-//                        double sum1 = sum;
-//                    }
-//                }
-               // double avgSpeed = sum / speedList.size();
-                //double avgSpeed = calculateAverage(speedList);
+                databaseEntries.add("Date : " + res.getString(1)+ "\n" +
+                        "            Duration: " + res.getString(2) + "\n" +
+                        "            Number of Laps: " + numOfLaps +"\n" +
+                        "            Average Lap Time: " + avgLapTime + "s" + "\n" +
+                        "            Average Speed: " + res.getString(10) + " kmh/mph" + "\n" +
+                        "            Max Linear Accel: " + res.getString(12) + " m/s/s" + "\n" +
+                        "            Max X Accel: " + res.getString(13) + " m/s/s" + "\n" +
+                        "            Max Y Accel: " + res.getString(14) + " m/s/s" + "\n" +
+                        "            Max Z Accel: " + res.getString(15) + " m/s/s"); //Only show date of each entry to reduce clutter
 
-
-                databaseEntries.add("Date : " + res.getString(1) + "\nDuration: " + res.getString(2) + "\nNumber of Laps: " + numOfLaps);// + "\nAverage Speed: " + avgSpeed); //Only show date of each entry to reduce clutter
             }
         } catch (Exception e) {
             Toast.makeText(RecordingsActivity.this, "Database is Empty", Toast.LENGTH_SHORT).show();
@@ -200,7 +192,7 @@ public class RecordingsActivity extends MainActivity {
         getMenuInflater().inflate(R.menu.settings, menu);
         MenuItem settings = menu.findItem(R.id.menu_settings);//Remove Settings button
         settings.setVisible(false);
-        MenuItem delete = menu.findItem(R.id.menu_delete);//Remove Settings button
+        MenuItem delete = menu.findItem(R.id.menu_delete);//Add Delete Database button
         delete.setVisible(true);
         return true;
     }
@@ -242,19 +234,7 @@ public class RecordingsActivity extends MainActivity {
         String string4 = string3.replaceAll("\"", ""); // remove QUOTATION marks
         return Arrays.asList((string4.split(",")));//remove COMMAS
     }
-//    private double calculateAverage(List<Double> speedList) {
-//        Double sum = 0.0;
-//        if(!speedList.isEmpty()) {
-//            for (int i = 0; i < speedList.size(); i++) {
-//                sum += speedList.get(i);
-//            }
-//            if (sum != 0)
-//                return sum / speedList.size();
-//            else
-//                return 0.0;
-//        }
-//        return 0.0;
-//    }
+
 }
 
 

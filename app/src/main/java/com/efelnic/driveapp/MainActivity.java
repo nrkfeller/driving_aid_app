@@ -105,14 +105,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.settings, menu);
-//        MenuItem save = menu.findItem(R.id.menu_save);
-//        MenuItem play = menu.findItem(R.id.menu_play);
-//        MenuItem pause = menu.findItem(R.id.menu_pause);
-//        save.setVisible(false);
-//        play.setVisible(false);
-//        pause.setVisible(false);
-
-
         return true;
     }
 
@@ -124,52 +116,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(this, UserSettingActivity.class);
                 startActivityForResult(i, RESULT_SETTINGS);
                 break;
-
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-
-    //What is this for??
-//    protected void showUserSettings() {
-//        SharedPreferences sharedPrefs = PreferenceManager
-//                .getDefaultSharedPreferences(this);
-//
-//        StringBuilder builder = new StringBuilder();
-//
-//        //What is this? (only commented part)
-////        builder.append("\n Username: "
-////                + sharedPrefs.getString("prefUsername", "NULL"));
-////
-////        builder.append("\n Send report:"
-////                + sharedPrefs.getBoolean("prefSendReport", false));
-////
-////        builder.append("\n Sync Frequency: "
-////                + sharedPrefs.getString("prefSyncFrequency", "NULL"));
-//        //
-//
-//        //TextView settingsTextView = (TextView) findViewById(R.id.textUserSettings);
-//
-//        //settingsTextView.setText(builder.toString());
-//    }
-
-
-
-    //**Settings menu in TRACKING ACTIVITY crashes when this is enabled
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        switch (requestCode) {
-//            case RESULT_SETTINGS:
-//                showUserSettings();
-//                break;
-//
-//        }
-//
-//    }
-
 
 }
 

@@ -60,9 +60,12 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -113,6 +116,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     ArrayList<String> lapTimesList;
     String distValue;
 
+
     Gson gsonAccel = new Gson();
     Gson gsonXAccel = new Gson();
     Gson gsonYAccel = new Gson();
@@ -120,7 +124,12 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     Gson gsonSpeed = new Gson();
     Gson gsonLapTimes = new Gson();
     Gson gsonDistance = new Gson();
-
+    Gson gsonAvgSpeed = new Gson();
+    Gson gsonAvgLapTime = new Gson();
+    Gson gsonMaxLinAccel = new Gson();
+    Gson gsonMaxXAccel = new Gson();
+    Gson gsonMaxYAccel = new Gson();
+    Gson gsonMaxZAccel = new Gson();
     double dist = 0;
     //    double curLat = 0;
 //    double curLng = 0;
@@ -167,7 +176,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
     private final float[] deltaRotationVector = new float[4];
     private float timestamp;
 
-    //Database Methods
+//Database Methods
     public void SaveRace(MenuItem item) {
 
         String inputAccel = gsonAccel.toJson(accelerationList);
@@ -178,13 +187,54 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         String inputDist = gsonDistance.toJson(distValue);
         String inputLapTimes = gsonLapTimes.toJson(lapTimesList);
 
-        boolean isinserted = myDb.insertData(chronoView.getText().toString(), inputDist, inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel, inputLapTimes);
+
+        //Add average speed
+        float avgSpeed = calculateAverage(speedList);
+        String inputAverageSpeed = gsonAvgSpeed.toJson((avgSpeed));
+
+        //Add average laptime
+        float avgLapTime = calculateAverage(lapTimesList);
+        String inputAverageLapTime = gsonAvgLapTime.toJson(avgLapTime);
+
+        //Add Max Linear Accel Value
+        float maxLinAccelValue = Float.valueOf(Collections.max(accelerationList));
+        String inputMaxLinAccel= gsonMaxLinAccel.toJson(maxLinAccelValue);
+
+        //Add Max Linear Accel Value
+        float maxXAccelValue = Float.valueOf(Collections.max(XaccelList));
+        String inputMaxXAccel= gsonMaxXAccel.toJson(maxXAccelValue);
+        //Add Max Linear Accel Value
+        float maxYAccelValue = Float.valueOf(Collections.max(YaccelList));
+        String inputMaxYAccel= gsonMaxYAccel.toJson(maxYAccelValue);
+        //Add Max Linear Accel Value
+        float maxZAccelValue = Float.valueOf(Collections.max(ZaccelList));
+        String inputMaxZAccel= gsonMaxZAccel.toJson(maxZAccelValue);
+
+
+        boolean isinserted = myDb.insertData(chronoView.getText().toString(), inputDist, inputSpeed, inputAccel, inputXAccel, inputYAccel, inputZAccel, inputLapTimes, inputAverageSpeed, inputAverageLapTime, inputMaxLinAccel, inputMaxXAccel, inputMaxYAccel, inputMaxZAccel);
         if (isinserted) {
             Toast.makeText(TrackingActivity.this, "Race Saved", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(TrackingActivity.this, "Error: Race Not Saved", Toast.LENGTH_SHORT).show();
         }
 
+    }
+    public List createListFromString(String string){
+        //Split accel into arraylist of strings
+        String string2 = string.replace("[", ""); // remove [
+        String string3 = string2.replace("]", "");// remove ]
+        String string4 = string3.replaceAll("\"", ""); // remove QUOTATION marks
+        return Arrays.asList((string4.split(",")));//remove COMMAS
+    }
+        private float calculateAverage(ArrayList<String> list) {
+        float sum = 0;
+        if(!list.isEmpty()) {
+            for (int i = 0; i < list.size(); i++) {
+                sum += Float.valueOf(list.get(i));
+            }
+            return sum / list.size();
+        }
+        return 0;
     }
 //End of Database Methods
 
@@ -412,19 +462,19 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         //Calculate Linear Acceleration
         double lin_accel = Math.sqrt(linear_acceleration[0] * linear_acceleration[0] + linear_acceleration[1] * linear_acceleration[1] + linear_acceleration[2] * linear_acceleration[2]);
 
+        //Database
+        accelerationList.add(String.valueOf(lin_accel));
+        XaccelList.add(String.valueOf(linear_acceleration[2]));
+        YaccelList.add(String.valueOf(linear_acceleration[1]));
+        ZaccelList.add(String.valueOf(linear_acceleration[0]));
         // rounding values to format "#.##"
-        double x = Math.round(event.values[2] * 100.0) / 100.0;
-        double y = Math.round(event.values[1] * 100.0) / 100.0;
-        double z = Math.round(event.values[0] * 100.0) / 100.0;
+
+        double x = Math.round(linear_acceleration[2] * 100.0) / 100.0;
+        double y = Math.round(linear_acceleration[1] * 100.0) / 100.0;
+        double z = Math.round(linear_acceleration[0] * 100.0) / 100.0;
         double accel = Math.round(lin_accel * 100.0) / 100.0;
 
-        //Database
-        accelerationList.add(String.valueOf(accel));
-        XaccelList.add(String.valueOf(x));
-        YaccelList.add(String.valueOf(y));
-        ZaccelList.add(String.valueOf(z));
-
-        //Send values to txt display
+        //Send values to txt display including rounding
         accView.setText("Accel: " + accel);
         xrotView.setText("X : " + x);
         yrotView.setText("Y : " + y);
@@ -721,8 +771,10 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         xl.setTextColor(Color.WHITE);
         xl.setDrawGridLines(false);
         xl.setAvoidFirstLastClipping(false);
-        xl.setSpaceBetweenLabels(5);
+        xl.setSpaceBetweenLabels(2);
+
         xl.setEnabled(true);
+
 
         YAxis leftAxis = mChart.getAxisLeft();
         //leftAxis.setTypeface(tf);
@@ -730,7 +782,6 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
         leftAxis.setAxisMaxValue(30f);
         leftAxis.setAxisMinValue(-5f);
         leftAxis.setDrawGridLines(true);
-
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setEnabled(false);
     }
@@ -761,7 +812,7 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
             mChart.notifyDataSetChanged();
 
             // limit the number of visible entries
-            mChart.setVisibleXRangeMaximum(120);
+            mChart.setVisibleXRangeMaximum(200);
             // mChart.setVisibleYRange(30, AxisDependency.LEFT);
 
             // move to the latest entry
@@ -770,12 +821,13 @@ public class TrackingActivity extends ScriptActivity implements LocationListener
             // this automatically refreshes the chart (calls invalidate())
             mChart.moveViewTo(linedata.getXValCount() - 7, 55f,
                     YAxis.AxisDependency.LEFT);
+
         }
     }
 
     private LineDataSet createSet() {
 
-        LineDataSet set = new LineDataSet(null, "Dynamic Data");
+        LineDataSet set = new LineDataSet(null, "Real Time Linear Acceleration");
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
         set.setColor(ColorTemplate.getHoloBlue());
         set.setCircleColor(Color.WHITE);

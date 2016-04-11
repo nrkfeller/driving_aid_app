@@ -32,7 +32,7 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:id="@+id/recordingsListView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
