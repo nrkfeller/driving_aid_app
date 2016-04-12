@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,6 +15,15 @@
     tools:context="com.efelnic.driveapp.PrivacyActivity"
     android:background="@drawable/background">
 
+<ScrollView
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:id="@+id/scrollView2"
+android:layout_alignParentTop="true"
+android:layout_alignParentLeft="true"
+android:layout_alignParentStart="true"
+android:layout_marginTop="98dp" >
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,4 +34,27 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="PRIVACY POLICY"
+        android:id="@+id/textView7"
+        android:layout_alignRight="@+id/scrollView2"
+        android:layout_alignEnd="@+id/scrollView2"
+        android:textSize="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#C0C0C0"
+        android:textAlignment="center" />
+
+
 </RelativeLayout>
+
+
+
+
